@@ -1,5 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Ignore dbsettings.properties
+Donggae/src/main/resources/dbsettings.properties
+# Ignore emailsettings.properties
+Donggae/src/main/resources/emailsettings.properties
+
 # dependencies
 /node_modules
 /.pnp
