@@ -5,8 +5,6 @@ import Header from "./Header";
 
 export default function Home() {
     const history = useNavigate();
-    const button_startCustom = () => { history("/custom"); };
-    const button_startAuto = () => { history("/auto"); };
     return (
         <div className={styles.default}>
             <div className={styles.inner}>
