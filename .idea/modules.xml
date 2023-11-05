@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Donggae.iml" filepath="$PROJECT_DIR$/.idea/Donggae.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Donggae.Donggae.iml" filepath="$PROJECT_DIR$/.idea/modules/Donggae.Donggae.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Donggae.Donggae.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Donggae.Donggae.main.iml" />
     </modules>
   </component>
 </project>

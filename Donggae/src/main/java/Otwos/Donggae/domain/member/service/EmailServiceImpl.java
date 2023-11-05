@@ -20,8 +20,8 @@ public class EmailServiceImpl implements EmailService{
     @Override
     public void sendEmail(String to, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject("비밀번호 찾기 위한 보안코드: ");
+        message.setTo(to+"@dgu.ac.kr");
+        message.setSubject("이메일 인증 코드: ");
         message.setText(text);
         javaMailSender.send(message);
     }
