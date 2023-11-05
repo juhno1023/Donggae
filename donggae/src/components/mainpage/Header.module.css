@@ -5,7 +5,7 @@
     top: 0;
     width: 100%;
     height: 120px;
-    
+    background-color: white;
 }
 
 .contents{
@@ -20,6 +20,7 @@
     border-bottom: solid 1px var(--border-grey);
     border-width: 120%;
     padding-bottom : 30px;
+    background-color: white;
 }
 
 .logo{
@@ -55,7 +56,7 @@
     align-items: center;
 }
 
-ul {
+.navigation ul {
     display: flex;
     list-style: none;
     font-family: 'Viga';
@@ -63,8 +64,9 @@ ul {
     font-weight: bold;
 }
 
-li + li {
+.navigation li + li {
     margin-left: 40px;
+    
 }
   
   

@@ -13,6 +13,7 @@
     --border-grey: #A49F9F;
     --box-border:#E6EBEE;
     --box-bg:#B9B9B9;
+    --box-bg2:#F1F1F1;
 
     --point-orange:#FAAB23;
     
@@ -39,5 +40,11 @@ body{
 .default{
     width: 1900px;
     min-height: 100vh;
+    
+}
+
+.inner{
+    width: 1900px;
+    padding-top:200px;
 }
 
