@@ -3,7 +3,6 @@ Donggae/src/main/resources/dbsettings.properties
 # Ignore emailsettings.properties
 Donggae/src/main/resources/emailsettings.properties
 
-HELP.md
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
