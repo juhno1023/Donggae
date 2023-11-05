@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Donggae.iml" filepath="$PROJECT_DIR$/.idea/Donggae.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Otwos.Donggae.iml" filepath="$PROJECT_DIR$/.idea/modules/Otwos.Donggae.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Otwos.Donggae.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Otwos.Donggae.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Otwos.Donggae.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Otwos.Donggae.test.iml" />
     </modules>
