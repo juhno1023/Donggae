@@ -11,5 +11,10 @@
         <module name="Donggae.Donggae.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Otwos.Donggae" target="17" />
+      <module name="Otwos.Donggae.main" target="17" />
+      <module name="Otwos.Donggae.test" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
