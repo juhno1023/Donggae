@@ -4,8 +4,9 @@
 Donggae/src/main/resources/dbsettings.properties
 # Ignore emailsettings.properties
 Donggae/src/main/resources/emailsettings.properties
-Donggae/.idea
-.idea
+
+*.idea
+*.iml
 
 # dependencies
 /node_modules
@@ -17,6 +18,8 @@ Donggae/.idea
 
 # production
 /build
+Donggae/build
+Donggae/.gradle
 
 # misc
 .DS_Store
