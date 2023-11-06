@@ -1,9 +1,13 @@
 package Otwos.Donggae.DAO.Test;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "test_question")
 public class TestQuestion {
     @Id
@@ -11,15 +15,11 @@ public class TestQuestion {
     @Column(name = "test_question_id")
     private int testQuestionId;
 
-    @ManyToOne
-    @JoinColumn(name = "test_id", referencedColumnName = "testId")
-    private Test test;
+    // N:1 test
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "test_id")
+    private Test testId;
 
     @Column(name = "question_text", length = 100, nullable = false)
     private String questionText;
-
-    @ManyToOne
-    @JoinColumn(name = "answer_id", nullable = false, referencedColumnName = "id")
-    private AnswerOption answerOption;
-
 }

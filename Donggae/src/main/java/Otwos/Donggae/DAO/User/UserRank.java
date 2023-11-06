@@ -13,15 +13,14 @@ public class UserRank {
     @Column(name = "id")
     private int id;
 
-    @ManyToOne
+    // 1:1 user 단방향
+    @OneToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User userId;
 
     @Column(name = "score")
     private Integer score;
 
     @Column(name = "rank", length = 10, columnDefinition = "VARCHAR(10) DEFAULT '똥개'")
     private String rank;
-
-    // Constructors, getters, and setters
 }

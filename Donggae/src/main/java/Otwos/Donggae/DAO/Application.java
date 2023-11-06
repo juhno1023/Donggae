@@ -2,10 +2,13 @@ package Otwos.Donggae.DAO;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.User.User;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "application")
 public class Application {
 
@@ -14,13 +17,15 @@ public class Application {
     @Column(name = "application_id")
     private int applicationId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    // N:1 user
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id") //팀장 (글쓴이) 아이디
+    private User userId;
 
-    @ManyToOne
+    // N:1 RecruitPost
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recruit_post_id")
-    private RecruitPost recruitPost;
+    private RecruitPost recruitPostId;
 
     @Column(name = "self_intro", length = 255)
     private String selfIntro;

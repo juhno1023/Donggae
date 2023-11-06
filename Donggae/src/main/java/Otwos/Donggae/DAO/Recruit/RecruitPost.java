@@ -1,25 +1,29 @@
 package Otwos.Donggae.DAO.Recruit;
 import Otwos.Donggae.DAO.Application;
-import Otwos.Donggae.DAO.Team.Team;
 import Otwos.Donggae.DAO.User.User;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 
 import java.sql.Date;
 import java.util.List;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "recruit_post")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Table(name = "recruit_post")
 public class RecruitPost {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "recruit_post_id")
     private int recruitPostId;
 
-    @ManyToOne
+    // N:1 user
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private User userId;
 
     @Column(name = "title")
     private String title;
@@ -33,12 +37,20 @@ public class RecruitPost {
     @Column(name = "created_date")
     private Date createdDate;
 
-    @OneToMany(mappedBy = "recruitPost")
-    private List<Team> teams;
+    // 1:N recruitField
+    @OneToMany(mappedBy = "recruitPostId")
+    private List<RecruitField> recruitFields;
 
-    @OneToMany(mappedBy = "recruitPost")
+    // 1:N recruitLanguage
+    @OneToMany(mappedBy = "recruitPostId")
+    private List<RecruitLanguage> recruitLanguages;
+
+    // 1:N recruitPersonality
+    @OneToMany(mappedBy = "recruitPostId")
+    private List<RecruitPersonality> recruitPersonalities;
+
+    // 1:N Application
+    @OneToMany(mappedBy = "recruitPostId")
     private List<Application> applications;
-
-    // Getters and setters
 }
 
