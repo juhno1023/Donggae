@@ -1,6 +1,7 @@
 package Otwos.Donggae.DAO.User;
 
 import Otwos.Donggae.DAO.User.Identifier.UserStudyFieldPK;
+import Otwos.Donggae.Global.StudyFieldEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class UserStudyField {
 
     @Id
     @Column(name = "study_field", length = 20, nullable = false)
-    private String studyField;
+    @Enumerated(EnumType.STRING)
+    private StudyFieldEnum studyField;
 }
 

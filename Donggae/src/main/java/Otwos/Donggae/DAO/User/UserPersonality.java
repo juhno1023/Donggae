@@ -1,6 +1,7 @@
 package Otwos.Donggae.DAO.User;
 
 import Otwos.Donggae.DAO.User.Identifier.UserPersonalityPK;
+import Otwos.Donggae.Global.PersonalityEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class UserPersonality {
 
     @Id
     @Column(name = "personality", length = 20, nullable = false)
-    private String personality;
+    @Enumerated(EnumType.STRING)
+    private PersonalityEnum personality;
 }
 

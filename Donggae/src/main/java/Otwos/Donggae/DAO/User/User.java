@@ -1,7 +1,10 @@
 package Otwos.Donggae.DAO.User;
 
+import Otwos.Donggae.Global.Rank.BaekjoonRank;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,7 +39,8 @@ public class User {
     private int leaderCount; // 팀장 경험 횟수
 
     @Column(name = "baekjoon_rank", length = 20)
-    private String boj_rank; // 백준 랭크
+    @Enumerated(EnumType.STRING)
+    private BaekjoonRank boj_rank; // 백준 랭크
 
     @Column(name = "developer_test_score")
     private int devTestScore; // 역량 평가 총 점수

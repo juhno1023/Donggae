@@ -1,5 +1,6 @@
 package Otwos.Donggae.DAO.Test;
 
+import Otwos.Donggae.Global.TestFieldEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,5 +18,6 @@ public class Test {
     private int testId;
 
     @Column(name = "test_field", length = 20, nullable = false)
-    private String testField;
+    @Enumerated(EnumType.STRING)
+    private TestFieldEnum testField;
 }

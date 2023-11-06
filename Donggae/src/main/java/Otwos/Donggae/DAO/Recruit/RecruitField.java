@@ -1,6 +1,7 @@
 package Otwos.Donggae.DAO.Recruit;
 
 import Otwos.Donggae.DAO.Recruit.Identifier.RecruitFieldPK;
+import Otwos.Donggae.Global.FieldEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,5 +22,6 @@ public class RecruitField {
 
     @Id
     @Column(name = "field", length = 20, nullable = false)
-    private String field;
+    @Enumerated(EnumType.STRING)
+    private FieldEnum field;
 }

@@ -1,5 +1,6 @@
 package Otwos.Donggae.DAO.User;
 
+import Otwos.Donggae.Global.Rank.DonggaeRank;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -22,5 +23,6 @@ public class UserRank {
     private Integer score;
 
     @Column(name = "rank", length = 10, columnDefinition = "VARCHAR(10) DEFAULT '똥개'")
-    private String rank;
+    @Enumerated(EnumType.STRING)
+    private DonggaeRank rank;
 }

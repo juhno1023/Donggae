@@ -1,6 +1,7 @@
 package Otwos.Donggae.DAO.User;
 
 import Otwos.Donggae.DAO.User.Identifier.UserInterestFieldPK;
+import Otwos.Donggae.Global.FieldEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,5 +22,6 @@ public class UserInterestField {
 
     @Id
     @Column(name = "interest_field", length = 20, nullable = false)
-    private String interestField; // 관심분야
+    @Enumerated(EnumType.STRING)
+    private FieldEnum interestField; // 관심분야
 }

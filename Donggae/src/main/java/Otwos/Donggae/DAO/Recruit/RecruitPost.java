@@ -1,6 +1,7 @@
 package Otwos.Donggae.DAO.Recruit;
 import Otwos.Donggae.DAO.Application;
 import Otwos.Donggae.DAO.User.User;
+import Otwos.Donggae.Global.MajorLectureEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -32,7 +33,8 @@ public class RecruitPost {
     private String content;
 
     @Column(name = "major_lecture_name", length = 20)
-    private String majorLectureName;
+    @Enumerated(EnumType.STRING)
+    private MajorLectureEnum majorLectureName;
 
     @Column(name = "created_date")
     private Date createdDate;
