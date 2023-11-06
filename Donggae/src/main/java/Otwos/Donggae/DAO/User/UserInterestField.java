@@ -1,4 +1,4 @@
-package Otwos.Donggae.DAO;
+package Otwos.Donggae.DAO.User;
 
 import jakarta.persistence.*;
 import lombok.Getter;

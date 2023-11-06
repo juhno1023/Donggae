@@ -1,5 +1,5 @@
 package Otwos.Donggae.DAO.Team;
-import Otwos.Donggae.DAO.User;
+import Otwos.Donggae.DAO.User.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 
