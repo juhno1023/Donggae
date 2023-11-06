@@ -5,35 +5,6 @@
     font-style: normal;
 }
 
-:root {
-    --body-font: "", sans-serif;
-    --basic-white: #fff;
-    --basic-black: #000000;
-
-    --border-grey: #A49F9F;
-    --box-border:#E6EBEE;
-    --box-bg:#B9B9B9;
-    --box-bg2:#F1F1F1;
-
-    --point-orange:#FAAB23;
-    
-    --pastel-blue:#9BC3FF;
-    --pastel-orange:#FF9F81;
-    
-    /* Text */
-    --basic-text :#222222;
-    --disabled-text : #707070;
-    --grey-text:#898989;
-
-    /* Select */
-    --select-bg:#F2F3F5;
-}
-
-*{
-    box-sizing: inherit;
-    margin: 0;
-    padding: 0;
-}
 body{
     background-color: var(--basic-white);
 }
@@ -48,3 +19,12 @@ body{
     padding-top:200px;
 }
 
+.body{
+    position: absolute;
+    font-size: 14px;
+    left : 520px;
+    top : 220px;
+    background-color: white;
+    width : 900px;
+    height : 680px;
+}

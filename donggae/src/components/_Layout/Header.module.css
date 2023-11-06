@@ -1,3 +1,40 @@
+@font-face {
+    font-family: 'Viga';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+:root {
+    --body-font: "", sans-serif;
+    --basic-white: #fff;
+    --basic-black: #000000;
+
+    --border-grey: #A49F9F;
+    --box-border:#E6EBEE;
+    --box-bg:#B9B9B9;
+    --box-bg2:#F1F1F1;
+    --box-bg3:#F9F9F9;
+    --point-orange:#FAAB23;
+    
+    --pastel-blue:#9BC3FF;
+    --pastel-orange:#FF9F81;
+    
+    /* Text */
+    --basic-text :#222222;
+    --disabled-text : #707070;
+    --grey-text:#898989;
+
+    /* Select */
+    --select-bg:#f7f6f6;
+}
+
+*{
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
 /* header */
 .header{
     position: fixed;
