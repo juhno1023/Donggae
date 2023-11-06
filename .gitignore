@@ -18,6 +18,8 @@ Donggae/src/main/resources/emailsettings.properties
 
 # production
 /build
+Donggae/build
+Donggae/.gradle
 
 # misc
 .DS_Store
