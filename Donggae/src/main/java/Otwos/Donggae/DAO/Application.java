@@ -1,5 +1,6 @@
 package Otwos.Donggae.DAO;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
+import Otwos.Donggae.DAO.User.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 
