@@ -14,7 +14,7 @@ public class Application {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "application_id")
+    @Column(name = "application_id", nullable = false)
     private int applicationId;
 
     // N:1 user
@@ -27,7 +27,7 @@ public class Application {
     @JoinColumn(name = "recruit_post_id")
     private RecruitPost recruitPostId;
 
-    @Column(name = "self_intro", length = 255)
+    @Column(name = "self_intro")
     private String selfIntro;
 
     @Column(name = "content", length = 1000)

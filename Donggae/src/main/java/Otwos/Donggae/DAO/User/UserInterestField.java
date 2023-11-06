@@ -20,6 +20,6 @@ public class UserInterestField {
     private User userId;
 
     @Id
-    @Column(name = "interest_field")
+    @Column(name = "interest_field", length = 20, nullable = false)
     private String interestField; // 관심분야
 }

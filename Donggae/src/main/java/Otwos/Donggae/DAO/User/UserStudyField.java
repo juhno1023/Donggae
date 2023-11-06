@@ -20,7 +20,7 @@ public class UserStudyField {
     private User userId;
 
     @Id
-    @Column(name = "study_field", length = 20)
+    @Column(name = "study_field", length = 20, nullable = false)
     private String studyField;
 }
 

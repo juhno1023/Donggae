@@ -17,7 +17,7 @@ public class RecruitPost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "recruit_post_id")
+    @Column(name = "recruit_post_id", nullable = false)
     private int recruitPostId;
 
     // N:1 user
@@ -25,13 +25,13 @@ public class RecruitPost {
     @JoinColumn(name = "user_id")
     private User userId;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "content")
+    @Column(name = "content", length = 1000, nullable = false)
     private String content;
 
-    @Column(name = "major_lecture_name")
+    @Column(name = "major_lecture_name", length = 20)
     private String majorLectureName;
 
     @Column(name = "created_date")

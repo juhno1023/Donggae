@@ -20,6 +20,6 @@ public class UserLanguage {
     private User userId;
 
     @Id
-    @Column(name = "language")
+    @Column(name = "language", length = 20, nullable = false)
     private String language; // 기술스택(언어)
 }

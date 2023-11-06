@@ -20,7 +20,7 @@ public class UserPersonality {
     private User userId;
 
     @Id
-    @Column(name = "personality", length = 20)
+    @Column(name = "personality", length = 20, nullable = false)
     private String personality;
 }
 

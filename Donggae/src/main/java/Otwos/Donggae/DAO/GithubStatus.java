@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class GithubStatus {
 
     @Id
-    @Column(name = "github_id")
+    @Column(name = "github_id", nullable = false)
     private int githubId;
 
     // 1:1 user

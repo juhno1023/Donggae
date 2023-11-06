@@ -20,6 +20,6 @@ public class RecruitField {
     private RecruitPost recruitPostId;
 
     @Id
-    @Column(name = "field", length = 20)
+    @Column(name = "field", length = 20, nullable = false)
     private String field;
 }

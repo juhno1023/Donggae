@@ -10,7 +10,7 @@ public class UserRank {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private int id;
 
     // 1:1 user 단방향

@@ -15,7 +15,7 @@ public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "team_id")
+    @Column(name = "team_id", nullable = false)
     private int teamId;
 
     // 1:1 recruitPost
@@ -23,7 +23,7 @@ public class Team {
     @JoinColumn(name = "recruit_post_id")
     private RecruitPost recruitPostId;
 
-    @Column(name = "team_name")
+    @Column(name = "team_name", length = 30, nullable = false)
     private String teamName;
 
     // 1:N teamMember

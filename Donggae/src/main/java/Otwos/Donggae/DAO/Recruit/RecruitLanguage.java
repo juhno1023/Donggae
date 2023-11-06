@@ -20,6 +20,6 @@ public class RecruitLanguage {
     private RecruitPost recruitPostId;
 
     @Id
-    @Column(name = "language", length = 20)
+    @Column(name = "language", length = 20, nullable = false)
     private String language;
 }

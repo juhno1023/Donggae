@@ -26,7 +26,7 @@ public class TestResult {
     @JoinColumn(name = "test_id")
     private Test testId;
 
-    @Column(name = "test_result")
+    @Column(name = "test_result", nullable = false)
     private int testResult;
 
 }
