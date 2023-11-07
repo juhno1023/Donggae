@@ -4,7 +4,10 @@ import donggae from '../../image/donggae.png';
 import github from '../../image/GitHub.png';
 
 export default function Home() {
-    const history = useNavigate();
+    const navigate = useNavigate();
+    const navigateToSignup = () => {
+      navigate("/Signuppage");
+    };
 
         return (
           <div className="login-page">
@@ -12,7 +15,7 @@ export default function Home() {
               <div className="overlap">
                 <div className="group" />
                 <div className="text-wrapper">로그인</div>
-                <div className="text-wrapper-2">회원가입</div>
+                <div className="text-wrapper-2"><button size = "large" className="button" onClick={navigateToSignup}>회원가입</button></div>
                 <img className="image" alt="Image" src={github} />
               </div>
               <div className="overlap-group-wrapper">

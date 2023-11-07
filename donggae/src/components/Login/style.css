@@ -144,3 +144,13 @@
     top: 555px;
     width: 480px;
   }
+
+  .login-page .button{
+    font-size: 40px;
+    font-weight: 700;
+    width: 180px;
+    height: 50px;
+    position: absolute;
+    top:15px;
+    left:0.5px;
+  }
