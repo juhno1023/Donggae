@@ -40,9 +40,10 @@
     position: fixed;
     left: 0;
     top: 0;
-    width: 100%;
+    width: 1920px;
     height: 120px;
     background-color: white;
+    z-index: 1;
 }
 
 .contents{
