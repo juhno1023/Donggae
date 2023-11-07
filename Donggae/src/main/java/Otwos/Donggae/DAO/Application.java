@@ -3,6 +3,7 @@ import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.User.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -32,5 +33,16 @@ public class Application {
 
     @Column(name = "content", length = 1000)
     private String content;
+
+    @Builder
+    public Application(int applicationId, User userId,
+                       RecruitPost recruitPostId, String selfIntro,
+                       String content) {
+        this.applicationId = applicationId;
+        this.userId = userId;
+        this.recruitPostId = recruitPostId;
+        this.selfIntro = selfIntro;
+        this.content = content;
+    }
 
 }
