@@ -2,7 +2,7 @@ import styles from "./Posting.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../_Layout/Header";
 
-export default function Home() {
+export default function Posting() {
     const history = useNavigate();
 
     return (
