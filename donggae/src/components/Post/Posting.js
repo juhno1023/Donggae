@@ -31,8 +31,7 @@ export default function Posting() {
                 
                 <div className={styles.box__}>
                     <div className={styles.half}>
-                        <div className={styles.text__1}>세부사항 설정</div>
-                        <div className={styles.text__2}>모집 분야</div>
+                        <div className={styles.text__1}>세부사항 설정</div> 모집 분야
                         <div className={styles.container}>
                             <div>
                                 <label>
@@ -47,7 +46,7 @@ export default function Posting() {
                                 </label>
                             </div>
                         </div>
-                        <div className={styles.text__2}>선호 언어</div>
+                        선호 언어
                         <div className={styles.container}>
                             <div>
                                 <label>
@@ -62,7 +61,7 @@ export default function Posting() {
                                 </label>
                             </div>
                         </div>
-                        <div className={styles.text__2}>선호 성향</div>
+                        선호 성향
                         <div className={styles.container}>
                             <div>
                                 <label>
@@ -79,8 +78,7 @@ export default function Posting() {
                         </div>
                     </div>
                     <div className={styles.half}>
-                    <div className={styles.text__1}>전공강의 팀원 모집하기</div>
-                        <div className={styles.text__2}>선택 된 수강강의
+                    <div className={styles.text__1}>전공강의 팀원 모집하기</div> 선택 된 수강강의
                         <select>
                             <option value="Option 1">없음</option>
                             <option value="Option 2">소프트웨어공학개론</option>
@@ -91,7 +89,6 @@ export default function Posting() {
                             Options
                             </option>
                         </select>
-                        </div>
                     </div>
                 </div>
                 </div>
