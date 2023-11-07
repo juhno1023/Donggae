@@ -8,7 +8,7 @@
   
   .login-page .div {
     background-color: #ffffff;
-    height: 1080px;
+    height: 100vh;
     position: relative;
     width: 1920px;
   }
@@ -41,7 +41,7 @@
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
-    top: 28px;
+    top: 38px;
     transform: rotate(0.31deg);
     width: 239px;
   }
@@ -58,7 +58,7 @@
     position: absolute;
     top: 164px;
     transform: rotate(0.31deg);
-    width: 136px;
+    width: 145px;
   }
   
   .login-page .image {
@@ -95,7 +95,7 @@
     line-height: normal;
     position: absolute;
     text-align: center;
-    top: 0;
+    top: 20px;
     width: 604px;
   }
   
@@ -110,7 +110,7 @@
     line-height: normal;
     position: absolute;
     text-align: center;
-    top: 149px;
+    top: 200px;
     width: 604px;
   }
   
@@ -142,5 +142,5 @@
     line-height: normal;
     position: absolute;
     top: 555px;
-    width: 445px;
+    width: 480px;
   }
