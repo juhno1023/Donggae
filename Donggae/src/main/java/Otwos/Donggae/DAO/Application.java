@@ -18,6 +18,13 @@ public class Application {
     @Column(name = "application_id", nullable = false)
     private int applicationId;
 
+
+    @Column(name = "self_intro")
+    private String selfIntro;
+
+    @Column(name = "content", length = 1000)
+    private String content;
+
     // N:1 user
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id") //팀장 (글쓴이) 아이디
@@ -28,19 +35,10 @@ public class Application {
     @JoinColumn(name = "recruit_post_id")
     private RecruitPost recruitPostId;
 
-    @Column(name = "self_intro")
-    private String selfIntro;
-
-    @Column(name = "content", length = 1000)
-    private String content;
-
     @Builder
-    public Application(int applicationId, User userId,
-                       RecruitPost recruitPostId, String selfIntro,
+    public Application(int applicationId, String selfIntro,
                        String content) {
         this.applicationId = applicationId;
-        this.userId = userId;
-        this.recruitPostId = recruitPostId;
         this.selfIntro = selfIntro;
         this.content = content;
     }
