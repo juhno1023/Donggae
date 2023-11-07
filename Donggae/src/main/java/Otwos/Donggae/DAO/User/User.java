@@ -12,6 +12,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -63,4 +64,19 @@ public class User {
     // 1:N userStudyField
     @OneToMany(mappedBy = "userId")
     private List<UserStudyField> userStudyFields;
+
+    @Builder
+    public User(int userId, String githubName,
+                String intro, int teamExpCount,
+                int leaderCount, BaekjoonRank boj_rank,
+                int devTestScore, String dguEmail) {
+        this.userId = userId;
+        this.githubName = githubName;
+        this.intro = intro;
+        this.teamExpCount = teamExpCount;
+        this.leaderCount = leaderCount;
+        this.boj_rank = boj_rank;
+        this.devTestScore = devTestScore;
+        this.dguEmail = dguEmail;
+    }
 }
