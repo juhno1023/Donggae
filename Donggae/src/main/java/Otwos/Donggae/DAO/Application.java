@@ -18,7 +18,6 @@ public class Application {
     @Column(name = "application_id", nullable = false)
     private int applicationId;
 
-
     @Column(name = "self_intro")
     private String selfIntro;
 
