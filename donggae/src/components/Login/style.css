@@ -14,20 +14,20 @@
   }
   
   .login-page .overlap {
-    height: 244px;
     left: 713px;
     position: absolute;
-    top: 748px;
+    top: 650px;
+    height: 244px;
     width: 461px;
   }
   
   .login-page .group {
     background-color: #efefef;
     border-radius: 50px;
-    height: 165px;
     left: 0;
     position: absolute;
     top: 0;
+    height: 165px;
     width: 461px;
   }
   
