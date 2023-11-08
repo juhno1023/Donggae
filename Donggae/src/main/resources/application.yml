@@ -22,14 +22,6 @@ spring:
     debug: true
     default:
       encoding: UTF-8
-  security:
-    oauth2:
-      client:
-        registration:
-          github:
-            client-id: ${CLIENT_ID}
-            client-secret: ${CLIENT_SECRET}
-            redirect-uri: ${REDIRECT_URI}
   server:
     address: localhost
     port: 8080
@@ -67,3 +59,7 @@ github:
     redirect-url: ${REDIRECT_URL}
     token-url: "https://github.com/login/oauth/access_token"
     user-api-url: "https://api.github.com/user"
+security:
+  jwt:
+    token:
+      secret-key: "3or3rixlvknasld345slkn4561sdfknl413420wqroi0467895oferymkfkj"

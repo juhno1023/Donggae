@@ -57,6 +57,7 @@ public class LoginServiceImpl implements LoginService{
         HttpEntity<Object> request = new HttpEntity<>(headers);
         ResponseEntity<GitHubUserInfo> response = new RestTemplate().exchange(userUrl, HttpMethod.GET, request, GitHubUserInfo.class);
 
+
         return response.getBody();
     }
 
