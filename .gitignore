@@ -5,6 +5,9 @@ Donggae/src/main/resources/dbsettings.properties
 # Ignore emailsettings.properties
 Donggae/src/main/resources/emailsettings.properties
 
+#Ignore oauthsettings.properties
+Donggae/src/main/resources/application-oauth.properties
+
 *.idea
 *.iml
 

@@ -4,7 +4,7 @@ spring:
 #      charset: UTF-8
 #      force: true
   config:
-    import: dbsettings.properties, emailsettings.properties
+    import: dbsettings.properties, emailsettings.properties, application-oauth.properties
   mail:
     host: smtp.gmail.com
     port: 587
@@ -22,6 +22,14 @@ spring:
     debug: true
     default:
       encoding: UTF-8
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_SECRET}
+            redirect-uri: ${REDIRECT_URI}
   server:
     address: localhost
     port: 8080
@@ -53,3 +61,9 @@ logging:
         type:
           descriptor:
             sql: trace
+github:
+    client-id: ${CLIENT_ID}
+    client-secret: ${CLIENT_SECRET}
+    redirect-url: ${REDIRECT_URL}
+    token-url: "https://github.com/login/oauth/access_token"
+    user-api-url: "https://api.github.com/user"
