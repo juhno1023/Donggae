@@ -54,6 +54,7 @@ public class MemberServiceImpl implements MemberService{
         }
     }
 
+    @Override
     public Integer checkUserSignUp(String githubId){
         User userByGithubName = memberRepository.findUserByGithubName(githubId);
         if(userByGithubName == null){
@@ -62,5 +63,11 @@ public class MemberServiceImpl implements MemberService{
         else{
             return userByGithubName.getUserId();
         }
+    }
+
+    @Override
+    public String getUserEmail(int userId) {
+        User user = memberRepository.findUserByUserId(userId);
+        return user.getDguEmail();
     }
 }

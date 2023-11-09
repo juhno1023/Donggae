@@ -6,4 +6,6 @@ public interface MemberService {
     public void register(SignUpDTO signUpDTO);
 
     public Integer checkUserSignUp(String githubId);
+
+    public String getUserEmail(int userId);
 }

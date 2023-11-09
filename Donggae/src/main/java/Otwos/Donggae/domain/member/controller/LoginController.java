@@ -61,8 +61,6 @@ public class LoginController {
 
             GitHubUserInfo gitHubUserInfo = loginServiceImpl.getGitHubUserInfo(githubToken);  //user 정보 받아오기
             log.info("githubUserName: {}", gitHubUserInfo.getUsername());
-            log.info("githubUserProfile: {}", gitHubUserInfo.getProfileUrl());
-            log.info("githubUserIdNum: {}", gitHubUserInfo.getIdNumber());
 
             Integer userId =  memberService.checkUserSignUp(gitHubUserInfo.getUsername()); // 깃허브 username을 통해 userId 가져오기
             if(userId == null){ // 회원가입 했는 지 검사
@@ -71,9 +69,13 @@ public class LoginController {
             }
 
             String token = tokenProvider.createToken(String.valueOf(userId)); //userId 이용해 Jwt token 발급
-            LoginResponse loginResponse = new LoginResponse(token); //response 생성
-//            response.setHeader("Authorization", githubToken.getAuthorizationValue());]
+            String userName = gitHubUserInfo.getUsername(); // 깃허브 네임
+            String profile = gitHubUserInfo.getProfileUrl(); // 프로필 url
+            String userEmail = memberService.getUserEmail(userId);// 이메일
+
+            LoginResponse loginResponse = new LoginResponse(token, userName, profile, userEmail); //response 생성
             log.info("token = {}", token);
+
             return ResponseEntity.ok().body(loginResponse);
         } catch (Exception e) {
             log.info("exception");
