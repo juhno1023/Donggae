@@ -188,6 +188,8 @@
     position: relative;
     top: -1px;
     width: 616px;
+    
+    font-size:20pt;
   }
   
   .signup .text-wrapper-6 {
@@ -202,6 +204,7 @@
     position: absolute;
     top: 20px;
     width: 610px;
+    
   }
   
   .signup .div-wrapper {
@@ -271,6 +274,7 @@
     position: relative;
     top: -1px;
     width: 281px;
+    font-size:20pt;
   }
   
   .signup .group-3 {
@@ -362,10 +366,7 @@
     width: 77px;
   }
   
-input{
-    font-size:20pt;
-}
 
-button{
+.overlap-6{
     color:black;
 }
