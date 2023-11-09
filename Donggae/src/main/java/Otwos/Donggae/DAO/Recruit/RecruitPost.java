@@ -2,14 +2,16 @@ package Otwos.Donggae.DAO.Recruit;
 import Otwos.Donggae.DAO.Application;
 import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.Global.MajorLectureEnum;
+import Otwos.Donggae.Global.Rank.BaekjoonRank;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.*;
 
 import java.sql.Date;
 import java.util.List;
-import lombok.NoArgsConstructor;
 
+
+@Builder
+@Setter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -54,5 +56,19 @@ public class RecruitPost {
     // 1:N Application
     @OneToMany(mappedBy = "recruitPostId")
     private List<Application> applications;
+
+    @Builder
+    public RecruitPost(int recruitPostId, User userId, String title, String content, MajorLectureEnum majorLectureName, Date createdDate, List<RecruitField> recruitFields, List<RecruitLanguage> recruitLanguages, List<RecruitPersonality> recruitPersonalities, List<Application> applications) {
+        this.recruitPostId = recruitPostId;
+        this.userId = userId;
+        this.title = title;
+        this.content = content;
+        this.majorLectureName = majorLectureName;
+        this.createdDate = createdDate;
+        this.recruitFields = recruitFields;
+        this.recruitLanguages = recruitLanguages;
+        this.recruitPersonalities = recruitPersonalities;
+        this.applications = applications;
+    }
 }
 
