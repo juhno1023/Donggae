@@ -53,4 +53,14 @@ public class MemberServiceImpl implements MemberService{
             throw new Exception("DGU 이메일이 중복됩니다: " + signUpDTO.getDguEmail());
         }
     }
+
+    public Integer checkUserSignUp(String githubId){
+        User userByGithubName = memberRepository.findUserByGithubName(githubId);
+        if(userByGithubName == null){
+            return null;
+        }
+        else{
+            return userByGithubName.getUserId();
+        }
+    }
 }
