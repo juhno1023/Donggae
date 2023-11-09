@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from "./Application.module.css"
 import { useNavigate } from "react-router-dom";
-import Header from "../_Layout/Header";
+import Header from "../../components/_Layout/Header";
 import bgImg from '../../image/donggae.png';
 
 export default function Posting() {

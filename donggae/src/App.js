@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './components/mainpage/Mainpage';
-import Posting from './components/Post/Posting';
-import Post from './components/Post/Post';
-import Application from './components/Application/Application';
-import Login from './components/Login/Login';
-import Signup from "./components/Signup/Signup";
+import Home from './page/mainpage/Mainpage';
+import Posting from './page/Post/Posting';
+import Post from './page/Post/Post';
+import Application from './page/Application/Application';
+import Login from './page/Login/Login';
+import Signup from "./page/Signup/Signup";
 
 function App() {
   return (

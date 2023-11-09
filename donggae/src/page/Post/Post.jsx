@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./Post.module.css"
-import Header from "../_Layout/Header";
+import Header from "../../components/_Layout/Header";
 import bgImg from '../../image/donggae.png';
 
 export default function Post() {

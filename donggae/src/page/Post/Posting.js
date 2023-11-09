@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from "./Posting.module.css"
 import { useNavigate } from "react-router-dom";
-import Header from "../_Layout/Header";
+import Header from "../../components/_Layout/Header";
 
 export default function Posting() {
     const [formData, setFormData] = useState({
