@@ -4,6 +4,7 @@ import Otwos.Donggae.DAO.User.Identifier.UserLanguagePK;
 import Otwos.Donggae.Global.LanguageEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,4 +25,10 @@ public class UserLanguage {
     @Column(name = "language", length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private LanguageEnum language; // 기술스택(언어)
+
+    @Builder
+    public UserLanguage(User userId, LanguageEnum language) {
+        this.userId = userId;
+        this.language = language;
+    }
 }

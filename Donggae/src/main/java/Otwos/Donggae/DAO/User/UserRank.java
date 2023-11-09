@@ -2,6 +2,7 @@ package Otwos.Donggae.DAO.User;
 
 import Otwos.Donggae.Global.Rank.DonggaeRank;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -25,4 +26,12 @@ public class UserRank {
     @Column(name = "rank_name", length = 10, columnDefinition = "VARCHAR(10) DEFAULT '똥개'")
     @Enumerated(EnumType.STRING)
     private DonggaeRank rankName;
+
+    @Builder
+    public UserRank(int id, User user, int score, DonggaeRank rankName) {
+        this.id = id;
+        this.userId = user;
+        this.score = score;
+        this.rankName = rankName;
+    }
 }

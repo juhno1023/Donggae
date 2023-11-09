@@ -7,4 +7,6 @@ public interface MemberRepository extends JpaRepository<User, Long> {
     User findUserByGithubName(String githubId);
 
     User findUserByDguEmail(String dguEmail);
+
+    User findUserByUserId(int userId);
 }

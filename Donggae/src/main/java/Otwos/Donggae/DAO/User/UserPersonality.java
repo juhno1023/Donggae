@@ -4,6 +4,7 @@ import Otwos.Donggae.DAO.User.Identifier.UserPersonalityPK;
 import Otwos.Donggae.Global.PersonalityEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,5 +25,11 @@ public class UserPersonality {
     @Column(name = "personality", length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private PersonalityEnum personality;
+
+    @Builder
+    public UserPersonality(User userId, PersonalityEnum personality) {
+        this.userId = userId;
+        this.personality = personality;
+    }
 }
 
