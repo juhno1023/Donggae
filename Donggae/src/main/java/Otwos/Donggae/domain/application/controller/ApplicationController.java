@@ -3,6 +3,8 @@ package Otwos.Donggae.domain.application.controller;
 import Otwos.Donggae.DTO.application.ApplyDTO;
 import Otwos.Donggae.DTO.application.read.ReadApplicationRequest;
 import Otwos.Donggae.DTO.application.read.ReadApplicationResponse;
+import Otwos.Donggae.DTO.member.previewInfo.PreviewUserInfoDTO;
+import Otwos.Donggae.Jwt.Auth;
 import Otwos.Donggae.domain.application.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +19,9 @@ public class ApplicationController {
     private ApplicationService applicationService;
 
     @PostMapping("/apply")
-    public ResponseEntity<?> applyForTeam(@RequestBody ApplyDTO applyDTO) {
+    public ResponseEntity<?> applyForTeam(@Auth int userId, @RequestBody ApplyDTO applyDTO) {
         try {
-            applicationService.applyFor(applyDTO);
+            applicationService.applyFor(userId, applyDTO);
             return ResponseEntity.ok("지원 완료");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -27,9 +29,19 @@ public class ApplicationController {
     }
 
     @PostMapping("/apply/show")
-    public ResponseEntity<?> showApplication(@RequestBody ReadApplicationRequest request) {
+    public ResponseEntity<?> showApplication(@Auth int userId, @RequestBody ReadApplicationRequest request) {
         try {
-            ReadApplicationResponse response = applicationService.readApplication(request);
+            ReadApplicationResponse response = applicationService.readApplication(userId, request);
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/applypage")
+    public ResponseEntity<?> applyPageMyInfo(@Auth int userId) {
+        try {
+            PreviewUserInfoDTO response = applicationService.applyPageInfo(userId);
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

@@ -12,7 +12,6 @@ public class ApplyDTO {
     private int applicationId;
     private String selfIntro;
     private String content;
-    private int userId;
     private int recruitPostId;
 
     public Application toEntity(User user, RecruitPost recruitPost) {

@@ -9,7 +9,6 @@ import Otwos.Donggae.DAO.User.UserPersonality;
 import Otwos.Donggae.DAO.User.UserRank;
 import Otwos.Donggae.DAO.User.UserStudyField;
 import Otwos.Donggae.DTO.application.ApplyDTO;
-import Otwos.Donggae.DTO.application.ApplyPage.ApplyPageRequest;
 import Otwos.Donggae.DTO.application.read.ReadApplicationRequest;
 import Otwos.Donggae.DTO.application.read.ReadApplicationResponse;
 import Otwos.Donggae.DTO.member.previewInfo.PreviewUserInfoDTO;
@@ -18,6 +17,7 @@ import Otwos.Donggae.DTO.member.userinfo.UserLanguageDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserPersonalityDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserStudyFieldDTO;
 import Otwos.Donggae.Global.Rank.DonggaeRank;
+import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.application.repository.ApplicationRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
 import Otwos.Donggae.domain.member.repository.info.UserInterestFieldRepository;
@@ -59,8 +59,8 @@ public class ApplicationServiceImpl implements ApplicationService{
 
     //지원하는 글 쓰고 지원하기 버튼 클릭 시
     @Override
-    public void applyFor(ApplyDTO applyDTO) {
-        User user = memberRepository.findUserByUserId(applyDTO.getUserId());
+    public void applyFor(int userId, ApplyDTO applyDTO) {
+        User user = memberRepository.findUserByUserId(userId);
         RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(applyDTO.getRecruitPostId());
         //예외처리 하고 저장
         try {
@@ -86,8 +86,8 @@ public class ApplicationServiceImpl implements ApplicationService{
 
     //지원서 조회
     @Override
-    public ReadApplicationResponse readApplication(ReadApplicationRequest applicationRequest) {
-        User user = memberRepository.findUserByUserId(applicationRequest.getUserId());
+    public ReadApplicationResponse readApplication(int userId, ReadApplicationRequest applicationRequest) {
+        User user = memberRepository.findUserByUserId(userId);
         RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(applicationRequest.getRecruitPostId());
         //예외처리
         try {
@@ -135,8 +135,33 @@ public class ApplicationServiceImpl implements ApplicationService{
 
     //지원하기 페이지 갔을 때 내정보 표시
     @Override
-    public PreviewUserInfoDTO applyPageInfo(ApplyPageRequest applyPageRequest) {
-        //구현
+    public PreviewUserInfoDTO applyPageInfo(int userId) {
+        User user = memberRepository.findUserByUserId(userId);
+
+        List<UserLanguageDTO> userLanguageDTOS = getLanguageDTO(user);
+        List<UserInterestFieldDTO> userInterestFieldDTOS = getInterestFieldDTO(user);
+        List<UserPersonalityDTO> userPersonalityDTOS = getPersonalityDTO(user);
+        List<UserStudyFieldDTO> userStudyFieldDTOS = getStudyFieldDTO(user);
+
+        //rank 엔티티에 없으면 그냥 "똥개" 보냄
+        UserRank userRank = userRankRepository.findUserRankByUserId(user);
+        DonggaeRank donggaeRank = DonggaeRank.똥개;
+        if (userRank != null){
+            donggaeRank = userRank.getRankName();
+        }
+
+        PreviewUserInfoDTO previewUserInfoDTO = new PreviewUserInfoDTO(
+                user.getGithubName(),
+                user.getIntro(),
+                user.getBoj_rank(),
+                user.getDguEmail(),
+                donggaeRank,
+                userLanguageDTOS,
+                userInterestFieldDTOS,
+                userPersonalityDTOS,
+                userStudyFieldDTOS
+        );
+        return previewUserInfoDTO;
     }
 
     //userId와 recruitPost에 해당하는 지원서 있는지 확인

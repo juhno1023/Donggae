@@ -6,6 +6,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ReadApplicationRequest {
-    private int userId;
     private int recruitPostId;
 }
