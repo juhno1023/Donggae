@@ -9,6 +9,7 @@ import Otwos.Donggae.DAO.User.UserPersonality;
 import Otwos.Donggae.DAO.User.UserRank;
 import Otwos.Donggae.DAO.User.UserStudyField;
 import Otwos.Donggae.DTO.application.ApplyDTO;
+import Otwos.Donggae.DTO.application.ApplyPage.ApplyPageRequest;
 import Otwos.Donggae.DTO.application.read.ReadApplicationRequest;
 import Otwos.Donggae.DTO.application.read.ReadApplicationResponse;
 import Otwos.Donggae.DTO.member.previewInfo.PreviewUserInfoDTO;
@@ -130,6 +131,12 @@ public class ApplicationServiceImpl implements ApplicationService{
         );
 
         return readApplicationResponse;
+    }
+
+    //지원하기 페이지 갔을 때 내정보 표시
+    @Override
+    public PreviewUserInfoDTO applyPageInfo(ApplyPageRequest applyPageRequest) {
+        //구현
     }
 
     //userId와 recruitPost에 해당하는 지원서 있는지 확인
