@@ -1,7 +1,7 @@
 import styles from "./Mainpage.module.css"
 import { useNavigate } from "react-router-dom";
-import Header from "../_Layout/Header";
-import Sidebar from "../_Layout/Sidebar";
+import Header from "../../components/_Layout/Header";
+import Sidebar from "../../components/_Layout/Sidebar";
 
 export default function Home() {
     const history = useNavigate();

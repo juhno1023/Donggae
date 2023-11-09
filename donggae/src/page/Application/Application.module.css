@@ -30,7 +30,6 @@ body{
 
 
 .formGroup {
-    display: flex;
     flex-direction: row ;
     margin-bottom: 20px;
     position: relative;
@@ -60,22 +59,21 @@ button{
     line-height: 35px;
 }
 
-.formGroup input, textarea {
+.formGroup input, .formGroup textarea {
     padding: 5px;
     border-radius: 12px;
     border: 1px solid var(--box-bg);
     background: var(--box-bg3);
     height: 20px;
-    line-height: 36px;
+    line-height: 30px;
     word-wrap: break-word;
     padding : 10px;
-}
-.fmg2 input{
-    width: 800px;
+    margin-top:10px;
+    width: 850px;
 }
 
+
 .fmg3 textarea{
-    width: 800px;
     height: 140px;
 }
 
@@ -94,7 +92,7 @@ button{
     width : 450px;
 }
 
-/* checkbox */
+/* profile box */
 .text__1 {
     font-size:23px;
     font-weight: bold;
@@ -102,46 +100,73 @@ button{
     line-height: 35px;
 }
 
-.container{
-    max-width : 1200px;
-    margin : 0 auto;
-    display :flex;
-    flex-wrap: wrap;
-}
-.container div{
-    margin : 10px;
-    margin-left: 0px;
-}
-.container div label{
-    cursor:pointer;
-}
-.container div label input[type="checkbox"]{
-    display: none;
-    
-}
-.container div label span{
+
+/* profile box */
+.profile_box {
+    background-color: var(--box-bg3);
+    border-radius: 8px;
+    height: 220px;
+    width: 409px;
+    line-height: 36px;
+    word-wrap: break-word;
+    padding : 10px;
+  }
+  
+  .logo{
+    display: flex; 
+    width : 300px;
+  }
+  
+  .logoimg{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius:50%;
+    margin :5px;
+  }
+  
+  .profile_info {
+    line-height: 25px;
+    margin-top:26px;
+    padding-left: 10px;
+    color:var(--disabled-text);
+  }
+  
+  .text__2 {
+    font-size:23px;
+    font-weight: bold;
+  }
+  
+  /* profile more */
+  
+  .profile_more {
+    background-color: #d8d8d8;
+    border-radius: 0px 0px 8px 8px;
+    height: 110px;
+    width: 409px;
+    position: relative;
+    top:-110px;
+    line-height: 36px;
+    word-wrap: break-word;
+    padding : 10px;
+  }
+  
+  .keyword_box{
+    width : 400px;
+    display: flex;
+    margin-bottom: 10px;
+    padding-left: 20px;
+  }
+  .keyword{
+    width : 200px;
+  }
+  .keyword_box span{
     position: relative;
     display: inline-block;
     background-color: var(--select-bg);
-    padding: 10px 16px;
+    padding: 0px 10px;
     font-size: 12px;
     border-radius: 30px;
-    user-select: none;
-    overflow: hidden;
-}
-.container div label input[type="checkbox"]:checked~span{
-    background:var(--point-orange);
-}
-
-/* select box */
-select {
-    appearance: none;
-    font-family: inherit;
-    cursor: pointer;
-    padding: 10px 16px;
-    font-size: 12px;
-    border-radius: 30px;
-    background-color: var(--select-bg);
-    border: 1px solid var(--box-bg);
     margin-left: 10px;
-}
+  }
+  
