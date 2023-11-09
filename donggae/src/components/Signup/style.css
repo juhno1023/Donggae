@@ -208,6 +208,7 @@
   }
   
   .signup .div-wrapper {
+    color:#000000;
     background-color: #faab238a;
     border: 2px solid;
     border-color: #faab23;
@@ -312,6 +313,7 @@
   }
   
   .signup .overlap-4 {
+    color: #000000;
     background-color: #faab238a;
     border: 2px solid;
     border-color: #faab23;
