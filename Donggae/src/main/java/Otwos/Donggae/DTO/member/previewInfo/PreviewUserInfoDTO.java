@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class PreviewUserInfoDTO {
-    private int userId;
+    //private int userId;
     private String githubName;
     private String selfIntro;
     private BaekjoonRank bojRank;
