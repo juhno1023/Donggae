@@ -29,7 +29,8 @@ public class AuthConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor)
                 .addPathPatterns("/**") // 모든 경로에 대해서 인터셉터 적용
-                .excludePathPatterns("/auth/**"); // /auth로 시작하는 경로는 인터셉터 적용에서 제외
+                .excludePathPatterns("/auth/**") // /auth로 시작하는 경로는 인터셉터 적용에서 제외
+                .excludePathPatterns("/signup/**"); // 회원가입도 제외
     }
 
     @Override

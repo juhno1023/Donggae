@@ -24,6 +24,8 @@ public class AuthInterceptor implements HandlerInterceptor  {
         }
 
         String token = extractToken(request); // request에서 토큰 추출
+        tokenProvider.validateToken(token); // 유효한 토큰인지
+        
         return true;
     }
 
