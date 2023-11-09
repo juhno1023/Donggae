@@ -54,13 +54,13 @@ public class MemberServiceImpl implements MemberService{
         }
     }
 
-    public String checkUserSignUp(String githubId){
+    public Integer checkUserSignUp(String githubId){
         User userByGithubName = memberRepository.findUserByGithubName(githubId);
         if(userByGithubName == null){
             return null;
         }
         else{
-            return userByGithubName.getGithubName();
+            return userByGithubName.getUserId();
         }
     }
 }

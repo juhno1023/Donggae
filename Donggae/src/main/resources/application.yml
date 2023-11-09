@@ -62,4 +62,4 @@ github:
 security:
   jwt:
     token:
-      secret-key: "3or3rixlvknasld345slkn4561sdfknl413420wqroi0467895oferymkfkj"
+      secret-key: ${JWT_SECRETKEY}

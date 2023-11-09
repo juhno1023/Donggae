@@ -23,7 +23,7 @@ public class JwtTokenProvider implements TokenProvider{
 
     public JwtTokenProvider(@Value("${security.jwt.token.secret-key}") String secretKey) {
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
-        this.validityInMilliseconds = 3600000; // 1 시간
+        this.validityInMilliseconds = 3600000 * 2; // 2 시간
     }
 
     @Override
@@ -33,14 +33,15 @@ public class JwtTokenProvider implements TokenProvider{
 
         return Jwts.builder()
                 .setSubject(payload)
-                .setIssuedAt(now)
-                .setExpiration(validity)
+                .setIssuedAt(now) // 현재 시간 기반으로 생성
+                .setExpiration(validity) // 만료 시간 세팅
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
     @Override
     public String parsePayload(String token) {
+        // 토큰에서 정보 추출
         try {
             return Jwts.parserBuilder()
                     .setSigningKey(key)
@@ -50,8 +51,8 @@ public class JwtTokenProvider implements TokenProvider{
                     .getSubject();
         } catch (JwtException | IllegalArgumentException e) {
             e.printStackTrace();
-            log.error("error in token: " + token);
-            return "error in token";
+            log.error("parsePayload: error in token: " + token);
+            throw new CustomAuthenticationException("parsePayload fail");
         }
     }
 
@@ -65,8 +66,10 @@ public class JwtTokenProvider implements TokenProvider{
                     .parseClaimsJws(token);
         } catch (ExpiredJwtException e) {
             log.error("expired token: " + token);
+            throw new CustomAuthenticationException("validateToken expired token");
         } catch (JwtException | IllegalArgumentException e) {
             log.error("invalid token: " + token);
+            throw new CustomAuthenticationException("validateToken invalid token");
         }
     }
 }

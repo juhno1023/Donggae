@@ -44,6 +44,7 @@ public class LoginController {
 
     @GetMapping("/github/login")
     public void redirectGithub(HttpServletResponse response) throws IOException {
+        log.info("github/login ");
         String redirect_uri = "https://github.com/login/oauth/authorize?client_id="+clientId+"&redirect_uri="+redirectURI;
         response.sendRedirect(redirect_uri);
     }
@@ -55,6 +56,7 @@ public class LoginController {
     @GetMapping("/github/callback")
     public ResponseEntity<?> githubLogin(@RequestParam String code, HttpServletResponse response) {
         try{
+            log.info("github/callback");
             GithubToken githubToken = loginServiceImpl.getAccessToken(code); //AccessToken 발급 받기
 
             GitHubUserInfo gitHubUserInfo = loginServiceImpl.getGitHubUserInfo(githubToken);  //user 정보 받아오기
@@ -62,14 +64,16 @@ public class LoginController {
             log.info("githubUserProfile: {}", gitHubUserInfo.getProfileUrl());
             log.info("githubUserIdNum: {}", gitHubUserInfo.getIdNumber());
 
-            if(memberService.checkUserSignUp(gitHubUserInfo.getUsername()) == null){ // 회원가입 했는 지 검사
+            Integer userId =  memberService.checkUserSignUp(gitHubUserInfo.getUsername()); // 깃허브 username을 통해 userId 가져오기
+            if(userId == null){ // 회원가입 했는 지 검사
                 log.info("Signup First");
                 return ResponseEntity.notFound().build(); // 회원 가입 안 했음을 반환
             }
 
-            String token = tokenProvider.createToken(String.valueOf(gitHubUserInfo.getIdNumber())); //Jwt token 발급
+            String token = tokenProvider.createToken(String.valueOf(userId)); //userId 이용해 Jwt token 발급
             LoginResponse loginResponse = new LoginResponse(token); //response 생성
-            response.setHeader("Authorization", githubToken.getAuthorizationValue());
+//            response.setHeader("Authorization", githubToken.getAuthorizationValue());]
+            log.info("token = {}", token);
             return ResponseEntity.ok().body(loginResponse);
         } catch (Exception e) {
             log.info("exception");

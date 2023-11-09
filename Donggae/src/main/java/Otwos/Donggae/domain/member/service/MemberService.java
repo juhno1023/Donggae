@@ -5,5 +5,5 @@ import Otwos.Donggae.DTO.member.register.SignUpDTO;
 public interface MemberService {
     public void register(SignUpDTO signUpDTO);
 
-    public String checkUserSignUp(String githubId);
+    public Integer checkUserSignUp(String githubId);
 }

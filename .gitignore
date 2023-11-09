@@ -21,10 +21,10 @@ Donggae/src/main/resources/application-oauth.properties
 
 # production
 /build
-Donggae/build
 Donggae/.gradle
+Donggae/build
 
-# misc
+# miscg
 .DS_Store
 .env.local
 .env.development.local

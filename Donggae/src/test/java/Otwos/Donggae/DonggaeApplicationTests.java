@@ -9,5 +9,4 @@ class DonggaeApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
