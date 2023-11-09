@@ -1,31 +1,66 @@
+import React, { useState } from 'react';
 import styles from "./Posting.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../_Layout/Header";
 
 export default function Posting() {
-    const history = useNavigate();
+    const [formData, setFormData] = useState({
+        team_name: '',
+        post_title: '',
+        post_content: '',
+    });
 
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Form Data:', formData);
+    };
+    
     return (
         <div className={styles.default}>
-            <Header />
-            <div className={styles.inner}>
+          <Header />
+          <div className={styles.inner}>
                 <div className={styles.body}>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <button type="submit">작성완료</button>
                     <div className={`${styles.formGroup} ${styles.fmg1}`}>
-                        <label  className={styles.text__1} for="team_name" >팀명</label>
-                        <input type="text" id="team_name"
-                        placeholder="팀 이름을 작성해주세요." />
+                    <label htmlFor="team_name">팀명</label>
+                    <input
+                        type="text"
+                        id="team_name"
+                        name="team_name"
+                        placeholder="팀 이름을 작성해주세요."
+                        value={formData.team_name}
+                        onChange={handleInputChange}
+                    />
                     </div>
                     <div className={`${styles.formGroup} ${styles.fmg2}`}>
-                        <label for="post_title">제목</label>
-                        <input type="text" id="post_title"
-                        placeholder="제목을 작성해주세요. (예시 : 함께 ㅇㅇ 프로젝트를 이끌어 갈 분들을 모집합니다! )" />
+                    <label htmlFor="post_title">제목</label>
+                    <input
+                        type="text"
+                        id="post_title"
+                        name="post_title"
+                        placeholder="제목을 작성해주세요. (예시 : 함께 ㅇㅇ 프로젝트를 이끌어 갈 분들을 모집합니다! )"
+                        value={formData.post_title}
+                        onChange={handleInputChange}
+                    />
                     </div>
                     <div className={`${styles.formGroup} ${styles.fmg3}`}>
-                        <label for="post_content">내용</label>
-                        <textarea id="post_content"
-                        placeholder="내용을 작성해주세요. (예시 : 이번에 간단하게 웹 프로젝트를 함께 이끌어 갈 분들을 모집합니다! 사용하고자 하는 기술 스택은 nodejs, ...)" />
+                    <label htmlFor="post_content">내용</label>
+                    <textarea
+                        id="post_content"
+                        name="post_content"
+                        placeholder="내용을 작성해주세요. (예시 : 이번에 간단하게 웹 프로젝트를 함께 이끌어 갈 분들을 모집합니다! 사용하고자 하는 기술 스택은 nodejs, ...)"
+                        value={formData.post_content}
+                        onChange={handleInputChange}
+                    />
                     </div>
                 </form>
                 
