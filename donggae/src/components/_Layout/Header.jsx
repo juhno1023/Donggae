@@ -1,19 +1,16 @@
 import styles from "./Header.module.css"
 import { useNavigate } from "react-router-dom";
 import bgImg from '../../image/donggae.png';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
     const history = useNavigate();
-    const button_startLogIn = () => { history("/signin"); };
-    const button_startSignUp = () => { history("/signup"); };
-
-    const navigateToHome = () => {history("/");};
-    
+      
     return (
         <div className={styles.header}>
             <div className={styles.contents}>
                 <div className={styles.logo}>
-                    <img className={styles.logoimg} src={bgImg} alt="Donggae Logo" />
+                    <Link to='/'><img className={styles.logoimg} src={bgImg} alt="Donggae Logo" /></Link>
                     <div>
                         <div className={styles.title}>Donggae</div>
                         <div className={styles.subtitle}><b>동</b>국대 <b>개</b>발자들</div>
@@ -21,10 +18,10 @@ export default function Header() {
                 </div>
                 <nav className={styles.navigation}>
                     <ul>
-                        <li>메인</li>
-                        <li>랭킹</li>
-                        <li>팀 찾기</li>
-                        <li>팀원 모집</li>
+                    <li><Link to='/'>메인</Link></li>
+                    <li><Link to='/posting'>랭킹</Link></li>
+                    <li><Link to='/post'>팀 찾기</Link></li>
+                    <li><Link to='/application'>팀원 모집</Link></li>
                     </ul>
                 </nav>
             </div>
