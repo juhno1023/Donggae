@@ -3,7 +3,7 @@ import "./style.css";
 import donggae from '../../image/donggae.png';
 import github from '../../image/GitHub.png';
 
-export default function Home() {
+export default function Login() {
     const navigate = useNavigate();
     const navigateToSignup = () => {
       navigate("/Signuppage");

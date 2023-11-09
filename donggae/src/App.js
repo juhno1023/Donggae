@@ -5,6 +5,7 @@ import Posting from './components/Post/Posting';
 import Post from './components/Post/Post';
 import Login from './components/Login/Loginpage';
 import Signup from "./components/Signup/Signuppage";
+import SignupGit from './components/Signup/withGitHub';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/posting" element={<Posting />} />
           <Route path="/post" element={<Post />} />
           <Route path="/Loginpage" element={<Login />} />
+          <Route path="/withGitHub" element={<SignupGit />} />
           <Route path="/Signuppage" element={<Signup />}></Route>
         </Routes>
       </BrowserRouter>

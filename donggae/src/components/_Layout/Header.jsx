@@ -6,6 +6,9 @@ export default function Header() {
     const history = useNavigate();
     const button_startLogIn = () => { history("/signin"); };
     const button_startSignUp = () => { history("/signup"); };
+
+    const navigateToHome = () => {history("/");};
+    
     return (
         <div className={styles.header}>
             <div className={styles.contents}>
