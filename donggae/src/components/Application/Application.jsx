@@ -12,7 +12,7 @@ export default function Posting() {
             <div className={styles.inner}>
                 <div className={styles.body}>
                 <form>
-                    <button type="submit">작성완료</button>
+                    <button type="submit">지원완료</button>
                     <div className={`${styles.formGroup} ${styles.fmg1}`}>
                         <label  className={styles.text__1} for="team_name" >자기소개</label>
                         <input type="text" id="team_name"
