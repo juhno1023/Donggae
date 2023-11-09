@@ -4,6 +4,7 @@ import Otwos.Donggae.DAO.User.Identifier.UserInterestFieldPK;
 import Otwos.Donggae.Global.FieldEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,4 +25,10 @@ public class UserInterestField {
     @Column(name = "interest_field", length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private FieldEnum interestField; // 관심분야
+
+    @Builder
+    public UserInterestField(User userId, FieldEnum interestField) {
+        this.userId = userId;
+        this.interestField = interestField;
+    }
 }
