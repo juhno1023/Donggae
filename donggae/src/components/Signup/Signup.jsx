@@ -5,7 +5,21 @@ import github from '../../image/GitHub.png';
 
 export default function Signup() {
     const navigate = useNavigate();
+    
+    // const UserInfo = () => { //GET 요청 하고 JSON 받아오기
+    // fetch("/auth/github/login", {
+    //         method : "GET",          //메소드 지정
+    //         headers : {               //데이터 타입 지정
+    //             "Content-Type":"application/json; charset=utf-8"
+    //         },
+    //         body: JSON.stringify(data)   //실제 데이터 파싱하여 body에 저장
+    //     }).then(res=>res.json())        // 리턴값이 있으면 리턴값에 맞는 req 지정
+    //       .then(res=> {
+    //         console.log(res);          // 리턴값에 대한 처리
+    //       });
+    // }
 
+    
     return (
         <div className="signup">
         <div className="div">
@@ -13,7 +27,8 @@ export default function Signup() {
             <div className="group">
                 <div className="rectangle" />
             </div>
-            <div className="text-wrapper">회원가입</div>
+            <button className="text-wrapper, rectangle">회원가입</button>
+
             </div>
             <div className="overlap-group">
             <div className="overlap-group-wrapper">

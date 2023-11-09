@@ -109,10 +109,14 @@
   
   .signup .span {
     font-weight: 700;
+    position: relative;
+    top:15px;
   }
   
   .signup .text-wrapper-3 {
     font-family: "Brawler-Regular", Helvetica;
+    position: relative;
+    top:15px;
   }
   
   .signup .image {
@@ -216,7 +220,7 @@
     height: 49px;
     left: 1291px;
     position: absolute;
-    top: 359px;
+    top: 350px;
     width: 92px;
   }
   
