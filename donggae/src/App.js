@@ -3,9 +3,9 @@ import './App.css';
 import Home from './components/mainpage/Mainpage';
 import Posting from './components/Post/Posting';
 import Post from './components/Post/Post';
-import Login from './components/Login/Loginpage';
-import Signup from "./components/Signup/Signuppage";
-import SignupGit from './components/Signup/withGitHub';
+import Application from './components/Application/Application';
+import Login from './components/Login/Login';
+import Signup from "./components/Signup/Signup";
 
 function App() {
   return (
@@ -15,9 +15,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/posting" element={<Posting />} />
           <Route path="/post" element={<Post />} />
-          <Route path="/Loginpage" element={<Login />} />
-          <Route path="/withGitHub" element={<SignupGit />} />
-          <Route path="/Signuppage" element={<Signup />}></Route>
+          <Route path="/application" element={<Application />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Signup" element={<Signup />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
