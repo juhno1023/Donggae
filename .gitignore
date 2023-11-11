@@ -1,12 +1,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # Ignore dbsettings.properties
-Donggae/src/main/resources/dbsettings.properties
+<<<<<<< HEAD
+BackEnd/src/main/resources/dbsettings.properties
 # Ignore emailsettings.properties
-Donggae/src/main/resources/emailsettings.properties
+BackEnd/src/main/resources/emailsettings.properties
 
 #Ignore oauthsettings.properties
-Donggae/src/main/resources/application-oauth.properties
+BackEnd/src/main/resources/application-oauth.properties
 
 *.idea
 *.iml
@@ -21,8 +22,9 @@ Donggae/src/main/resources/application-oauth.properties
 
 # production
 /build
-Donggae/.gradle
-Donggae/build
+BackEnd/.gradle
+BackEnd/build
+
 
 # miscg
 .DS_Store
