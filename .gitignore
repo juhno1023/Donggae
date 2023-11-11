@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # Ignore dbsettings.properties
+<<<<<<< HEAD
 BackEnd/src/main/resources/dbsettings.properties
 # Ignore emailsettings.properties
 BackEnd/src/main/resources/emailsettings.properties
@@ -23,6 +24,7 @@ BackEnd/src/main/resources/application-oauth.properties
 /build
 BackEnd/.gradle
 BackEnd/build
+
 
 # miscg
 .DS_Store
