@@ -1,9 +1,11 @@
 package Otwos.Donggae.DAO.Recruit;
 
 import Otwos.Donggae.DAO.Recruit.Identifier.RecruitPersonalityPK;
+import Otwos.Donggae.Global.FieldEnum;
 import Otwos.Donggae.Global.PersonalityEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,4 +26,10 @@ public class RecruitPersonality {
     @Column(name = "personality", length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private PersonalityEnum personality;
+
+    @Builder
+    public RecruitPersonality(RecruitPost recruitPostId, PersonalityEnum personality) {
+        this.recruitPostId = recruitPostId;
+        this.personality = personality;
+    }
 }
