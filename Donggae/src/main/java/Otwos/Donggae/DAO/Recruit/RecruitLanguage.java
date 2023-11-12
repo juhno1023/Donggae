@@ -38,4 +38,8 @@ public class RecruitLanguage {
                 .language(language)
                 .build();
     }
+
+    public LanguageEnum getLanguage() {
+        return this.language;
+    }
 }
