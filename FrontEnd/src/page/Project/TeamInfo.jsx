@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState  } from 'react';
-import styles from "./Leader.module.css"
+import styles from "./TeamInfo.module.css"
 import Header from "../../components/_Layout/Header";
 import bgImg from '../../image/donggae.png';
 import AppliList from '../../components/AppliList';
 import Sidebar from "../../components/_Layout/Sidebar";
 
-export default function Leader() {
+export default function TeamInfo() {
     const [checkedItems, setCheckedItems] = useState([])
     const datas = [
        { id: "day6", title: "00", completed: false, },
@@ -54,15 +54,7 @@ export default function Leader() {
                         </div>
                     </div>
                 </div>
-                <div className={styles.half}>
-                    <div className={styles.text__1}>지원자 리스트</div>
-                    <div className={styles.listed}>
-                        <div className={styles.line}>
-                        {datas2.map(data => <AppliList title={data.title} id={data.id} checkedItems={checkedItems} checkedItemHandler={checkedItemHandler} />)}
-                        </div>
-                </div>
-                </div>
-                </div>
+            </div>
             </div>
         </div>
     </div>

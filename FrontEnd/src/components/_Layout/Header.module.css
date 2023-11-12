@@ -53,8 +53,7 @@ html,body {
 
 .contents{
     font-size: 14px;
-    width: 96%;
-    max-width: 1500px;
+    width: 80vw;
     height: 100%;
     margin: 0 auto;
     align-items: center;

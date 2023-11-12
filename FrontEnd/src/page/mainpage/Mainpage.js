@@ -8,8 +8,8 @@ export default function Home() {
     return (
         <div className={styles.default}>
             <Header />
+            <Sidebar/>
             <div className={styles.inner}>
-                <Sidebar/>
                 <div className={styles.body}>
                     default
                 </div>
