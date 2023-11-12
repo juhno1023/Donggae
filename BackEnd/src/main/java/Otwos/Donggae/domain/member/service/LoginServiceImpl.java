@@ -51,14 +51,18 @@ public class LoginServiceImpl implements LoginService{
     }
 
     public GitHubUserInfo getGitHubUserInfo(GithubToken githubToken) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "token " + githubToken.getAccessToken());
-
-        HttpEntity<Object> request = new HttpEntity<>(headers);
-        ResponseEntity<GitHubUserInfo> response = new RestTemplate().exchange(userUrl, HttpMethod.GET, request, GitHubUserInfo.class);
-
-
-        return response.getBody();
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Authorization", "token " + githubToken.getAccessToken());
+            HttpEntity<Object> request = new HttpEntity<>(headers);
+            ResponseEntity<GitHubUserInfo> response = new RestTemplate().exchange(
+                    userUrl, HttpMethod.GET, request, GitHubUserInfo.class
+            );
+            return response.getBody();
+        } catch (Exception e) {
+            log.error("Error during GitHub API call", e);
+            throw e; // 또는 적절한 예외 처리
+        }
     }
 
 }

@@ -7,6 +7,7 @@ import Application from './page/Application/Application';
 import Login from './page/Login/Login';
 import Signup from "./page/Signup/Signup";
 import Leader from "./page/Project/Leader";
+import AuthCallback from './page/Login/AuthCallback';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/post" element={<Post />} />
           <Route path="/application" element={<Application />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/auth/github/callback" element={<AuthCallback />} />
           <Route path="/Signup" element={<Signup />}></Route>
           <Route path="/Leader" element={<Leader />}></Route>
         </Routes>
