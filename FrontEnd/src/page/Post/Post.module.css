@@ -13,10 +13,6 @@ body{
   height: 100vh;
 }
 
-.inner{
-  width: 100vw;
-  padding-top:200px;
-}
 
 .body{
   position: absolute;

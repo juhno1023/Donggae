@@ -71,13 +71,7 @@ export default function Posting() {
                             <div>
                                 <label>
                                     <input type="checkbox" name=""/>
-                                    <span class="list">전체</span>
-                                </label>
-                            </div>
-                            <div>
-                                <label>
-                                    <input type="checkbox" name=""/>
-                                    <span class="list">JavaScript</span>
+                                    <span className={styles.list}>JavaScript</span>
                                 </label>
                             </div>
                         </div>
@@ -86,13 +80,7 @@ export default function Posting() {
                             <div>
                                 <label>
                                     <input type="checkbox" name=""/>
-                                    <span class="list">전체</span>
-                                </label>
-                            </div>
-                            <div>
-                                <label>
-                                    <input type="checkbox" name=""/>
-                                    <span class="list">JavaScript</span>
+                                    <span className={styles.list}>JavaScript</span>
                                 </label>
                             </div>
                         </div>
@@ -101,13 +89,7 @@ export default function Posting() {
                             <div>
                                 <label>
                                     <input type="checkbox" name=""/>
-                                    <span class="list">전체</span>
-                                </label>
-                            </div>
-                            <div>
-                                <label>
-                                    <input type="checkbox" name=""/>
-                                    <span class="list">JavaScript</span>
+                                    <span className={styles.list}>JavaScript</span>
                                 </label>
                             </div>
                         </div>
