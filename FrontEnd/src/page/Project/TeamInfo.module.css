@@ -8,14 +8,14 @@
 body{
   background-color: var(--basic-white);
 }
+
 .default{
-  width: 100vw;
-  height: 100vh;
+  width: 90vw;
   padding-top:200px;
 }
 .inner{
   margin : 0 auto;
-  width : 900px;
+  width : 50vw;
   height : 680px;
 }
 
@@ -24,6 +24,7 @@ body{
   font-size: 14px;
   top : 230px;
   background-color: white;
+  margin-left: 200px;
 }
 
 
