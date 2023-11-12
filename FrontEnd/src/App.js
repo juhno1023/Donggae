@@ -7,6 +7,7 @@ import Application from './page/Application/Application';
 import Login from './page/Login/Login';
 import Signup from "./page/Signup/Signup";
 import Leader from "./page/Project/Leader";
+import TeamInfo from "./page/Project/TeamInfo";
 import AuthCallback from './page/Login/AuthCallback';
 
 function App() {
@@ -20,8 +21,9 @@ function App() {
           <Route path="/post" element={<Post />} />
           <Route path="/application" element={<Application />} />
           <Route path="/auth/github/callback" element={<AuthCallback />} />
-          <Route path="/Signup" element={<Signup />}></Route>
-          <Route path="/Leader" element={<Leader />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/leader" element={<Leader />}></Route>
+          <Route path="/teaminfo" element={<TeamInfo />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

@@ -21,7 +21,6 @@ const AppliList = ({ title, id, checkedItems, checkedItemHandler }) => {
             <div>{id}{title}
             <label>
                 <input type='checkbox'
-                    name='meal'
                     checked={isChecked}
                     value={title}
                     onChange={e => onCheck(e)}

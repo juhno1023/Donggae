@@ -1,24 +1,20 @@
-
 .default{
     width: 100vw;
     height: 100vh;
-}
-
-.inner{
-    width: 100vw;
-    padding-top:200px;
-}
-
-.body{
-    position: absolute;
-    font-size: 14px;
-    left : 520px;
-    top : 230px;
-    background-color: white;
+  }
+  .inner{
+    margin : 0 auto;
     width : 900px;
     height : 680px;
-}
-
+  }
+  
+  .body{
+    position: absolute;
+    font-size: 14px;
+    top : 230px;
+    background-color: white;
+  }
+  
 
 .formGroup {
     display: flex;

@@ -21,8 +21,8 @@ export default function Header() {
                     <li><Link to='/main'>메인</Link></li>
                     <li><Link to='/posting'>posting</Link></li>
                     <li><Link to='/post'>post</Link></li>
-                    <li><Link to='/application'>application</Link></li>
                     <li><Link to='/leader'>leader</Link></li>
+                    <li><Link to='/teaminfo'>info</Link></li>
                     </ul>
                 </nav>
             </div>

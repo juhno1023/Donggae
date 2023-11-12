@@ -8,7 +8,6 @@
 body{
   background-color: var(--basic-white);
 }
-
 .default{
   width: 100vw;
   height: 100vh;
@@ -26,7 +25,6 @@ body{
   top : 230px;
   background-color: white;
 }
-
 
 
 .formGroup {
