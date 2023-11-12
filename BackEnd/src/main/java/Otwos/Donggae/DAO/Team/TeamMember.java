@@ -4,6 +4,7 @@ import Otwos.Donggae.DAO.Team.Identifier.TeamMemberPK;
 import Otwos.Donggae.DAO.User.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.io.Serializable;
@@ -31,5 +32,12 @@ public class TeamMember {
     @Column(name = "is_leader")
     private Boolean isLeader;
 
+    @Builder
+    public TeamMember(Team team, User user,
+                      Boolean isLeader) {
+        this.teamId = team;
+        this.userId = user;
+        this.isLeader = isLeader;
+    }
 }
 
