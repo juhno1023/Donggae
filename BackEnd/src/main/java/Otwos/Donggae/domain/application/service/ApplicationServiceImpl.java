@@ -27,6 +27,7 @@ import Otwos.Donggae.domain.member.repository.info.UserStudyFieldRepository;
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -40,6 +41,7 @@ public class ApplicationServiceImpl implements ApplicationService{
     private UserStudyFieldRepository userStudyFieldRepository;
     private UserRankRepository userRankRepository;
 
+    @Autowired
     public ApplicationServiceImpl(ApplicationRepository applicationRepository, MemberRepository memberRepository,
                                   RecruitPostRepository recruitPostRepository,
                                   UserInterestFieldRepository interestFieldRepository,
