@@ -2,6 +2,7 @@ package Otwos.Donggae.DAO.Team;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
@@ -30,4 +31,11 @@ public class Team {
     @OneToMany(mappedBy = "teamId")
     private List<TeamMember> teamMembers;
 
+    @Builder
+    public Team(int teamId, RecruitPost recruitPost,
+                String teamName) {
+        this.teamId = teamId;
+        this.recruitPostId = recruitPost;
+        this.teamName = teamName;
+    }
 }

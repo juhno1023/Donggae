@@ -14,7 +14,7 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
-    @PostMapping("/signup")
+    @PostMapping("/member/signup")
     public ResponseEntity<?> signUp(@RequestBody SignUpDTO signUpDTO) {
         try {
             memberService.register(signUpDTO);
