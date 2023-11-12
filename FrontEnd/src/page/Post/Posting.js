@@ -1,10 +1,11 @@
-import React, { useState, Component  } from 'react';
+import React, { useState  } from 'react';
 import styles from "./Posting.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
 import CheckBox from '../../components/CheckBox';
 
 export default function Posting() {
+    // 팀명, 제목, 내용 등 text Input
     const [formData, setFormData] = useState({
         team_name: '',
         post_title: '',
@@ -19,7 +20,7 @@ export default function Posting() {
         });
     };
 
-    
+    // checkbox Input
     const [checkedItems, setCheckedItems] = useState([])
     const datas = [
         { title: '아침식사'},
@@ -41,10 +42,20 @@ export default function Posting() {
             setCheckedItems([...filter])
         }
     }
+
+    // Option Select Input
+    const selectList = ["없음", "apple", "banana", "grape", "orange"];
+    const [Selected, setSelected] = useState("");
+
+    const handleSelect = (e) => {
+        setSelected(e.target.value);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form Data:', formData);
-        console.log('Form Data:', checkedItems);
+        console.log('checkedItems:', checkedItems);
+        console.log('selectList:', Selected);
     };
 
     return (
@@ -111,15 +122,12 @@ export default function Posting() {
                     </div>
                     <div className={styles.half}>
                     <div className={styles.text__1}>전공강의 팀원 모집하기</div> 선택 된 수강강의
-                        <select>
-                            <option value="Option 1">없음</option>
-                            <option value="Option 2">소프트웨어공학개론</option>
-                            <option value="Option 3">Option 3</option>
-                            <option value="Option 4">Option 4</option>
-                            <option value="Option 5">Option 5</option>
-                            <option value="Option length">
-                            Options
+                    <select onChange={handleSelect} value={Selected}>
+                        {selectList.map((item) => (
+                            <option value={item} key={item}>
+                            {item}
                             </option>
+                        ))}
                         </select>
                     </div>
                 </div>
