@@ -6,6 +6,7 @@ import Post from './page/Post/Post';
 import Application from './page/Application/Application';
 import Login from './page/Login/Login';
 import Signup from "./page/Signup/Signup";
+import Leader from "./page/Project/Leader";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/application" element={<Application />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />}></Route>
+          <Route path="/Leader" element={<Leader />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

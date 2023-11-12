@@ -19,9 +19,10 @@ export default function Header() {
                 <nav className={styles.navigation}>
                     <ul>
                     <li><Link to='/'>메인</Link></li>
-                    <li><Link to='/posting'>랭킹</Link></li>
-                    <li><Link to='/post'>팀 찾기</Link></li>
-                    <li><Link to='/application'>팀원 모집</Link></li>
+                    <li><Link to='/posting'>posting</Link></li>
+                    <li><Link to='/post'>post</Link></li>
+                    <li><Link to='/application'>application</Link></li>
+                    <li><Link to='/leader'>leader</Link></li>
                     </ul>
                 </nav>
             </div>
