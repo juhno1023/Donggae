@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, Component  } from 'react';
 import styles from "./Posting.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
+import CheckBox from '../../components/CheckBox';
 
 export default function Posting() {
     const [formData, setFormData] = useState({
@@ -18,11 +19,34 @@ export default function Posting() {
         });
     };
 
+    
+    const [checkedItems, setCheckedItems] = useState([])
+    const datas = [
+        { title: '아침식사'},
+        { title: '아침간식'},
+    ]
+    const datas2 = [
+        { title: 'd'},
+        { title: 'f'},
+    ]
+    const datas3 = [
+        { title: 'dd'},
+        { title: 'ff'},
+    ]
+    const checkedItemHandler = (code, isChecked) => {
+        if (isChecked) { //체크 추가할때
+            setCheckedItems([...checkedItems, code])
+        } else if (!isChecked && checkedItems.find(one => one === code)) {//체크 해제할때 checkedItems에 있을 경우
+            const filter = checkedItems.filter(one => one !== code)
+            setCheckedItems([...filter])
+        }
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form Data:', formData);
+        console.log('Form Data:', checkedItems);
     };
-    
+
     return (
         <div className={styles.default}>
           <Header />
@@ -69,28 +93,19 @@ export default function Posting() {
                         <div className={styles.text__1}>세부사항 설정</div> 모집 분야
                         <div className={styles.container}>
                             <div>
-                                <label>
-                                    <input type="checkbox" name=""/>
-                                    <span className={styles.list}>JavaScript</span>
-                                </label>
+                            {datas.map(data => <CheckBox data={data.title} checkedItems={checkedItems} checkedItemHandler={checkedItemHandler} />)}
                             </div>
                         </div>
                         선호 언어
                         <div className={styles.container}>
                             <div>
-                                <label>
-                                    <input type="checkbox" name=""/>
-                                    <span className={styles.list}>JavaScript</span>
-                                </label>
+                            {datas2.map(data => <CheckBox data={data.title} checkedItems={checkedItems} checkedItemHandler={checkedItemHandler} />)}
                             </div>
                         </div>
                         선호 성향
                         <div className={styles.container}>
                             <div>
-                                <label>
-                                    <input type="checkbox" name=""/>
-                                    <span className={styles.list}>JavaScript</span>
-                                </label>
+                            {datas3.map(data => <CheckBox data={data.title} checkedItems={checkedItems} checkedItemHandler={checkedItemHandler} />)}
                             </div>
                         </div>
                     </div>
