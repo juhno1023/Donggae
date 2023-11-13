@@ -7,7 +7,7 @@ function AuthCallback() {
 
     useEffect(() => {
         if (!code) {
-            navigate('/login');
+            navigate('/'); //로그인 페이지로
             return;
         }
 
@@ -33,7 +33,7 @@ function AuthCallback() {
             .then(data => {
                 if (data.token) {
                     localStorage.setItem('token', data.token);
-                    navigate('/', { replace: true });
+                    navigate('/main', { replace: true }); //로그인 성공 시 메인페이지
                 }
             })
             .catch(error => {
