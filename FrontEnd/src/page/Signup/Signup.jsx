@@ -1,24 +1,57 @@
 import { useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
 import "./style.css";
 import donggae from '../../image/donggae.png';
 import github from '../../image/GitHub.png';
 
 export default function Signup() {
     const navigate = useNavigate();
-    
-    // const UserInfo = () => { //GET 요청 하고 JSON 받아오기
-    // fetch("/auth/github/login", {
-    //         method : "GET",          //메소드 지정
-    //         headers : {               //데이터 타입 지정
-    //             "Content-Type":"application/json; charset=utf-8"
-    //         },
-    //         body: JSON.stringify(data)   //실제 데이터 파싱하여 body에 저장
-    //     }).then(res=>res.json())        // 리턴값이 있으면 리턴값에 맞는 req 지정
-    //       .then(res=> {
-    //         console.log(res);          // 리턴값에 대한 처리
-    //       });
-    // }
 
+    const [answerCodeValue, setAnswerCode] = useState('');
+    const [codeValue, setCode] = useState('');
+    const [emailValue, setEmail] = useState('');
+
+    const saveCode = event =>{
+        setCode(event.target.value);
+        console.log(event.target.value);
+    }
+
+    const saveEmail = event =>{
+        setEmail(event.target.value);
+        console.log(event.target.value);
+    }
+    
+    const codeSend = () => { //GET 요청 하고 JSON 받아오기
+        fetch('https://localhost:8080/sendemail', {
+                method : "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: emailValue
+                })
+            }).then(res=>res.json())        
+              .then(res=> {
+                console.log(res)
+              });
+        }
+
+    const compareValue = () => {
+
+         //GET 요청 하고 JSON 받아오기
+            fetch('https://localhost:8080/sendemail', {
+                    method : "GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }   
+                }).then(res=>res.json())        
+                  .then(res=> {
+                    setAnswerCode(res);
+                  });
+
+        if(codeValue === answerCodeValue) console.log('good');
+        else console('bad');
+    }
     
     return (
         <div className="signup">
@@ -60,8 +93,8 @@ export default function Signup() {
             <div className="text-wrapper-8">동국대 이메일</div>
             <div className="overlap-3">
             <div className="group-2">
-                <input className = "rectangle-3" Type="text" id="team_name"
-                        placeholder="내용을 입력해주세요." />
+                <input  value={emailValue} onChange={saveEmail} className = "rectangle-3" Type="text" id="team_name"
+                        placeholder="메일을 입력해주세요." />
             </div>
             
             <div className="group-3">
@@ -70,17 +103,17 @@ export default function Signup() {
             <div className="dgu-ac-kr">@&nbsp;&nbsp;&nbsp;&nbsp;dgu.ac.kr</div>
             </div>
             <div>
-                <button className="overlap-4 ,div-wrapper">메일발송</button>
+                <button onClick={codeSend} className="overlap-4 ,div-wrapper">메일발송</button>
             </div>
             <div className="text-wrapper-9">인증번호</div>
             <div className="overlap-5">
             <div className="rectangle-wrapper">
-                <input className = "rectangle-2" Type="text" id="team_name"
+                <input value={codeValue} onChange={saveCode} className = "rectangle-2" Type="text" id="team_name"
                         placeholder="내용을 입력해주세요." />
             </div>
             </div>
             <div>
-                <button className="overlap-6 ,div-wrapper">인증</button>
+                <button onClick = {compareValue} className="overlap-6 ,div-wrapper">인증</button>
             </div>
             <img className="img" alt="Image" src={github} />
         </div>
