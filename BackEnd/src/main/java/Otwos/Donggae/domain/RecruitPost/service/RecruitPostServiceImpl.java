@@ -42,9 +42,6 @@ import static java.sql.Types.NULL;
 
 @Service
 public class RecruitPostServiceImpl implements RecruitPostService {
-
-    @Autowired
-    private RecruitPostService recruitPostService;
     @Autowired
     private MemberRepository memberRepository;
 
@@ -58,9 +55,6 @@ public class RecruitPostServiceImpl implements RecruitPostService {
     private RecruitPersonalityRepository recruitPersonalityRepository;
     @Autowired
     private RecruitFieldRepository recruitFieldRepository;
-
-    @Autowired
-    private TeamService teamService;
 
     @Autowired
     private TeamRepository teamRepository;
