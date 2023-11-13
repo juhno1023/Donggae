@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Data
@@ -30,7 +31,7 @@ public class RecruitPostDTO {
 
     private MajorLectureEnum majorLectureName;
 
-    private Date createdDate;
+    private Timestamp createdDate;
 
     private List<RecruitField> recruitFields;
 
@@ -42,16 +43,11 @@ public class RecruitPostDTO {
 
     public RecruitPost toEntity() {
         return RecruitPost.builder()
-                .recruitPostId(recruitPostId)
                 .userId(userId)
                 .title(title)
                 .content(content)
                 .majorLectureName(majorLectureName)
                 .createdDate(createdDate)
-                .recruitFields(recruitFields)
-                .recruitLanguages(recruitLanguages)
-                .recruitPersonalities(recruitPersonalities)
-                .applications(applications)
                 .build();
     }
 }

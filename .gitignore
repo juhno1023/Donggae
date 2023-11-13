@@ -23,7 +23,7 @@ BackEnd/src/main/resources/application-oauth.properties
 /build
 BackEnd/.gradle
 BackEnd/build
-
+FrontEnd/package.json
 
 # miscg
 .DS_Store

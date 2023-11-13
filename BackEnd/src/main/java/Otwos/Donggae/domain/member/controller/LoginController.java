@@ -12,10 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -42,14 +39,6 @@ public class LoginController {
     private MemberService memberService;
 
 
-    @GetMapping("/github/login")
-    public void redirectGithub(HttpServletResponse response) throws IOException {
-        log.info("github/login ");
-        String redirect_uri = "https://github.com/login/oauth/authorize?client_id="+clientId+"&redirect_uri="+redirectURI;
-        response.sendRedirect(redirect_uri);
-    }
-
-
      // Authorization callback URL을 통해 임시 code 발급
      // 이를 이용해 AccessToken 발급 받기
      // AccessToken을 이용해 user 정보 가져오기
@@ -58,6 +47,7 @@ public class LoginController {
         try{
             log.info("github/callback");
             GithubToken githubToken = loginServiceImpl.getAccessToken(code); //AccessToken 발급 받기
+            log.info("whyyy");
 
             GitHubUserInfo gitHubUserInfo = loginServiceImpl.getGitHubUserInfo(githubToken);  //user 정보 받아오기
             log.info("githubUserName: {}", gitHubUserInfo.getUsername());
