@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RecruitPostRepository extends JpaRepository<RecruitPost, Integer> {
     RecruitPost findRecruitPostByRecruitPostId(int id);
+
+    RecruitPost findRecruitPostByTitle(String title);
     RecruitPost save(RecruitPost recruitPost);
 
 }

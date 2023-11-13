@@ -1,9 +1,11 @@
 package Otwos.Donggae.DAO.Recruit;
 
 import Otwos.Donggae.DAO.Recruit.Identifier.RecruitLanguagePK;
+import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.Global.LanguageEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,4 +26,20 @@ public class RecruitLanguage {
     @Column(name = "language", length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private LanguageEnum language;
+
+    @Builder
+    public RecruitLanguage(RecruitPost recruitPostId, LanguageEnum language) {
+        this.recruitPostId = recruitPostId;
+        this.language = language;
+    }
+    public RecruitLanguage toEntity(RecruitPost recruitPostId, LanguageEnum language) {
+        return RecruitLanguage.builder()
+                .recruitPostId(recruitPostId)
+                .language(language)
+                .build();
+    }
+
+    public LanguageEnum getLanguage() {
+        return this.language;
+    }
 }

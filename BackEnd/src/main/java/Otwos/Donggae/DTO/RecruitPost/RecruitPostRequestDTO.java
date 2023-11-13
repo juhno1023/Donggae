@@ -32,4 +32,6 @@ public class RecruitPostRequestDTO {
 
     private List<RecruitPersonality> recruitPersonalities;
 
+    private String teamName;
+
 }
