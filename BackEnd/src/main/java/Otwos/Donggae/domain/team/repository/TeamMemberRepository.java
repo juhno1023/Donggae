@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TeamMemberRepository extends JpaRepository<TeamMember, TeamMemberPK> {
     public TeamMember findTeamMemberByTeamIdAndUserId(Team teamId, User userId);
+
+    public void deleteTeamMemberByTeamIdAndUserId(Team teamId, User userId);
 }

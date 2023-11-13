@@ -8,5 +8,5 @@ import Otwos.Donggae.DTO.team.selectTeamMember.SelectTeamMemberRequest;
 public interface TeamService {
     public void selectTeamMember(SelectTeamMemberRequest request);
 
-
+    public void deleteTeamMember(SelectTeamMemberRequest request);
 }
