@@ -7,9 +7,9 @@ import github from '../../image/GitHub.png';
 export default function Login() {
     const navigate = useNavigate();
 
-    // 환경 변수 설정 필요!!
-    const clientId = 'f891db0dacbd43f99b74';
-    const redirectUri = 'http://localhost:3000/auth/github/callback';
+    // 환경 변수 설정 필요 - 설정 완료 .env 파일 참조
+    const clientId = process.env.clientId;
+    const redirectUri = process.env.redirectUri;
     const GITHUB_AUTH_URI = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`;
 
     // 로그인 버튼 클릭 핸들러
