@@ -21,7 +21,7 @@ public class RecruitPostController {
     @PostMapping("/recruitPost") // 글 작성
     public ResponseEntity<?>  createBoard(@RequestBody RecruitPostRequestDTO recruitPostDTO, @Auth int userId){
         try {
-            recruitPostService.createRecruitPost(recruitPostDTO,userId);
+            recruitPostService.createRecruitPostAndTeam(recruitPostDTO,userId);
             return ResponseEntity.ok("작성 완료");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

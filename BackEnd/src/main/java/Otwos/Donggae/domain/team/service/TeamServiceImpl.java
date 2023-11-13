@@ -3,6 +3,8 @@ package Otwos.Donggae.domain.team.service;
 import Otwos.Donggae.DAO.Team.Team;
 import Otwos.Donggae.DAO.Team.TeamMember;
 import Otwos.Donggae.DAO.User.User;
+import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
+import Otwos.Donggae.DTO.team.TeamDTO;
 import Otwos.Donggae.DTO.team.TeamMemberDTO;
 import Otwos.Donggae.DTO.team.selectTeamMember.SelectTeamMemberRequest;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
@@ -10,6 +12,7 @@ import Otwos.Donggae.domain.team.repository.TeamMemberRepository;
 import Otwos.Donggae.domain.team.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TeamServiceImpl implements TeamService{
