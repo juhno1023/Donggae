@@ -22,7 +22,7 @@ public class UserInterestField {
     private User userId;
 
     @Id
-    @Column(name = "interest_field", length = 20, nullable = false)
+    @Column(name = "interest_field", length = 200, nullable = false)
     @Enumerated(EnumType.STRING)
     private FieldEnum interestField; // 관심분야
 

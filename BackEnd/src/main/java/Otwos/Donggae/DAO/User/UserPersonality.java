@@ -22,7 +22,7 @@ public class UserPersonality {
     private User userId;
 
     @Id
-    @Column(name = "personality", length = 20, nullable = false)
+    @Column(name = "personality", length = 200, nullable = false)
     @Enumerated(EnumType.STRING)
     private PersonalityEnum personality;
 
