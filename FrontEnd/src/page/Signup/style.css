@@ -192,7 +192,7 @@
     position: relative;
     top: -1px;
     width: 616px;
-    
+    padding-left: 15px;
     font-size:20pt;
   }
   
@@ -280,6 +280,7 @@
     top: -1px;
     width: 281px;
     font-size:20pt;
+    padding-left: 15px;
   }
   
   .signup .group-3 {
@@ -300,20 +301,22 @@
     position: relative;
     top: -1px;
     width: 281px;
+    padding-left: 15px;
   }
   
   .signup .dgu-ac-kr {
     color: #000000;
     font-family: "Brawler-Bold", Helvetica;
-    font-size: 40px;
-    font-weight: 700;
+    font-size: 35px;
+    font-weight: 600;
     height: 54px;
     left: 291px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
-    top: 15px;
+    top: 17px;
     width: 304px;
+    padding-left: 8px;
   }
   
   .signup .overlap-4 {

@@ -19,7 +19,7 @@ html,body {
   }
   
   .login-page .overlap {
-    left: 713px;
+    left: 840px;
     position: absolute;
     top: 650px;
     height: 244px;
@@ -34,6 +34,7 @@ html,body {
     top: 0;
     height: 165px;
     width: 461px;
+    border: 2px solid;
   }
   
   .login-page .text-wrapper {
@@ -46,9 +47,10 @@ html,body {
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
-    top: 38px;
+    top: 30px;
     transform: rotate(0.31deg);
     width: 239px;
+    
   }
   
   .login-page .text-wrapper-2 {
@@ -142,7 +144,7 @@ html,body {
     font-size: 40px;
     font-weight: 700;
     height: 64px;
-    left: 720px;
+    left: 840px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
@@ -158,4 +160,5 @@ html,body {
     position: absolute;
     top:15px;
     left:0.5px;
+    color:#717171;
   }

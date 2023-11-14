@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -39,7 +40,7 @@ public class RecruitPost {
     private MajorLectureEnum majorLectureName;
 
     @Column(name = "created_date")
-    private Date createdDate;
+    private Timestamp createdDate;
 
     // 1:N recruitField
     @OneToMany(mappedBy = "recruitPostId")
@@ -58,7 +59,7 @@ public class RecruitPost {
     private List<Application> applications;
 
     @Builder
-    public RecruitPost(int recruitPostId, User userId, String title, String content, MajorLectureEnum majorLectureName, Date createdDate, List<RecruitField> recruitFields, List<RecruitLanguage> recruitLanguages, List<RecruitPersonality> recruitPersonalities, List<Application> applications) {
+    public RecruitPost(int recruitPostId, User userId, String title, String content, MajorLectureEnum majorLectureName, Timestamp createdDate, List<RecruitField> recruitFields, List<RecruitLanguage> recruitLanguages, List<RecruitPersonality> recruitPersonalities, List<Application> applications) {
         this.recruitPostId = recruitPostId;
         this.userId = userId;
         this.title = title;
