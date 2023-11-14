@@ -5,13 +5,13 @@ import Otwos.Donggae.Global.MajorLectureEnum;
 import Otwos.Donggae.Global.Rank.BaekjoonRank;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
 
-@Builder
 @Setter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -42,6 +42,9 @@ public class RecruitPost {
     @Column(name = "created_date")
     private Timestamp createdDate;
 
+    @Column(name = "is_complete", nullable = false, columnDefinition = "boolean default false")
+    private Boolean isComplete;
+
     // 1:N recruitField
     @OneToMany(mappedBy = "recruitPostId")
     private List<RecruitField> recruitFields;
@@ -70,6 +73,7 @@ public class RecruitPost {
         this.recruitLanguages = recruitLanguages;
         this.recruitPersonalities = recruitPersonalities;
         this.applications = applications;
+        this.isComplete = false;
     }
 }
 
