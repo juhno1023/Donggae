@@ -11,7 +11,7 @@ function AuthCallback() {
             return;
         }
 
-        fetch(`http://localhost:8080/auth/github/callback?code=${code}`, {
+        fetch(`/auth/github/callback?code=${code}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
