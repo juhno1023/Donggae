@@ -35,7 +35,7 @@ public class RecruitPost {
     @Column(name = "content", length = 1000, nullable = false)
     private String content;
 
-    @Column(name = "major_lecture_name", length = 20)
+    @Column(name = "major_lecture_name", length = 200)
     @Enumerated(EnumType.STRING)
     private MajorLectureEnum majorLectureName;
 

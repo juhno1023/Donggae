@@ -2,11 +2,14 @@ package Otwos.Donggae.DAO.User;
 
 import Otwos.Donggae.Global.Rank.DonggaeRank;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "user_rank")
 public class UserRank {
 
@@ -23,7 +26,7 @@ public class UserRank {
     @Column(name = "score")
     private Integer score;
 
-    @Column(name = "rank_name", length = 10, columnDefinition = "VARCHAR(10) DEFAULT '똥개'")
+    @Column(name = "rank_name", length = 200, columnDefinition = "VARCHAR(10) DEFAULT '똥개'")
     @Enumerated(EnumType.STRING)
     private DonggaeRank rankName;
 

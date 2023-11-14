@@ -22,7 +22,7 @@ public class UserLanguage {
     private User userId;
 
     @Id
-    @Column(name = "language", length = 20, nullable = false)
+    @Column(name = "language", length = 200, nullable = false)
     @Enumerated(EnumType.STRING)
     private LanguageEnum language; // 기술스택(언어)
 

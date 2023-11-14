@@ -23,7 +23,7 @@ public class RecruitField {
     private RecruitPost recruitPostId;
 
     @Id
-    @Column(name = "field", length = 20, nullable = false)
+    @Column(name = "field", length = 200, nullable = false)
     @Enumerated(EnumType.STRING)
     private FieldEnum field;
 
