@@ -1,23 +1,40 @@
 import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import donggae from '../../image/donggae.png';
 import github from '../../image/GitHub.png';
 
 export default function Signup() {
     const navigate = useNavigate();
+
+    const [answerCodeValue, setAnswerCode] = useState('');
+    const [codeValue, setCode] = useState('');
     
-    // const UserInfo = () => { //GET 요청 하고 JSON 받아오기
-    // fetch("/auth/github/login", {
-    //         method : "GET",          //메소드 지정
-    //         headers : {               //데이터 타입 지정
-    //             "Content-Type":"application/json; charset=utf-8"
-    //         },
-    //         body: JSON.stringify(data)   //실제 데이터 파싱하여 body에 저장
-    //     }).then(res=>res.json())        // 리턴값이 있으면 리턴값에 맞는 req 지정
-    //       .then(res=> {
-    //         console.log(res);          // 리턴값에 대한 처리
-    //       });
-    // }
+    const saveCode = event => {
+        setCode(event.target.value);
+        console.log(event.target.value);
+    };
+
+    const saveAnswerCode = event => {
+        setAnswerCode(event.target.value);
+        console.log(event.target.value);
+    };
+
+
+
+    const UserInfo = () => { //GET 요청 하고 JSON 받아오기
+    fetch("'http://localhost:8080/요청하는곳'", {
+            method : "GET",          //메소드 지정
+            headers : {               //데이터 타입 지정
+                "Content-Type":"application/json; charset=utf-8"
+            },
+            body: JSON.stringify(data)   //실제 데이터 파싱하여 body에 저장
+        }).then(res=>res.json())        // 리턴값이 있으면 리턴값에 맞는 req 지정
+          .then(res=> {
+            {saveAnswerCode} //값을 바꿔야한다...!
+            console.log(res);          // 리턴값에 대한 처리
+          });
+    }
 
     
     return (
@@ -80,7 +97,7 @@ export default function Signup() {
             </div>
             </div>
             <div>
-                <button className="overlap-6 ,div-wrapper">인증</button>
+                <button value={codeValue} onChange={saveCode} onClick={saveCode} className="overlap-6 ,div-wrapper">인증</button>
             </div>
             <img className="img" alt="Image" src={github} />
         </div>

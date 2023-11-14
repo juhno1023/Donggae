@@ -19,7 +19,7 @@ html,body {
   }
   
   .login-page .overlap {
-    left: 713px;
+    left: 840px;
     position: absolute;
     top: 650px;
     height: 244px;
@@ -144,7 +144,7 @@ html,body {
     font-size: 40px;
     font-weight: 700;
     height: 64px;
-    left: 720px;
+    left: 840px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
@@ -161,5 +161,4 @@ html,body {
     top:15px;
     left:0.5px;
     color:#717171;
-    border:solid;
   }
