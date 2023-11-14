@@ -27,7 +27,7 @@ public class User {
     @Column(name = "user_id", nullable = false)
     private int userId;
 
-    @Column(name = "github_name", length = 30, nullable = false)
+    @Column(name = "github_name", length = 200, nullable = false)
     private String githubName; // 깃허브 닉네임
 
     @Column(name = "self_intro")
@@ -39,7 +39,7 @@ public class User {
     @Column(name = "leader_count")
     private int leaderCount; // 팀장 경험 횟수
 
-    @Column(name = "baekjoon_rank", length = 20)
+    @Column(name = "baekjoon_rank", length = 200)
     @Enumerated(EnumType.STRING)
     private BaekjoonRank boj_rank; // 백준 랭크
 
