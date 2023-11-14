@@ -12,6 +12,11 @@ export default function Signup() {
     const [emailValue, setEmail] = useState('');
     const [githubIdValue, setGithubId] = useState('');
 
+    const userData = {
+        github_name : githubIdValue,
+        dgu_email : emailValue
+    }
+    
     const saveCode = event =>{
         setCode(event.target.value);
         console.log(event.target.value);
@@ -50,28 +55,26 @@ export default function Signup() {
     }
     
     const sign = (e) => {
-        e.preventDefault()
-        //코드 확인 과정 추가
+        e.preventDefault();
+    
+        console.log(userData)
+        // 코드 확인 과정 추가
         fetch('http://localhost:8080/member/signup', {
-            method : "POST",
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                githubName: 'eeheueklf',
-                dguEmail: emailValue+'@dgu.ac.kr' // 깃허브 ID 추가
-            })
+            body: JSON.stringify(userData),
         }).then(res => res.json())
-        .then(data => {
-            console.log(data);
+        .then(res => {
+            console.log(res);
             alert("회원가입 성공!");
         })
         .catch(error => {
             console.error('Signup error:', error);
             alert("회원가입 실패!");
         });
-        // window.location.replace('/')
-    }
+    };
 
     return (
         <div className="signup">
