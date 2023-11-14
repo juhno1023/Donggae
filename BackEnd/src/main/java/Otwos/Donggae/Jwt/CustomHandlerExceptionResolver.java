@@ -16,7 +16,10 @@ public class CustomHandlerExceptionResolver implements HandlerExceptionResolver 
                                          Exception ex) {
         if (ex instanceof CustomAuthenticationException) {
             try {
-                response.sendRedirect("/auth/github/login"); // 로그인 페이지로 리다이렉트
+                String alertScript = "<script>alert('다시 로그인 해주세요');</script>";
+                response.getWriter().write(alertScript);
+                
+                response.sendRedirect("http://localhost:3000/"); // 로그인 페이지로 리다이렉트
             } catch (IOException e) {
                 e.printStackTrace(); // 로깅을 위한 예외 처리
             }
