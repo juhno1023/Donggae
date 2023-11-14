@@ -1,6 +1,7 @@
 package Otwos.Donggae.Jwt;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -9,6 +10,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 @Component
+@Slf4j
 public class AuthResolver implements HandlerMethodArgumentResolver {
 //특정 조건을 충족하는 메서드 파라미터의 값을 동적으로 해석
     private final TokenProvider tokenProvider;
@@ -31,7 +33,9 @@ public class AuthResolver implements HandlerMethodArgumentResolver {
         HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 
         String token = extractToken(request); //요청으로부터 토큰을 추출
+        log.info("resolve token");
         String payload = tokenProvider.parsePayload(token); // 토큰에서 정보(페이로드)를 파싱
+        log.info("resolve Payload");
 
         return Integer.parseInt(payload); // userId가 int형
     }

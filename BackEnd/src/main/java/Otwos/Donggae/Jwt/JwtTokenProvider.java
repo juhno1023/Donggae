@@ -68,7 +68,7 @@ public class JwtTokenProvider implements TokenProvider{
             log.error("expired token: " + token);
             throw new CustomAuthenticationException("validateToken expired token");
         } catch (JwtException | IllegalArgumentException e) {
-            log.error("invalid token: " + token);
+            log.error("invalid token: " + token + e);
             throw new CustomAuthenticationException("validateToken invalid token");
         }
     }
