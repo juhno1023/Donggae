@@ -10,9 +10,15 @@ export default function Signup() {
     const [answerCodeValue, setAnswerCode] = useState('');
     const [codeValue, setCode] = useState('');
     const [emailValue, setEmail] = useState('');
+    const [githubIdValue, setGithubId] = useState('');
 
     const saveCode = event =>{
         setCode(event.target.value);
+        console.log(event.target.value);
+    }
+
+    const saveId = event =>{
+        setGithubId(event.target.value);
         console.log(event.target.value);
     }
 
@@ -97,7 +103,7 @@ export default function Signup() {
             <div className="rectangle-wrapper">
                 <div className="" />
             </div>
-             <input className = "rectangle-2" Type="text" id="team_name"
+             <input value={githubIdValue} onChange={saveId} className = "rectangle-2" Type="text" id="team_name"
                         placeholder="팀 이름을 작성해주세요." />
             </div>
             <div>
