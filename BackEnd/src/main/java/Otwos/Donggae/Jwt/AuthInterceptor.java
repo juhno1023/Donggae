@@ -3,11 +3,13 @@ package Otwos.Donggae.Jwt;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 @Component
+@Slf4j
 public class AuthInterceptor implements HandlerInterceptor  {
     //토큰을 추출해 현재 사용자가 로그인한 상태인지를 체크하는 처리
     private final TokenProvider tokenProvider;
@@ -24,6 +26,8 @@ public class AuthInterceptor implements HandlerInterceptor  {
         }
 
         String token = extractToken(request); // request에서 토큰 추출
+        log.info("token = {}", token);
+
         tokenProvider.validateToken(token); // 유효한 토큰인지
         
         return true;

@@ -23,7 +23,7 @@ public class RecruitLanguage {
     private RecruitPost recruitPostId;
 
     @Id
-    @Column(name = "language", length = 20, nullable = false)
+    @Column(name = "language", length = 200, nullable = false)
     @Enumerated(EnumType.STRING)
     private LanguageEnum language;
 
