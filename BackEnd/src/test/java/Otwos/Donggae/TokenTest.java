@@ -3,7 +3,6 @@ package Otwos.Donggae;
 
 import Otwos.Donggae.Jwt.CustomAuthenticationException;
 import Otwos.Donggae.Jwt.JwtTokenProvider;
-import Otwos.Donggae.Jwt.TokenProvider;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -21,7 +20,7 @@ import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-public class TempTEst {
+public class TokenTest {
 
 
     @Autowired
@@ -83,6 +82,4 @@ public class TempTEst {
         assertThatExceptionOfType(CustomAuthenticationException.class)
                 .isThrownBy(() -> jwtTokenProvider.validateToken(invalidSecretToken));
     }
-//
-//    (@Value("${security.jwt.token.secret-key}")
 }
