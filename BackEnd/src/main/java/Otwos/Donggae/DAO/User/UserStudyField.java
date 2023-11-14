@@ -22,7 +22,7 @@ public class UserStudyField {
     private User userId;
 
     @Id
-    @Column(name = "study_field", length = 20, nullable = false)
+    @Column(name = "study_field", length = 200, nullable = false)
     @Enumerated(EnumType.STRING)
     private StudyFieldEnum studyField;
 
