@@ -31,22 +31,37 @@ export default function Signup() {
         setEmail(event.target.value);
         console.log(event.target.value);
     }
+
+    const checkDup = async (e) => {
+        e.preventDefault();
     
-    const checkDup = () => { //GET 요청 하고 JSON 받아오기
-        fetch('http://localhost:8080/valid/githubid', {
-            method : "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: emailValue
-            })
-        }).then(res=>res.json())        
-            .then(res=> {
-            setAnswerCode(res.number);
-            console.log(res)
-        });
-    }
+        console.log(githubIdValue);
+    // 코드 확인 과정 추가
+        try {
+            const response = await fetch("http://localhost:8080/valid/githubid", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(githubIdValue),
+            });
+    
+            console.log("Response status:", response.status);
+            
+            if (response.ok) {
+                alert("중복확인 완료");
+            } else if (response.status === 400) {
+                const errorText = await response.text();
+                alert(`중복입니다. ${errorText}`);
+                console.error("중복확인 실패1 : ", errorText);
+            } else {
+                console.error("중복확인 실패2 : ", response.statusText);
+            }
+        } catch (error) {
+            console.error("중복확인 실패3 : ", error);
+        }
+    };
+    
 
     const codeSend = () => { //GET 요청 하고 JSON 받아오기
         fetch('http://localhost:8080/sendemail', {
