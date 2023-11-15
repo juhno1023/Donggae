@@ -13,6 +13,7 @@ import Otwos.Donggae.DTO.team.showMyTeam.MyTeamList;
 import Otwos.Donggae.DTO.team.showMyTeam.TeamByLeader;
 import Otwos.Donggae.DTO.team.showMyTeam.TeamByMember;
 import Otwos.Donggae.DTO.team.showMyTeam.TeamLeader;
+import Otwos.Donggae.Global.Rank.DonggaeRank;
 import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
@@ -94,14 +95,17 @@ public class TeamServiceImpl implements TeamService{
             if (teamMember.getIsLeader() == Boolean.TRUE) { //user가 팀장인 경우
 
                 UserRank userRank = userRankRepository.findUserRankByUserId(user);
-                
+                DonggaeRank donggaeRank = userRank.getRankName();
+                if (donggaeRank == null) { //동개랭크 없는경우
+                    donggaeRank = DonggaeRank.똥개;
+                }
                 Team team = teamMember.getTeamId(); //해당하는 팀
                 RecruitPost recruitPost = team.getRecruitPostId(); //해당하는 모집 글
 
                 TeamLeader teamLeader = new TeamLeader(
                         user.getGithubName(), //팀장 이름
                         user.getBoj_rank(), //팀장 백준랭크
-                        userRank.getRankName()); //팀장 동개랭크
+                        donggaeRank); //팀장 동개랭크
 
                 TeamByLeader teamByLeader = new TeamByLeader(
                         team.getTeamName(), //팀 이름
@@ -112,14 +116,17 @@ public class TeamServiceImpl implements TeamService{
 
             } else { //user가 팀원인 경우
                 UserRank userRank = userRankRepository.findUserRankByUserId(user);
-
+                DonggaeRank donggaeRank = userRank.getRankName();
+                if (donggaeRank == null) { //동개랭크 없는경우
+                    donggaeRank = DonggaeRank.똥개;
+                }
                 Team team = teamMember.getTeamId(); //해당하는 팀
                 RecruitPost recruitPost = team.getRecruitPostId(); //해당하는 모집 글
 
                 TeamLeader teamLeader = new TeamLeader(
                         user.getGithubName(), //팀장 이름
                         user.getBoj_rank(), //팀장 백준랭크
-                        userRank.getRankName()); //팀장 동개랭크
+                        donggaeRank); //팀장 동개랭크
 
                 TeamByMember teamByMember = new TeamByMember(
                         team.getTeamName(), //팀 이름
