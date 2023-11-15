@@ -2,6 +2,9 @@ package Otwos.Donggae;
 
 import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.DAO.User.UserInterestField;
+import Otwos.Donggae.Global.LanguageEnum;
+import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
+import Otwos.Donggae.domain.RecruitPost.Repository.info.RecruitLanguageRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
 import Otwos.Donggae.domain.member.repository.info.UserInterestFieldRepository;
 import org.junit.jupiter.api.Test;
@@ -23,13 +26,28 @@ public class MemberTest {
     @Autowired
     private MemberRepository memberRepository;
 
+    @Autowired
+    private RecruitLanguageRepository recruitLanguageRepository;
+
+    @Autowired
+    private RecruitPostRepository recruitPostRepository;
+
     @Test
     @Transactional
-    void ttt(){
-        User user = memberRepository.findUserByUserId(1); // userId가 Long 타입이라면 여기도 Long 타입을 사용
-        List<UserInterestField> interestFields = userInterestFieldRepository.findUserInterestFieldsByUserId(user);
+    void userIdFKTest(){
+        User user = memberRepository.findUserByUserId(1);
+        List<UserInterestField> interestFields = userInterestFieldRepository.findAllByUserId(user);
         assertThat(interestFields).isNotEmpty(); // 결과 리스트가 비어 있지 않은지 확인
         assertThat(interestFields.get(0).getInterestField().name()).isEqualTo("모집분야"); // 첫 번째 항목의 interestField와 비교
+
+        recruitPostRepository.findAllByIsCompleteAndUserId(false, user);
+
+    }
+
+    @Test
+    @Transactional
+    void enumTest(){
+        recruitLanguageRepository.findAllByLanguage(LanguageEnum.valueOf("C플라스플라스"));
 
     }
 }
