@@ -13,8 +13,8 @@ export default function Signup() {
     const [githubIdValue, setGithubId] = useState('');
 
     const userData = {
-        github_name : githubIdValue,
-        dgu_email : emailValue
+        githubName : githubIdValue,
+        dguEmail : emailValue
     }
     
     const saveCode = event =>{
@@ -32,6 +32,22 @@ export default function Signup() {
         console.log(event.target.value);
     }
     
+    const checkDup = () => { //GET 요청 하고 JSON 받아오기
+        fetch('http://localhost:8080/valid/githubid', {
+            method : "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: emailValue
+            })
+        }).then(res=>res.json())        
+            .then(res=> {
+            setAnswerCode(res.number);
+            console.log(res)
+        });
+    }
+
     const codeSend = () => { //GET 요청 하고 JSON 받아오기
         fetch('http://localhost:8080/sendemail', {
             method : "POST",
@@ -54,27 +70,38 @@ export default function Signup() {
         else console.log('엄');
     }
     
-    const sign = (e) => {
+    const sign = async (e) => {
         e.preventDefault();
     
-        console.log(userData)
-        // 코드 확인 과정 추가
-        fetch('http://localhost:8080/member/signup', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData),
-        }).then(res => res.json())
-        .then(res => {
-            console.log(res);
-            alert("회원가입 성공!");
-        })
-        .catch(error => {
-            console.error('Signup error:', error);
-            alert("회원가입 실패!");
-        });
+        console.log(userData);
+    // 코드 확인 과정 추가
+        try {
+            const response = await fetch("http://localhost:8080/member/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userData),
+            });
+    
+            console.log("Response status:", response.status);
+            
+            if (response.ok) {
+                alert("회원가입 성공!");
+                window.location.replace("/");
+            } else if (response.status === 400) {
+                const errorText = await response.text();
+                alert(`일치하지 않습니다. ${errorText}`);
+                console.error("회원가입 실패 : ", errorText);
+            } else {
+                console.error("회원가입 실패 : ", response.statusText);
+            }
+        } catch (error) {
+            console.error("회원가입 실패 : ", error);
+        }
     };
+    
+    
 
     return (
         <div className="signup">
@@ -110,7 +137,7 @@ export default function Signup() {
                         placeholder="팀 이름을 작성해주세요." />
             </div>
             <div>
-            <button className="text-wrapper-7, div-wrapper">중복확인</button>
+            <button onClick={checkDup}  className="text-wrapper-7, div-wrapper">중복확인</button>
             </div>
             <div className="text-wrapper-8">동국대 이메일</div>
             <div className="overlap-3">
