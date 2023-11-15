@@ -7,5 +7,5 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserInterestFieldRepository extends JpaRepository<UserInterestField, UserInterestFieldPK> {
-    List<UserInterestField> findUserInterestFieldsByUserId(User user);
+    List<UserInterestField> findAllByUserId(User user);
 }

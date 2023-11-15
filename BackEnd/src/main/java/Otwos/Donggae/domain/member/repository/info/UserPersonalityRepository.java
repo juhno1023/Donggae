@@ -7,5 +7,5 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserPersonalityRepository extends JpaRepository<UserPersonality, UserPersonalityPK> {
-    List<UserPersonality> findUserPersonalitiesByUserId(User user);
+    List<UserPersonality> findAllByUserId(User user);
 }

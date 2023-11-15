@@ -1,8 +1,12 @@
 package Otwos.Donggae;
 
 
+import Otwos.Donggae.DAO.User.User;
+import Otwos.Donggae.DAO.User.UserInterestField;
 import Otwos.Donggae.Jwt.CustomAuthenticationException;
 import Otwos.Donggae.Jwt.JwtTokenProvider;
+import Otwos.Donggae.domain.member.repository.MemberRepository;
+import Otwos.Donggae.domain.member.repository.info.UserInterestFieldRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -15,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 

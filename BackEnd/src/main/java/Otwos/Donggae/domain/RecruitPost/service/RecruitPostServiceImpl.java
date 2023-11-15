@@ -5,16 +5,13 @@ import Otwos.Donggae.DAO.Recruit.RecruitLanguage;
 import Otwos.Donggae.DAO.Recruit.RecruitPersonality;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.Team.Team;
-import Otwos.Donggae.DAO.Team.TeamMember;
 import Otwos.Donggae.DAO.User.User;
-import Otwos.Donggae.DAO.User.UserLanguage;
+import Otwos.Donggae.DTO.RecruitPost.RecRecruitPostDTO;
 import Otwos.Donggae.DTO.RecruitPost.RecruitPostDTO;
 import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
-import Otwos.Donggae.DTO.RecruitPost.RecruitPostResponseDTO;
 import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitFieldDTO;
 import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitLanguageDTO;
 import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitPersonalityDTO;
-import Otwos.Donggae.DTO.member.userinfo.UserLanguageDTO;
 import Otwos.Donggae.DTO.team.TeamDTO;
 import Otwos.Donggae.DTO.team.TeamMemberDTO;
 import Otwos.Donggae.Global.MajorLectureEnum;
@@ -23,11 +20,8 @@ import Otwos.Donggae.domain.RecruitPost.Repository.info.RecruitFieldRepository;
 import Otwos.Donggae.domain.RecruitPost.Repository.info.RecruitLanguageRepository;
 import Otwos.Donggae.domain.RecruitPost.Repository.info.RecruitPersonalityRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
-import Otwos.Donggae.domain.member.service.EmailService;
 import Otwos.Donggae.domain.team.repository.TeamMemberRepository;
 import Otwos.Donggae.domain.team.repository.TeamRepository;
-import Otwos.Donggae.domain.team.service.TeamService;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -124,17 +118,17 @@ public class RecruitPostServiceImpl implements RecruitPostService {
                 teamName
         );
         // Team 저장
-       teamRepository.save(teamDTO.toEntity(recruitPost));
+        teamRepository.save(teamDTO.toEntity(recruitPost));
 
-       Team team = teamRepository.findTeamByTeamName(teamName);
+        Team team = teamRepository.findTeamByTeamName(teamName);
 
-       TeamMemberDTO teamMemberDTO = new TeamMemberDTO(
-               team.getTeamId(),
-               user.getUserId(),
-               Boolean.TRUE
-       );
-       // Team Member 저장
-       teamMemberRepository.save(teamMemberDTO.toEntity(team, user));
+        TeamMemberDTO teamMemberDTO = new TeamMemberDTO(
+                team.getTeamId(),
+                user.getUserId(),
+                Boolean.TRUE
+        );
+        // Team Member 저장
+        teamMemberRepository.save(teamMemberDTO.toEntity(team, user));
     }
 
     private List<RecruitLanguageDTO> addRecruitPostLanguageDTO(RecruitPost recruitPost, RecruitPostRequestDTO recruitPostRequestDTO){
@@ -146,7 +140,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
             RecruitLanguageDTO recruitLanguageDTO = new RecruitLanguageDTO(
                     recruitPost.getRecruitPostId(),
                     recruitLanguage.getLanguage()
-                );
+            );
             recruitLanguageDTOS.add(recruitLanguageDTO);
         }
         return recruitLanguageDTOS;
@@ -192,7 +186,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         List<RecruitPersonality> recruitPersonalities = recruitPostRequestDTO.getRecruitPersonalities();
 
         for (RecruitPersonality recruitPersonality : recruitPersonalities) {
-             RecruitPersonalityDTO recruitPersonalityDTO = new RecruitPersonalityDTO(
+            RecruitPersonalityDTO recruitPersonalityDTO = new RecruitPersonalityDTO(
                     recruitPost.getRecruitPostId(),
                     recruitPersonality.getPersonality()
             );
