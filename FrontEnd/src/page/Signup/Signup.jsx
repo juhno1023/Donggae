@@ -1,54 +1,29 @@
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import React, { useEffect, useState } from "react";
-=======
 import React, {useEffect, useState} from "react";
->>>>>>> 700de272bd9123fe0f78611e621f3f349cac5ca3
 import "./style.css";
 import donggae from '../../image/donggae.png';
 import github from '../../image/GitHub.png';
 
 export default function Signup() {
     const navigate = useNavigate();
-<<<<<<< HEAD
-
-    const [answerCodeValue, setAnswerCode] = useState('');
-    const [codeValue, setCode] = useState('');
-    
-    const saveCode = event => {
-        setCode(event.target.value);
-        console.log(event.target.value);
-    };
-
-    const saveAnswerCode = event => {
-        setAnswerCode(event.target.value);
-        console.log(event.target.value);
-    };
-
-
-
-    const UserInfo = () => { //GET 요청 하고 JSON 받아오기
-    fetch("'http://localhost:8080/요청하는곳'", {
-            method : "GET",          //메소드 지정
-            headers : {               //데이터 타입 지정
-                "Content-Type":"application/json; charset=utf-8"
-            },
-            body: JSON.stringify(data)   //실제 데이터 파싱하여 body에 저장
-        }).then(res=>res.json())        // 리턴값이 있으면 리턴값에 맞는 req 지정
-          .then(res=> {
-            {saveAnswerCode} //값을 바꿔야한다...!
-            console.log(res);          // 리턴값에 대한 처리
-          });
-    }
-=======
->>>>>>> 700de272bd9123fe0f78611e621f3f349cac5ca3
 
     const [answerCodeValue, setAnswerCode] = useState('');
     const [codeValue, setCode] = useState('');
     const [emailValue, setEmail] = useState('');
+    const [githubIdValue, setGithubId] = useState('');
 
+    const userData = {
+        github_name : githubIdValue,
+        dgu_email : emailValue
+    }
+    
     const saveCode = event =>{
         setCode(event.target.value);
+        console.log(event.target.value);
+    }
+
+    const saveId = event =>{
+        setGithubId(event.target.value);
         console.log(event.target.value);
     }
 
@@ -58,37 +33,49 @@ export default function Signup() {
     }
     
     const codeSend = () => { //GET 요청 하고 JSON 받아오기
-        fetch('https://localhost:8080/sendemail', {
-                method : "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: emailValue
-                })
-            }).then(res=>res.json())        
-              .then(res=> {
-                console.log(res)
-              });
-        }
+        fetch('http://localhost:8080/sendemail', {
+            method : "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: emailValue
+            })
+        }).then(res=>res.json())        
+            .then(res=> {
+            setAnswerCode(res.number);
+            console.log(res)
+        });
+    }
 
     const compareValue = () => {
 
-         //GET 요청 하고 JSON 받아오기
-            fetch('https://localhost:8080/sendemail', {
-                    method : "GET",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }   
-                }).then(res=>res.json())        
-                  .then(res=> {
-                    setAnswerCode(res);
-                  });
-
         if(codeValue === answerCodeValue) console.log('good');
-        else console('bad');
+        else console.log('엄');
     }
     
+    const sign = (e) => {
+        e.preventDefault();
+    
+        console.log(userData)
+        // 코드 확인 과정 추가
+        fetch('http://localhost:8080/member/signup', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        }).then(res => res.json())
+        .then(res => {
+            console.log(res);
+            alert("회원가입 성공!");
+        })
+        .catch(error => {
+            console.error('Signup error:', error);
+            alert("회원가입 실패!");
+        });
+    };
+
     return (
         <div className="signup">
         <div className="div">
@@ -96,8 +83,7 @@ export default function Signup() {
             <div className="group">
                 <div className="rectangle" />
             </div>
-            <button className="text-wrapper, rectangle">회원가입</button>
-
+            <button onClick={sign} className="text-wrapper, rectangle">회원가입</button>
             </div>
             <div className="overlap-group">
             <div className="overlap-group-wrapper">
@@ -120,7 +106,7 @@ export default function Signup() {
             <div className="rectangle-wrapper">
                 <div className="" />
             </div>
-             <input className = "rectangle-2" Type="text" id="team_name"
+             <input value={githubIdValue} onChange={saveId} className = "rectangle-2" Type="text" id="team_name"
                         placeholder="팀 이름을 작성해주세요." />
             </div>
             <div>
@@ -149,11 +135,8 @@ export default function Signup() {
             </div>
             </div>
             <div>
-<<<<<<< HEAD
                 <button value={codeValue} onChange={saveCode} onClick={saveCode} className="overlap-6 ,div-wrapper">인증</button>
-=======
                 <button onClick = {compareValue} className="overlap-6 ,div-wrapper">인증</button>
->>>>>>> 700de272bd9123fe0f78611e621f3f349cac5ca3
             </div>
             <img className="img" alt="Image" src={github} />
         </div>

@@ -5,6 +5,7 @@ import static java.sql.Types.NULL;
 import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.DTO.member.UserDTO;
 import Otwos.Donggae.DTO.member.register.SignUpDTO;
+import Otwos.Donggae.DTO.member.register.ValidGithubIdRequest;
 import Otwos.Donggae.Global.Rank.BaekjoonRank;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,23 @@ public class MemberServiceImpl implements MemberService{
                 signUpDTO.getDguEmail()
         );
         memberRepository.save(userDTO.toEntity());
+    }
+
+    @Override
+    public void validGithubName(ValidGithubIdRequest request){
+        try {
+            validateGIt(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // github name 중복검사
+    private void validateGIt(ValidGithubIdRequest request) throws Exception {
+        User userByGithubName = memberRepository.findUserByGithubName(request.getGithubName());
+        if (userByGithubName != null) {
+            throw new Exception("GitHub 이름이 중복됩니다: " + request.getGithubName());
+        }
     }
 
     // github name, dgu email 중복검사
