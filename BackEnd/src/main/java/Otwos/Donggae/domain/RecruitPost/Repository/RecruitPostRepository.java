@@ -15,6 +15,6 @@ public interface RecruitPostRepository extends JpaRepository<RecruitPost, Intege
 
     RecruitPost save(RecruitPost recruitPost);
 
-    List<RecruitPost> findAllByIsCompleteAndUserId(Boolean isComplete, User user);
+    List<RecruitPost> findAllByIsCompleteAndUserIdNot(Boolean isComplete, User user);
 
 }

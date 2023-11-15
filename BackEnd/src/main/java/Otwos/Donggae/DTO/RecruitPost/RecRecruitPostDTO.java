@@ -1,6 +1,9 @@
 package Otwos.Donggae.DTO.RecruitPost;
 
 import Otwos.Donggae.DAO.Recruit.RecruitLanguage;
+import Otwos.Donggae.Global.MajorLectureEnum;
+import Otwos.Donggae.Global.Rank.BaekjoonRank;
+import Otwos.Donggae.Global.Rank.DonggaeRank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,15 +16,15 @@ public class RecRecruitPostDTO {
 
     private int recruitPostId;
 
-    private String majorLectureName;
+    private MajorLectureEnum majorLectureName;
 
     private String title;
 
     private List<RecruitLanguage> recruitLanguages;
 
-    private String donggaeRank;
+    private DonggaeRank donggaeRank;
 
-    private String bojRank;
+    private BaekjoonRank bojRank;
 
     private String userName;
 

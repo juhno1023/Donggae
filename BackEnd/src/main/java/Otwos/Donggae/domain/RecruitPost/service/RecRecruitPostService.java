@@ -7,5 +7,5 @@ import java.util.List;
 
 
 public interface RecRecruitPostService {
-    List<UserInterestField> recommendRecruitPost(int userId);
+    List<RecRecruitPostDTO> recommendRecruitPost(int userId);
 }

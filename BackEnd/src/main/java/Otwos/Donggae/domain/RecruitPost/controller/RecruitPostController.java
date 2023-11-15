@@ -35,7 +35,7 @@ public class RecruitPostController {
     @PostMapping("/recruitPost/recommend") // 프로젝트 추천
     public ResponseEntity<?> recommendBoard(int userId){
         try{
-            List<UserInterestField> recRecruitPostDTOList = recRecruitPostService.recommendRecruitPost(userId);
+            List<RecRecruitPostDTO> recRecruitPostDTOList = recRecruitPostService.recommendRecruitPost(userId);
             return ResponseEntity.ok().body(recRecruitPostDTOList);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

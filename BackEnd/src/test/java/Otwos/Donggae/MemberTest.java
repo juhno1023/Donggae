@@ -40,7 +40,7 @@ public class MemberTest {
         assertThat(interestFields).isNotEmpty(); // 결과 리스트가 비어 있지 않은지 확인
         assertThat(interestFields.get(0).getInterestField().name()).isEqualTo("모집분야"); // 첫 번째 항목의 interestField와 비교
 
-        recruitPostRepository.findAllByIsCompleteAndUserId(false, user);
+        recruitPostRepository.findAllByIsCompleteAndUserIdNot(false, user);
 
     }
 
