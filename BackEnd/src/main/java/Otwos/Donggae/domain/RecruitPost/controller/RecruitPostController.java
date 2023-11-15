@@ -4,8 +4,8 @@ import Otwos.Donggae.DAO.User.UserInterestField;
 import Otwos.Donggae.DTO.RecruitPost.RecRecruitPostDTO;
 import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
 import Otwos.Donggae.Jwt.Auth;
+import Otwos.Donggae.domain.RecruitPost.service.RecRecruitPostService;
 import Otwos.Donggae.domain.RecruitPost.service.RecruitPostService;
-import Otwos.Donggae.domain.member.service.RecRecruitPostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ public class RecruitPostController {
     private RecruitPostService recruitPostService;
 
     @Autowired
-    private RecRecruitPostServiceImpl recRecruitPostService;
+    private RecRecruitPostService recRecruitPostService;
 
     @PostMapping("/recruitPost") // 글 작성
     public ResponseEntity<?>  createBoard(@RequestBody RecruitPostRequestDTO recruitPostDTO, @Auth int userId){
