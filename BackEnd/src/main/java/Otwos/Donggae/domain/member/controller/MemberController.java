@@ -26,7 +26,7 @@ public class MemberController {
 
     }
 
-    @PostMapping("/valid/github")
+    @PostMapping("/valid/githubid")
     public ResponseEntity<?> validateDuplicateGithubName(@RequestBody ValidGithubIdRequest request) {
         try {
             memberService.validGithubName(request);

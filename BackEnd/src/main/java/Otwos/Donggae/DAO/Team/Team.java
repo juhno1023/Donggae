@@ -21,7 +21,7 @@ public class Team {
 
     // 1:1 recruitPost
     @OneToOne
-    @JoinColumn(name = "recruit_post_id")
+    @JoinColumn(name = "recruit_post_id", nullable = false)
     private RecruitPost recruitPostId;
 
     @Column(name = "team_name", length = 30, nullable = false)
