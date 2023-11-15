@@ -1,5 +1,7 @@
 package Otwos.Donggae.domain.application.service;
 
+import static java.sql.Types.NULL;
+
 import Otwos.Donggae.DAO.Application;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.User.User;
@@ -9,6 +11,7 @@ import Otwos.Donggae.DAO.User.UserPersonality;
 import Otwos.Donggae.DAO.User.UserRank;
 import Otwos.Donggae.DAO.User.UserStudyField;
 import Otwos.Donggae.DTO.application.ApplyDTO;
+import Otwos.Donggae.DTO.application.ApplyTeamRequest;
 import Otwos.Donggae.DTO.application.read.ReadApplicationRequest;
 import Otwos.Donggae.DTO.application.read.ReadApplicationResponse;
 import Otwos.Donggae.DTO.member.previewInfo.PreviewUserInfoDTO;
@@ -61,9 +64,9 @@ public class ApplicationServiceImpl implements ApplicationService{
 
     //지원하는 글 쓰고 지원하기 버튼 클릭 시
     @Override
-    public void applyFor(int userId, ApplyDTO applyDTO) {
+    public void applyFor(int userId, ApplyTeamRequest request) {
         User user = memberRepository.findUserByUserId(userId);
-        RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(applyDTO.getRecruitPostId());
+        RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(request.getRecruitPostId());
         //예외처리 하고 저장
         try {
             validateUserAndRecruitPost(user, recruitPost);
@@ -73,6 +76,12 @@ public class ApplicationServiceImpl implements ApplicationService{
 
         //해당 user와 recruitPost가 있으면 저장
         //applicationId따로 안넣어도 알아서 들어가겠지?
+        ApplyDTO applyDTO = new ApplyDTO(
+                NULL,
+                request.getSelfIntro(),
+                request.getContent(),
+                NULL
+        );
         applicationRepository.save(applyDTO.toEntity(user, recruitPost));
     }
 
