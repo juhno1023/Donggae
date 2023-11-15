@@ -177,7 +177,7 @@ public class ApplicationServiceImpl implements ApplicationService{
 
     //user에 해당하는 userLanguage받아오기
     private List<UserLanguageDTO> getLanguageDTO(User user) {
-        List<UserLanguage> userLanguages = userLanguageRepository.findUserLanguagesByUserId(user);
+        List<UserLanguage> userLanguages = userLanguageRepository.findAllByUserId(user);
         List<UserLanguageDTO> userLanguageDTOS = new ArrayList<>(); //빈 리스트 생성
 
         for (UserLanguage userLanguage : userLanguages) {
@@ -192,7 +192,7 @@ public class ApplicationServiceImpl implements ApplicationService{
 
     //user에 해당하는 userInterestField받아오기
     private List<UserInterestFieldDTO> getInterestFieldDTO(User user) {
-        List<UserInterestField> userInterestFields = userInterestFieldRepository.findUserInterestFieldsByUserId(user);
+        List<UserInterestField> userInterestFields = userInterestFieldRepository.findAllByUserId(user);
         List<UserInterestFieldDTO> userInterestFieldDTOS = new ArrayList<>();
 
         for (UserInterestField userInterestField : userInterestFields) {
@@ -207,7 +207,7 @@ public class ApplicationServiceImpl implements ApplicationService{
 
     //user에 해당하는 userPersonality받아오기
     private List<UserPersonalityDTO> getPersonalityDTO(User user) {
-        List<UserPersonality> userPersonalities = userPersonalityRepository.findUserPersonalitiesByUserId(user);
+        List<UserPersonality> userPersonalities = userPersonalityRepository.findAllByUserId(user);
         List<UserPersonalityDTO> userPersonalityDTOS = new ArrayList<>();
 
         for (UserPersonality userPersonality : userPersonalities) {
@@ -222,7 +222,7 @@ public class ApplicationServiceImpl implements ApplicationService{
 
     //user에 해당하는 studyField받아오기
     private List<UserStudyFieldDTO> getStudyFieldDTO(User user) {
-        List<UserStudyField> userStudyFields = userStudyFieldRepository.findUserStudyFieldsByUserId(user);
+        List<UserStudyField> userStudyFields = userStudyFieldRepository.findAllByUserId(user);
         List<UserStudyFieldDTO> userStudyFieldDTOS = new ArrayList<>();
 
         for (UserStudyField userStudyField : userStudyFields) {

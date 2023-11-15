@@ -9,5 +9,5 @@ public class TeamByMember {
     //팀원으로 속한 팀
     private String teamName; //팀이름
     private String title; //프로젝트 제목
-    private teamLeader teamLeader; //팀장 정보
+    private TeamLeader teamLeader; //팀장 정보
 }
