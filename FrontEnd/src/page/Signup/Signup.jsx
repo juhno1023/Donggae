@@ -11,6 +11,9 @@ export default function Signup() {
     const [codeValue, setCode] = useState('');
     const [emailValue, setEmail] = useState('');
     const [githubIdValue, setGithubId] = useState('');
+    // 버튼 상태
+    const [mailValid, setMailValid] = useState(false);
+    const [codeValid, setCodeValid] = useState(false);
 
     const userData = {
         githubName : githubIdValue,
@@ -34,9 +37,11 @@ export default function Signup() {
 
     const checkDup = async (e) => {
         e.preventDefault();
-    
         console.log(githubIdValue);
-    // 코드 확인 과정 추가
+        if(githubIdValue<3){
+            alert('깃허브 ID를 제대로 입력해주세요')
+            return;
+        }
         try {
             const response = await fetch("http://localhost:8080/valid/githubid", {
                 method: "POST",
@@ -49,13 +54,13 @@ export default function Signup() {
             console.log("Response status:", response.status);
             
             if (response.ok) {
+                setMailValid(true);
                 alert("중복확인 완료");
             } else if (response.status === 400) {
                 const errorText = await response.text();
-                alert(`중복입니다. ${errorText}`);
-                console.error("중복확인 실패1 : ", errorText);
+                alert(`중복된 ID입니다.`);
             } else {
-                console.error("중복확인 실패2 : ", response.statusText);
+                console.error("중복확인에 실패하였습니다.", response.statusText);
             }
         } catch (error) {
             console.error("중복확인 실패3 : ", error);
@@ -64,25 +69,29 @@ export default function Signup() {
     
 
     const codeSend = () => { //GET 요청 하고 JSON 받아오기
-        fetch('http://localhost:8080/sendemail', {
-            method : "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: emailValue
-            })
-        }).then(res=>res.json())        
-            .then(res=> {
-            setAnswerCode(res.number);
-            console.log(res)
-        });
+        if(mailValid){
+            fetch('http://localhost:8080/sendemail', {
+                method : "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: emailValue
+                })
+            }).then(res=>res.json())        
+                .then(res=> {
+                setAnswerCode(res.number);
+                console.log(res)
+                setCodeValid(true);
+            });
+        }
     }
 
     const compareValue = () => {
-
-        if(codeValue === answerCodeValue) console.log('good');
-        else console.log('엄');
+        if(codeValid){
+            if(codeValue === answerCodeValue) alert("인증 완료되었습니다.")
+            else alert("인증 실패하였습니다.")
+        }
     }
     
     const sign = async (e) => {
@@ -102,7 +111,7 @@ export default function Signup() {
             console.log("Response status:", response.status);
             
             if (response.ok) {
-                alert("회원가입 성공!");
+                alert("회원가입에 성공하셨습니다.");
                 window.location.replace("/");
             } else if (response.status === 400) {
                 const errorText = await response.text();
@@ -149,7 +158,7 @@ export default function Signup() {
                 <div className="" />
             </div>
              <input value={githubIdValue} onChange={saveId} className = "rectangle-2" Type="text" id="team_name"
-                        placeholder="팀 이름을 작성해주세요." />
+                        placeholder="깃허브 ID를 작성해주세요." />
             </div>
             <div>
             <button onClick={checkDup}  className="text-wrapper-7, div-wrapper">중복확인</button>
@@ -167,7 +176,12 @@ export default function Signup() {
             <div className="dgu-ac-kr">@&nbsp;&nbsp;&nbsp;&nbsp;dgu.ac.kr</div>
             </div>
             <div>
-                <button onClick={codeSend} className="overlap-4 ,div-wrapper">메일발송</button>
+            <button
+                onClick={codeSend}
+                className={`overlap-4 div-wrapper ${mailValid ? '' : 'disabled'}`}
+                disabled={!mailValid}>
+            메일발송
+            </button>
             </div>
             <div className="text-wrapper-9">인증번호</div>
             <div className="overlap-5">
@@ -177,8 +191,12 @@ export default function Signup() {
             </div>
             </div>
             <div>
-                <button value={codeValue} onChange={saveCode} onClick={saveCode} className="overlap-6 ,div-wrapper">인증</button>
-                <button onClick = {compareValue} className="overlap-6 ,div-wrapper">인증</button>
+            <button
+                onClick={compareValue}
+                className={`overlap-6 div-wrapper ${codeValid ? '' : 'disabled'}`}
+                disabled={!codeValid}>
+            인증
+            </button>
             </div>
             <img className="img" alt="Image" src={github} />
         </div>
