@@ -44,7 +44,7 @@ public class RecRecruitPostServiceImpl implements RecRecruitPostService {
     @Override
     public List<RecRecruitPostDTO> recommendRecruitPost(int userId) {
         // user 가져오기
-        User user = memberRepository.findUserByUserId(userId);
+        User user = memberRepository.findUserWithDetailsByUserId(userId);
 
         // 1) isComplete==false인 게시물 && 자신(user)이 작성한 게시물 제외
         List<RecruitPost> recommendedPostList = recruitPostRepository.findAllByIsCompleteAndUserIdNot(false, user);
@@ -63,9 +63,9 @@ public class RecRecruitPostServiceImpl implements RecRecruitPostService {
 
     private HashMap<RecruitPost, Integer> calculatePriorities(User user, List<RecruitPost> recommendedPostList) {
         // user 정보 가져오기 - 관심분야, 언어, 성격
-        List<UserInterestField> userInterestFieldList = userInterestFieldRepository.findAllByUserId(user);
-        List<UserLanguage> userLanguageList = userLanguageRepository.findAllByUserId(user);
-        List<UserPersonality> userPersonalityList = userPersonalityRepository.findAllByUserId(user);
+        Set<UserInterestField> userInterestFieldList = user.getUserInterestFields();
+        Set<UserLanguage> userLanguageList = user.getUserLanguages();
+        Set<UserPersonality> userPersonalityList = user.getUserPersonalities();
 
         // RecruitPost의 우선순위를 저장하는 map
         HashMap<RecruitPost, Integer> priorityMap = new HashMap<RecruitPost, Integer>();
@@ -78,7 +78,7 @@ public class RecRecruitPostServiceImpl implements RecRecruitPostService {
         return priorityMap;
     }
 
-    private int calculatePriorityForMatchingAttributes(RecruitPost post, List<UserLanguage> userLanguageList, List<UserInterestField> userInterestFieldList, List<UserPersonality> userPersonalityList) {
+    private int calculatePriorityForMatchingAttributes(RecruitPost post, Set<UserLanguage> userLanguageList, Set<UserInterestField> userInterestFieldList, Set<UserPersonality> userPersonalityList) {
         int priority = 0;
         if (post.getRecruitLanguages().stream().anyMatch(lang -> userLanguageList.contains(lang.getLanguage()))) {
             priority++;
