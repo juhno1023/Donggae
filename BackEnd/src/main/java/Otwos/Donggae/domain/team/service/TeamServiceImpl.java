@@ -96,9 +96,9 @@ public class TeamServiceImpl implements TeamService{
             if (teamMember.getIsLeader() == Boolean.TRUE) { //user가 팀장인 경우
 
                 UserRank userRank = userRankRepository.findUserRankByUserId(user);
-                DonggaeRank donggaeRank = userRank.getRankName();
-                if (donggaeRank == null) { //동개랭크 없는경우
-                    donggaeRank = DonggaeRank.똥개;
+                DonggaeRank donggaeRank = DonggaeRank.똥개;
+                if (userRank != null) { //동개랭크 있는경우
+                    donggaeRank = userRank.getRankName();
                 }
                 Team team = teamMember.getTeamId(); //해당하는 팀
                 RecruitPost recruitPost = team.getRecruitPostId(); //해당하는 모집 글
@@ -117,9 +117,9 @@ public class TeamServiceImpl implements TeamService{
 
             } else { //user가 팀원인 경우
                 UserRank userRank = userRankRepository.findUserRankByUserId(user);
-                DonggaeRank donggaeRank = userRank.getRankName();
-                if (donggaeRank == null) { //동개랭크 없는경우
-                    donggaeRank = DonggaeRank.똥개;
+                DonggaeRank donggaeRank = DonggaeRank.똥개;
+                if (userRank != null) { //동개랭크 있는경우
+                    donggaeRank = userRank.getRankName();
                 }
                 Team team = teamMember.getTeamId(); //해당하는 팀
                 RecruitPost recruitPost = team.getRecruitPostId(); //해당하는 모집 글
