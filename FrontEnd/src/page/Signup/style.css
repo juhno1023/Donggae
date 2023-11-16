@@ -213,7 +213,6 @@
   
   .signup .div-wrapper {
     color:#000000;
-    background-color: #faab238a;
     border: 2px solid;
     border-color: #faab23;
     border-radius: 6px;
@@ -223,6 +222,12 @@
     top: 350px;
     width: 92px;
   }
+
+  .disabled {
+    background-color: rgb(204, 204, 204); 
+    border-color: rgb(204, 204, 204) !important;
+    cursor: not-allowed;
+}
   
   .signup .text-wrapper-7 {
     color: #000000;
@@ -321,7 +326,6 @@
   
   .signup .overlap-4 {
     color: #000000;
-    background-color: #faab238a;
     border: 2px solid;
     border-color: #faab23;
     border-radius: 6px;
@@ -355,7 +359,6 @@
   }
   
   .signup .overlap-6 {
-    background-color: #faab238a;
     border: 2px solid;
     border-color: #faab23;
     border-radius: 6px;
@@ -379,3 +382,4 @@
 .overlap-6{
     color:black;
 }
+
