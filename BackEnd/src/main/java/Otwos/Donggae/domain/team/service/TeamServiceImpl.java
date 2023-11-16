@@ -64,6 +64,7 @@ public class TeamServiceImpl implements TeamService{
 
     //팀원 추방하기
     //teamMember에서 삭제
+    @Transactional
     @Override
     public void deleteTeamMember(SelectTeamMemberRequest request) {
         User user = memberRepository.findUserByUserId(request.getUserId());
@@ -164,6 +165,9 @@ public class TeamServiceImpl implements TeamService{
         }
         if (teamMember == null) {
             throw new Exception("존재하지 않는 팀원입니다.");
+        }
+        if (teamMember.getIsLeader() == Boolean.TRUE) {
+            throw new Exception("팀장은 추방 불가.");
         }
     }
 }
