@@ -1,4 +1,4 @@
-package Otwos.Donggae.DTO.team.selectTeamMember;
+package Otwos.Donggae.DTO.team.teamDetail;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SelectTeamMemberRequest {
-    private int userId;
+public class TeamIdRequest {
     private int teamId;
 }

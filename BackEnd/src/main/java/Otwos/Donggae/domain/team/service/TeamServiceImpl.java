@@ -5,14 +5,14 @@ import Otwos.Donggae.DAO.Team.Team;
 import Otwos.Donggae.DAO.Team.TeamMember;
 import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.DAO.User.UserRank;
-import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
-import Otwos.Donggae.DTO.team.TeamDTO;
 import Otwos.Donggae.DTO.team.TeamMemberDTO;
 import Otwos.Donggae.DTO.team.selectTeamMember.SelectTeamMemberRequest;
 import Otwos.Donggae.DTO.team.showMyTeam.MyTeamList;
 import Otwos.Donggae.DTO.team.showMyTeam.TeamByLeader;
 import Otwos.Donggae.DTO.team.showMyTeam.TeamByMember;
-import Otwos.Donggae.DTO.team.showMyTeam.TeamLeader;
+import Otwos.Donggae.DTO.team.showMyTeam.TeamMemberPreview;
+import Otwos.Donggae.DTO.team.teamDetail.DetailByMember;
+import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
 import Otwos.Donggae.Global.Rank.DonggaeRank;
 import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
@@ -64,6 +64,7 @@ public class TeamServiceImpl implements TeamService{
 
     //팀원 추방하기
     //teamMember에서 삭제
+    @Transactional
     @Override
     public void deleteTeamMember(SelectTeamMemberRequest request) {
         User user = memberRepository.findUserByUserId(request.getUserId());
@@ -95,43 +96,47 @@ public class TeamServiceImpl implements TeamService{
             if (teamMember.getIsLeader() == Boolean.TRUE) { //user가 팀장인 경우
 
                 UserRank userRank = userRankRepository.findUserRankByUserId(user);
-                DonggaeRank donggaeRank = userRank.getRankName();
-                if (donggaeRank == null) { //동개랭크 없는경우
-                    donggaeRank = DonggaeRank.똥개;
+                DonggaeRank donggaeRank = DonggaeRank.똥개;
+                if (userRank != null) { //동개랭크 있는경우
+                    donggaeRank = userRank.getRankName();
                 }
                 Team team = teamMember.getTeamId(); //해당하는 팀
                 RecruitPost recruitPost = team.getRecruitPostId(); //해당하는 모집 글
 
-                TeamLeader teamLeader = new TeamLeader(
+                TeamMemberPreview teamMemberPreview = new TeamMemberPreview(
                         user.getGithubName(), //팀장 이름
                         user.getBoj_rank(), //팀장 백준랭크
-                        donggaeRank); //팀장 동개랭크
+                        donggaeRank, //팀장 동개랭크
+                        teamMember.getIsLeader());
 
                 TeamByLeader teamByLeader = new TeamByLeader(
+                        team.getTeamId(),
                         team.getTeamName(), //팀 이름
                         recruitPost.getTitle(), //프로젝트 제목
-                        teamLeader); //팀장 정보
+                        teamMemberPreview); //팀장 정보
 
                 leaders.add(teamByLeader); //팀장으로 속한 팀 리스트에 추가
 
             } else { //user가 팀원인 경우
                 UserRank userRank = userRankRepository.findUserRankByUserId(user);
-                DonggaeRank donggaeRank = userRank.getRankName();
-                if (donggaeRank == null) { //동개랭크 없는경우
-                    donggaeRank = DonggaeRank.똥개;
+                DonggaeRank donggaeRank = DonggaeRank.똥개;
+                if (userRank != null) { //동개랭크 있는경우
+                    donggaeRank = userRank.getRankName();
                 }
                 Team team = teamMember.getTeamId(); //해당하는 팀
                 RecruitPost recruitPost = team.getRecruitPostId(); //해당하는 모집 글
 
-                TeamLeader teamLeader = new TeamLeader(
+                TeamMemberPreview teamMemberPreview = new TeamMemberPreview(
                         user.getGithubName(), //팀장 이름
                         user.getBoj_rank(), //팀장 백준랭크
-                        donggaeRank); //팀장 동개랭크
+                        donggaeRank, //팀장 동개랭크
+                        teamMember.getIsLeader());
 
                 TeamByMember teamByMember = new TeamByMember(
+                        team.getTeamId(),
                         team.getTeamName(), //팀 이름
                         recruitPost.getTitle(), //프로젝트 제목
-                        teamLeader); //팀장 정보
+                        teamMemberPreview); //팀장 정보
 
                 members.add(teamByMember); //팀원으로 속한 팀 리스트에 추가
 
@@ -139,6 +144,46 @@ public class TeamServiceImpl implements TeamService{
         }
         MyTeamList myTeamList = new MyTeamList(leaders, members);
         return myTeamList;
+    }
+
+    //팀원으로 속한 팀 상세보기
+    @Override
+    public DetailByMember DetailTeamByMember(TeamIdRequest teamIdRequest) {
+        Team team = teamRepository.findTeamByTeamId(teamIdRequest.getTeamId()); //해당하는 팀
+        try {
+            validateTeam(team);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        RecruitPost recruitPost = team.getRecruitPostId(); //해당하는 모집 글
+
+        List<TeamMember> teams = teamMemberRepository.findTeamMembersByTeamId(team);
+        List<TeamMemberPreview> teamMemberPreviews = new ArrayList<>();
+
+        for (TeamMember teamMember : teams) {
+            User user = teamMember.getUserId();
+            UserRank userRank = userRankRepository.findUserRankByUserId(user);
+            DonggaeRank donggaeRank = DonggaeRank.똥개;
+            if (userRank != null) { //동개랭크 있는경우
+                donggaeRank = userRank.getRankName();
+            }
+
+            TeamMemberPreview teamMemberPreview = new TeamMemberPreview(
+                    user.getGithubName(), //팀장 이름
+                    user.getBoj_rank(), //팀장 백준랭크
+                    donggaeRank, //팀장 동개랭크
+                    teamMember.getIsLeader());
+            teamMemberPreviews.add(teamMemberPreview);
+        }
+
+        DetailByMember detailByMember = new DetailByMember(
+                teamIdRequest.getTeamId(),
+                recruitPost.getTitle(),
+                team.getTeamName(),
+                recruitPost.getContent(),
+                teamMemberPreviews
+        );
+        return detailByMember;
     }
 
     private void validateSelectRequest(User user, Team team) throws Exception{
@@ -164,6 +209,15 @@ public class TeamServiceImpl implements TeamService{
         }
         if (teamMember == null) {
             throw new Exception("존재하지 않는 팀원입니다.");
+        }
+        if (teamMember.getIsLeader() == Boolean.TRUE) {
+            throw new Exception("팀장은 추방 불가.");
+        }
+    }
+
+    private void validateTeam(Team team) throws Exception {
+        if (team == null) {
+            throw new Exception("존재하지 않는 team입니다.");
         }
     }
 }
