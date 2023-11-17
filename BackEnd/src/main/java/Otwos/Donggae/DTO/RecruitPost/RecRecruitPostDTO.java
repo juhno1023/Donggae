@@ -9,6 +9,7 @@ import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class RecRecruitPostDTO {
 
     private String title;
 
-    private List<RecruitLanguage> recruitLanguages;
+    private List<String> recruitLanguages;
 
     private DonggaeRank donggaeRank;
 
@@ -28,6 +29,8 @@ public class RecRecruitPostDTO {
 
     private String userName;
 
-    private Date createDate;
+    private String createDate;
+
+
 
 }
