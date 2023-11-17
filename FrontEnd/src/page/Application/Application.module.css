@@ -8,15 +8,6 @@
 body{
     background-color: var(--basic-white);
 }
-.default{
-    width: 1900px;
-    min-height: 100vh;
-}
-
-.inner{
-    width: 1900px;
-    padding-top:200px;
-}
 
 .body{
     position: absolute;

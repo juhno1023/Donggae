@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState  } from 'react';
 import styles from "./Posting.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
+import CheckBox from '../../components/CheckBox';
 
 export default function Posting() {
+    // 팀명, 제목, 내용 등 text Input
     const [formData, setFormData] = useState({
         team_name: '',
         post_title: '',
@@ -18,12 +20,44 @@ export default function Posting() {
         });
     };
 
+    // checkbox Input
+    const [checkedItems, setCheckedItems] = useState([])
+    const datas = [
+        { title: '아침식사'},
+        { title: '아침간식'},
+    ]
+    const datas2 = [
+        { title: 'd'},
+        { title: 'f'},
+    ]
+    const datas3 = [
+        { title: 'dd'},
+        { title: 'ff'},
+    ]
+    const checkedItemHandler = (code, isChecked) => {
+        if (isChecked) { //체크 추가할때
+            setCheckedItems([...checkedItems, code])
+        } else if (!isChecked && checkedItems.find(one => one === code)) {//체크 해제할때 checkedItems에 있을 경우
+            const filter = checkedItems.filter(one => one !== code)
+            setCheckedItems([...filter])
+        }
+    }
+
+    // Option Select Input
+    const selectList = ["없음", "apple", "banana", "grape", "orange"];
+    const [Selected, setSelected] = useState("");
+
+    const handleSelect = (e) => {
+        setSelected(e.target.value);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form Data:', formData);
+        console.log('checkedItems:', checkedItems);
+        console.log('selectList:', Selected);
     };
 
-    
     return (
         <div className={styles.default}>
           <Header />
@@ -70,60 +104,30 @@ export default function Posting() {
                         <div className={styles.text__1}>세부사항 설정</div> 모집 분야
                         <div className={styles.container}>
                             <div>
-                                <label>
-                                    <input type="checkbox" name=""/>
-                                    <span className={styles.list}>전체</span>
-                                </label>
-                            </div>
-                            <div>
-                                <label>
-                                    <input type="checkbox" name=""/>
-                                    <span className={styles.list}>JavaScript</span>
-                                </label>
+                            {datas.map(data => <CheckBox data={data.title} checkedItems={checkedItems} checkedItemHandler={checkedItemHandler} />)}
                             </div>
                         </div>
                         선호 언어
                         <div className={styles.container}>
                             <div>
-                                <label>
-                                    <input type="checkbox" name=""/>
-                                    <span className={styles.list}>전체</span>
-                                </label>
-                            </div>
-                            <div>
-                                <label>
-                                    <input type="checkbox" name=""/>
-                                    <span className={styles.list}>JavaScript</span>
-                                </label>
+                            {datas2.map(data => <CheckBox data={data.title} checkedItems={checkedItems} checkedItemHandler={checkedItemHandler} />)}
                             </div>
                         </div>
                         선호 성향
                         <div className={styles.container}>
                             <div>
-                                <label>
-                                    <input type="checkbox" name=""/>
-                                    <span className={styles.list}>전체</span>
-                                </label>
-                            </div>
-                            <div>
-                                <label>
-                                    <input type="checkbox" name=""/>
-                                    <span className={styles.list}>JavaScript</span>
-                                </label>
+                            {datas3.map(data => <CheckBox data={data.title} checkedItems={checkedItems} checkedItemHandler={checkedItemHandler} />)}
                             </div>
                         </div>
                     </div>
                     <div className={styles.half}>
                     <div className={styles.text__1}>전공강의 팀원 모집하기</div> 선택 된 수강강의
-                        <select>
-                            <option value="Option 1">없음</option>
-                            <option value="Option 2">소프트웨어공학개론</option>
-                            <option value="Option 3">Option 3</option>
-                            <option value="Option 4">Option 4</option>
-                            <option value="Option 5">Option 5</option>
-                            <option value="Option length">
-                            Options
+                    <select onChange={handleSelect} value={Selected}>
+                        {selectList.map((item) => (
+                            <option value={item} key={item}>
+                            {item}
                             </option>
+                        ))}
                         </select>
                     </div>
                 </div>

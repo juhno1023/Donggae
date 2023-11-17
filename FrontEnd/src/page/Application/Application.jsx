@@ -73,21 +73,21 @@ export default function Posting() {
                             <div className={styles.keyword_box}>
                                 <div className={styles.keyword}>
                                     모집 분야
-                                    <span className={styles.list}>JavaScript</span>
+                                    <span class="list">JavaScript</span>
                                 </div>
                                 <div className={styles.keyword}>
                                     모집 분야
-                                    <span className={styles.list}>C++</span>
+                                    <span class="list">C++</span>
                                 </div>
                             </div>
                             <div className={styles.keyword_box}>
                                 <div className={styles.keyword}>
                                     모집 분야
-                                    <span className={styles.list}>성실함</span>
+                                    <span class="list">성실함</span>
                                 </div>
                                 <div className={styles.keyword}>
                                     모집 분야
-                                    <span className={styles.list}>냠냠</span>
+                                    <span class="list">냠냠</span>
                                 </div>
                             </div>
                         </div>
