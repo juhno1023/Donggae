@@ -242,6 +242,7 @@ public class TeamServiceImpl implements TeamService{
         List<Application> applications = applicationRepository.findApplicationsByRecruitPostId(recruitPost);
         List<ApplyMemberPreview> applyMemberList = new ArrayList<>();
 
+        // 추천 해야함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         for (Application application : applications) { //지원자 리스트 반환
             User user = application.getUserId();
             UserRank userRank = userRankRepository.findUserRankByUserId(user);
