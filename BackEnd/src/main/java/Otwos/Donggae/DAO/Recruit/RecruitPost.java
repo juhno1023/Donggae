@@ -5,13 +5,13 @@ import Otwos.Donggae.Global.MajorLectureEnum;
 import Otwos.Donggae.Global.Rank.BaekjoonRank;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
 
-@Builder
 @Setter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -35,12 +35,15 @@ public class RecruitPost {
     @Column(name = "content", length = 1000, nullable = false)
     private String content;
 
-    @Column(name = "major_lecture_name", length = 20)
+    @Column(name = "major_lecture_name", length = 200)
     @Enumerated(EnumType.STRING)
     private MajorLectureEnum majorLectureName;
 
     @Column(name = "created_date")
     private Timestamp createdDate;
+
+    @Column(name = "is_complete", nullable = false, columnDefinition = "boolean default false")
+    private Boolean isComplete;
 
     // 1:N recruitField
     @OneToMany(mappedBy = "recruitPostId")
@@ -70,6 +73,7 @@ public class RecruitPost {
         this.recruitLanguages = recruitLanguages;
         this.recruitPersonalities = recruitPersonalities;
         this.applications = applications;
+        this.isComplete = false;
     }
 }
 
