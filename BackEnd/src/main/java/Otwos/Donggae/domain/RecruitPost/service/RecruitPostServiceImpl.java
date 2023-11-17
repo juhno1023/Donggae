@@ -56,7 +56,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
     @Autowired
     private TeamMemberRepository teamMemberRepository;
 
-    @Transactional
+    @Transactional //게시글 작성
     public void createRecruitPostAndTeam(RecruitPostRequestDTO recruitPostRequestDTO, int userId) {
 
         User user = memberRepository.findUserByUserId(userId);
@@ -155,7 +155,6 @@ public class RecruitPostServiceImpl implements RecruitPostService {
                 .collect(Collectors.toList());
     }
 
-
     private List<RecruitFieldDTO> addRecruitPostFieldDTO(RecruitPost recruitPost, RecruitPostRequestDTO recruitPostRequestDTO){
 
         List<RecruitFieldDTO> recruitFieldDTOS = new ArrayList<>(); //빈 리스트 생성
@@ -203,6 +202,38 @@ public class RecruitPostServiceImpl implements RecruitPostService {
                 })
                 .collect(Collectors.toList());
     }
+
+    @Transactional //게시글 삭제
+    public String deleteRecruitPost(int recruitPostId, int userId){
+        User user = memberRepository.findUserByUserId(userId);
+        RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(recruitPostId);
+        if (recruitPost.getUserId() == user) {
+            recruitPostRepository.deleteById(recruitPostId);
+            return "success";
+        }
+        return "fail";
+    }
+
+    @Transactional //게시글 수정
+    public void editRecruitPost(int recruitPostId, RecruitPostRequestDTO recruitPostRequestDTO, int userId){
+        RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(recruitPostId);
+        if(recruitPostRequestDTO.getTitle()!=null){
+            recruitPost.setTitle(recruitPostRequestDTO.getTitle());
+        }
+        if(recruitPostRequestDTO.getContent()!=null){
+            recruitPost.setContent(recruitPostRequestDTO.getContent());
+        }
+        if(recruitPostRequestDTO.getMajorLectureName()!=null){
+            recruitPost.setMajorLectureName(recruitPostRequestDTO.getMajorLectureName());
+        }
+
+        recruitPostRepository.save(recruitPost);
+    }
+
+    //    @Override // 게시글 조회
+//    public RecruitPostResponseDTO getRecruitPost(int recruitPostId) {
+//
+//    }
 
 }
 

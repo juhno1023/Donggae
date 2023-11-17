@@ -11,7 +11,7 @@ export default function Login() {
     const clientId = process.env.REACT_APP_clientId;
     const redirectUri = process.env.REACT_APP_redirectUri;
     const GITHUB_AUTH_URI = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}`;
-    
+
     // 로그인 버튼 클릭 핸들러
     const handleLogin = () => {
         // GitHub 인증 URI로 리다이렉션
