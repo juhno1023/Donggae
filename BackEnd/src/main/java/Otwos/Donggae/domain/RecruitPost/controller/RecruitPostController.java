@@ -37,9 +37,13 @@ public class RecruitPostController {
     }
 
     @PostMapping("/recruitPost/recommend") // 프로젝트 추천
-    public ResponseEntity<?> recommendBoard(int userId){
+    public ResponseEntity<?> recommendBoard(@Auth int userId){
         try{
-            List<UserInterestField> recRecruitPostDTOList = recRecruitPostService.recommendRecruitPost(userId);
+            List<RecRecruitPostDTO> recRecruitPostDTOList = recRecruitPostService.recommendRecruitPost(userId);
+            if(recRecruitPostDTOList.isEmpty()){ // 사이트에 모집 글이 0개 일 때
+                return ResponseEntity.notFound().build();
+            }
+
             return ResponseEntity.ok().body(recRecruitPostDTOList);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
