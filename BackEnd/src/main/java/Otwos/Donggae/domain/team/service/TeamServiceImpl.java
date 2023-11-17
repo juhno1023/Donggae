@@ -104,6 +104,7 @@ public class TeamServiceImpl implements TeamService{
                 RecruitPost recruitPost = team.getRecruitPostId(); //해당하는 모집 글
 
                 TeamMemberPreview teamMemberPreview = new TeamMemberPreview(
+                        userId,
                         user.getGithubName(), //팀장 이름
                         user.getBoj_rank(), //팀장 백준랭크
                         donggaeRank, //팀장 동개랭크
@@ -118,19 +119,31 @@ public class TeamServiceImpl implements TeamService{
                 leaders.add(teamByLeader); //팀장으로 속한 팀 리스트에 추가
 
             } else { //user가 팀원인 경우
-                UserRank userRank = userRankRepository.findUserRankByUserId(user);
-                DonggaeRank donggaeRank = DonggaeRank.똥개;
-                if (userRank != null) { //동개랭크 있는경우
-                    donggaeRank = userRank.getRankName();
-                }
                 Team team = teamMember.getTeamId(); //해당하는 팀
                 RecruitPost recruitPost = team.getRecruitPostId(); //해당하는 모집 글
 
-                TeamMemberPreview teamMemberPreview = new TeamMemberPreview(
-                        user.getGithubName(), //팀장 이름
-                        user.getBoj_rank(), //팀장 백준랭크
-                        donggaeRank, //팀장 동개랭크
-                        teamMember.getIsLeader());
+                List<TeamMember> teamMembers = teamMemberRepository.findTeamMembersByTeamId(team);
+                TeamMemberPreview teamMemberPreview = null;
+
+                for (TeamMember teamMember1 : teamMembers) {
+                    if (teamMember1.getIsLeader() == Boolean.TRUE) {
+
+                        User user1 = teamMember1.getUserId();
+
+                        UserRank userRank = userRankRepository.findUserRankByUserId(user1);
+                        DonggaeRank donggaeRank = DonggaeRank.똥개;
+                        if (userRank != null) { //동개랭크 있는경우
+                            donggaeRank = userRank.getRankName();
+                        }
+
+                        teamMemberPreview = new TeamMemberPreview(
+                                user1.getUserId(),
+                                user1.getGithubName(), //팀장 이름
+                                user1.getBoj_rank(), //팀장 백준랭크
+                                donggaeRank, //팀장 동개랭크
+                                teamMember1.getIsLeader());
+                    }
+                }
 
                 TeamByMember teamByMember = new TeamByMember(
                         team.getTeamId(),
@@ -169,9 +182,10 @@ public class TeamServiceImpl implements TeamService{
             }
 
             TeamMemberPreview teamMemberPreview = new TeamMemberPreview(
-                    user.getGithubName(), //팀장 이름
-                    user.getBoj_rank(), //팀장 백준랭크
-                    donggaeRank, //팀장 동개랭크
+                    user.getUserId(),
+                    user.getGithubName(), //이름
+                    user.getBoj_rank(), //백준랭크
+                    donggaeRank, //동개랭크
                     teamMember.getIsLeader());
             teamMemberPreviews.add(teamMemberPreview);
         }
