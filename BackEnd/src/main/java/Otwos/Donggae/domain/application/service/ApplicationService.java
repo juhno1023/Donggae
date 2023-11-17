@@ -8,6 +8,6 @@ import Otwos.Donggae.DTO.member.previewInfo.PreviewUserInfoDTO;
 
 public interface ApplicationService {
     public void applyFor(int userId, ApplyTeamRequest request);
-    public ReadApplicationResponse readApplication(int userId, ReadApplicationRequest applicationRequest);
+    public ReadApplicationResponse readApplication(ReadApplicationRequest applicationRequest);
     public PreviewUserInfoDTO applyPageInfo(int userId);
 }

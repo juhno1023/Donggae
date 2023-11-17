@@ -30,9 +30,9 @@ public class ApplicationController {
     }
 
     @PostMapping("/apply/show")
-    public ResponseEntity<?> showApplication(@Auth int userId, @RequestBody ReadApplicationRequest request) {
+    public ResponseEntity<?> showApplication(@RequestBody ReadApplicationRequest request) {
         try {
-            ReadApplicationResponse response = applicationService.readApplication(userId, request);
+            ReadApplicationResponse response = applicationService.readApplication(request);
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
