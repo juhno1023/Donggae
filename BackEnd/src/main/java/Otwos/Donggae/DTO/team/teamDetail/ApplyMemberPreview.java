@@ -1,4 +1,4 @@
-package Otwos.Donggae.DTO.team.showMyTeam;
+package Otwos.Donggae.DTO.team.teamDetail;
 
 import Otwos.Donggae.Global.Rank.BaekjoonRank;
 import Otwos.Donggae.Global.Rank.DonggaeRank;
@@ -7,10 +7,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class TeamMemberPreview {
+public class ApplyMemberPreview {
     private int userId;
     private String name; //이름
     private BaekjoonRank bojRank; //백준랭크
     private DonggaeRank donggaeRank; //동개랭크
-    private Boolean isLeader; //팀장여부
 }
