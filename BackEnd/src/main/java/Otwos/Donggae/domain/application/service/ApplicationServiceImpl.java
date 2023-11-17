@@ -1,5 +1,7 @@
 package Otwos.Donggae.domain.application.service;
 
+import static java.sql.Types.NULL;
+
 import Otwos.Donggae.DAO.Application;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.User.User;
@@ -9,6 +11,7 @@ import Otwos.Donggae.DAO.User.UserPersonality;
 import Otwos.Donggae.DAO.User.UserRank;
 import Otwos.Donggae.DAO.User.UserStudyField;
 import Otwos.Donggae.DTO.application.ApplyDTO;
+import Otwos.Donggae.DTO.application.ApplyTeamRequest;
 import Otwos.Donggae.DTO.application.read.ReadApplicationRequest;
 import Otwos.Donggae.DTO.application.read.ReadApplicationResponse;
 import Otwos.Donggae.DTO.member.previewInfo.PreviewUserInfoDTO;
@@ -16,6 +19,10 @@ import Otwos.Donggae.DTO.member.userinfo.UserInterestFieldDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserLanguageDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserPersonalityDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserStudyFieldDTO;
+import Otwos.Donggae.DTO.member.userinfo.response.UserInterestFieldResponse;
+import Otwos.Donggae.DTO.member.userinfo.response.UserLanguageResponse;
+import Otwos.Donggae.DTO.member.userinfo.response.UserPersonalityResponse;
+import Otwos.Donggae.DTO.member.userinfo.response.UserStudyFieldResponse;
 import Otwos.Donggae.Global.Rank.DonggaeRank;
 import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.application.repository.ApplicationRepository;
@@ -61,9 +68,9 @@ public class ApplicationServiceImpl implements ApplicationService{
 
     //지원하는 글 쓰고 지원하기 버튼 클릭 시
     @Override
-    public void applyFor(int userId, ApplyDTO applyDTO) {
+    public void applyFor(int userId, ApplyTeamRequest request) {
         User user = memberRepository.findUserByUserId(userId);
-        RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(applyDTO.getRecruitPostId());
+        RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(request.getRecruitPostId());
         //예외처리 하고 저장
         try {
             validateUserAndRecruitPost(user, recruitPost);
@@ -73,6 +80,12 @@ public class ApplicationServiceImpl implements ApplicationService{
 
         //해당 user와 recruitPost가 있으면 저장
         //applicationId따로 안넣어도 알아서 들어가겠지?
+        ApplyDTO applyDTO = new ApplyDTO(
+                NULL,
+                request.getSelfIntro(),
+                request.getContent(),
+                NULL
+        );
         applicationRepository.save(applyDTO.toEntity(user, recruitPost));
     }
 
@@ -99,10 +112,10 @@ public class ApplicationServiceImpl implements ApplicationService{
             throw new RuntimeException(e);
         }
 
-        List<UserLanguageDTO> userLanguageDTOS = getLanguageDTO(user);
-        List<UserInterestFieldDTO> userInterestFieldDTOS = getInterestFieldDTO(user);
-        List<UserPersonalityDTO> userPersonalityDTOS = getPersonalityDTO(user);
-        List<UserStudyFieldDTO> userStudyFieldDTOS = getStudyFieldDTO(user);
+        List<UserLanguageResponse> userLanguageDTOS = getLanguageResponse(user);
+        List<UserInterestFieldResponse> userInterestFieldDTOS = getInterestFieldResponse(user);
+        List<UserPersonalityResponse> userPersonalityDTOS = getPersonalityResponse(user);
+        List<UserStudyFieldResponse> userStudyFieldDTOS = getStudyFieldResponse(user);
 
         //rank 엔티티에 없으면 그냥 "똥개" 보냄
         UserRank userRank = userRankRepository.findUserRankByUserId(user);
@@ -140,10 +153,10 @@ public class ApplicationServiceImpl implements ApplicationService{
     public PreviewUserInfoDTO applyPageInfo(int userId) {
         User user = memberRepository.findUserByUserId(userId);
 
-        List<UserLanguageDTO> userLanguageDTOS = getLanguageDTO(user);
-        List<UserInterestFieldDTO> userInterestFieldDTOS = getInterestFieldDTO(user);
-        List<UserPersonalityDTO> userPersonalityDTOS = getPersonalityDTO(user);
-        List<UserStudyFieldDTO> userStudyFieldDTOS = getStudyFieldDTO(user);
+        List<UserLanguageResponse> userLanguageDTOS = getLanguageResponse(user);
+        List<UserInterestFieldResponse> userInterestFieldDTOS = getInterestFieldResponse(user);
+        List<UserPersonalityResponse> userPersonalityDTOS = getPersonalityResponse(user);
+        List<UserStudyFieldResponse> userStudyFieldDTOS = getStudyFieldResponse(user);
 
         //rank 엔티티에 없으면 그냥 "똥개" 보냄
         UserRank userRank = userRankRepository.findUserRankByUserId(user);
@@ -176,62 +189,58 @@ public class ApplicationServiceImpl implements ApplicationService{
     }
 
     //user에 해당하는 userLanguage받아오기
-    private List<UserLanguageDTO> getLanguageDTO(User user) {
+    private List<UserLanguageResponse> getLanguageResponse(User user) {
         List<UserLanguage> userLanguages = userLanguageRepository.findAllByUserId(user);
-        List<UserLanguageDTO> userLanguageDTOS = new ArrayList<>(); //빈 리스트 생성
+        List<UserLanguageResponse> responses = new ArrayList<>(); //빈 리스트 생성
 
         for (UserLanguage userLanguage : userLanguages) {
-            UserLanguageDTO userLanguageDTO = new UserLanguageDTO(
-                    user.getUserId(),
+            UserLanguageResponse userLanguageResponse = new UserLanguageResponse(
                     userLanguage.getLanguage()
             );
-            userLanguageDTOS.add(userLanguageDTO);
+            responses.add(userLanguageResponse);
         }
-        return userLanguageDTOS;
+        return responses;
     }
 
     //user에 해당하는 userInterestField받아오기
-    private List<UserInterestFieldDTO> getInterestFieldDTO(User user) {
+    private List<UserInterestFieldResponse> getInterestFieldResponse(User user) {
         List<UserInterestField> userInterestFields = userInterestFieldRepository.findAllByUserId(user);
-        List<UserInterestFieldDTO> userInterestFieldDTOS = new ArrayList<>();
+        List<UserInterestFieldResponse> responses = new ArrayList<>();
 
         for (UserInterestField userInterestField : userInterestFields) {
-            UserInterestFieldDTO userInterestFieldDTO = new UserInterestFieldDTO(
-                    user.getUserId(),
+            UserInterestFieldResponse userInterestFieldResponse = new UserInterestFieldResponse(
                     userInterestField.getInterestField()
             );
-            userInterestFieldDTOS.add(userInterestFieldDTO);
+            responses.add(userInterestFieldResponse);
         }
-        return userInterestFieldDTOS;
+        return responses;
     }
 
     //user에 해당하는 userPersonality받아오기
-    private List<UserPersonalityDTO> getPersonalityDTO(User user) {
+    private List<UserPersonalityResponse> getPersonalityResponse(User user) {
         List<UserPersonality> userPersonalities = userPersonalityRepository.findAllByUserId(user);
-        List<UserPersonalityDTO> userPersonalityDTOS = new ArrayList<>();
+        List<UserPersonalityResponse> responses = new ArrayList<>();
 
         for (UserPersonality userPersonality : userPersonalities) {
-            UserPersonalityDTO userPersonalityDTO = new UserPersonalityDTO(
-                    user.getUserId(),
+            UserPersonalityResponse userPersonalityResponse = new UserPersonalityResponse(
                     userPersonality.getPersonality()
             );
-            userPersonalityDTOS.add(userPersonalityDTO);
+            responses.add(userPersonalityResponse);
         }
-        return userPersonalityDTOS;
+        return responses;
     }
 
     //user에 해당하는 studyField받아오기
-    private List<UserStudyFieldDTO> getStudyFieldDTO(User user) {
+    private List<UserStudyFieldResponse> getStudyFieldResponse(User user) {
         List<UserStudyField> userStudyFields = userStudyFieldRepository.findAllByUserId(user);
-        List<UserStudyFieldDTO> userStudyFieldDTOS = new ArrayList<>();
+        List<UserStudyFieldResponse> responses = new ArrayList<>();
 
         for (UserStudyField userStudyField : userStudyFields) {
-            UserStudyFieldDTO userStudyFieldDTO = new UserStudyFieldDTO(
-                    user.getUserId(),
+            UserStudyFieldResponse userStudyFieldResponse = new UserStudyFieldResponse(
                     userStudyField.getStudyField()
             );
-            userStudyFieldDTOS.add(userStudyFieldDTO);
+            responses.add(userStudyFieldResponse);
         }
-        return userStudyFieldDTOS;
+        return responses;
     }
 }
