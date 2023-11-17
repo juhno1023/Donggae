@@ -7,7 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class TeamByMember {
     //팀원으로 속한 팀
+    private int teamId;
     private String teamName; //팀이름
     private String title; //프로젝트 제목
-    private TeamLeader teamLeader; //팀장 정보
+    private TeamMemberPreview teamMemberPreview; //팀장 정보
 }

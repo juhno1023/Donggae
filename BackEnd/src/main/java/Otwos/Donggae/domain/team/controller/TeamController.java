@@ -2,6 +2,8 @@ package Otwos.Donggae.domain.team.controller;
 
 import Otwos.Donggae.DTO.team.selectTeamMember.SelectTeamMemberRequest;
 import Otwos.Donggae.DTO.team.showMyTeam.MyTeamList;
+import Otwos.Donggae.DTO.team.teamDetail.DetailByMember;
+import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
 import Otwos.Donggae.Jwt.Auth;
 import Otwos.Donggae.domain.team.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,16 @@ public class TeamController {
             MyTeamList myTeamList = teamService.showTeamS(userId);
             return ResponseEntity.ok().body(myTeamList);
         } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/team/detail/member")
+    public ResponseEntity<?> showDetailByMember(@RequestBody TeamIdRequest teamIdRequest) {
+        try {
+            DetailByMember detailByMember = teamService.DetailTeamByMember(teamIdRequest);
+            return ResponseEntity.ok().body(detailByMember);
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
