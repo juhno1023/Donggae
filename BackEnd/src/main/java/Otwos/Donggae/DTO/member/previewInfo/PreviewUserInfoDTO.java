@@ -4,6 +4,10 @@ import Otwos.Donggae.DTO.member.userinfo.UserInterestFieldDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserLanguageDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserPersonalityDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserStudyFieldDTO;
+import Otwos.Donggae.DTO.member.userinfo.response.UserInterestFieldResponse;
+import Otwos.Donggae.DTO.member.userinfo.response.UserLanguageResponse;
+import Otwos.Donggae.DTO.member.userinfo.response.UserPersonalityResponse;
+import Otwos.Donggae.DTO.member.userinfo.response.UserStudyFieldResponse;
 import Otwos.Donggae.Global.Rank.BaekjoonRank;
 import Otwos.Donggae.Global.Rank.DonggaeRank;
 import java.util.List;
@@ -19,8 +23,9 @@ public class PreviewUserInfoDTO {
     private BaekjoonRank bojRank;
     private String dguEmail;
     private DonggaeRank userRank;
-    private List<UserLanguageDTO> userLanguageDTOS;
-    private List<UserInterestFieldDTO> userInterestFieldDTOS;
-    private List<UserPersonalityDTO> userPersonalityDTOS;
-    private List<UserStudyFieldDTO> userStudyFieldDTOS;
+
+    private List<UserLanguageResponse> userLanguageDTOS;
+    private List<UserInterestFieldResponse> userInterestFieldDTOS;
+    private List<UserPersonalityResponse> userPersonalityDTOS;
+    private List<UserStudyFieldResponse> userStudyFieldDTOS;
 }
