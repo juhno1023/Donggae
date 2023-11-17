@@ -10,6 +10,7 @@ import org.hibernate.annotations.ColumnDefault;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 
 @Setter
@@ -47,22 +48,22 @@ public class RecruitPost {
 
     // 1:N recruitField
     @OneToMany(mappedBy = "recruitPostId")
-    private List<RecruitField> recruitFields;
+    private Set<RecruitField> recruitFields;
 
     // 1:N recruitLanguage
     @OneToMany(mappedBy = "recruitPostId")
-    private List<RecruitLanguage> recruitLanguages;
+    private Set<RecruitLanguage> recruitLanguages;
 
     // 1:N recruitPersonality
     @OneToMany(mappedBy = "recruitPostId")
-    private List<RecruitPersonality> recruitPersonalities;
+    private Set<RecruitPersonality> recruitPersonalities;
 
     // 1:N Application
     @OneToMany(mappedBy = "recruitPostId")
     private List<Application> applications;
 
     @Builder
-    public RecruitPost(int recruitPostId, User userId, String title, String content, MajorLectureEnum majorLectureName, Timestamp createdDate, List<RecruitField> recruitFields, List<RecruitLanguage> recruitLanguages, List<RecruitPersonality> recruitPersonalities, List<Application> applications) {
+    public RecruitPost(int recruitPostId, User userId, String title, String content, MajorLectureEnum majorLectureName, Timestamp createdDate, Set<RecruitField> recruitFields, Set<RecruitLanguage> recruitLanguages, Set<RecruitPersonality> recruitPersonalities, List<Application> applications) {
         this.recruitPostId = recruitPostId;
         this.userId = userId;
         this.title = title;
