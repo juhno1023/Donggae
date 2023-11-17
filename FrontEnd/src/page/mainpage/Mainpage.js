@@ -11,83 +11,84 @@ export default function Home() {
     useEffect(() => {
         const fetchData = async() => {
             try {
-                const response = await fetch('http://localhost:8080/recruitPost/recommend', {
+                const res = await fetch('/recruitPost/recommend', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
-                })
-                .then(res=>res.json())        
+                })     
                 .then(res=> {
-                    console.log(res)
-                });
-                console.log(response.status)
-                if (response.status === 400) {
-                    alert(`400 Error`);
-                    return;
-                }else if(response.status === 404){
-                    alert(`404 Error`);
-                    return;
-                }
-                // const data = await response.json();
-                // console.log(data);
-                // setTeamData(data);
+                    if (res.status === 400) {
+                        alert(`400 Error`);
+                        return;
+                    }
+                    if(res.status === 404){
+                        alert(`포스트 영개`);
+                        return;
+                    }
+                    return res.json();
+                }).then(data => {
+                    console.log(data)
+                })
             } catch (error) {
                 console.error("Failed to fetch: ", error);
             }
         };
         fetchData(); 
     }, []);
-    // const user = {
-    //     token: localStorage.getItem('token')
-    // };
-    // console.log(user.token);
-   
-    // let token = localStorage.getItem('token') || '';
-    // useEffect(() => {
-    //     const fetchData = async() => {
-    //         try {
-    //             fetch('http://localhost:8080/recruitPost/recommend', {
-    //                 method: 'POST', // 사용하는 HTTP 메서드 (GET, POST, PUT 등)
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                     'Authorization': `Bearer ${token}`
-    //                 },
-    //             })
-    //             .then(res=>res.json())        
-    //             .then(res=> {
-    //                 console.log(res)
-    //             });
-    //         } catch (error) {
-    //             console.error("Failed to fetch: ", error);
-    //         }
-    //     };
-    //     fetchData();   
-    // }, []);
 
 
   return (
     <div className={styles.default}>
-        <Header />
-        <Sidebar/>
-        <div className={styles.inner}>
-            <div className={styles.body}>
-            <div className={styles.box__}>
-                
-            </div>
-            <div className={styles.box__}>
-                <div className={styles.half}>
-                    <div className={styles.text__1}>현재 팀원 리스트</div>
-                    <div className={styles.listed}>
-                        <div className={styles.line}>
-                        {teamData.map(data => <div>팀원 : {data.name} {data.donggaeRank}</div>)}
+            <Header />
+            <Sidebar/>
+            <div className={styles.inner}>
+                <div className={styles.body}>
+                <div className={styles.box__}>
+                    <div>
+                        <div className={styles.text__1} >팀장으로 속한 팀</div>
+                        <div className={styles.formGroup__}>
+                            <div className={styles.GroupCard}>
+                                💙우주최강팀💙
+                                <div>동국대 졸업할 수 있을까</div>
+                                <div>팀장</div>
+                                <div>상세보기</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                    <div className={styles.text__1} >팀원으로 속한 팀</div>
+                        <div className={styles.formGroup}>
+                            <div className={styles.GroupCard}>
+                                💙우주최강팀💙
+                                <div>동국대 졸업할 수 있을까</div>
+                                <div>팀장</div>
+                                <div>상세보기</div>
+                            </div>
+                            <div className={styles.GroupCard}>
+                                💙우주최강팀💙
+                                <div>동국대 졸업할 수 있을까</div>
+                                <div>팀장</div>
+                                <div>상세보기</div>
+                            </div>
+                            <div className={styles.GroupCard}>
+                                💙우주최강팀💙
+                                <div>동국대 졸업할 수 있을까</div>
+                                <div>팀장</div>
+                                <div>상세보기</div>
+                            </div>
+                            <div className={styles.GroupCard}>
+                                💙우주최강팀💙
+                                <div>동국대 졸업할 수 있을까</div>
+                                <div>팀장</div>
+                                <div>상세보기</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
             </div>
         </div>
-    </div>
 );
 }
