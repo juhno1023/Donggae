@@ -8,5 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReadApplicationRequest {
+    private int userId;
     private int recruitPostId;
 }
