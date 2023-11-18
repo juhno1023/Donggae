@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./UserTeam.module.css"
 import Header from "../../components/_Layout/Header";
-import AppliList from '../../components/AppliList';
 import Sidebar from "../../components/_Layout/Sidebar";
 
 export default function UserTeam() {
