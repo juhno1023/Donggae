@@ -4,7 +4,6 @@ import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebar";
 
 export default function TeamInfo() {
-    const [checkedItems, setCheckedItems] = useState([]);
     const [teamData, setTeamData] = useState([]);
     let token = localStorage.getItem('token') || '';
 

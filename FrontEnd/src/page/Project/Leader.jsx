@@ -1,7 +1,8 @@
 import React, { useState ,useEffect } from 'react';
 import styles from "./Leader.module.css"
 import Header from "../../components/_Layout/Header";
-import AppliList from '../../components/AppliList';
+import Deletion from '../../components/Deletion';
+import Selection from '../../components/Selection';
 import Sidebar from "../../components/_Layout/Sidebar";
 
 export default function Leader() {
@@ -10,7 +11,6 @@ export default function Leader() {
        { id: "s", title: "CSS", completed: true },
        { id: "a", title: "Javascript", completed: false }
     ]
-    const [checkedItems, setCheckedItems] = useState([]);
     const [teamData, setTeamData] = useState([]);
     const [applyData, setApplyData] = useState([]);
     let token = localStorage.getItem('token') || '';
@@ -19,7 +19,7 @@ export default function Leader() {
         // teamId: sessionStorage.getItem('teamId')
         // 세션 스토리지가 아니라 URL로 받아오는 것 : 팀 상세보기 클릭 후 나오는 화면이기 때문에
         // 임시로 2라 설정함
-        teamId: 5,
+        teamId: 2,
     };
 
     useEffect(() => {
@@ -52,15 +52,6 @@ export default function Leader() {
           handleClick();   
     }, []);
 
-    const checkedItemHandler = (code, isChecked) => {
-        if (isChecked) { //체크 추가할때
-            setCheckedItems([...checkedItems, code])
-        } else if (!isChecked && checkedItems.find(one => one === code)) {//체크 해제할때 checkedItems에 있을 경우
-            const filter = checkedItems.filter(one => one !== code)
-            setCheckedItems([...filter])
-        }
-    }
-
   return (
     <div className={styles.default}>
         <Header />
@@ -79,7 +70,7 @@ export default function Leader() {
                     <div className={styles.text__1}>현재 팀원 리스트</div>
                     <div className={styles.listed}>
                         <div className={styles.line}>
-                        {teamData.map(data => <AppliList name={data.name} rank={data.donggaeRank} checkedItems={checkedItems} checkedItemHandler={checkedItemHandler} />)}
+                        {teamData.map(data => <Deletion name={data.name} rank={data.donggaeRank} id={data.userId}  value="추방"/>)}
                         </div>
                     </div>
                 </div>
@@ -87,7 +78,7 @@ export default function Leader() {
                     <div className={styles.text__1}>지원자 리스트</div>
                     <div className={styles.listed}>
                         <div className={styles.line}>
-                        {datas2.map(data => <AppliList title={data.title} id={data.id} checkedItems={checkedItems} checkedItemHandler={checkedItemHandler} />)}
+                        {applyData.map(data => <Selection name={data.name} rank={data.donggaeRank} id={data.userId}  value={["추가", "지원서 보기"]}/>)}
                         </div>
                 </div>
                 </div>
