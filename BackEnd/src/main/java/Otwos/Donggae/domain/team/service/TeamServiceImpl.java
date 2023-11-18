@@ -16,7 +16,6 @@ import Otwos.Donggae.DTO.team.teamDetail.ApplyMemberPreview;
 import Otwos.Donggae.DTO.team.teamDetail.DetailByLeader;
 import Otwos.Donggae.DTO.team.teamDetail.DetailByMember;
 import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
-import Otwos.Donggae.Global.Rank.DonggaeRank;
 import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.application.repository.ApplicationRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
@@ -24,7 +23,12 @@ import Otwos.Donggae.domain.rank.repository.UserRankRepository;
 import Otwos.Donggae.domain.team.repository.TeamMemberRepository;
 import Otwos.Donggae.domain.team.repository.TeamRepository;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,25 +36,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TeamServiceImpl implements TeamService{
 
+    @Autowired
     private TeamRepository teamRepository;
+    @Autowired
     private TeamMemberRepository teamMemberRepository;
+    @Autowired
     private MemberRepository memberRepository;
+    @Autowired
     private UserRankRepository userRankRepository;
+    @Autowired
     private RecruitPostRepository recruitPostRepository;
+    @Autowired
     private ApplicationRepository applicationRepository;
 
-    @Autowired
-    public TeamServiceImpl(TeamRepository teamRepository, TeamMemberRepository teamMemberRepository,
-                           MemberRepository memberRepository, UserRankRepository userRankRepository,
-                           RecruitPostRepository recruitPostRepository,
-                           ApplicationRepository applicationRepository) {
-        this.teamRepository = teamRepository;
-        this.teamMemberRepository = teamMemberRepository;
-        this.memberRepository = memberRepository;
-        this.userRankRepository = userRankRepository;
-        this.recruitPostRepository = recruitPostRepository;
-        this.applicationRepository = applicationRepository;
-    }
 
     //회원 뽑기
     //지원자 선택해서 팀에(팀원으로) 추가하기
@@ -103,10 +101,7 @@ public class TeamServiceImpl implements TeamService{
             if (teamMember.getIsLeader() == Boolean.TRUE) { //user가 팀장인 경우
 
                 UserRank userRank = userRankRepository.findUserRankByUserId(user);
-                DonggaeRank donggaeRank = DonggaeRank.똥개;
-                if (userRank != null) { //동개랭크 있는경우
-                    donggaeRank = userRank.getRankName();
-                }
+
                 Team team = teamMember.getTeamId(); //해당하는 팀
                 RecruitPost recruitPost = team.getRecruitPostId(); //해당하는 모집 글
 
@@ -114,7 +109,7 @@ public class TeamServiceImpl implements TeamService{
                         userId,
                         user.getGithubName(), //팀장 이름
                         user.getBoj_rank(), //팀장 백준랭크
-                        donggaeRank, //팀장 동개랭크
+                        userRank.getRankName(), //팀장 동개랭크
                         teamMember.getIsLeader());
 
                 TeamByLeader teamByLeader = new TeamByLeader(
@@ -134,20 +129,15 @@ public class TeamServiceImpl implements TeamService{
 
                 for (TeamMember teamMember1 : teamMembers) {
                     if (teamMember1.getIsLeader() == Boolean.TRUE) {
-
                         User user1 = teamMember1.getUserId();
 
                         UserRank userRank = userRankRepository.findUserRankByUserId(user1);
-                        DonggaeRank donggaeRank = DonggaeRank.똥개;
-                        if (userRank != null) { //동개랭크 있는경우
-                            donggaeRank = userRank.getRankName();
-                        }
 
                         teamMemberPreview = new TeamMemberPreview(
                                 user1.getUserId(),
                                 user1.getGithubName(), //팀장 이름
                                 user1.getBoj_rank(), //팀장 백준랭크
-                                donggaeRank, //팀장 동개랭크
+                                userRank.getRankName(), //팀장 동개랭크
                                 teamMember1.getIsLeader());
                     }
                 }
@@ -183,16 +173,12 @@ public class TeamServiceImpl implements TeamService{
         for (TeamMember teamMember : teams) { //팀원 리스트 반환
             User user = teamMember.getUserId();
             UserRank userRank = userRankRepository.findUserRankByUserId(user);
-            DonggaeRank donggaeRank = DonggaeRank.똥개;
-            if (userRank != null) { //동개랭크 있는경우
-                donggaeRank = userRank.getRankName();
-            }
 
             TeamMemberPreview teamMemberPreview = new TeamMemberPreview(
                     user.getUserId(),
                     user.getGithubName(), //이름
                     user.getBoj_rank(), //백준랭크
-                    donggaeRank, //동개랭크
+                    userRank.getRankName(), //동개랭크
                     teamMember.getIsLeader());
             teamMemberPreviews.add(teamMemberPreview);
         }
@@ -224,41 +210,31 @@ public class TeamServiceImpl implements TeamService{
         for (TeamMember teamMember : teams) { //팀원 리스트 반환
             User user = teamMember.getUserId();
             UserRank userRank = userRankRepository.findUserRankByUserId(user);
-            DonggaeRank donggaeRank = DonggaeRank.똥개;
-            if (userRank != null) { //동개랭크 있는경우
-                donggaeRank = userRank.getRankName();
-            }
 
             TeamMemberPreview teamMemberPreview = new TeamMemberPreview(
                     user.getUserId(),
                     user.getGithubName(), //이름
                     user.getBoj_rank(), //백준랭크
-                    donggaeRank, //동개랭크
+                    userRank.getRankName(), //동개랭크
                     teamMember.getIsLeader());
             teamMemberList.add(teamMemberPreview);
         }
 
         //지원자 리스트
         List<Application> applications = applicationRepository.findApplicationsByRecruitPostId(recruitPost);
-        List<ApplyMemberPreview> applyMemberList = new ArrayList<>();
+        HashMap<Application, Integer> priorityMap = new HashMap<>();
 
-        // 추천 해야함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        for (Application application : applications) { //지원자 리스트 반환
+        for (Application application : applications) { //지원자 리스트 반환 -> 지원자 우선순위 해시맵 반환
             User user = application.getUserId();
-            UserRank userRank = userRankRepository.findUserRankByUserId(user);
-            DonggaeRank donggaeRank = DonggaeRank.똥개;
-            if (userRank != null) { //동개랭크 있는경우
-                donggaeRank = userRank.getRankName();
-            }
 
-            ApplyMemberPreview teamMemberPreview = new ApplyMemberPreview(
-                    user.getUserId(),
-                    user.getGithubName(), //이름
-                    user.getBoj_rank(), //백준랭크
-                    donggaeRank //동개랭크
-                    );
-            applyMemberList.add(teamMemberPreview);
+            int priority = calculatePriorityForMatchingAttributes(recruitPost, user);
+            priorityMap.put(application, priority);
         }
+
+        List<Application> applicationPriority = sortApplicationByPriority(priorityMap);
+
+        List<ApplyMemberPreview> applyMemberList = new ArrayList<>();
+        hashToDTO(applicationPriority, applyMemberList);
 
         DetailByLeader detailByLeader = new DetailByLeader(
                 teamIdRequest.getTeamId(),
@@ -272,6 +248,68 @@ public class TeamServiceImpl implements TeamService{
         return detailByLeader;
     }
 
+    // dto로 변환 (지원자 리스트만)
+    private void hashToDTO(List<Application> applications, List<ApplyMemberPreview> applyMemberPreviews) {
+        for (Application application : applications) {
+            User user = application.getUserId();
+            UserRank userRank = userRankRepository.findUserRankByUserId(user);
+
+            ApplyMemberPreview teamMemberPreview = new ApplyMemberPreview(
+                    user.getUserId(),
+                    user.getGithubName(), //이름
+                    user.getBoj_rank(), //백준랭크
+                    userRank.getRankName() //동개랭크
+            );
+            applyMemberPreviews.add(teamMemberPreview);
+        }
+    }
+
+    private int calculatePriorityForMatchingAttributes(RecruitPost post, User user) { //지원자 우선순위
+        // user 정보 가져오기 - 관심분야, 언어, 성격
+        Set<String> userInterestFieldList = user.getUserInterestFields()
+                .stream()
+                .map(userInterestField -> userInterestField.getInterestField().name())
+                .collect(Collectors.toSet());
+        Set<String> userLanguageList = user.getUserLanguages()
+                .stream()
+                .map(userLanguage -> userLanguage.getLanguage().name())
+                .collect(Collectors.toSet());
+
+        Set<String> userPersonalityList = user.getUserPersonalities()
+                .stream()
+                .map(userPersonality -> userPersonality.getPersonality().name())
+                .collect(Collectors.toSet());
+
+        int priority = 0;
+        // 언어 일치 여부에 대한 점수 계산 (일치 개수만큼 우선순위 +1)
+        long languageMatchCount = post.getRecruitLanguages().stream()
+                .filter(lang -> userLanguageList.contains(lang.getLanguage().name()))
+                .count();
+        priority += languageMatchCount;
+
+        // 관심 분야 일치 여부에 대한 점수 계산 (일치 개수만큼 우선순위 +1)
+        long fieldMatchCount = post.getRecruitFields().stream()
+                .filter(field -> userInterestFieldList.contains(field.getField().name()))
+                .count();
+        priority += fieldMatchCount;
+
+        // 성격 특성 일치 여부에 대한 점수 계산 (일치 개수만큼 우선순위 +1)
+        long personalityMatchCount = post.getRecruitPersonalities().stream()
+                .filter(pers -> userPersonalityList.contains(pers.getPersonality().name()))
+                .count();
+        priority += personalityMatchCount;
+
+        return priority;
+    }
+
+    //우선순위 순으로 정렬
+    private List<Application> sortApplicationByPriority(HashMap<Application, Integer> priorityMap) {
+        return priorityMap.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
 
     private void validateSelectRequest(User user, Team team) throws Exception{
         TeamMember teamMember = teamMemberRepository.findTeamMemberByTeamIdAndUserId(team, user);
