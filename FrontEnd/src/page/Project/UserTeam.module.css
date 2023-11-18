@@ -44,23 +44,7 @@ body{
   border: 1px solid var(--box-bg);
 }
 
-/* button */
-button{
-  border:none;
-  border-radius: 6px;
-  background: var(--point-orange);
-  width : 76px;
-  height : 37px;
-  right : 25px;
-  position: absolute;
-  cursor:pointer;
 
-  font-family: 'Brawler';
-  color : white;
-  font-size:15px;
-  font-weight: bold;
-  z-index: 1;
-}
 /* input */
 
 .formGroup .GroupCard{

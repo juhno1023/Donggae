@@ -23,7 +23,7 @@
     position: relative;
 }
 /* button */
-button{
+.submitBtn{
     border:none;
     border-radius: 6px;
     background: var(--point-orange);
