@@ -39,7 +39,7 @@ export default function Post() {
         <div className={styles.inner}>
             <div className={styles.body}>
             <div className={styles.box__}>
-                <Link to='/application'><button type="submit">지원하기</button></Link>
+                <Link to='/application'><button type="submit" className={styles.submitBtn}>지원하기</button></Link>
                 <div  className={styles.text__1} for="team_name" >🧡떡잎방범대🧡이번 학기에 소공 같이 플젝 하실 분 모집합니다</div>
                 <div className={styles.formGroup}>
                     <div>이번에 간단하게 웹 프로젝트를 함께 이끌어 갈 분들을 모집합니다! 사용하고자 하는 기술 스택은 nodejs 입니다

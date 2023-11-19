@@ -32,4 +32,9 @@ public class RecruitField {
         this.recruitPostId = recruitPostId;
         this.field = field;
     }
+
+    public RecruitField(RecruitPost recruitPostId, String field) {
+        this.recruitPostId = recruitPostId;
+        this.field = FieldEnum.valueOf(field); // Enum으로 변환
+    }
 }

@@ -2,6 +2,7 @@ package Otwos.Donggae.DAO.Recruit;
 
 import Otwos.Donggae.DAO.Recruit.Identifier.RecruitLanguagePK;
 import Otwos.Donggae.DAO.User.User;
+import Otwos.Donggae.Global.FieldEnum;
 import Otwos.Donggae.Global.LanguageEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -32,6 +33,12 @@ public class RecruitLanguage {
         this.recruitPostId = recruitPostId;
         this.language = language;
     }
+
+    public RecruitLanguage(RecruitPost recruitPostId, String language) {
+        this.recruitPostId = recruitPostId;
+        this.language = LanguageEnum.valueOf(language); // Enum으로 변환
+    }
+
     public RecruitLanguage toEntity(RecruitPost recruitPostId, LanguageEnum language) {
         return RecruitLanguage.builder()
                 .recruitPostId(recruitPostId)

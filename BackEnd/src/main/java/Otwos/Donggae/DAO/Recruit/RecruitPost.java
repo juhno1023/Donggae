@@ -47,15 +47,13 @@ public class RecruitPost {
     private Boolean isComplete;
 
     // 1:N recruitField
-    @OneToMany(mappedBy = "recruitPostId")
+    @OneToMany(mappedBy = "recruitPostId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RecruitField> recruitFields;
 
-    // 1:N recruitLanguage
-    @OneToMany(mappedBy = "recruitPostId")
+    @OneToMany(mappedBy = "recruitPostId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RecruitLanguage> recruitLanguages;
 
-    // 1:N recruitPersonality
-    @OneToMany(mappedBy = "recruitPostId")
+    @OneToMany(mappedBy = "recruitPostId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RecruitPersonality> recruitPersonalities;
 
     // 1:N Application
