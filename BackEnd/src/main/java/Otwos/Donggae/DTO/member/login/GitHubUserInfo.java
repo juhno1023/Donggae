@@ -7,18 +7,14 @@ import lombok.Getter;
 @Getter
 public class GitHubUserInfo {
 
-    private final String idNumber; // 깃허브 id 넘버
+    private final Long idNumber; // 깃허브 id 넘버
     private final String username; // 깃허브 고유 아이디 이름
     private final String profileUrl; // 깃허브 프로필 이미지 url
-//    private final Integer commitNum; // 커밋 수
-//    private final Integer issueNum; // 이슈 수
-//    private final Integer starNum; // 스타 수
-//    private final Integer prNum; // pull request 수
 
     @JsonCreator
     public GitHubUserInfo(
             @JsonProperty("login") String username,
-            @JsonProperty("id") String idNumber,
+            @JsonProperty("id") Long idNumber,
             @JsonProperty("avatar_url") String profileUrl) {
 
         this.username = username;
