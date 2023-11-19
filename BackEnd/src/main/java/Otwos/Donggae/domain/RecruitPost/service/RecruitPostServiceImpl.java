@@ -14,7 +14,10 @@ import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitLanguageDTO;
 import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitPersonalityDTO;
 import Otwos.Donggae.DTO.team.TeamDTO;
 import Otwos.Donggae.DTO.team.TeamMemberDTO;
+import Otwos.Donggae.Global.FieldEnum;
+import Otwos.Donggae.Global.LanguageEnum;
 import Otwos.Donggae.Global.MajorLectureEnum;
+import Otwos.Donggae.Global.PersonalityEnum;
 import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.RecruitPost.Repository.info.RecruitFieldRepository;
 import Otwos.Donggae.domain.RecruitPost.Repository.info.RecruitLanguageRepository;
@@ -132,14 +135,16 @@ public class RecruitPostServiceImpl implements RecruitPostService {
     }
 
     private List<RecruitLanguageDTO> addRecruitPostLanguageDTO(RecruitPost recruitPost, RecruitPostRequestDTO recruitPostRequestDTO){
-
         List<RecruitLanguageDTO> recruitLanguageDTOS = new ArrayList<>(); //빈 리스트 생성
-        List<RecruitLanguage> recruitLanguages = recruitPostRequestDTO.getRecruitLanguages();
+        List<String> recruitLanguages = recruitPostRequestDTO.getRecruitLanguages();
 
-        for (RecruitLanguage recruitLanguage : recruitLanguages) {
+        for (String language : recruitLanguages) {
+            // 문자열을 Enum으로 변환
+            LanguageEnum languageEnum = LanguageEnum.valueOf(language);
+
             RecruitLanguageDTO recruitLanguageDTO = new RecruitLanguageDTO(
                     recruitPost.getRecruitPostId(),
-                    recruitLanguage.getLanguage()
+                    languageEnum
             );
             recruitLanguageDTOS.add(recruitLanguageDTO);
         }
@@ -156,14 +161,16 @@ public class RecruitPostServiceImpl implements RecruitPostService {
     }
 
     private List<RecruitFieldDTO> addRecruitPostFieldDTO(RecruitPost recruitPost, RecruitPostRequestDTO recruitPostRequestDTO){
-
         List<RecruitFieldDTO> recruitFieldDTOS = new ArrayList<>(); //빈 리스트 생성
-        List<RecruitField> recruitFields = recruitPostRequestDTO.getRecruitFields();
+        List<String> recruitFields = recruitPostRequestDTO.getRecruitFields();
 
-        for (RecruitField recruitField : recruitFields) {
+        for (String field : recruitFields) {
+            // 문자열을 Enum으로 변환
+            FieldEnum fieldEnum = FieldEnum.valueOf(field);
+
             RecruitFieldDTO recruitFieldDTO = new RecruitFieldDTO(
                     recruitPost.getRecruitPostId(),
-                    recruitField.getField()
+                    fieldEnum
             );
             recruitFieldDTOS.add(recruitFieldDTO);
         }
@@ -180,14 +187,16 @@ public class RecruitPostServiceImpl implements RecruitPostService {
     }
 
     private List<RecruitPersonalityDTO> addRecruitPostPersonalityDTO(RecruitPost recruitPost, RecruitPostRequestDTO recruitPostRequestDTO){
-
         List<RecruitPersonalityDTO> recruitPersonalityDTOS = new ArrayList<>(); //빈 리스트 생성
-        List<RecruitPersonality> recruitPersonalities = recruitPostRequestDTO.getRecruitPersonalities();
+        List<String> recruitPersonalities = recruitPostRequestDTO.getRecruitPersonalities();
 
-        for (RecruitPersonality recruitPersonality : recruitPersonalities) {
+        for (String personality : recruitPersonalities) {
+            // 문자열을 Enum으로 변환
+            PersonalityEnum personalityEnum = PersonalityEnum.valueOf(personality);
+
             RecruitPersonalityDTO recruitPersonalityDTO = new RecruitPersonalityDTO(
                     recruitPost.getRecruitPostId(),
-                    recruitPersonality.getPersonality()
+                    personalityEnum
             );
             recruitPersonalityDTOS.add(recruitPersonalityDTO);
         }
