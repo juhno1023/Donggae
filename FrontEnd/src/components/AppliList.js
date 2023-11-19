@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const AppliList = ({ title, id, checkedItems, checkedItemHandler }) => {
+const AppliList = ({ name, rank, checkedItems, checkedItemHandler }) => {
     const [isChecked, setIsChecked] = useState(null)
 
     const onCheck = ({ target }) => {
@@ -9,7 +9,7 @@ const AppliList = ({ title, id, checkedItems, checkedItemHandler }) => {
     }
 
     useEffect(() => {
-        if (checkedItems.includes(title)) {
+        if (checkedItems.includes(name)) {
             setIsChecked(true)
         } else {
             setIsChecked(false)
@@ -18,11 +18,11 @@ const AppliList = ({ title, id, checkedItems, checkedItemHandler }) => {
 
     return (
         <> 
-            <div>{id}{title}
+            <div>팀원 : {name} {rank}
             <label>
                 <input type='checkbox'
                     checked={isChecked}
-                    value={title}
+                    value={name}
                     onChange={e => onCheck(e)}
                     className='hidden' />
             </label>

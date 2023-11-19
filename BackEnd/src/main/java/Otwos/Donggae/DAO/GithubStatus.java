@@ -3,6 +3,7 @@ package Otwos.Donggae.DAO;
 import Otwos.Donggae.DAO.User.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +15,7 @@ public class GithubStatus {
 
     @Id
     @Column(name = "github_id", nullable = false)
-    private int githubId;
+    private Long githubId;
 
     // 1:1 user
     @OneToOne
@@ -32,4 +33,14 @@ public class GithubStatus {
 
     @Column(name = "pr_num")
     private Integer prNum;
+
+    @Builder
+    public GithubStatus(Long githubId, User userId, Integer commitNum, Integer issueNum, Integer starNum, Integer prNum){
+        this.githubId = githubId;
+        this.userId = userId;
+        this.commitNum = commitNum;
+        this.issueNum = issueNum;
+        this.starNum = starNum;
+        this.prNum = prNum;
+    }
 }

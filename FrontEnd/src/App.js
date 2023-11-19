@@ -8,6 +8,7 @@ import Login from './page/Login/Login';
 import Signup from "./page/Signup/Signup";
 import Leader from "./page/Project/Leader";
 import TeamInfo from "./page/Project/TeamInfo";
+import UserTeam from "./page/Project/UserTeam";
 import AuthCallback from './page/Login/AuthCallback';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/leader" element={<Leader />}></Route>
           <Route path="/teaminfo" element={<TeamInfo />}></Route>
+          <Route path="/userteam" element={<UserTeam />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
