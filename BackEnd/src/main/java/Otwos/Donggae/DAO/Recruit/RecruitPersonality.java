@@ -2,6 +2,7 @@ package Otwos.Donggae.DAO.Recruit;
 
 import Otwos.Donggae.DAO.Recruit.Identifier.RecruitPersonalityPK;
 import Otwos.Donggae.Global.FieldEnum;
+import Otwos.Donggae.Global.LanguageEnum;
 import Otwos.Donggae.Global.PersonalityEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -31,5 +32,10 @@ public class RecruitPersonality {
     public RecruitPersonality(RecruitPost recruitPostId, PersonalityEnum personality) {
         this.recruitPostId = recruitPostId;
         this.personality = personality;
+    }
+
+    public RecruitPersonality(RecruitPost recruitPostId, String personality) {
+        this.recruitPostId = recruitPostId;
+        this.personality = PersonalityEnum.valueOf(personality); // Enum으로 변환
     }
 }
