@@ -39,32 +39,22 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ApplicationServiceImpl implements ApplicationService{
-    private ApplicationRepository applicationRepository;
-    private MemberRepository memberRepository;
-    private RecruitPostRepository recruitPostRepository;
-    private UserInterestFieldRepository userInterestFieldRepository;
-    private UserLanguageRepository userLanguageRepository;
-    private UserPersonalityRepository userPersonalityRepository;
-    private UserStudyFieldRepository userStudyFieldRepository;
-    private UserRankRepository userRankRepository;
-
     @Autowired
-    public ApplicationServiceImpl(ApplicationRepository applicationRepository, MemberRepository memberRepository,
-                                  RecruitPostRepository recruitPostRepository,
-                                  UserInterestFieldRepository interestFieldRepository,
-                                  UserLanguageRepository languageRepository,
-                                  UserPersonalityRepository personalityRepository,
-                                  UserStudyFieldRepository studyFieldRepository,
-                                  UserRankRepository userRankRepository) {
-        this.applicationRepository = applicationRepository;
-        this.memberRepository = memberRepository;
-        this.recruitPostRepository = recruitPostRepository;
-        this.userInterestFieldRepository = interestFieldRepository;
-        this.userLanguageRepository = languageRepository;
-        this.userPersonalityRepository = personalityRepository;
-        this.userStudyFieldRepository = studyFieldRepository;
-        this.userRankRepository = userRankRepository;
-    }
+    private ApplicationRepository applicationRepository;
+    @Autowired
+    private MemberRepository memberRepository;
+    @Autowired
+    private RecruitPostRepository recruitPostRepository;
+    @Autowired
+    private UserInterestFieldRepository userInterestFieldRepository;
+    @Autowired
+    private UserLanguageRepository userLanguageRepository;
+    @Autowired
+    private UserPersonalityRepository userPersonalityRepository;
+    @Autowired
+    private UserStudyFieldRepository userStudyFieldRepository;
+    @Autowired
+    private UserRankRepository userRankRepository;
 
     //지원하는 글 쓰고 지원하기 버튼 클릭 시
     @Override

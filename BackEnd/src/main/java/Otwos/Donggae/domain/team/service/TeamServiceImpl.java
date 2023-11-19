@@ -51,7 +51,8 @@ public class TeamServiceImpl implements TeamService{
 
 
     //회원 뽑기
-    //지원자 선택해서 팀에(팀원으로) 추가하기
+    //지원자 선택해서 팀에(팀원으로) 추가하기 -> 지원자에서 삭제
+    @Transactional
     @Override
     public void selectTeamMember(SelectTeamMemberRequest request) {
         User user = memberRepository.findUserByUserId(request.getUserId());
@@ -65,6 +66,11 @@ public class TeamServiceImpl implements TeamService{
 
         TeamMemberDTO teamMemberDTO = new TeamMemberDTO(request.getTeamId(), request.getUserId(), Boolean.FALSE);
         teamMemberRepository.save(teamMemberDTO.toEntity(team, user));
+
+        //지원자에서 삭제
+        RecruitPost recruitPost = team.getRecruitPostId();
+        Application application = applicationRepository.findApplicationByUserIdAndRecruitPostId(user, recruitPost);
+        applicationRepository.delete(application);
     }
 
     //팀원 추방하기
