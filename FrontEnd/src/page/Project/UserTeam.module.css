@@ -28,27 +28,36 @@ body{
 }
 
 
-
-.formGroup {
+.formGroup{
   display: flex;
   flex-direction: row ;
   margin-bottom: 20px;
   position: relative;
-}
-
-/* input */
-
-.formGroup div{
   padding: 5px;
   border-radius: 12px;
-  border: 1px solid var(--box-bg);
-  background: var(--box-bg3);
   height: 20px;
   line-height: 36px;
   word-wrap: break-word;
   padding : 10px;
   width : 850px;
-  height: 140px;
+  height: 220px;
+  border: 1px solid var(--box-bg);
+}
+
+
+/* input */
+
+.formGroup .GroupCard{
+  padding: 5px;
+  border-radius: 16px;
+  border: 1px solid var(--box-bg);
+  height: 20px;
+  line-height: 36px;
+  word-wrap: break-word;
+  padding : 10px;
+  width : 170px;
+  height: 200px;
+  margin-right : 10px;
 }
 
 
@@ -80,41 +89,3 @@ body{
   line-height: 35px;
   margin-bottom:20px;
 }
-
-
-
-/* listed */
-.listed{
-  margin-right: 60px;
-}
-
-.listed div label{
-  cursor:pointer;
-}
-
-.listed .line{
-  padding: 5px;
-  border-radius: 12px;
-  border: 1px solid var(--box-bg);
-  background: var(--box-bg3);
-  line-height: 36px;
-  word-wrap: break-word;
-  padding : 10px;
-  margin : 10px;
-  margin-left: 0px;
-  height : 200px;
-}
-
-/* button */
-.line input[type="button"]{
-  border:none;
-  border-radius: 6px;
-  width : 40px;
-  height : 25px;
-  margin-left: 10px;
-  cursor:pointer;
-  font-family: 'Brawler';
-  font-weight: bold;
-  z-index: 1;
-}
-

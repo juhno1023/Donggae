@@ -11,6 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
+import java.util.Set;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -51,19 +53,19 @@ public class User {
 
     // 1:N userLanguage
     @OneToMany(mappedBy = "userId")
-    private List<UserLanguage> userLanguages;
+    private Set<UserLanguage> userLanguages;
 
     // 1:N userInterestField
     @OneToMany(mappedBy = "userId")
-    private List<UserInterestField> userInterestFields;
+    private Set<UserInterestField> userInterestFields;
 
     // 1:N userPersonality
     @OneToMany(mappedBy = "userId")
-    private List<UserPersonality> userPersonalities;
+    private Set<UserPersonality> userPersonalities;
 
     // 1:N userStudyField
     @OneToMany(mappedBy = "userId")
-    private List<UserStudyField> userStudyFields;
+    private Set<UserStudyField> userStudyFields;
 
     @Builder
     public User(int userId, String githubName,
