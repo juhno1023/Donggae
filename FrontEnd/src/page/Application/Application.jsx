@@ -31,7 +31,7 @@ export default function Posting() {
             <div className={styles.inner}>
                 <div className={styles.body}>
                 <form onSubmit={handleSubmit}>
-                    <button type="submit">지원완료</button>
+                    <button type="submit" className={styles.submitBtn}>지원완료</button>
                     <div className={`${styles.formGroup} ${styles.fmg1}`}>
                         <label  className={styles.text__1} for="introduce" >자기소개</label>
                         <input

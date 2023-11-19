@@ -2,6 +2,7 @@ package Otwos.Donggae.domain.team.controller;
 
 import Otwos.Donggae.DTO.team.selectTeamMember.SelectTeamMemberRequest;
 import Otwos.Donggae.DTO.team.showMyTeam.MyTeamList;
+import Otwos.Donggae.DTO.team.teamDetail.DetailByLeader;
 import Otwos.Donggae.DTO.team.teamDetail.DetailByMember;
 import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
 import Otwos.Donggae.Jwt.Auth;
@@ -53,6 +54,16 @@ public class TeamController {
         try {
             DetailByMember detailByMember = teamService.DetailTeamByMember(teamIdRequest);
             return ResponseEntity.ok().body(detailByMember);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/team/detail/leader")
+    public ResponseEntity<?> showDetailByLeader(@RequestBody TeamIdRequest teamIdRequest) {
+        try {
+            DetailByLeader detailByLeader = teamService.DetailTeamByLeader(teamIdRequest);
+            return ResponseEntity.ok().body(detailByLeader);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

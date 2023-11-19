@@ -2,6 +2,7 @@ package Otwos.Donggae.domain.RecruitPost.Repository;
 
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.User.User;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +16,7 @@ public interface RecruitPostRepository extends JpaRepository<RecruitPost, Intege
 
     RecruitPost save(RecruitPost recruitPost);
 
-    List<RecruitPost> findAllByIsCompleteAndUserId(Boolean isComplete, User user);
+    @EntityGraph(attributePaths = {"recruitFields", "recruitLanguages", "recruitPersonalities", "applications"}, type = EntityGraph.EntityGraphType.FETCH)
+    List<RecruitPost> findAllByIsCompleteAndUserIdNot(Boolean isComplete, User user);
 
 }

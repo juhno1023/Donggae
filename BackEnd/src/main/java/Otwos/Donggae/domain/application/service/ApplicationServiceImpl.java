@@ -101,8 +101,8 @@ public class ApplicationServiceImpl implements ApplicationService{
 
     //지원서 조회
     @Override
-    public ReadApplicationResponse readApplication(int userId, ReadApplicationRequest applicationRequest) {
-        User user = memberRepository.findUserByUserId(userId);
+    public ReadApplicationResponse readApplication(ReadApplicationRequest applicationRequest) {
+        User user = memberRepository.findUserByUserId(applicationRequest.getUserId());
         RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(applicationRequest.getRecruitPostId());
         //예외처리
         try {
