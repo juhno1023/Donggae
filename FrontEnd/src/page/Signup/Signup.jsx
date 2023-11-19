@@ -84,6 +84,7 @@ export default function Signup() {
                 console.log(res)
                 setCodeValid(true);
             });
+            //메일이 보내졌습니다.
         }
     }
 

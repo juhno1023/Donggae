@@ -64,7 +64,7 @@ export default function Posting() {
           <div className={styles.inner}>
                 <div className={styles.body}>
                 <form onSubmit={handleSubmit}>
-                    <button type="submit">작성완료</button>
+                    <button type="submit" className={styles.submitBtn}>작성완료</button>
                     <div className={`${styles.formGroup} ${styles.fmg1}`}>
                     <label htmlFor="team_name">팀명</label>
                     <input
