@@ -46,8 +46,6 @@ public class RecRecruitPostServiceImpl implements RecRecruitPostService {
         // priorityMap을 값으로 정렬하여 상위 4개 선택 (우선순위 높은 4개)
         List<RecruitPost> topPosts = selectTopPriorityPosts(priorityMap, 4);
 
-        // 전체 게시물이 4개가 안될 때 - 처리 해야 하나?? or 추천 게시물 수도 response로?
-
         // DTO 생성 및 반환
         return createRecruitPostDTOList(topPosts);
     }
