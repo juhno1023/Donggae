@@ -31,7 +31,7 @@ export default function Posting() {
             <div className={styles.inner}>
                 <div className={styles.body}>
                 <form onSubmit={handleSubmit}>
-                    <button type="submit">지원완료</button>
+                    <button type="submit" className={styles.submitBtn}>지원완료</button>
                     <div className={`${styles.formGroup} ${styles.fmg1}`}>
                         <label  className={styles.text__1} for="introduce" >자기소개</label>
                         <input
@@ -73,21 +73,21 @@ export default function Posting() {
                             <div className={styles.keyword_box}>
                                 <div className={styles.keyword}>
                                     모집 분야
-                                    <span className={styles.list}>JavaScript</span>
+                                    <span class="list">JavaScript</span>
                                 </div>
                                 <div className={styles.keyword}>
                                     모집 분야
-                                    <span className={styles.list}>C++</span>
+                                    <span class="list">C++</span>
                                 </div>
                             </div>
                             <div className={styles.keyword_box}>
                                 <div className={styles.keyword}>
                                     모집 분야
-                                    <span className={styles.list}>성실함</span>
+                                    <span class="list">성실함</span>
                                 </div>
                                 <div className={styles.keyword}>
                                     모집 분야
-                                    <span className={styles.list}>냠냠</span>
+                                    <span class="list">냠냠</span>
                                 </div>
                             </div>
                         </div>

@@ -9,23 +9,20 @@ body{
   background-color: var(--basic-white);
 }
 .default{
-  width: 1900px;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
 }
-
 .inner{
-  width: 1900px;
-  padding-top:200px;
+  margin : 0 auto;
+  width : 900px;
+  height : 680px;
 }
 
 .body{
   position: absolute;
   font-size: 14px;
-  left : 520px;
   top : 230px;
   background-color: white;
-  width : 900px;
-  height : 680px;
 }
 
 
@@ -36,7 +33,7 @@ body{
   position: relative;
 }
 /* button */
-button{
+.submitBtn{
   border:none;
   border-radius: 6px;
   background: var(--point-orange);

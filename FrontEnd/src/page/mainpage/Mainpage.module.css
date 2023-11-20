@@ -1,25 +1,83 @@
-
-
-body{
-    background-color: var(--basic-white);
+html,body {
+    width: 100%;
+    height: 100%;
 }
+
 .default{
-    width: 1900px;
-    min-height: 100vh;
-    
-}
-
-.inner{
-    width: 1900px;
+    width: 90vw;
     padding-top:200px;
-}
-
-.body{
+  }
+  .inner{
+    margin : 0 auto;
+    width : 50vw;
+    height : 680px;
+  }
+  
+  .body{
     position: absolute;
     font-size: 14px;
-    left : 520px;
-    top : 220px;
+    top : 230px;
     background-color: white;
+    margin-left: 200px;
+  }
+  
+
+  .box__{
     width : 900px;
-    height : 680px;
+    height: 600px;
+    margin : 0 auto;
+    display :flex;
+    flex-wrap: wrap;
+  }
+  
+  .formGroup__{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row ;
+    margin-bottom: 20px;
+    position: relative;
+    padding: 5px;
+    border-radius: 12px;
+    height: 20px;
+    line-height: 36px;
+    word-wrap: break-word;
+    padding : 10px;
+    width : 210px;
+    height: 440px;
+  }
+  
+ 
+.formGroup{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row ;
+  margin-bottom: 20px;
+  position: relative;
+  padding: 5px;
+  border-radius: 12px;
+  height: 20px;
+  line-height: 36px;
+  word-wrap: break-word;
+  padding : 10px;
+  width : 420px;
+  height: 440px;
+}
+
+.GroupCard{
+  border-radius: 16px;
+  border: 1px solid var(--box-bg);
+  padding : 10px;
+  min-width : 170px;
+  height: 200px;
+  margin-right : 10px;
+}
+/* half */
+
+
+.text__1 {
+  font-size:23px;
+  font-weight: bold;
+  width : 100%;
+  line-height: 35px;
+  margin-bottom:20px;
 }

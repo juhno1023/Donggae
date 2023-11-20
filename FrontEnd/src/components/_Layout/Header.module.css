@@ -35,12 +35,17 @@
     padding: 0;
 }
 
+html,body {
+    width: 100%;
+    height: 100%;
+}
+
 /* header */
 .header{
     position: fixed;
     left: 0;
     top: 0;
-    width: 1920px;
+    width: 100vw;
     height: 120px;
     background-color: white;
     z-index: 2;
@@ -48,8 +53,7 @@
 
 .contents{
     font-size: 14px;
-    width: 96%;
-    max-width: 1500px;
+    width: 80vw;
     height: 100%;
     margin: 0 auto;
     align-items: center;

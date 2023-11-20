@@ -2,6 +2,8 @@ import styles from "./Sidebar.module.css"
 
 import { useNavigate } from "react-router-dom";
 import profile from '../../image/profile.png';
+import { Link } from 'react-router-dom';
+
 
 export default function Sidebar() {
     const history = useNavigate();
@@ -10,7 +12,7 @@ export default function Sidebar() {
             <div className={styles.contents}>
                 <nav className={styles.sidenav}>
                     <ul>
-                        <li>내가 속한 팀</li>
+                        <Link to='/teaminfo'><li>내가 속한 팀</li></Link>
                         <li>마이페이지</li>
                         <li>
                             <svg xmlns="http://www.w3.org/2000/svg" width="38" height="40" viewBox="0 0 42 46" fill="none">
