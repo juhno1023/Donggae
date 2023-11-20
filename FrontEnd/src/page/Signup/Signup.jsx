@@ -64,7 +64,7 @@ export default function Signup() {
             }
         } catch (error) {
             console.error("중복확인 실패3 : ", error);
-        }
+        }//엄!
     };
     
 
