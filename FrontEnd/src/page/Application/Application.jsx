@@ -15,7 +15,11 @@ export default function Posting() {
     const Data = {
         selfIntro : selfIntroValue,
         content : contentValue,
+<<<<<<< HEAD
         recruitPostId : 2 //예시
+=======
+        RecruitPostId : 2 //예시
+>>>>>>> 451598bcbfe3de2368b3543ab5664344e70b0f81
     }
 
     const saveSelfIntro = event =>{
@@ -54,7 +58,12 @@ export default function Posting() {
                     alert("지원 완료");
                 } 
                 else if (res.status === 400) {
+<<<<<<< HEAD
                     alert(`지원에 실패하였습니다.`);
+=======
+                    const errorText = await res.text();
+                    alert(`중복된 ID입니다.`);
+>>>>>>> 451598bcbfe3de2368b3543ab5664344e70b0f81
                 } else {
                     console.error("중복확인에 실패하였습니다.", res.statusText);
                 }
