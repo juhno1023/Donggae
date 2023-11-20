@@ -1,0 +1,13 @@
+
+.GroupCard{
+    padding: 5px;
+    border-radius: 16px;
+    border: 1px solid var(--box-bg);
+    height: 20px;
+    line-height: 36px;
+    word-wrap: break-word;
+    padding : 10px;
+    width : 170px;
+    height: 200px;
+    margin-right : 10px;
+  }
