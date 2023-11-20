@@ -1,6 +1,8 @@
 package Otwos.Donggae.domain.RecruitPost.service;
 
+import Otwos.Donggae.DAO.Recruit.RecruitField;
 import Otwos.Donggae.DAO.Recruit.RecruitLanguage;
+import Otwos.Donggae.DAO.Recruit.RecruitPersonality;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.User.*;
 import Otwos.Donggae.DTO.RecruitPost.RecRecruitPostDTO;
@@ -9,9 +11,6 @@ import Otwos.Donggae.Global.Rank.BaekjoonRank;
 import Otwos.Donggae.Global.Rank.DonggaeRank;
 import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
-import Otwos.Donggae.domain.member.repository.info.UserInterestFieldRepository;
-import Otwos.Donggae.domain.member.repository.info.UserLanguageRepository;
-import Otwos.Donggae.domain.member.repository.info.UserPersonalityRepository;
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,15 +25,6 @@ public class RecRecruitPostServiceImpl implements RecRecruitPostService {
 
     @Autowired
     private MemberRepository memberRepository;
-
-    @Autowired
-    private UserLanguageRepository userLanguageRepository;
-
-    @Autowired
-    private UserInterestFieldRepository userInterestFieldRepository;
-
-    @Autowired
-    private UserPersonalityRepository userPersonalityRepository;
 
     @Autowired
     private RecruitPostRepository recruitPostRepository;
@@ -55,8 +45,6 @@ public class RecRecruitPostServiceImpl implements RecRecruitPostService {
 
         // priorityMap을 값으로 정렬하여 상위 4개 선택 (우선순위 높은 4개)
         List<RecruitPost> topPosts = selectTopPriorityPosts(priorityMap, 4);
-
-        // 전체 게시물이 4개가 안될 때 - 처리 해야 하나?? or 추천 게시물 수도 response로?
 
         // DTO 생성 및 반환
         return createRecruitPostDTOList(topPosts);
@@ -91,14 +79,26 @@ public class RecRecruitPostServiceImpl implements RecRecruitPostService {
 
     private int calculatePriorityForMatchingAttributes(RecruitPost post, Set<String> userLanguageList, Set<String> userInterestFieldList, Set<String> userPersonalityList) {
         int priority = 0;
-        if (post.getRecruitLanguages().stream().anyMatch(lang -> userLanguageList.contains(lang.getLanguage().name()))) {
-            priority++;
+
+        // 언어 일치 여부 확인
+        for (RecruitLanguage language : post.getRecruitLanguages()) {
+            if (userLanguageList.contains(language.getLanguage().name())) {
+                priority++;
+            }
         }
-        if (post.getRecruitFields().stream().anyMatch(field -> userInterestFieldList.contains(field.getField().name()))) {
-            priority++;
+
+        // 관심분야 일치 여부 확인
+        for (RecruitField field : post.getRecruitFields()) {
+            if (userInterestFieldList.contains(field.getField().name())) {
+                priority++;
+            }
         }
-        if (post.getRecruitPersonalities().stream().anyMatch(pers -> userPersonalityList.contains(pers.getPersonality().name()))) {
-            priority++;
+
+        // 성격 일치 여부 확인
+        for (RecruitPersonality personality : post.getRecruitPersonalities()) {
+            if (userPersonalityList.contains(personality.getPersonality().name())) {
+                priority++;
+            }
         }
         return priority;
     }

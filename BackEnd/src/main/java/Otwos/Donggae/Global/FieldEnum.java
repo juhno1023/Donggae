@@ -7,5 +7,5 @@ public enum FieldEnum {
     Android,
     AI,
     Game,
-    UIUX,
+    UIUX
 }

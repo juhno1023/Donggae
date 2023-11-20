@@ -4,7 +4,7 @@ import Otwos.Donggae.DTO.member.login.GitHubUserInfo;
 import Otwos.Donggae.DTO.member.login.GithubToken;
 import Otwos.Donggae.DTO.member.login.LoginResponse;
 import Otwos.Donggae.Jwt.TokenProvider;
-import Otwos.Donggae.domain.member.service.LoginServiceImpl;
+import Otwos.Donggae.domain.member.service.LoginService;
 import Otwos.Donggae.domain.member.service.MemberService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 
 
 @RestController
@@ -32,7 +30,7 @@ public class LoginController {
     @Value("${github.redirect-url}")
     private String redirectURI;
 
-    private final LoginServiceImpl loginServiceImpl;
+    private final LoginService loginService;
     private final TokenProvider tokenProvider;
 
     @Autowired
@@ -46,10 +44,9 @@ public class LoginController {
     public ResponseEntity<?> githubLogin(@RequestParam String code, HttpServletResponse response) {
         try{
             log.info("github/callback");
-            GithubToken githubToken = loginServiceImpl.getAccessToken(code); //AccessToken 발급 받기
-            log.info("whyyy");
+            GithubToken githubToken = loginService.getAccessToken(code); //AccessToken 발급 받기
 
-            GitHubUserInfo gitHubUserInfo = loginServiceImpl.getGitHubUserInfo(githubToken);  //user 정보 받아오기
+            GitHubUserInfo gitHubUserInfo = loginService.getGitHubUserInfo(githubToken);  //user 정보 받아오기
             log.info("githubUserName: {}", gitHubUserInfo.getUsername());
 
             Integer userId =  memberService.checkUserSignUp(gitHubUserInfo.getUsername()); // 깃허브 username을 통해 userId 가져오기
@@ -62,6 +59,9 @@ public class LoginController {
             String userName = gitHubUserInfo.getUsername(); // 깃허브 네임
             String profile = gitHubUserInfo.getProfileUrl(); // 프로필 url
             String userEmail = memberService.getUserEmail(userId);// 이메일
+
+            // github_stats 저장
+            loginService.getUserRepositories(userName, githubToken, gitHubUserInfo.getIdNumber());
 
             LoginResponse loginResponse = new LoginResponse(token, userName, profile, userEmail); //response 생성
             log.info("token = {}", token);

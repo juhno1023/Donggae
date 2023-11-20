@@ -30,7 +30,7 @@ public class RecruitPostController {
     public ResponseEntity<?> createRecruitPostAndTeam(@RequestBody RecruitPostRequestDTO recruitPostDTO, @Auth int userId){
         try {
             recruitPostService.createRecruitPostAndTeam(recruitPostDTO,userId);
-            return ResponseEntity.ok("작성 완료");
+            return ResponseEntity.ok("Successfully posted recruit Post");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -50,30 +50,11 @@ public class RecruitPostController {
         }
     }
 
-
-
-//    @DeleteMapping("/recruitPost/{recruitPostId}") // 게시글 삭제
-//    public ResponseEntity<String> deleteBoard(@PathVariable int recruitPostId){
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication != null && authentication.getPrincipal() != "anonymousUser") {
-//            return ResponseEntity.ok(recruitPostService.deleteBoard(recruitPostId,authentication));
-//        }
-//        return ResponseEntity.ok("fail");
-//    }
-//
-//    @PutMapping("/recruitPost/{recruitPostId}") // 게시글 수정
-//    public ResponseEntity<RecruitPostDTO> editReply(@PathVariable int recruitPostId,@RequestBody RecruitPostRequestDTO recruitPostRequestDTO){
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if(authentication != null && authentication.getPrincipal() != "anonymousUser"){
-//            return ResponseEntity.ok(recruitPostService.editRecruitPost(recruitPostId, recruitPostRequestDTO));
-//        }
-//        return ResponseEntity.notFound().build();
-//    }
     @DeleteMapping("/recruitPost/{recruitPostId}") // 게시글 삭제
     public ResponseEntity<?> deleteRecruitPost(@PathVariable int recruitPostId, @Auth int userId){
         try {
             recruitPostService.deleteRecruitPost(recruitPostId, userId);
-            return ResponseEntity.ok("삭제 완료");
+            return ResponseEntity.ok("Successfully deleated recruit Post");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -83,7 +64,7 @@ public class RecruitPostController {
     public ResponseEntity<?> editRecruitPost(@PathVariable int recruitPostId,@RequestBody RecruitPostRequestDTO recruitPostRequestDTO, @Auth int userId){
         try {
             recruitPostService.editRecruitPost(recruitPostId, recruitPostRequestDTO, userId);
-            return ResponseEntity.ok("수정 완료");
+            return ResponseEntity.ok("Successfully edited recruit Post");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

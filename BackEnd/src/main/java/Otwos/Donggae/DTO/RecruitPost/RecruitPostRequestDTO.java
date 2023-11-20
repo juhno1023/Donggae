@@ -26,11 +26,11 @@ public class RecruitPostRequestDTO {
 
     private MajorLectureEnum majorLectureName;
 
-    private List<RecruitField> recruitFields;
+    private List<String> recruitFields;
 
-    private List<RecruitLanguage> recruitLanguages;
+    private List<String> recruitLanguages;
 
-    private List<RecruitPersonality> recruitPersonalities;
+    private List<String> recruitPersonalities;
 
     private String teamName;
 
