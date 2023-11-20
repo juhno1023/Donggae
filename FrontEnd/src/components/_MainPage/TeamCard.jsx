@@ -1,18 +1,20 @@
-import styles from './TeamCard.module.css';
+import styles from './Card.module.css';
 
-const TeamCard = ({ name, title, member}) => {
+const TeamCard = ({ lecture, title, name, date, rank, language}) => {
 
     const imoArray= ["❤️", `🧡`, `💛`, `💚`, `💙`, `🩵`, `💜`, `🩷`, `🤎`, `🖤`, `🖤`, `🩶`, `🤍`, `💞`, `💟`, `💕`, `❣️`, `💝`, `💌`,`😀`, `😁`, `😃`, `😄`, `😋`, `😊`, `😉`, `😍`, `😘`, `🥰`, `😗`, `😙`, `🥲`, `🤗`, `🙂`, `☺️`, `😚`, `😐`, `😑`, `😶`, `🫥`, `😮`, `😯`, `😝`, `👻`, `😺`, `😸`, `😹`, `😻`, `😼`, `😽`, `🐱`]
     const num = Math.round(Math.random() * 50);
     console.log(num)
-
+    if(!lecture) lecture = "개인"
     return (
         <> 
             <div className={styles.GroupCard}>
-                {imoArray[num]}{name}{imoArray[num]}
-                <div>{title}</div>
-                <div>{member.name}</div>
-                <div></div>
+                {lecture}
+                
+                <div>{imoArray[num]}{title}{imoArray[num]}</div>
+                <div>{rank}{name}</div>
+                <div>{date}</div>
+                {language}
             </div>
         </>
     );

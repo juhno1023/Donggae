@@ -1,18 +1,16 @@
-import styles from './TeamCard.module.css';
+import styles from './Card.module.css';
 
-const TeamCard = ({ name, title, member}) => {
+const TeamCard = ({ name, intro, devTestScore, rank, language, interest, personal, study}) => {
 
     const imoArray= ["❤️", `🧡`, `💛`, `💚`, `💙`, `🩵`, `💜`, `🩷`, `🤎`, `🖤`, `🖤`, `🩶`, `🤍`, `💞`, `💟`, `💕`, `❣️`, `💝`, `💌`,`😀`, `😁`, `😃`, `😄`, `😋`, `😊`, `😉`, `😍`, `😘`, `🥰`, `😗`, `😙`, `🥲`, `🤗`, `🙂`, `☺️`, `😚`, `😐`, `😑`, `😶`, `🫥`, `😮`, `😯`, `😝`, `👻`, `😺`, `😸`, `😹`, `😻`, `😼`, `😽`, `🐱`]
     const num = Math.round(Math.random() * 50);
     console.log(num)
-
     return (
         <> 
-            <div className={styles.GroupCard}>
-                {imoArray[num]}{name}{imoArray[num]}
-                <div>{title}</div>
-                <div>{member.name}</div>
-                <div></div>
+            <div className={styles.UserCard}>                
+                <div>{name}</div>
+                <div>{intro}{devTestScore}{rank}</div>
+                <div>#{language}#{interest}#{personal},#{study}</div>
             </div>
         </>
     );
