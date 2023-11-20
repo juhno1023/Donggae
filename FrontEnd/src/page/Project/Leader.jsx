@@ -1,8 +1,8 @@
 import React, { useState ,useEffect } from 'react';
 import styles from "./Leader.module.css"
 import Header from "../../components/_Layout/Header";
-import Deletion from '../../components/Deletion';
-import Selection from '../../components/Selection';
+import Deletion from '../../components/_Leader/Deletion';
+import Selection from '../../components/_Leader/Selection';
 import Sidebar from "../../components/_Layout/Sidebar";
 
 export default function Leader() {
@@ -19,7 +19,7 @@ export default function Leader() {
         // teamId: sessionStorage.getItem('teamId')
         // 세션 스토리지가 아니라 URL로 받아오는 것 : 팀 상세보기 클릭 후 나오는 화면이기 때문에
         // 임시로 2라 설정함
-        teamId: 2,
+        teamId: 1,
     };
 
     useEffect(() => {
@@ -36,8 +36,8 @@ export default function Leader() {
                     }),
                     }).then(res=>res.json())        
                         .then(res=> {
-                        console.log(res)
                         setTeamData(res.teamMemberList);
+                        console.log(teamData[0])
                         setApplyData(res.applyMemberList);
                 });
 
