@@ -24,6 +24,7 @@ import Otwos.Donggae.domain.RecruitPost.Repository.info.RecruitLanguageRepositor
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
 import Otwos.Donggae.domain.team.repository.TeamMemberRepository;
 import Otwos.Donggae.domain.team.repository.TeamRepository;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -111,13 +112,16 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
                     .map(lang -> new UserLanguageResponse(lang.getLanguage()))
                     .collect(Collectors.toList());
 
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String createdDate = simpleDateFormat.format(recruitPost.getCreatedDate());
+
             //전공 강의 모집 글
             if (recruitPost.getMajorLectureName() != null) {
                 LectureRecruitPost lectureRecruitPost = new LectureRecruitPost(
                         recruitPost.getTitle(), //제목
                         languages, //모집 언어들
                         teamLeader, //팀장
-                        recruitPost.getCreatedDate(), //작성날짜
+                        createdDate, //작성날짜
                         recruitPost.getMajorLectureName() //해당 강의
                 );
                 lectureRecruitPosts.add(lectureRecruitPost);
@@ -128,7 +132,7 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
                         recruitPost.getTitle(),
                         languages,
                         teamLeader,
-                        recruitPost.getCreatedDate()
+                        createdDate
                 );
                 naturalRecruitPosts.add(naturalRecruitPost);
             }
