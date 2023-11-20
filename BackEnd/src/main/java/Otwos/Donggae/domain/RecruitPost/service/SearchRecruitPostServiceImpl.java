@@ -17,6 +17,7 @@ import Otwos.Donggae.DTO.member.userinfo.response.UserPersonalityResponse;
 import Otwos.Donggae.DTO.team.teamDetail.ApplyMemberPreview;
 import Otwos.Donggae.Global.FieldEnum;
 import Otwos.Donggae.Global.LanguageEnum;
+import Otwos.Donggae.Global.MajorLectureEnum;
 import Otwos.Donggae.Global.PersonalityEnum;
 import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.RecruitPost.Repository.info.RecruitLanguageRepository;
@@ -56,11 +57,13 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
                 .map(UserPersonalityResponse::getPersonality)
                 .collect(Collectors.toSet());
 
+        MajorLectureEnum requestedMajorLecture = searchRequest.getMajorLecture();
+
         //모든 모집 글 불러옴
         List<RecruitPost> allPosts = recruitPostRepository.findAll();
         //검색에 해당되는 것만 가져오기
         List<RecruitPost> matchingPosts = allPosts.stream()
-                .filter(post -> matchesRequest(post, requestedLanguages, requestedFields, requestedPersonalities))
+                .filter(post -> matchesRequest(post, requestedLanguages, requestedFields, requestedPersonalities, requestedMajorLecture))
                 .collect(Collectors.toList());
 
         //majorlecture가 있으면 LectureRecruitPost에, 없으면 NaturalRecruitPost에 넣기
@@ -68,7 +71,8 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
     }
 
     private boolean matchesRequest(RecruitPost post, Set<LanguageEnum> requestedLanguages,
-                                   Set<FieldEnum> requestedFields, Set<PersonalityEnum> requestedPersonalities) {
+                                   Set<FieldEnum> requestedFields, Set<PersonalityEnum> requestedPersonalities,
+                                   MajorLectureEnum requestedMajorLecture) {
         // 여기서 각 게시물이 요청과 맞는지를 확인하는 로직을 구현
         // 예: 모든 요청된 언어, 분야, 성격이 게시글에 포함되어 있는지 확인
         Set<LanguageEnum> postLanguages = post.getRecruitLanguages().stream()
@@ -83,9 +87,13 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
                 .map(RecruitPersonality::getPersonality)
                 .collect(Collectors.toSet());
 
+        boolean matchesMajorLecture = (requestedMajorLecture == null) ||
+                (post.getMajorLectureName() == requestedMajorLecture);
+
         return postLanguages.containsAll(requestedLanguages) &&
                 postFields.containsAll(requestedFields) &&
-                postPersonalities.containsAll(requestedPersonalities);
+                postPersonalities.containsAll(requestedPersonalities) &&
+                matchesMajorLecture;
     }
 
     private SearchResponse convertToSearchResponse(List<RecruitPost> posts) {
@@ -135,6 +143,12 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
         TeamMember teamMember = teamMemberRepository.findTeamMemberByTeamIdAndIsLeader(team, Boolean.TRUE);
         UserRank userRank = userRankRepository.findUserRankByUserId(teamMember.getUserId());
 
+        try {
+            validateSearchRequest(team, teamMember, userRank);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         ApplyMemberPreview teamLeader = new ApplyMemberPreview(
                 teamMember.getUserId().getUserId(), //userId
                 teamMember.getUserId().getGithubName(), //이름
@@ -143,5 +157,17 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
         );
 
         return teamLeader;
+    }
+
+    private void validateSearchRequest(Team team, TeamMember teamMember, UserRank userRank) throws Exception{
+        if (team == null) {
+            throw new Exception("team is null");
+        }
+        if (teamMember == null) {
+            throw new Exception("teamMember is null");
+        }
+        if (userRank == null) {
+            throw new Exception("userRank is null");
+        }
     }
 }

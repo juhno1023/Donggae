@@ -4,5 +4,5 @@ import Otwos.Donggae.DTO.RecruitPost.search.SearchRequest;
 import Otwos.Donggae.DTO.RecruitPost.search.SearchResponse;
 
 public interface SearchRecruitPostService {
-    public SearchResponse searchRecruitPost(SearchRequest searchRequest);
+    SearchResponse searchRecruitPost(SearchRequest searchRequest);
 }
