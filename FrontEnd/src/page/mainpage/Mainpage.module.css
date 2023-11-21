@@ -63,14 +63,7 @@ html,body {
   height: 440px;
 }
 
-.GroupCard{
-  border-radius: 16px;
-  border: 1px solid var(--box-bg);
-  padding : 10px;
-  min-width : 170px;
-  height: 200px;
-  margin-right : 10px;
-}
+
 /* half */
 
 

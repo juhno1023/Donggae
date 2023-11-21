@@ -9,6 +9,7 @@ import Otwos.Donggae.Jwt.Auth;
 import Otwos.Donggae.domain.application.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +40,7 @@ public class ApplicationController {
         }
     }
 
-    @PostMapping("/applypage")
+    @GetMapping("/applypage")
     public ResponseEntity<?> applyPageMyInfo(@Auth int userId) {
         try {
             PreviewUserInfoDTO response = applicationService.applyPageInfo(userId);

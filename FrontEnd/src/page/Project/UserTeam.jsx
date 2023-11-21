@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styles from "./UserTeam.module.css"
 import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebar";
+import TeamCard from '../../components/_UserTeam/TeamCard';
 
 export default function UserTeam() {
-    const [teamList, setTeamList] = useState([]);
+    const [teambyL, setTeamL] = useState([]);
+    const [teambyM, setTeamM] = useState([]);
     const user = {
         token: localStorage.getItem('token')
     };
@@ -24,7 +26,8 @@ export default function UserTeam() {
                 .then(res=>res.json())        
                 .then(res=> {
                     console.log(res)
-                    setTeamList(res.teamMemberList);
+                    setTeamL(res.teamByLeaders);
+                    setTeamM(res.teamByMembers);
                 });
             } catch (error) {
                 console.error("Failed to fetch: ", error);
@@ -42,23 +45,14 @@ export default function UserTeam() {
                 <div className={styles.box__}>
                     <div className={styles.text__1} >팀장으로 속한 팀</div>
                     <div className={styles.formGroup}>
-                        <div className={styles.GroupCard}>
-                            💙우주최강팀💙
-                            <div>동국대 졸업할 수 있을까</div>
-                            <div>팀장</div>
-                            <div>상세보기</div>
-                        </div>
+                        {teambyL.map(data => <TeamCard name={data.teamName} title={data.title} member={data.teamMemberPreview} />)} 
+
                     </div>
                 </div>
                 <div className={styles.box__}>
                 <div className={styles.text__1} >팀원으로 속한 팀</div>
                     <div className={styles.formGroup}>
-                        <div className={styles.GroupCard}>
-                            💙우주최강팀💙
-                            <div>동국대 졸업할 수 있을까</div>
-                            <div>팀장</div>
-                            <div>상세보기</div>
-                        </div>
+                        {teambyM.map(data => <TeamCard name={data.teamName} title={data.title} member={data.teamMemberPreview} />)} 
                     </div>
                 </div>
                 </div>
