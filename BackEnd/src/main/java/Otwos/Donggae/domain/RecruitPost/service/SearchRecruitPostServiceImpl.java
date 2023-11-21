@@ -137,6 +137,7 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
             //전공 강의 모집 글
             if (recruitPost.getMajorLectureName() != null) {
                 LectureRecruitPost lectureRecruitPost = new LectureRecruitPost(
+                        recruitPost.getRecruitPostId(),
                         recruitPost.getTitle(), //제목
                         languages, //모집 언어들
                         teamLeader, //팀장
@@ -148,6 +149,7 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
             //일반 모집 글
             else {
                 NaturalRecruitPost naturalRecruitPost = new NaturalRecruitPost(
+                        recruitPost.getRecruitPostId(),
                         recruitPost.getTitle(),
                         languages,
                         teamLeader,
