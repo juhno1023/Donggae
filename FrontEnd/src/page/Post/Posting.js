@@ -5,11 +5,18 @@ import Header from "../../components/_Layout/Header";
 import CheckBox from '../../components/CheckBox';
 
 export default function Posting() {
-    // 팀명, 제목, 내용 등 text Input
+    let token = localStorage.getItem('token') || '';
+    const [recruitFields, setrecruitFields] = useState([])
+    const [recruitLanguages, setrecruitLanguages] = useState([])
+    const [recruitPersonalities, setrecruitPersonalities] = useState([])
     const [formData, setFormData] = useState({
-        team_name: '',
-        post_title: '',
-        post_content: '',
+        title: '',
+        content: '',
+        majorLectureName: null,
+        recruitFields: [],
+        recruitLanguages: [],
+        recruitPersonalities: [],
+        teamName: '',
     });
 
     const handleInputChange = (e) => {
@@ -21,28 +28,31 @@ export default function Posting() {
     };
 
     // checkbox Input
-    const [checkedItems, setCheckedItems] = useState([])
     const datas = [
-        { title: '아침식사'},
-        { title: '아침간식'},
+        { title: 'BackEnd'},
+        { title: 'IOS'},
+        { title: 'Android'},
     ]
     const datas2 = [
-        { title: 'd'},
-        { title: 'f'},
+        { title: 'JavaScript'},
+        { title: 'TypeScript'},
+        { title: 'Vue'},
+        { title: 'Nodejs'},
     ]
     const datas3 = [
-        { title: 'dd'},
-        { title: 'ff'},
+        { title: '계획적인'},
+        { title: '논리적인'},
+        { title: '꼼꼼한'},
     ]
-    const checkedItemHandler = (code, isChecked) => {
-        if (isChecked) { //체크 추가할때
-            setCheckedItems([...checkedItems, code])
-        } else if (!isChecked && checkedItems.find(one => one === code)) {//체크 해제할때 checkedItems에 있을 경우
-            const filter = checkedItems.filter(one => one !== code)
-            setCheckedItems([...filter])
-        }
-    }
 
+    const checkedItemHandler = (itemName, stateKey) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            [stateKey]: prevData[stateKey].includes(itemName)
+                ? prevData[stateKey].filter((item) => item !== itemName)
+                : [...prevData[stateKey], itemName],
+        }));
+    };
     // Option Select Input
     const selectList = ["없음", "apple", "banana", "grape", "orange"];
     const [Selected, setSelected] = useState("");
@@ -51,49 +61,73 @@ export default function Posting() {
         setSelected(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+
+    const PostOn = (e) => {
         e.preventDefault();
-        console.log('Form Data:', formData);
-        console.log('checkedItems:', checkedItems);
-        console.log('selectList:', Selected);
+        console.log(formData);
+        const fetchData = async() => {
+            try {
+                const res = await fetch('http://localhost:8080/recuritpost', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(formData),
+                })
+                if (res.ok) {
+                    alert("지원 완료");
+                } 
+                else if (res.status === 400) {
+                    alert(`지원에 실패하였습니다.`);
+                } else {
+                    console.error("중복확인에 실패하였습니다.", res.statusText);
+                }
+                
+            } catch (error) {
+                console.error("Failed to fetch: ", error);
+            }
+        };
+        fetchData(); 
     };
+
 
     return (
         <div className={styles.default}>
           <Header />
           <div className={styles.inner}>
                 <div className={styles.body}>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={PostOn}>
                     <button type="submit" className={styles.submitBtn}>작성완료</button>
                     <div className={`${styles.formGroup} ${styles.fmg1}`}>
-                    <label htmlFor="team_name">팀명</label>
+                    <label>팀명</label>
                     <input
                         type="text"
                         id="team_name"
-                        name="team_name"
+                        name="teamName"
                         placeholder="팀 이름을 작성해주세요."
-                        value={formData.team_name}
+                        value={formData.teamName}
                         onChange={handleInputChange}
                     />
                     </div>
                     <div className={`${styles.formGroup} ${styles.fmg2}`}>
-                    <label htmlFor="post_title">제목</label>
+                    <label>제목</label>
                     <input
                         type="text"
                         id="post_title"
-                        name="post_title"
+                        name="title"
                         placeholder="제목을 작성해주세요. (예시 : 함께 ㅇㅇ 프로젝트를 이끌어 갈 분들을 모집합니다! )"
-                        value={formData.post_title}
+                        value={formData.title}
                         onChange={handleInputChange}
                     />
                     </div>
                     <div className={`${styles.formGroup} ${styles.fmg3}`}>
-                    <label htmlFor="post_content">내용</label>
+                    <label>내용</label>
                     <textarea
                         id="post_content"
-                        name="post_content"
+                        name="content"
                         placeholder="내용을 작성해주세요. (예시 : 이번에 간단하게 웹 프로젝트를 함께 이끌어 갈 분들을 모집합니다! 사용하고자 하는 기술 스택은 nodejs, ...)"
-                        value={formData.post_content}
+                        value={formData.content}
                         onChange={handleInputChange}
                     />
                     </div>
@@ -101,22 +135,41 @@ export default function Posting() {
                 
                 <div className={styles.box__}>
                     <div className={styles.half}>
-                        <div className={styles.text__1}>세부사항 설정</div> 모집 분야
+                        <div className={styles.text__1}>세부사항 설정</div>
+                        모집 분야
                         <div className={styles.container}>
                             <div>
-                            {datas.map(data => <CheckBox data={data.title} checkedItems={checkedItems} checkedItemHandler={checkedItemHandler} />)}
+                            {datas.map(data => 
+                                <CheckBox 
+                                    data={data.title} 
+                                    checkedItems={recruitFields} 
+                                    checkedItemHandler={(itemName) => checkedItemHandler(itemName, 'recruitFields')}
+                                />
+                            )}
                             </div>
                         </div>
                         선호 언어
                         <div className={styles.container}>
                             <div>
-                            {datas2.map(data => <CheckBox data={data.title} checkedItems={checkedItems} checkedItemHandler={checkedItemHandler} />)}
+                            {datas2.map(data => 
+                                <CheckBox
+                                    data={data.title}
+                                    checkedItems={formData.recruitLanguages}
+                                    checkedItemHandler={(itemName) => checkedItemHandler(itemName, 'recruitLanguages')}
+                                />
+                            )}
                             </div>
                         </div>
                         선호 성향
                         <div className={styles.container}>
                             <div>
-                            {datas3.map(data => <CheckBox data={data.title} checkedItems={checkedItems} checkedItemHandler={checkedItemHandler} />)}
+                            {datas3.map(data => 
+                                <CheckBox
+                                    data={data.title}
+                                    checkedItems={formData.recruitPersonalities}
+                                    checkedItemHandler={(itemName) => checkedItemHandler(itemName, 'recruitPersonalities')}
+                                />
+                            )}
                             </div>
                         </div>
                     </div>
