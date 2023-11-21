@@ -27,5 +27,4 @@ public interface RecruitPostRepository extends JpaRepository<RecruitPost, Intege
 
     //일반 모집 글 최신2개 (is_complete == true)
     List<RecruitPost> findTop2ByIsCompleteFalseAndMajorLectureNameIsNullOrderByCreatedDateDesc(Pageable pageable);
-
 }

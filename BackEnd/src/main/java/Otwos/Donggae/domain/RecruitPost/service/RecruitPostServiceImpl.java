@@ -14,6 +14,7 @@ import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitLanguageDTO;
 import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitPersonalityDTO;
 import Otwos.Donggae.DTO.team.TeamDTO;
 import Otwos.Donggae.DTO.team.TeamMemberDTO;
+import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
 import Otwos.Donggae.Global.FieldEnum;
 import Otwos.Donggae.Global.LanguageEnum;
 import Otwos.Donggae.Global.MajorLectureEnum;
@@ -243,6 +244,29 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 //    public RecruitPostResponseDTO getRecruitPost(int recruitPostId) {
 //
 //    }
+
+    @Transactional
+    @Override
+    public void completeRecruitPost(TeamIdRequest teamIdRequest) {
+        Team team = teamRepository.findTeamByTeamId(teamIdRequest.getTeamId());
+        RecruitPost recruitPost = team.getRecruitPostId();
+        try {
+            validateTeamAndPost(team, recruitPost);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        recruitPost.complete();
+        recruitPostRepository.save(recruitPost); // 변경사항 저장
+    }
+
+    private void validateTeamAndPost(Team team, RecruitPost recruitPost) throws Exception{
+        if (team == null) {
+            throw new Exception("team is null");
+        }
+        if (recruitPost == null) {
+            throw new Exception("recruitPost is null");
+        }
+    }
 
 }
 

@@ -6,6 +6,7 @@ import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
 import Otwos.Donggae.DTO.RecruitPost.RecruitPostResponseDTO;
 import Otwos.Donggae.DTO.RecruitPost.search.SearchRequest;
 import Otwos.Donggae.DTO.RecruitPost.search.SearchResponse;
+import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
 import Otwos.Donggae.Jwt.Auth;
 import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.RecruitPost.service.RecRecruitPostService;
@@ -98,4 +99,13 @@ public class RecruitPostController {
         }
     }
 
+    @PutMapping("/recruitPost/complete")
+    public ResponseEntity<?> completeRecruitPost(@RequestBody TeamIdRequest teamIdRequest) {
+        try {
+            recruitPostService.completeRecruitPost(teamIdRequest);
+            return ResponseEntity.ok("complete recruitPost");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
