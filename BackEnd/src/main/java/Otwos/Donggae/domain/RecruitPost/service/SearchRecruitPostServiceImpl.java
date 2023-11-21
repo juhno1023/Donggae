@@ -103,6 +103,11 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
         List<NaturalRecruitPost> naturalRecruitPosts = new ArrayList<>();
 
         for (RecruitPost recruitPost : posts) {
+            //모집 완료된 글은 표시X
+            if (recruitPost.getIsComplete() == Boolean.TRUE) {
+                continue;
+            }
+
             //팀장 설정
             ApplyMemberPreview teamLeader = returnTeamLeader(recruitPost);
 
