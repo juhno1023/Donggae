@@ -67,7 +67,7 @@ export default function Posting() {
         console.log(formData);
         const fetchData = async() => {
             try {
-                const res = await fetch('http://localhost:8080/recuritpost', {
+                const res = await fetch('http://localhost:8080/recuritPost', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
