@@ -17,7 +17,7 @@ export default function UserTeam() {
         const fetchData = async() => {
             try {
                 fetch('http://localhost:8080/team/show', {
-                    method: 'POST', // 사용하는 HTTP 메서드 (GET, POST, PUT 등)
+                    method: 'GET', // 사용하는 HTTP 메서드 (GET, POST, PUT 등)
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
