@@ -64,12 +64,13 @@ public class ApplicationServiceImpl implements ApplicationService{
         //예외처리 하고 저장
         try {
             validateUserAndRecruitPost(user, recruitPost);
+            //이미 해당 글에 지원했으면 에러
+            validDuplicateApplication(user, recruitPost);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
         //해당 user와 recruitPost가 있으면 저장
-        //applicationId따로 안넣어도 알아서 들어가겠지?
         ApplyDTO applyDTO = new ApplyDTO(
                 NULL,
                 request.getSelfIntro(),
@@ -85,6 +86,14 @@ public class ApplicationServiceImpl implements ApplicationService{
         }
         if (recruitPost == null) {
             throw new Exception("해당 recruitPost가 없습니다.");
+        }
+    }
+
+    //application이 이미 있는지 확인
+    private void validDuplicateApplication(User user, RecruitPost recruitPost) throws Exception {
+        Application application = applicationRepository.findApplicationByUserIdAndRecruitPostId(user, recruitPost);
+        if (application != null) {
+            throw new Exception("application already exist");
         }
     }
 
