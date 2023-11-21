@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 
 export default function Header() {
     const history = useNavigate();
-      
+    const menus = [
+        {name:"hot추천", path:"/main"},
+        {name:"문화행사", path:"/posting"},
+    ]
     return (
         <div className={styles.header}>
             <div className={styles.contents}>
@@ -18,7 +21,7 @@ export default function Header() {
                 </div>
                 <nav className={styles.navigation}>
                     <ul>
-                    <li><Link to='/main'>메인</Link></li>
+                    <li><Link to={menus[0].path}>메인</Link></li>
                     <li><Link to='/posting'>posting</Link></li>
                     <li><Link to='/post'>post</Link></li>
                     <li><Link to='/leader'>leader</Link></li>

@@ -64,7 +64,7 @@ export default function Signup() {
             }
         } catch (error) {
             console.error("중복확인 실패3 : ", error);
-        }
+        }//엄!
     };
     
 
@@ -84,6 +84,7 @@ export default function Signup() {
                 console.log(res)
                 setCodeValid(true);
             });
+            alert("메일이 보내졌습니다! 두 번 누르지 마세요")
             //메일이 보내졌습니다.
         }
     }

@@ -2,13 +2,34 @@ import styles from "./Mainpage.module.css"
 import React, { useEffect, useState } from 'react';
 import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebar";
+import TeamCard from '../../components/_MainPage/TeamCard';
+import UserCard from '../../components/_MainPage/UserCard';
 
-export default function Home() {
-    const [checkedItems, setCheckedItems] = useState([]);
-    const [teamData, setTeamData] = useState([]);
+export default function Home() {    
+    const [recommendUser, setRecUser] = useState([]);
+    const [recommendPj, setRecPj] = useState([]);
     let token = localStorage.getItem('token') || '';
-
     useEffect(() => {
+        const fetchData1 = async() => {
+            try {
+                fetch('/member/recommend', {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                })
+                .then(res=>res.json())        
+                .then(res=> {
+                    console.log("멤버 : ", res)
+                    setRecUser(res);
+                    console.log(recommendUser)
+                });
+            } catch (error) {
+                console.error("Failed to fetch: ", error);
+            }
+        };
+
         const fetchData = async() => {
             try {
                 const res = await fetch('/recruitPost/recommend', {
@@ -29,12 +50,15 @@ export default function Home() {
                     }
                     return res.json();
                 }).then(data => {
+                    console.log("포스트 : ", data)
+                    setRecPj(data);
                     console.log(data)
                 })
             } catch (error) {
                 console.error("Failed to fetch: ", error);
             }
         };
+        fetchData1();   
         fetchData(); 
     }, []);
 
@@ -47,43 +71,31 @@ export default function Home() {
                 <div className={styles.body}>
                 <div className={styles.box__}>
                     <div>
-                        <div className={styles.text__1} >팀장으로 속한 팀</div>
-                        <div className={styles.formGroup__}>
-                            <div className={styles.GroupCard}>
-                                💙우주최강팀💙
-                                <div>동국대 졸업할 수 있을까</div>
-                                <div>팀장</div>
-                                <div>상세보기</div>
-                            </div>
+                        <div className={styles.text__1} >추천 동개</div>
+                        <div className={styles.formGroup}>
+                        {recommendUser.map(data => 
+                        <UserCard name={data.githubName} 
+                            intro={data.intro} 
+                            devTestScore={data.devTestScore} 
+                            rank={data.boj_rank} 
+                            language={data.recuritLanguages} 
+                            interest={data.userInterestFields} 
+                            personal={data.userPersonalities} 
+                            study={data.userStudyFields} 
+                        />)} 
                         </div>
                     </div>
                     <div>
-                    <div className={styles.text__1} >팀원으로 속한 팀</div>
+                    <div className={styles.text__1} >요즘 핫한 프로젝트</div>
                         <div className={styles.formGroup}>
-                            <div className={styles.GroupCard}>
-                                💙우주최강팀💙
-                                <div>동국대 졸업할 수 있을까</div>
-                                <div>팀장</div>
-                                <div>상세보기</div>
-                            </div>
-                            <div className={styles.GroupCard}>
-                                💙우주최강팀💙
-                                <div>동국대 졸업할 수 있을까</div>
-                                <div>팀장</div>
-                                <div>상세보기</div>
-                            </div>
-                            <div className={styles.GroupCard}>
-                                💙우주최강팀💙
-                                <div>동국대 졸업할 수 있을까</div>
-                                <div>팀장</div>
-                                <div>상세보기</div>
-                            </div>
-                            <div className={styles.GroupCard}>
-                                💙우주최강팀💙
-                                <div>동국대 졸업할 수 있을까</div>
-                                <div>팀장</div>
-                                <div>상세보기</div>
-                            </div>
+                        {recommendPj.map(data => 
+                        <TeamCard lecture={data.majorLectureName} 
+                            title = {data.title} 
+                            name={data.userName} 
+                            date={data.createDate} 
+                            rank={data.donggaeRank} 
+                            language={data.recuritLanguages} 
+                        />)} 
                         </div>
                     </div>
                 </div>
