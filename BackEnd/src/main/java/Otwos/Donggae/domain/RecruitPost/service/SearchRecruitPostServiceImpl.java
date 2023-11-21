@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -44,6 +45,19 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
     private TeamMemberRepository teamMemberRepository;
     @Autowired
     private UserRankRepository userRankRepository;
+
+    //강의 모집 글 최신2개 (is_complete == false)
+    //일반 모집 글 최신2개 (is_complete == false)
+    @Override
+    public SearchResponse showRecentFourPost() {
+        List<RecruitPost> withMajor = recruitPostRepository.findTop2ByIsCompleteFalseAndMajorLectureNameIsNotNullOrderByCreatedDateDesc(
+                PageRequest.of(0, 2));
+        List<RecruitPost> withoutMajor = recruitPostRepository.findTop2ByIsCompleteFalseAndMajorLectureNameIsNullOrderByCreatedDateDesc(
+                PageRequest.of(0, 2));
+
+        withMajor.addAll(withoutMajor);
+        return convertToSearchResponse(withMajor);
+    }
 
     @Override
     public SearchResponse searchRecruitPost(SearchRequest searchRequest) {
@@ -143,7 +157,7 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
             }
         }
 
-        return new SearchResponse(lectureRecruitPosts, naturalRecruitPosts); // 임시 반환 값
+        return new SearchResponse(lectureRecruitPosts, naturalRecruitPosts);
     }
 
     //팀장 정보 반환

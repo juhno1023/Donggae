@@ -78,7 +78,7 @@ public class RecruitPostController {
         }
     }
 
-    @PostMapping("/recruitPost/search")
+    @PostMapping("/recruitPost/search") // 게시글 검색
     public ResponseEntity<?> searchRecruitPost(@RequestBody SearchRequest searchRequest) {
         try {
             SearchResponse searchResponse = searchRecruitPostService.searchRecruitPost(searchRequest);
@@ -87,4 +87,15 @@ public class RecruitPostController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/recruitPostPage") // 최신 게시글 4개 표시
+    public ResponseEntity<?> searchRecruitPostPage() {
+        try {
+            SearchResponse searchResponse = searchRecruitPostService.showRecentFourPost();
+            return ResponseEntity.ok().body(searchResponse);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }
