@@ -9,6 +9,7 @@ import Otwos.Donggae.Jwt.Auth;
 import Otwos.Donggae.domain.team.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +40,7 @@ public class TeamController {
         }
     }
 
-    @PostMapping("/team/show")
+    @GetMapping("/team/show")
     public ResponseEntity<?> showMyTeams(@Auth int userId) {
         try{
             MyTeamList myTeamList = teamService.showTeamS(userId);
