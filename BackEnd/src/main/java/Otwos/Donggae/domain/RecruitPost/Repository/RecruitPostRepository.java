@@ -18,7 +18,7 @@ public interface RecruitPostRepository extends JpaRepository<RecruitPost, Intege
 
     RecruitPost save(RecruitPost recruitPost);
 
-    @EntityGraph(attributePaths = {"recruitFields", "recruitLanguages", "recruitPersonalities", "applications"}, type = EntityGraph.EntityGraphType.FETCH)
+    @EntityGraph(attributePaths = {"recruitFields", "recruitLanguages", "recruitPersonalities"}, type = EntityGraph.EntityGraphType.FETCH)
     List<RecruitPost> findAllByIsCompleteAndUserIdNot(Boolean isComplete, User user);
 
 
