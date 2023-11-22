@@ -5,26 +5,39 @@ import Otwos.Donggae.DAO.Recruit.RecruitLanguage;
 import Otwos.Donggae.DAO.Recruit.RecruitPersonality;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.Team.Team;
-import Otwos.Donggae.DAO.User.User;
-import Otwos.Donggae.DTO.RecruitPost.RecRecruitPostDTO;
-import Otwos.Donggae.DTO.RecruitPost.RecruitPostDTO;
-import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
+import Otwos.Donggae.DAO.User.*;
+import Otwos.Donggae.DTO.RecruitPost.*;
 import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitFieldDTO;
 import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitLanguageDTO;
 import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitPersonalityDTO;
+import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.response.RecruitFieldResponse;
+import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.response.RecruitLanguageResponse;
+import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.response.RecruitPersonalityResponse;
+import Otwos.Donggae.DTO.member.userinfo.response.UserInterestFieldResponse;
+import Otwos.Donggae.DTO.member.userinfo.response.UserLanguageResponse;
+import Otwos.Donggae.DTO.member.userinfo.response.UserPersonalityResponse;
+import Otwos.Donggae.DTO.member.userinfo.response.UserStudyFieldResponse;
 import Otwos.Donggae.DTO.team.TeamDTO;
 import Otwos.Donggae.DTO.team.TeamMemberDTO;
+import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
 import Otwos.Donggae.Global.FieldEnum;
 import Otwos.Donggae.Global.LanguageEnum;
 import Otwos.Donggae.Global.MajorLectureEnum;
 import Otwos.Donggae.Global.PersonalityEnum;
+import Otwos.Donggae.Global.Rank.DonggaeRank;
 import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.RecruitPost.Repository.info.RecruitFieldRepository;
 import Otwos.Donggae.domain.RecruitPost.Repository.info.RecruitLanguageRepository;
 import Otwos.Donggae.domain.RecruitPost.Repository.info.RecruitPersonalityRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
+import Otwos.Donggae.domain.member.repository.info.UserInterestFieldRepository;
+import Otwos.Donggae.domain.member.repository.info.UserLanguageRepository;
+import Otwos.Donggae.domain.member.repository.info.UserPersonalityRepository;
+import Otwos.Donggae.domain.member.repository.info.UserStudyFieldRepository;
+import Otwos.Donggae.domain.rank.repository.UserRankRepository;
 import Otwos.Donggae.domain.team.repository.TeamMemberRepository;
 import Otwos.Donggae.domain.team.repository.TeamRepository;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,6 +72,21 @@ public class RecruitPostServiceImpl implements RecruitPostService {
     @Autowired
     private TeamMemberRepository teamMemberRepository;
 
+    @Autowired
+    UserRankRepository userRankRepository;
+
+    @Autowired
+    UserLanguageRepository userLanguageRepository;
+
+    @Autowired
+    UserInterestFieldRepository userInterestFieldRepository;
+
+    @Autowired
+    UserPersonalityRepository userPersonalityRepository;
+
+    @Autowired
+    UserStudyFieldRepository userStudyFieldRepository;
+
     @Transactional //게시글 작성
     public void createRecruitPostAndTeam(RecruitPostRequestDTO recruitPostRequestDTO, int userId) {
 
@@ -76,6 +104,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
                 content,
                 majorLectureName,
                 createdDate,
+                Boolean.FALSE,
                 null,
                 null,
                 null,
@@ -239,10 +268,166 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         recruitPostRepository.save(recruitPost);
     }
 
-    //    @Override // 게시글 조회
-//    public RecruitPostResponseDTO getRecruitPost(int recruitPostId) {
-//
-//    }
+    @Override // 게시글 조회
+    @Transactional
+    public RecruitPostDetailResponseDTO getRecruitPost(int recruitPostId) {
+        RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(recruitPostId);
+        User teamLeader = recruitPost.getUserId();
+        UserRank userRank = userRankRepository.findUserRankByUserId(teamLeader);
+        DonggaeRank donggaeRank = DonggaeRank.똥개;
+        if (userRank != null){
+            donggaeRank = userRank.getRankName();
+        }
+
+        List<UserLanguageResponse> userLanguageDTOS = getLanguageResponse(teamLeader);
+        List<UserInterestFieldResponse> userInterestFieldDTOS = getInterestFieldResponse(teamLeader);
+        List<UserPersonalityResponse> userPersonalityDTOS = getPersonalityResponse(teamLeader);
+
+        List<RecruitLanguageResponse> recruitLanguageResponses = getRecruitLanguageResponse(recruitPost);
+        List<RecruitPersonalityResponse> recruitPersonalityResponses = getRecruitPersonalityResponse(recruitPost);
+        List<RecruitFieldResponse> recruitFieldResponses = getRecruitFieldResponse(recruitPost);
+
+        RecruitPostDetailResponseDTO recruitPostDetailResponseDTO = new RecruitPostDetailResponseDTO(
+                recruitPost.getRecruitPostId(),
+                recruitPost.getTitle(),
+                recruitPost.getContent(),
+                recruitPost.getMajorLectureName(),
+                recruitPost.getCreatedDate(),
+                recruitFieldResponses,
+                recruitLanguageResponses,
+                recruitPersonalityResponses,
+                recruitPost.getUserId(),
+                teamLeader.getGithubName(),
+                teamLeader.getDguEmail(),
+                teamLeader.getIntro(),
+                teamLeader.getBoj_rank(),
+                donggaeRank,
+                userLanguageDTOS,
+                userInterestFieldDTOS,
+                userPersonalityDTOS
+        );
+
+        return recruitPostDetailResponseDTO;
+    }
+    private List<RecruitLanguageResponse> getRecruitLanguageResponse(RecruitPost recruitPost) {
+        List<RecruitLanguage> recruitLanguages = recruitLanguageRepository.findAllByRecruitPostId(recruitPost);
+        List<RecruitLanguageResponse> responses = new ArrayList<>(); //빈 리스트 생성
+
+        for (RecruitLanguage recruitLanguage : recruitLanguages) {
+            RecruitLanguageResponse recruitLanguageResponse = new RecruitLanguageResponse(
+                    recruitLanguage.getLanguage()
+            );
+            responses.add(recruitLanguageResponse);
+        }
+        return responses;
+    }
+
+    private List<RecruitFieldResponse> getRecruitFieldResponse(RecruitPost recruitPost) {
+        List<RecruitField> recruitFields = recruitFieldRepository.findAllByRecruitPostId(recruitPost);
+        List<RecruitFieldResponse> responses = new ArrayList<>(); //빈 리스트 생성
+
+        for (RecruitField recruitField : recruitFields) {
+            RecruitFieldResponse recruitFieldResponse = new RecruitFieldResponse(
+                    recruitField.getField()
+            );
+            responses.add(recruitFieldResponse);
+        }
+        return responses;
+    }
+    private List<RecruitPersonalityResponse> getRecruitPersonalityResponse(RecruitPost recruitPost) {
+        List<RecruitPersonality> recruitPersonalities = recruitPersonalityRepository.findAllByRecruitPostId(recruitPost);
+        List<RecruitPersonalityResponse> responses = new ArrayList<>(); //빈 리스트 생성
+
+        for (RecruitPersonality recruitPersonality : recruitPersonalities) {
+            RecruitPersonalityResponse recruitPersonalityResponse = new RecruitPersonalityResponse(
+                    recruitPersonality.getPersonality()
+            );
+            responses.add(recruitPersonalityResponse);
+        }
+        return responses;
+    }
+
+    private List<UserLanguageResponse> getLanguageResponse(User user) {
+        List<UserLanguage> userLanguages = userLanguageRepository.findAllByUserId(user);
+        List<UserLanguageResponse> responses = new ArrayList<>(); //빈 리스트 생성
+
+        for (UserLanguage userLanguage : userLanguages) {
+            UserLanguageResponse userLanguageResponse = new UserLanguageResponse(
+                    userLanguage.getLanguage()
+            );
+            responses.add(userLanguageResponse);
+        }
+        return responses;
+    }
+
+    //user에 해당하는 userInterestField받아오기
+    private List<UserInterestFieldResponse> getInterestFieldResponse(User user) {
+        List<UserInterestField> userInterestFields = userInterestFieldRepository.findAllByUserId(user);
+        List<UserInterestFieldResponse> responses = new ArrayList<>();
+
+        for (UserInterestField userInterestField : userInterestFields) {
+            UserInterestFieldResponse userInterestFieldResponse = new UserInterestFieldResponse(
+                    userInterestField.getInterestField()
+            );
+            responses.add(userInterestFieldResponse);
+        }
+        return responses;
+    }
+
+    //user에 해당하는 userPersonality받아오기
+    private List<UserPersonalityResponse> getPersonalityResponse(User user) {
+        List<UserPersonality> userPersonalities = userPersonalityRepository.findAllByUserId(user);
+        List<UserPersonalityResponse> responses = new ArrayList<>();
+
+        for (UserPersonality userPersonality : userPersonalities) {
+            UserPersonalityResponse userPersonalityResponse = new UserPersonalityResponse(
+                    userPersonality.getPersonality()
+            );
+            responses.add(userPersonalityResponse);
+        }
+        return responses;
+    }
+
+    //user에 해당하는 studyField받아오기
+    private List<UserStudyFieldResponse> getStudyFieldResponse(User user) {
+        List<UserStudyField> userStudyFields = userStudyFieldRepository.findAllByUserId(user);
+        List<UserStudyFieldResponse> responses = new ArrayList<>();
+
+        for (UserStudyField userStudyField : userStudyFields) {
+            UserStudyFieldResponse userStudyFieldResponse = new UserStudyFieldResponse(
+                    userStudyField.getStudyField()
+            );
+            responses.add(userStudyFieldResponse);
+        }
+        return responses;
+    }
+
+    @Transactional
+    @Override
+    public void completeRecruitPost(TeamIdRequest teamIdRequest) {
+        Team team = teamRepository.findTeamByTeamId(teamIdRequest.getTeamId());
+        RecruitPost recruitPost = team.getRecruitPostId();
+        try {
+            validateTeamAndPost(team, recruitPost);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        recruitPost.complete();
+
+        recruitPostRepository.save(recruitPost); // 변경사항 저장
+    }
+
+    private void validateTeamAndPost(Team team, RecruitPost recruitPost) throws Exception{
+        if (team == null) {
+            throw new Exception("team is null");
+        }
+        if (recruitPost == null) {
+            throw new Exception("recruitPost is null");
+        }
+        if (recruitPost.getIsComplete() == Boolean.TRUE) {
+            throw new Exception("recruitPost is already closed");
+        }
+    }
 
 }
 

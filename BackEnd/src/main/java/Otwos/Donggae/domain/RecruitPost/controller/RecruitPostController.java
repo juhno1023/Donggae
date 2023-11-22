@@ -1,11 +1,14 @@
 package Otwos.Donggae.domain.RecruitPost.controller;
 
+import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.User.UserInterestField;
 import Otwos.Donggae.DTO.RecruitPost.RecRecruitPostDTO;
+import Otwos.Donggae.DTO.RecruitPost.RecruitPostDetailResponseDTO;
 import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
 import Otwos.Donggae.DTO.RecruitPost.RecruitPostResponseDTO;
 import Otwos.Donggae.DTO.RecruitPost.search.SearchRequest;
 import Otwos.Donggae.DTO.RecruitPost.search.SearchResponse;
+import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
 import Otwos.Donggae.Jwt.Auth;
 import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.RecruitPost.service.RecRecruitPostService;
@@ -30,6 +33,11 @@ public class RecruitPostController {
     private RecRecruitPostService recRecruitPostService;
     @Autowired
     private SearchRecruitPostService searchRecruitPostService;
+
+    @GetMapping("/recruitPost/{recruitPostId}") // 게시글 조회
+    public ResponseEntity<RecruitPostDetailResponseDTO> getRecruitPost(@PathVariable int recruitPostId){
+        return ResponseEntity.ok(recruitPostService.getRecruitPost(recruitPostId));
+    }
 
     @PostMapping("/recruitPost") // 글 작성
     public ResponseEntity<?> createRecruitPostAndTeam(@RequestBody RecruitPostRequestDTO recruitPostDTO,
@@ -78,11 +86,31 @@ public class RecruitPostController {
         }
     }
 
-    @PostMapping("/recruitPost/search")
+    @PostMapping("/recruitPost/search") // 게시글 검색
     public ResponseEntity<?> searchRecruitPost(@RequestBody SearchRequest searchRequest) {
         try {
             SearchResponse searchResponse = searchRecruitPostService.searchRecruitPost(searchRequest);
             return ResponseEntity.ok().body(searchResponse);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/recruitPostPage") // 최신 게시글 4개 표시
+    public ResponseEntity<?> searchRecruitPostPage() {
+        try {
+            SearchResponse searchResponse = searchRecruitPostService.showRecentFourPost();
+            return ResponseEntity.ok().body(searchResponse);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/recruitPost/complete")
+    public ResponseEntity<?> completeRecruitPost(@RequestBody TeamIdRequest teamIdRequest) {
+        try {
+            recruitPostService.completeRecruitPost(teamIdRequest);
+            return ResponseEntity.ok("complete recruitPost");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

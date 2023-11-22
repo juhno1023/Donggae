@@ -61,7 +61,15 @@ public class RecruitPost {
     private List<Application> applications;
 
     @Builder
-    public RecruitPost(int recruitPostId, User userId, String title, String content, MajorLectureEnum majorLectureName, Timestamp createdDate, Set<RecruitField> recruitFields, Set<RecruitLanguage> recruitLanguages, Set<RecruitPersonality> recruitPersonalities, List<Application> applications) {
+    public RecruitPost(int recruitPostId, User userId,
+                       String title, String content,
+                       MajorLectureEnum majorLectureName,
+                       Timestamp createdDate,
+                       Set<RecruitField> recruitFields,
+                       Set<RecruitLanguage> recruitLanguages,
+                       Set<RecruitPersonality> recruitPersonalities,
+                       List<Application> applications,
+                       Boolean isComplete) {
         this.recruitPostId = recruitPostId;
         this.userId = userId;
         this.title = title;
@@ -72,7 +80,11 @@ public class RecruitPost {
         this.recruitLanguages = recruitLanguages;
         this.recruitPersonalities = recruitPersonalities;
         this.applications = applications;
-        this.isComplete = false;
+        this.isComplete = isComplete;
+    }
+
+    public void complete() {
+        this.isComplete = true;
     }
 }
 
