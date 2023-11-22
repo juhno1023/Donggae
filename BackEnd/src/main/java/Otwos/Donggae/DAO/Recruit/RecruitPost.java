@@ -82,5 +82,9 @@ public class RecruitPost {
         this.applications = applications;
         this.isComplete = isComplete;
     }
+
+    public void complete() {
+        this.isComplete = true;
+    }
 }
 

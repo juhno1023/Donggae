@@ -1,7 +1,9 @@
 package Otwos.Donggae.domain.RecruitPost.controller;
 
+import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.User.UserInterestField;
 import Otwos.Donggae.DTO.RecruitPost.RecRecruitPostDTO;
+import Otwos.Donggae.DTO.RecruitPost.RecruitPostDetailResponseDTO;
 import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
 import Otwos.Donggae.DTO.RecruitPost.RecruitPostResponseDTO;
 import Otwos.Donggae.DTO.RecruitPost.search.SearchRequest;
@@ -31,6 +33,11 @@ public class RecruitPostController {
     private RecRecruitPostService recRecruitPostService;
     @Autowired
     private SearchRecruitPostService searchRecruitPostService;
+
+    @GetMapping("/recruitPost/{recruitPostId}") // 게시글 조회
+    public ResponseEntity<RecruitPostDetailResponseDTO> getRecruitPost(@PathVariable int recruitPostId){
+        return ResponseEntity.ok(recruitPostService.getRecruitPost(recruitPostId));
+    }
 
     @PostMapping("/recruitPost") // 글 작성
     public ResponseEntity<?> createRecruitPostAndTeam(@RequestBody RecruitPostRequestDTO recruitPostDTO,
