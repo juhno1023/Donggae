@@ -43,6 +43,7 @@ public class RecruitPostDTO {
 
     public RecruitPost toEntity() {
         return RecruitPost.builder()
+                .recruitPostId(recruitPostId)
                 .userId(userId)
                 .title(title)
                 .content(content)
