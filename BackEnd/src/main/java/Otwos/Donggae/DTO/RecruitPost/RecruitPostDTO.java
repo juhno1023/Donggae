@@ -32,6 +32,7 @@ public class RecruitPostDTO {
     private MajorLectureEnum majorLectureName;
 
     private Timestamp createdDate;
+    private Boolean isComplete;
 
     private List<RecruitField> recruitFields;
 
@@ -43,11 +44,13 @@ public class RecruitPostDTO {
 
     public RecruitPost toEntity() {
         return RecruitPost.builder()
+                .recruitPostId(recruitPostId)
                 .userId(userId)
                 .title(title)
                 .content(content)
                 .majorLectureName(majorLectureName)
                 .createdDate(createdDate)
+                .isComplete(isComplete)
                 .build();
     }
 }

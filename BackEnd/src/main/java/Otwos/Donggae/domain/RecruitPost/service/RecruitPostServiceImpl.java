@@ -19,6 +19,7 @@ import Otwos.Donggae.DTO.member.userinfo.response.UserPersonalityResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserStudyFieldResponse;
 import Otwos.Donggae.DTO.team.TeamDTO;
 import Otwos.Donggae.DTO.team.TeamMemberDTO;
+import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
 import Otwos.Donggae.Global.FieldEnum;
 import Otwos.Donggae.Global.LanguageEnum;
 import Otwos.Donggae.Global.MajorLectureEnum;
@@ -102,6 +103,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
                 content,
                 majorLectureName,
                 createdDate,
+                Boolean.FALSE,
                 null,
                 null,
                 null,
@@ -397,6 +399,42 @@ public class RecruitPostServiceImpl implements RecruitPostService {
             responses.add(userStudyFieldResponse);
         }
         return responses;
+    }
+
+    @Transactional
+    @Override
+    public void completeRecruitPost(TeamIdRequest teamIdRequest) {
+        Team team = teamRepository.findTeamByTeamId(teamIdRequest.getTeamId());
+        RecruitPost recruitPost = team.getRecruitPostId();
+        try {
+            validateTeamAndPost(team, recruitPost);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        RecruitPostDTO recruitPostDTO = new RecruitPostDTO(
+                recruitPost.getRecruitPostId(),
+                recruitPost.getUserId(),
+                recruitPost.getTitle(),
+                recruitPost.getContent(),
+                recruitPost.getMajorLectureName(),
+                recruitPost.getCreatedDate(),
+                Boolean.TRUE,
+                null,
+                null,
+                null,
+                null
+        );
+        recruitPostRepository.save(recruitPostDTO.toEntity()); // 변경사항 저장
+    }
+
+    private void validateTeamAndPost(Team team, RecruitPost recruitPost) throws Exception{
+        if (team == null) {
+            throw new Exception("team is null");
+        }
+        if (recruitPost == null) {
+            throw new Exception("recruitPost is null");
+        }
     }
 
 }
