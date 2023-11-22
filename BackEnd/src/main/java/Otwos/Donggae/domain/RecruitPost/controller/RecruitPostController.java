@@ -33,12 +33,10 @@ public class RecruitPostController {
     @Autowired
     private SearchRecruitPostService searchRecruitPostService;
 
-    @GetMapping("/recruitPost/{recruitPostId}")
+    @GetMapping("/recruitPost/{recruitPostId}") // 게시글 조회
     public ResponseEntity<RecruitPostDetailResponseDTO> getRecruitPost(@PathVariable int recruitPostId){
         return ResponseEntity.ok(recruitPostService.getRecruitPost(recruitPostId));
     }
-
-
 
     @PostMapping("/recruitPost") // 글 작성
     public ResponseEntity<?> createRecruitPostAndTeam(@RequestBody RecruitPostRequestDTO recruitPostDTO,

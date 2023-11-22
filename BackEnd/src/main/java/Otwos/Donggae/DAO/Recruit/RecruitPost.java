@@ -74,5 +74,9 @@ public class RecruitPost {
         this.applications = applications;
         this.isComplete = false;
     }
+
+    public void complete() {
+        this.isComplete = true;
+    }
 }
 
