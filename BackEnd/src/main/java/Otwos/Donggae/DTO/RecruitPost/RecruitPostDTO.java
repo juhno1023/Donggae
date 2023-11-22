@@ -32,6 +32,7 @@ public class RecruitPostDTO {
     private MajorLectureEnum majorLectureName;
 
     private Timestamp createdDate;
+    private Boolean isComplete;
 
     private List<RecruitField> recruitFields;
 
@@ -49,6 +50,7 @@ public class RecruitPostDTO {
                 .content(content)
                 .majorLectureName(majorLectureName)
                 .createdDate(createdDate)
+                .isComplete(isComplete)
                 .build();
     }
 }

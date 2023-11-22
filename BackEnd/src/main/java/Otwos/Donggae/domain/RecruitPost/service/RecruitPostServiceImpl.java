@@ -77,6 +77,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
                 content,
                 majorLectureName,
                 createdDate,
+                Boolean.FALSE,
                 null,
                 null,
                 null,
@@ -255,8 +256,21 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        recruitPost.complete();
-        recruitPostRepository.save(recruitPost); // 변경사항 저장
+
+        RecruitPostDTO recruitPostDTO = new RecruitPostDTO(
+                recruitPost.getRecruitPostId(),
+                recruitPost.getUserId(),
+                recruitPost.getTitle(),
+                recruitPost.getContent(),
+                recruitPost.getMajorLectureName(),
+                recruitPost.getCreatedDate(),
+                Boolean.TRUE,
+                null,
+                null,
+                null,
+                null
+        );
+        recruitPostRepository.save(recruitPostDTO.toEntity()); // 변경사항 저장
     }
 
     private void validateTeamAndPost(Team team, RecruitPost recruitPost) throws Exception{
