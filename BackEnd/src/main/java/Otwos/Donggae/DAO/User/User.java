@@ -16,8 +16,8 @@ import java.util.Set;
 import lombok.*;
 
 @Getter
-@Setter
 @Entity
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "user")
 public class User {

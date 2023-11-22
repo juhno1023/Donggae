@@ -44,11 +44,11 @@ public class MemberController {
         }
     }
 
-    @PostMapping("/member/recommend") // 프로젝트 추천
+    @PostMapping("/member/recommend") // 멤버 추천
     public ResponseEntity<?> recommendMember(@Auth int userId){
         try{
             List<RecMemberDTO> recMemberDTOList = recMemberService.recommendMember(userId);
-            if(recMemberDTOList.isEmpty()){ // 사이트에 모집 글이 0개 일 때
+            if(recMemberDTOList.isEmpty()){
                 return ResponseEntity.notFound().build();
             }
 
