@@ -1,6 +1,7 @@
 package Otwos.Donggae.domain.RecruitPost.service;
 
 import Otwos.Donggae.DTO.RecruitPost.RecRecruitPostDTO;
+import Otwos.Donggae.DTO.RecruitPost.RecruitPostDetailResponseDTO;
 import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface RecruitPostService {
 
 //    public RecruitPostResponseDTO getRecruitPost (int recruitPostId);
     public void editRecruitPost(int recruitPostId, RecruitPostRequestDTO recruitPostRequestDTO, int userId);
+
+    public RecruitPostDetailResponseDTO getRecruitPost(int recruitPostId);
 }

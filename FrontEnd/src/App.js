@@ -22,10 +22,10 @@ function App() {
           <Route path="/post" element={<Post />} />
           <Route path="/application" element={<Application />} />
           <Route path="/auth/github/callback" element={<AuthCallback />} />
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/leader" element={<Leader />}></Route>
-          <Route path="/teaminfo" element={<TeamInfo />}></Route>
-          <Route path="/userteam" element={<UserTeam />}></Route>
+          <Route path="/signup" element={<Signup />}/>
+          <Route path="/leader" element={<Leader />}/>
+          <Route path="/teaminfo" element={<TeamInfo />}/>
+          <Route path="/userteam" element={<UserTeam />}/>
         </Routes>
       </BrowserRouter>
     </div>
