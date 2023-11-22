@@ -37,6 +37,7 @@ import Otwos.Donggae.domain.member.repository.info.UserStudyFieldRepository;
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
 import Otwos.Donggae.domain.team.repository.TeamMemberRepository;
 import Otwos.Donggae.domain.team.repository.TeamRepository;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -411,21 +412,9 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        recruitPost.complete();
 
-        RecruitPostDTO recruitPostDTO = new RecruitPostDTO(
-                recruitPost.getRecruitPostId(),
-                recruitPost.getUserId(),
-                recruitPost.getTitle(),
-                recruitPost.getContent(),
-                recruitPost.getMajorLectureName(),
-                recruitPost.getCreatedDate(),
-                Boolean.TRUE,
-                null,
-                null,
-                null,
-                null
-        );
-        recruitPostRepository.save(recruitPostDTO.toEntity()); // 변경사항 저장
+        recruitPostRepository.save(recruitPost); // 변경사항 저장
     }
 
     private void validateTeamAndPost(Team team, RecruitPost recruitPost) throws Exception{
@@ -434,6 +423,9 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         }
         if (recruitPost == null) {
             throw new Exception("recruitPost is null");
+        }
+        if (recruitPost.getIsComplete() == Boolean.TRUE) {
+            throw new Exception("recruitPost is already closed");
         }
     }
 
