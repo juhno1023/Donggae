@@ -102,6 +102,7 @@ public class RankServiceImpl implements RankService{
         // 전체 랭크 리스트 반환
         List<UserRank> userRankList = userRankRepository.findAllByOrderByScoreDesc();
         List<UserRankInfoDTO> userRankInfoDTOList = new ArrayList<>();
+        int index = 1;
 
         for (UserRank userRank : userRankList) {
             User user = userRank.getUserId();
@@ -109,9 +110,13 @@ public class RankServiceImpl implements RankService{
             String githubName = user.getGithubName();
             List<String> userInterestFields = user.getUserInterestFields().stream().map(userInterestField -> userInterestField.getInterestField().name()).toList();
             BaekjoonRank bojRank = user.getBoj_rank();
-            UserRankInfoDTO userRankInfoDTO = new UserRankInfoDTO(rankName, githubName, userInterestFields, bojRank);
+            int score = userRank.getScore();
+
+            UserRankInfoDTO userRankInfoDTO = new UserRankInfoDTO(index, rankName, githubName, userInterestFields, score, bojRank);
 
             userRankInfoDTOList.add(userRankInfoDTO);
+
+            index++;
         }
 
         return userRankInfoDTOList;
