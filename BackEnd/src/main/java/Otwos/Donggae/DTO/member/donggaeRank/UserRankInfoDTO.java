@@ -11,8 +11,11 @@ import java.util.List;
 @AllArgsConstructor
 public class UserRankInfoDTO {
 
+    private int ranking;
     private DonggaeRank rankName;
     private String githubName;
     private List<String> userInterestFields;
+    private int score;
     private BaekjoonRank bojRank;
+
 }
