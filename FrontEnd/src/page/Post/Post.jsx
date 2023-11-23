@@ -1,4 +1,4 @@
-import React, { useState  } from 'react';
+import React, { useState ,useEffect } from 'react';
 import styles from "./Post.module.css"
 import Header from "../../components/_Layout/Header";
 import bgImg from '../../image/donggae.png';
@@ -31,8 +31,21 @@ export default function Post() {
         e.preventDefault();
         console.log('Form Data:', checkedItems);
     };
+    
+    let token = localStorage.getItem('token') || '';
+    const recruitPostId = 2; //예시
+    const [recruitPost, setRecruitPost] = useState('');
 
-
+    fetch(`/recruitPost/${recruitPostId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    }).then(res=>res.json())        
+    .then(res=> {
+        setRecruitPost(res)
+    });
   return (
     <div className={styles.default}>
         <Header />
@@ -40,10 +53,9 @@ export default function Post() {
             <div className={styles.body}>
             <div className={styles.box__}>
                 <Link to='/application'><button type="submit" className={styles.submitBtn}>지원하기</button></Link>
-                <div  className={styles.text__1} for="team_name" >🧡떡잎방범대🧡이번 학기에 소공 같이 플젝 하실 분 모집합니다</div>
+                <div  className={styles.text__1}>🧡{recruitPost.title}🧡{recruitPost.title}</div>
                 <div className={styles.formGroup}>
-                    <div>이번에 간단하게 웹 프로젝트를 함께 이끌어 갈 분들을 모집합니다! 사용하고자 하는 기술 스택은 nodejs 입니다
-                        </div>
+                    <div>{recruitPost.content}</div>
                 </div>
             </div>
             <div className={styles.box__}>
@@ -53,10 +65,9 @@ export default function Post() {
                     <div className={styles.logo}>
                     <img className={styles.logoimg} src={bgImg} alt="Donggae Logo" />
                     <div className={styles.profile_info}>
-                        <div className={styles.text__2}>Dabin</div>
-                        vhlekqls@naver.com
+                        <div className={styles.text__2}>{recruitPost.githubName}</div>
                         <br></br>
-                        웹프로젝트 장인입니다.
+                        {recruitPost.selfIntro}
                     </div>
                     </div>
                 </div>
@@ -64,21 +75,21 @@ export default function Post() {
                     <div className={styles.keyword_box}>
                         <div className={styles.keyword}>
                             모집 분야
-                            <span class="list">JavaScript</span>
+                            <span>JavaScript</span>
                         </div>
                         <div className={styles.keyword}>
                             모집 분야
-                            <span class="list">C++</span>
+                            <span>C++</span>
                         </div>
                     </div>
                     <div className={styles.keyword_box}>
                         <div className={styles.keyword}>
                             모집 분야
-                            <span class="list">성실함</span>
+                            <span>성실함</span>
                         </div>
                         <div className={styles.keyword}>
                             모집 분야
-                            <span class="list">냠냠</span>
+                            <span></span>
                         </div>
                     </div>
                 </div>
