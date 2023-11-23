@@ -245,7 +245,10 @@ public class RecruitPostServiceImpl implements RecruitPostService {
     public String deleteRecruitPost(int recruitPostId, int userId){
         User user = memberRepository.findUserByUserId(userId);
         RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(recruitPostId);
+        Team team = teamRepository.findTeamByRecruitPostId(recruitPost);
+
         if (recruitPost.getUserId() == user) {
+            teamRepository.delete(team);
             recruitPostRepository.deleteById(recruitPostId);
             return "success";
         }
