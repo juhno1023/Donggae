@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-const Rank = ({ rankNo, rank, id, field, tier}) => {
+const Rank = ({ rankNo, rank, id, field, score, tier}) => {
 
     const rankMap = async(e) => {
     return (
         <> 
-            <div>{rankNo} {rank} {id} {field} {tier} </div>
+            <div>{rankNo} 으악 {rank} {id} {field} {score} {tier} </div>
         </>
     );
 };

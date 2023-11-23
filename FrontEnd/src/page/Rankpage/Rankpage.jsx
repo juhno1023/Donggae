@@ -8,10 +8,13 @@ import Rank from '../../components/Rank';
 export default function Mypage() {
     const history = useNavigate();
 
+    const[rankNo, setRankNo] = useState();
     const[rank, setRank] = useState();
     const[id, setId] = useState();
     const[field, setField] = useState([]);
     const[bojrank, setBojrank] = useState();
+    const[score, setScore] = useState();
+    
     
 
     let token = localStorage.getItem('token') || '';
@@ -28,14 +31,16 @@ export default function Mypage() {
                     }).then(res=>res.json())        
                         .then(res=> {
                         console.log(res)
+                        setRankNo(res.ranking);
                         setRank(res.rankName);
                         setId(res.githubName);
                         setField(res.userInterestFields);
+                        setScore(res.score);
                         setBojrank(res.bojRank);
                 });
 
                 } catch (error) {
-                    console.error("Failed to fetch team data: ", error);
+                    console.error("Failed to fetch data: ", error);
                 }
             };
         }
@@ -48,8 +53,8 @@ export default function Mypage() {
             <div className={styles.inner}>
                 <div className={styles.body}>
                 <div className={styles.box__}>
-                    <div>
-                        <Rank rankNo={1} rank={rank} id={id} field={field} tier={bojrank}></Rank>
+                    <div className={styles.rankBox}>
+                        <Rank rankNo={rankNo} rank={rank} id={id} field={field} score={score} tier={bojrank}></Rank>
                     </div>
                 </div>
                 </div>
