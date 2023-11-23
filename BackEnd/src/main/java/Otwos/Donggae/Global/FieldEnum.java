@@ -1,6 +1,11 @@
 package Otwos.Donggae.Global;
 
 public enum FieldEnum {
-    모집분야,
-    뭐있냐
+    BackEnd,
+    FrontEnd,
+    iOS,
+    Android,
+    AI,
+    Game,
+    UIUX
 }

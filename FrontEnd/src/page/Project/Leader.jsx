@@ -1,16 +1,12 @@
 import React, { useState ,useEffect } from 'react';
 import styles from "./Leader.module.css"
 import Header from "../../components/_Layout/Header";
-import Deletion from '../../components/Deletion';
-import Selection from '../../components/Selection';
+import Deletion from '../../components/_Leader/Deletion';
+import Selection from '../../components/_Leader/Selection';
 import Sidebar from "../../components/_Layout/Sidebar";
 
 export default function Leader() {
-    const datas2 = [
-        { id: "d", title: "HTML", completed: false, },
-       { id: "s", title: "CSS", completed: true },
-       { id: "a", title: "Javascript", completed: false }
-    ]
+    const [team, setTeam] = useState([]);
     const [teamData, setTeamData] = useState([]);
     const [applyData, setApplyData] = useState([]);
     let token = localStorage.getItem('token') || '';
@@ -19,9 +15,9 @@ export default function Leader() {
         // teamId: sessionStorage.getItem('teamId')
         // 세션 스토리지가 아니라 URL로 받아오는 것 : 팀 상세보기 클릭 후 나오는 화면이기 때문에
         // 임시로 2라 설정함
-        teamId: 2,
+        teamId: 1,
     };
-
+    const teamName = '';
     useEffect(() => {
         const handleClick = () => {
             try {
@@ -36,8 +32,9 @@ export default function Leader() {
                     }),
                     }).then(res=>res.json())        
                         .then(res=> {
-                        console.log(res)
+                        setTeam(res)
                         setTeamData(res.teamMemberList);
+                        console.log(res)
                         setApplyData(res.applyMemberList);
                 });
 
@@ -59,10 +56,9 @@ export default function Leader() {
         <div className={styles.inner}>
             <div className={styles.body}>
             <div className={styles.box__}>
-                <div  className={styles.text__1} >🧡떡잎방범대🧡이번 학기에 소공 같이 플젝 하실 분 모집합니다</div>
+                <div  className={styles.text__1} >🧡{team.teamName}🧡{team.title}</div>
                 <div className={styles.formGroup}>
-                    <div>이번에 간단하게 웹 프로젝트를 함께 이끌어 갈 분들을 모집합니다! 사용하고자 하는 기술 스택은 nodejs 입니다
-                        </div>
+                    <div>{team.content}</div>
                 </div>
             </div>
             <div className={styles.box__}>

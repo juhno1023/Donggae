@@ -1,6 +1,35 @@
 package Otwos.Donggae.Global;
 
 public enum LanguageEnum {
-    C플라스플라스,
-    어이거씨쁠쁠어케씀
+    JavaScript,
+    TypeScript,
+    React,
+    Vue,
+    Svelte,
+    Nextjs,
+    Nodejs,
+    Java,
+    Spring,
+    Go,
+    Nestjs,
+    Kotlin,
+    Express,
+    MySQL,
+    MongoDB,
+    Python,
+    Django,
+    php,
+    GraphQL,
+    Firebase,
+    Flutter,
+    Swift,
+    ReactNative,
+    Unity,
+    AWS,
+    kubernetes,
+    Docker,
+    Git,
+    Figma,
+    Zeplin,
+    Jest
 }

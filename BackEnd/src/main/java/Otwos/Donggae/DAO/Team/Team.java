@@ -20,7 +20,7 @@ public class Team {
     private int teamId;
 
     // 1:1 recruitPost
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "recruit_post_id", nullable = false)
     private RecruitPost recruitPostId;
 
@@ -28,7 +28,7 @@ public class Team {
     private String teamName;
 
     // 1:N teamMember
-    @OneToMany(mappedBy = "teamId")
+    @OneToMany(mappedBy = "teamId", cascade = CascadeType.ALL)
     private List<TeamMember> teamMembers;
 
     @Builder
