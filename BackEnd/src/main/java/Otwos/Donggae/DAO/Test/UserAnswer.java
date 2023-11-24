@@ -3,6 +3,7 @@ package Otwos.Donggae.DAO.Test;
 import Otwos.Donggae.DAO.User.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,4 +32,12 @@ public class UserAnswer {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "answer_option_id")
     private AnswerOption answerOptionId;
+
+    @Builder
+    public UserAnswer(int id, User userId, TestQuestion testQuestionId, AnswerOption answerOptionId){
+        this.id = id;
+        this.userId = userId;
+        this.testQuestionId = testQuestionId;
+        this.answerOptionId = answerOptionId;
+    }
 }
