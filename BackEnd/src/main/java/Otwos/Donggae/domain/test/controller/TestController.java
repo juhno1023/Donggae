@@ -2,6 +2,7 @@ package Otwos.Donggae.domain.test.controller;
 
 import Otwos.Donggae.DTO.test.TestQuestionDTO;
 import Otwos.Donggae.DTO.test.showTestFields.TestDTO;
+import Otwos.Donggae.Jwt.Auth;
 import Otwos.Donggae.domain.test.service.TestService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,16 @@ public class TestController {
         try{
             List<TestQuestionDTO> testQuestionDTOList = testService.showTestQuestions(testId);
             return ResponseEntity.ok().body(testQuestionDTOList);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/test/save")
+    public ResponseEntity<?> saveTestAnswer(@Auth int userId){
+        try{
+
+            return ResponseEntity.ok().body("dd");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -58,6 +58,7 @@ public class TestServiceImpl implements TestService{
 
                     TestQuestionDTO.AnswerOptionDTO answerOptionDTO
                         = TestQuestionDTO.AnswerOptionDTO.builder()
+                                                        .answerId(answerOption.getId())
                                                         .answerNum(answerNum)
                                                         .answerText(answerOption.getContent())
                                                         .build();
@@ -72,4 +73,7 @@ public class TestServiceImpl implements TestService{
         }
         return testQuestionDTOS;
     }
+
+
+
 }
