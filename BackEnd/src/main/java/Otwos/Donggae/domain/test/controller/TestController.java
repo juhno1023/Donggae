@@ -1,16 +1,16 @@
 package Otwos.Donggae.domain.test.controller;
 
 import Otwos.Donggae.DTO.test.TestQuestionDTO;
+import Otwos.Donggae.DTO.test.UserAnswerDTO;
 import Otwos.Donggae.DTO.test.showTestFields.TestDTO;
 import Otwos.Donggae.Jwt.Auth;
 import Otwos.Donggae.domain.test.service.TestService;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TestController {
@@ -39,10 +39,10 @@ public class TestController {
     }
 
     @PostMapping("/test/save")
-    public ResponseEntity<?> saveTestAnswer(@Auth int userId){
+    public ResponseEntity<?> saveTestAnswer(@Auth int userId, @RequestBody ArrayList<UserAnswerDTO> userAnswerDTOs){
         try{
-
-            return ResponseEntity.ok().body("dd");
+            testService.saveUserAnswer(userId, userAnswerDTOs);
+            return ResponseEntity.ok("임시저장 완료");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
