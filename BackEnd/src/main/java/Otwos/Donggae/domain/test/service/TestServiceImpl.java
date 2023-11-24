@@ -64,7 +64,7 @@ public class TestServiceImpl implements TestService{
                     answerOptionDTOS.add(answerOptionDTO);
                     answerNum++;
                 }
-                TestQuestionDTO testQuestionDTO = new TestQuestionDTO(questionNum, testQuestion.getQuestionText(), answerOptionDTOS);
+                TestQuestionDTO testQuestionDTO = new TestQuestionDTO(testQuestion.getTestQuestionId(),questionNum, testQuestion.getQuestionText(), answerOptionDTOS);
                 testQuestionDTOS.add(testQuestionDTO);
                 questionNum++;
             }

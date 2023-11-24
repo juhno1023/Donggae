@@ -9,6 +9,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class TestQuestionDTO {
+
+    private int questionId;
     private int questionNum;
     private String questionText;
     private List<AnswerOptionDTO> answerOptions;
