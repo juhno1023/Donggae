@@ -1,10 +1,15 @@
 package Otwos.Donggae.domain.test.service;
 
+import static java.sql.Types.NULL;
 import Otwos.Donggae.DAO.Test.AnswerOption;
 import Otwos.Donggae.DAO.Test.Test;
 import Otwos.Donggae.DAO.Test.TestQuestion;
+import Otwos.Donggae.DAO.Test.UserAnswer;
+import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.DTO.test.TestQuestionDTO;
+import Otwos.Donggae.DTO.test.UserAnswerDTO;
 import Otwos.Donggae.DTO.test.showTestFields.TestDTO;
+import Otwos.Donggae.domain.member.repository.MemberRepository;
 import Otwos.Donggae.domain.test.repository.AnswerOptionRepository;
 import Otwos.Donggae.domain.test.repository.TestQuestionRepository;
 import Otwos.Donggae.domain.test.repository.TestRepository;
@@ -12,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import Otwos.Donggae.domain.test.repository.UserAnswerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +31,12 @@ public class TestServiceImpl implements TestService{
 
     @Autowired
     private AnswerOptionRepository answerOptionRepository;
+
+    @Autowired
+    private UserAnswerRepository userAnswerRepository;
+
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Override
     public List<TestDTO> showTestFields() {
@@ -58,6 +70,7 @@ public class TestServiceImpl implements TestService{
 
                     TestQuestionDTO.AnswerOptionDTO answerOptionDTO
                         = TestQuestionDTO.AnswerOptionDTO.builder()
+                                                        .answerId(answerOption.getId())
                                                         .answerNum(answerNum)
                                                         .answerText(answerOption.getContent())
                                                         .build();
@@ -72,4 +85,26 @@ public class TestServiceImpl implements TestService{
         }
         return testQuestionDTOS;
     }
+
+    @Override
+    public void saveUserAnswer(int userId, ArrayList<UserAnswerDTO> userAnswerDTOs) {
+        for (UserAnswerDTO userAnswerDTO : userAnswerDTOs) {
+            User user = memberRepository.findUserByUserId(userId);
+            Optional<TestQuestion> testQuestion = testQuestionRepository.findById(userAnswerDTO.getTestQuestionId());
+            Optional<AnswerOption> answerOption = answerOptionRepository.findById(userAnswerDTO.getAnswerOptionId());
+
+            if(testQuestion.isPresent() && answerOption.isPresent()){
+                UserAnswer userAnswer = UserAnswer.builder()
+                        .id(NULL)
+                        .userId(user)
+                        .testQuestionId(testQuestion.get())
+                        .answerOptionId(answerOption.get())
+                        .build();
+
+                userAnswerRepository.save(userAnswer);
+            }
+        }
+    }
+
+
 }

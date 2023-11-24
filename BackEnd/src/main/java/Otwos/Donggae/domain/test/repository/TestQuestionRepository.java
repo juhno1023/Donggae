@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface TestQuestionRepository extends JpaRepository<TestQuestion, Long> {
+public interface TestQuestionRepository extends JpaRepository<TestQuestion, Integer> {
     List<TestQuestion> findAllByTestId(Test testId);
 }

@@ -19,6 +19,7 @@ public class TestQuestionDTO {
     @AllArgsConstructor
     @Builder
     public static class AnswerOptionDTO{
+        private int answerId;
         private int answerNum;
         private String answerText;
     }
