@@ -20,6 +20,6 @@ public class TestQuestion {
     @JoinColumn(name = "test_id")
     private Test testId;
 
-    @Column(name = "question_text", length = 100, nullable = false)
+    @Column(name = "question_text", length = 500, nullable = false)
     private String questionText;
 }
