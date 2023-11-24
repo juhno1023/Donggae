@@ -5,6 +5,8 @@ import Posting from './page/Post/Posting';
 import Post from './page/Post/Post';
 import Application from './page/Application/Application';
 import Login from './page/Login/Login';
+import Mypage from './page/Mypage/Mypage';
+import Rank from './page/Rankpage/Rankpage';
 import Signup from "./page/Signup/Signup";
 import Leader from "./page/Project/Leader";
 import TeamInfo from "./page/Project/TeamInfo";
@@ -20,6 +22,8 @@ function App() {
           <Route path="/main" element={<Main />} />
           <Route path="/posting" element={<Posting />} />
           <Route path="/post" element={<Post />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/rank" element={<Rank />} />
           <Route path="/application" element={<Application />} />
           <Route path="/auth/github/callback" element={<AuthCallback />} />
           <Route path="/signup" element={<Signup />}/>
