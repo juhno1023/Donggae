@@ -90,11 +90,12 @@ export default function Home() {
                         <div className={styles.formGroup}>
                         {recommendPj.map(data => 
                         <TeamCard lecture={data.majorLectureName} 
-                            title = {data.title} 
                             name={data.userName} 
+                            title = {data.title} 
                             date={data.createDate} 
                             rank={data.donggaeRank} 
                             language={data.recuritLanguages} 
+                            no = {data.recruitPostId}
                         />)} 
                         </div>
                     </div>

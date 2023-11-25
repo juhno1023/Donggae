@@ -15,10 +15,6 @@ import Otwos.Donggae.DTO.application.ApplyTeamRequest;
 import Otwos.Donggae.DTO.application.read.ReadApplicationRequest;
 import Otwos.Donggae.DTO.application.read.ReadApplicationResponse;
 import Otwos.Donggae.DTO.member.previewInfo.PreviewUserInfoDTO;
-import Otwos.Donggae.DTO.member.userinfo.UserInterestFieldDTO;
-import Otwos.Donggae.DTO.member.userinfo.UserLanguageDTO;
-import Otwos.Donggae.DTO.member.userinfo.UserPersonalityDTO;
-import Otwos.Donggae.DTO.member.userinfo.UserStudyFieldDTO;
 import Otwos.Donggae.DTO.member.userinfo.response.UserInterestFieldResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserLanguageResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserPersonalityResponse;
@@ -34,6 +30,7 @@ import Otwos.Donggae.domain.member.repository.info.UserStudyFieldRepository;
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -103,6 +100,7 @@ public class ApplicationServiceImpl implements ApplicationService{
     public ReadApplicationResponse readApplication(ReadApplicationRequest applicationRequest) {
         User user = memberRepository.findUserByUserId(applicationRequest.getUserId());
         RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(applicationRequest.getRecruitPostId());
+
         //예외처리
         try {
             validateUserAndRecruitPost(user, recruitPost);
@@ -111,30 +109,8 @@ public class ApplicationServiceImpl implements ApplicationService{
             throw new RuntimeException(e);
         }
 
-        List<UserLanguageResponse> userLanguageDTOS = getLanguageResponse(user);
-        List<UserInterestFieldResponse> userInterestFieldDTOS = getInterestFieldResponse(user);
-        List<UserPersonalityResponse> userPersonalityDTOS = getPersonalityResponse(user);
-        List<UserStudyFieldResponse> userStudyFieldDTOS = getStudyFieldResponse(user);
-
-        //rank 엔티티에 없으면 그냥 "똥개" 보냄
-        UserRank userRank = userRankRepository.findUserRankByUserId(user);
-        DonggaeRank donggaeRank = DonggaeRank.똥개;
-        if (userRank != null){
-            donggaeRank = userRank.getRankName();
-        }
-
         //해당 user와 recruitPost가 있으면 보여주기
-        PreviewUserInfoDTO previewUserInfoDTO = new PreviewUserInfoDTO(
-                user.getGithubName(),
-                user.getIntro(),
-                user.getBoj_rank(),
-                user.getDguEmail(),
-                donggaeRank,
-                userLanguageDTOS,
-                userInterestFieldDTOS,
-                userPersonalityDTOS,
-                userStudyFieldDTOS
-        );
+        PreviewUserInfoDTO previewUserInfoDTO = createPreviewUserInfoDTO(user);
 
         Application application = applicationRepository.findApplicationByUserIdAndRecruitPostId(user, recruitPost);
 
@@ -151,20 +127,20 @@ public class ApplicationServiceImpl implements ApplicationService{
     @Override
     public PreviewUserInfoDTO applyPageInfo(int userId) {
         User user = memberRepository.findUserByUserId(userId);
+        return createPreviewUserInfoDTO(user);
+    }
 
+    private PreviewUserInfoDTO createPreviewUserInfoDTO(User user) {
         List<UserLanguageResponse> userLanguageDTOS = getLanguageResponse(user);
         List<UserInterestFieldResponse> userInterestFieldDTOS = getInterestFieldResponse(user);
         List<UserPersonalityResponse> userPersonalityDTOS = getPersonalityResponse(user);
         List<UserStudyFieldResponse> userStudyFieldDTOS = getStudyFieldResponse(user);
 
-        //rank 엔티티에 없으면 그냥 "똥개" 보냄
-        UserRank userRank = userRankRepository.findUserRankByUserId(user);
-        DonggaeRank donggaeRank = DonggaeRank.똥개;
-        if (userRank != null){
-            donggaeRank = userRank.getRankName();
-        }
+        DonggaeRank donggaeRank = Optional.ofNullable(userRankRepository.findUserRankByUserId(user))
+                .map(UserRank::getRankName)
+                .orElse(DonggaeRank.똥개);
 
-        PreviewUserInfoDTO previewUserInfoDTO = new PreviewUserInfoDTO(
+        return new PreviewUserInfoDTO(
                 user.getGithubName(),
                 user.getIntro(),
                 user.getBoj_rank(),
@@ -175,8 +151,8 @@ public class ApplicationServiceImpl implements ApplicationService{
                 userPersonalityDTOS,
                 userStudyFieldDTOS
         );
-        return previewUserInfoDTO;
     }
+
 
     //userId와 recruitPost에 해당하는 지원서 있는지 확인
     private void validateApplication(User user, RecruitPost recruitPost) throws Exception{
