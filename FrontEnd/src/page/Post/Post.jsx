@@ -4,9 +4,19 @@ import Header from "../../components/_Layout/Header";
 import bgImg from '../../image/donggae.png';
 import CheckBox from '../../components/CheckBox';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function Post() {
+    
+    let token = localStorage.getItem('token') || '';
+    const params = useParams();
+    const recruitPostId = params.recruitPostId
+    const [recruitPost, setRecruitPost] = useState('');
+    const [recuritField, setRecruitField] = useState([]);
+    const [recuritLan, setRecruitLan] = useState('');
+    const [recuritPers, setRecruitPers] = useState('');
     const [checkedItems, setCheckedItems] = useState([])
+
     const datas = [
         { title: '아침식사'},
         { title: '아침간식'},
@@ -31,21 +41,32 @@ export default function Post() {
         e.preventDefault();
         console.log('Form Data:', checkedItems);
     };
-    
-    let token = localStorage.getItem('token') || '';
-    const recruitPostId = 2; //예시
-    const [recruitPost, setRecruitPost] = useState('');
 
-    fetch(`/recruitPost/${recruitPostId}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-    }).then(res=>res.json())        
-    .then(res=> {
-        setRecruitPost(res)
-    });
+   
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                fetch(`/recruitPost/${recruitPostId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                }).then(res=>res.json())        
+                .then(res=> {
+                    console.log(res)
+                    setRecruitPost(res)
+                    setRecruitField(res.recruitFields)
+                    setRecruitLan(res.recruitLanguages)
+                    setRecruitPers(res.recruitPersonalities)
+                    console.log("얌" ,recuritField)
+                });
+            } catch (error) {
+                console.error("fatch to fail : ", error);
+            }
+        };
+        fetchData(); 
+    }, []);
   return (
     <div className={styles.default}>
         <Header />
@@ -75,21 +96,18 @@ export default function Post() {
                     <div className={styles.keyword_box}>
                         <div className={styles.keyword}>
                             모집 분야
-                            <span>JavaScript</span>
+                            {recuritField ? recuritField.slice(0, 2).map((item, index) => (<span>{item.field}</span>)) : null}
                         </div>
                         <div className={styles.keyword}>
-                            모집 분야
-                            <span>C++</span>
+                            선호 언어
+                            {recuritLan ? recuritLan.slice(0, 2).map((item, index) => (<span key={index}>{item.language}</span>)) : null}
+
                         </div>
                     </div>
                     <div className={styles.keyword_box}>
                         <div className={styles.keyword}>
-                            모집 분야
-                            <span>성실함</span>
-                        </div>
-                        <div className={styles.keyword}>
-                            모집 분야
-                            <span></span>
+                            성격 특성
+                            {recuritPers ? recuritPers.slice(0, 2).map((item, index) => (<span key={index}>{item.personality}</span>)) : null}
                         </div>
                     </div>
                 </div>
