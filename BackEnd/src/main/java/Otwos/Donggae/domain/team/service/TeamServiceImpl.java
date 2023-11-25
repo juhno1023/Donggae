@@ -119,6 +119,7 @@ public class TeamServiceImpl implements TeamService{
                         teamMember.getIsLeader());
 
                 TeamByLeader teamByLeader = new TeamByLeader(
+                        recruitPost.getRecruitPostId(),
                         team.getTeamId(),
                         team.getTeamName(), //팀 이름
                         recruitPost.getTitle(), //프로젝트 제목
@@ -149,6 +150,7 @@ public class TeamServiceImpl implements TeamService{
                 }
 
                 TeamByMember teamByMember = new TeamByMember(
+                        recruitPost.getRecruitPostId(),
                         team.getTeamId(),
                         team.getTeamName(), //팀 이름
                         recruitPost.getTitle(), //프로젝트 제목

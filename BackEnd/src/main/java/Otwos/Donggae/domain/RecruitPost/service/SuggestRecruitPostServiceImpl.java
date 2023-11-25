@@ -56,6 +56,7 @@ public class SuggestRecruitPostServiceImpl implements SuggestRecruitPostService{
             }
 
             TeamByMember teamByMember = new TeamByMember(
+                    recruitPost.getRecruitPostId(),
                     team.getTeamId(),
                     team.getTeamName(), //팀 이름
                     recruitPost.getTitle(), //프로젝트 제목
