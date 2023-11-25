@@ -10,12 +10,6 @@ export default function Mypage() {
 
 
     const[number, setNumber] = useState([]);
-    const[rankNo, setRankNo] = useState();
-    const[rank, setRank] = useState();
-    const[id, setId] = useState();
-    const[field, setField] = useState([]);
-    const[bojrank, setBojrank] = useState();
-    const[score, setScore] = useState();
     
     
 
@@ -34,12 +28,7 @@ export default function Mypage() {
                     .then(res=> {
                     console.log(res);
                     setNumber(res);
-                    setRankNo(res.ranking);
-                    setRank(res.rankName);
-                    setId(res.githubName);
-                    setField(res.userInterestFields);
-                    setScore(res.score);
-                    setBojrank(res.bojRank);
+                
             });
 
                 } catch (error) {
@@ -57,8 +46,8 @@ export default function Mypage() {
                 <div className={styles.body}>
                 <div className={styles.box__}>
                     <div className={styles.rankBox}>
-                    {number.map(data => <Rank rankNo={data.rankNo} rank={data.rank} id={data.id} 
-                    field={data.field} score={data.score} tier={data.bojrank}/>)}
+                    {number.map(data => <Rank  rankNo={data.ranking} rank={data.rankName} id={data.githubName} 
+                    field={data.userInterestField} score={data.score} tier={data.bojRank}/>)}
                     </div>
                 </div>
                 </div>
