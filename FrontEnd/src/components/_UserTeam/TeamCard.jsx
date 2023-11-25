@@ -1,10 +1,12 @@
 import styles from './TeamCard.module.css';
+import { Link } from 'react-router-dom';
 
-const TeamCard = ({ name, title, member}) => {
+const TeamCard = ({ name, title, member, recruitPost}) => {
 
     const imoArray= ["❤️", `🧡`, `💛`, `💚`, `💙`, `🩵`, `💜`, `🩷`, `🤎`, `🖤`, `🖤`, `🩶`, `🤍`, `💞`, `💟`, `💕`, `❣️`, `💝`, `💌`,`😀`, `😁`, `😃`, `😄`, `😋`, `😊`, `😉`, `😍`, `😘`, `🥰`, `😗`, `😙`, `🥲`, `🤗`, `🙂`, `☺️`, `😚`, `😐`, `😑`, `😶`, `🫥`, `😮`, `😯`, `😝`, `👻`, `😺`, `😸`, `😹`, `😻`, `😼`, `😽`, `🐱`]
     const num = Math.round(Math.random() * 50);
-    console.log(num)
+    let checkEdit = recruitPost
+    localStorage.setItem("checkEdit", JSON.stringify(checkEdit))
 
     return (
         <> 
@@ -12,7 +14,9 @@ const TeamCard = ({ name, title, member}) => {
                 {imoArray[num]}{name}{imoArray[num]}
                 <div>{title}</div>
                 <div>{member.name}</div>
-                <div></div>
+                <Link to={`/post/${recruitPost}`}>
+                    <button  type="submit" className={styles.modifyBtn}>조회</button>
+                </Link>
             </div>
         </>
     );

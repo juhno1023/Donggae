@@ -3,6 +3,7 @@ import styles from "./Post.module.css"
 import Header from "../../components/_Layout/Header";
 import bgImg from '../../image/donggae.png';
 import CheckBox from '../../components/CheckBox';
+import Modify from './Modify';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
@@ -11,6 +12,12 @@ export default function Post() {
     let token = localStorage.getItem('token') || '';
     const params = useParams();
     const recruitPostId = params.recruitPostId
+
+    // 글 수정
+    const [isEditing, setIsEditing] = useState(false);
+    const checkEdit = localStorage.getItem("checkEdit") ? JSON.parse(localStorage.getItem("checkEdit")) : [];
+
+
     const [recruitPost, setRecruitPost] = useState('');
     const [recuritField, setRecruitField] = useState([]);
     const [recuritLan, setRecruitLan] = useState('');
@@ -41,7 +48,6 @@ export default function Post() {
         e.preventDefault();
         console.log('Form Data:', checkedItems);
     };
-
    
     useEffect(() => {
         const fetchData = async () => {
@@ -67,14 +73,16 @@ export default function Post() {
         };
         fetchData(); 
     }, []);
-  return (
-    <div className={styles.default}>
+    console.log("checkEdit", checkEdit , recruitPostId)
+    return(
+        <div className={styles.default}>
         <Header />
         <div className={styles.inner}>
             <div className={styles.body}>
             <div className={styles.box__}>
+                {checkEdit == recruitPostId ? <button onClick={()=>setIsEditing(true)} type="submit" className={styles.modifyBtn}>수정하기</button> : null}
                 <Link to='/application'><button type="submit" className={styles.submitBtn}>지원하기</button></Link>
-                <div  className={styles.text__1}>🧡{recruitPost.title}🧡{recruitPost.title}</div>
+                <div  className={styles.text__1}>🧡{recruitPost.title}🧡</div>
                 <div className={styles.formGroup}>
                     <div>{recruitPost.content}</div>
                 </div>
@@ -136,6 +144,6 @@ export default function Post() {
                 </div>
             </div>
         </div>
-    </div>
-);
+        </div>    
+    );
 }
