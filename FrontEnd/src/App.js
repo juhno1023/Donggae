@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/main" element={<Main />} />
           <Route path="/posting" element={<Posting />} />
-          <Route path="/post" element={<Post />} />
+          <Route exact path="/post/:recruitPostId" element={<Post />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/rank" element={<Rank />} />
           <Route path="/application" element={<Application />} />
