@@ -15,7 +15,6 @@ export default function Post() {
 
     // 글 수정
     const [isEditing, setIsEditing] = useState(false);
-    const checkEdit = localStorage.getItem("checkEdit") ? JSON.parse(localStorage.getItem("checkEdit")) : [];
 
 
     const [recruitPost, setRecruitPost] = useState('');
@@ -65,7 +64,6 @@ export default function Post() {
                     setRecruitField(res.recruitFields)
                     setRecruitLan(res.recruitLanguages)
                     setRecruitPers(res.recruitPersonalities)
-                    console.log("얌" ,recuritField)
                 });
             } catch (error) {
                 console.error("fatch to fail : ", error);
@@ -73,14 +71,17 @@ export default function Post() {
         };
         fetchData(); 
     }, []);
-    console.log("checkEdit", checkEdit , recruitPostId)
+    if(isEditing){
+        return(
+            <Modify post={recruitPost}></Modify>
+        )
+    }else{
     return(
         <div className={styles.default}>
         <Header />
         <div className={styles.inner}>
             <div className={styles.body}>
             <div className={styles.box__}>
-                {checkEdit == recruitPostId ? <button onClick={()=>setIsEditing(true)} type="submit" className={styles.modifyBtn}>수정하기</button> : null}
                 <Link to='/application'><button type="submit" className={styles.submitBtn}>지원하기</button></Link>
                 <div  className={styles.text__1}>🧡{recruitPost.title}🧡</div>
                 <div className={styles.formGroup}>
@@ -145,5 +146,5 @@ export default function Post() {
             </div>
         </div>
         </div>    
-    );
+    )}
 }

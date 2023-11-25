@@ -45,7 +45,7 @@ export default function UserTeam() {
                 <div className={styles.box__}>
                     <div className={styles.text__1} >팀장으로 속한 팀</div>
                     <div className={styles.formGroup}>
-                        {teambyL.map(data => <TeamCard team = {data} name={data.teamName} title={data.title} member={data.teamMemberPreview} recruitPost = {data.teamId}/>)} 
+                        {teambyL.map(data => <TeamCard team = {data} name={data.teamName} title={data.title} member={data.teamMemberPreview} recruitPost = {data.recruitPostId}/>)} 
 
                     </div>
                 </div>
