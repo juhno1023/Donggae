@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+//필요 없어짐
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

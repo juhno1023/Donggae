@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+//필요 없어짐
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
