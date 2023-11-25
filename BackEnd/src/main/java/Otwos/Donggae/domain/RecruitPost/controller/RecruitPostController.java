@@ -8,12 +8,14 @@ import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
 import Otwos.Donggae.DTO.RecruitPost.RecruitPostResponseDTO;
 import Otwos.Donggae.DTO.RecruitPost.search.SearchRequest;
 import Otwos.Donggae.DTO.RecruitPost.search.SearchResponse;
+import Otwos.Donggae.DTO.team.showMyTeam.TeamByMember;
 import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
 import Otwos.Donggae.Jwt.Auth;
 import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.RecruitPost.service.RecRecruitPostService;
 import Otwos.Donggae.domain.RecruitPost.service.RecruitPostService;
 import Otwos.Donggae.domain.RecruitPost.service.SearchRecruitPostService;
+import Otwos.Donggae.domain.RecruitPost.service.SuggestRecruitPostService;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,8 @@ public class RecruitPostController {
     private RecRecruitPostService recRecruitPostService;
     @Autowired
     private SearchRecruitPostService searchRecruitPostService;
+    @Autowired
+    private SuggestRecruitPostService suggestRecruitPostService;
 
     @GetMapping("/recruitPost/{recruitPostId}") // 게시글 조회
     public ResponseEntity<RecruitPostDetailResponseDTO> getRecruitPost(@PathVariable int recruitPostId){
@@ -111,6 +115,16 @@ public class RecruitPostController {
         try {
             recruitPostService.completeRecruitPost(teamIdRequest);
             return ResponseEntity.ok("complete recruitPost");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/recruitPost/suggest")
+    public ResponseEntity<?> showSuggestRecruitPosts(@Auth int userId) {
+        try {
+            List<TeamByMember> suggests = suggestRecruitPostService.showSuggestRecruitPosts(userId);
+            return ResponseEntity.ok().body(suggests);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
