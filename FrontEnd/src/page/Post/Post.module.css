@@ -33,6 +33,22 @@ body{
   position: relative;
 }
 /* button */
+.modifyBtn{
+  background-color: white;
+  border:none;
+  border-radius: 6px;
+  width : 76px;
+  height : 37px;
+  right : 100px;
+  position: absolute;
+  cursor:pointer;
+
+  font-family: 'Brawler';
+  font-size:10px;
+  font-weight: bold;
+  z-index: 1;
+}
+
 .submitBtn{
   border:none;
   border-radius: 6px;

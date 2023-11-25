@@ -3,6 +3,7 @@ import './App.css';
 import Main from './page/mainpage/Mainpage';
 import Posting from './page/Post/Posting';
 import Post from './page/Post/Post';
+import Modify from './page/Post/Modify';
 import Application from './page/Application/Application';
 import Login from './page/Login/Login';
 import Mypage from './page/Mypage/Mypage';
@@ -22,6 +23,7 @@ function App() {
           <Route path="/main" element={<Main />} />
           <Route path="/posting" element={<Posting />} />
           <Route exact path="/post/:recruitPostId" element={<Post />} />
+          <Route exact path="/modify/:recruitPostId" element={<Modify />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/rank" element={<Rank />} />
           <Route path="/application" element={<Application />} />
