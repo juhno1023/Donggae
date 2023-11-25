@@ -8,10 +8,7 @@ import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.DAO.User.UserRank;
 import Otwos.Donggae.DTO.team.TeamMemberDTO;
 import Otwos.Donggae.DTO.team.selectTeamMember.SelectTeamMemberRequest;
-import Otwos.Donggae.DTO.team.showMyTeam.MyTeamList;
-import Otwos.Donggae.DTO.team.showMyTeam.TeamByLeader;
-import Otwos.Donggae.DTO.team.showMyTeam.TeamByMember;
-import Otwos.Donggae.DTO.team.showMyTeam.TeamMemberPreview;
+import Otwos.Donggae.DTO.team.showMyTeam.*;
 import Otwos.Donggae.DTO.team.teamDetail.ApplyMemberPreview;
 import Otwos.Donggae.DTO.team.teamDetail.DetailByLeader;
 import Otwos.Donggae.DTO.team.teamDetail.DetailByMember;
@@ -350,5 +347,32 @@ public class TeamServiceImpl implements TeamService{
         if (team == null) {
             throw new Exception("존재하지 않는 team입니다.");
         }
+    }
+
+    @Override
+    public List<MyRecruitPostNameList> showMyRecruitPostNameAsLeaderAndCompleteList(int userId) {
+        User user = memberRepository.findUserByUserId(userId);
+
+        List<MyRecruitPostNameList> myRecruitPostNameList = new ArrayList<>();
+        // userId에 해당하는 teamMember 모두 찾기 - team과 1:1매칭 가능
+        List<TeamMember> teams = teamMemberRepository.findTeamMembersByUserId(user);
+
+        for (TeamMember teamMember : teams) {
+
+            if (teamMember.getIsLeader() == Boolean.TRUE) { //user가 팀장인 경우
+
+                Team team = teamMember.getTeamId(); //해당하는 팀
+                RecruitPost recruitPost = team.getRecruitPostId(); //해당하는 모집 글
+
+                if(recruitPost.getIsComplete() == Boolean.TRUE){
+                    MyRecruitPostNameList myRecruitPostNameList1 = new MyRecruitPostNameList(
+                            recruitPost.getRecruitPostId(),
+                            recruitPost.getTitle()
+                    );
+                    myRecruitPostNameList.add(myRecruitPostNameList1);
+                }
+            }
+        }
+        return myRecruitPostNameList;
     }
 }

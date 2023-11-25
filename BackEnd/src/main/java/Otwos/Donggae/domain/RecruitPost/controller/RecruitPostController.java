@@ -1,23 +1,17 @@
 package Otwos.Donggae.domain.RecruitPost.controller;
 
-import Otwos.Donggae.DAO.Recruit.RecruitPost;
-import Otwos.Donggae.DAO.User.UserInterestField;
-import Otwos.Donggae.DTO.RecruitPost.RecRecruitPostDTO;
-import Otwos.Donggae.DTO.RecruitPost.RecruitPostDetailResponseDTO;
-import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
-import Otwos.Donggae.DTO.RecruitPost.RecruitPostResponseDTO;
+import Otwos.Donggae.DTO.RecruitPost.*;
 import Otwos.Donggae.DTO.RecruitPost.search.SearchRequest;
 import Otwos.Donggae.DTO.RecruitPost.search.SearchResponse;
+import Otwos.Donggae.DTO.team.showMyTeam.MyRecruitPostNameList;
 import Otwos.Donggae.DTO.team.showMyTeam.TeamByMember;
 import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
 import Otwos.Donggae.Jwt.Auth;
-import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.RecruitPost.service.RecRecruitPostService;
 import Otwos.Donggae.domain.RecruitPost.service.RecruitPostService;
 import Otwos.Donggae.domain.RecruitPost.service.SearchRecruitPostService;
 import Otwos.Donggae.domain.RecruitPost.service.SuggestRecruitPostService;
-import Otwos.Donggae.domain.member.repository.MemberRepository;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import Otwos.Donggae.domain.team.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,6 +31,8 @@ public class RecruitPostController {
     private SearchRecruitPostService searchRecruitPostService;
     @Autowired
     private SuggestRecruitPostService suggestRecruitPostService;
+    @Autowired
+    private TeamService teamService;
 
     @GetMapping("/recruitPost/{recruitPostId}") // 게시글 조회
     public ResponseEntity<RecruitPostDetailResponseDTO> getRecruitPost(@PathVariable int recruitPostId){
@@ -125,6 +121,25 @@ public class RecruitPostController {
         try {
             List<TeamByMember> suggests = suggestRecruitPostService.showSuggestRecruitPosts(userId);
             return ResponseEntity.ok().body(suggests);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/suggestRecruitPost") // 제안하기 버튼을 눌렀을 때, 누른 사용자가 팀장으로 속한 팀의 팀명 리스트를 보여줌
+    public ResponseEntity<?> showMyRecruitPosts(@Auth int userId) {
+        try {
+            List<MyRecruitPostNameList> myRecruitPostNameList = teamService.showMyRecruitPostNameAsLeaderAndCompleteList(userId);
+            return ResponseEntity.ok().body(myRecruitPostNameList);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @PostMapping("/suggestRecruitPostEnd") // 팀명을 선택하면 제안당한 유저의 아이디와 recruitPostId를 저장
+    public ResponseEntity<?> suggestMyRecruitPost(@RequestBody SuggestRequestDTO suggestRequestDTO) {
+        try {
+            suggestRecruitPostService.suggestRecruitPost(suggestRequestDTO);
+            return ResponseEntity.ok().body(suggestRequestDTO.getUserId() + "Successfully Suggested");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
