@@ -118,3 +118,28 @@ html,body {
 .navigation a:hover {
     color:var(--point-orange);
 }  
+
+
+/* 검색창 */
+.search {
+    position: relative;
+    left : 200px;
+    top : 30px;
+}
+  
+.search input {
+    width: 600px;
+    height : 20px;
+    border: 1px solid #bbb;
+    border-radius: 30px;
+    padding: 10px 12px;
+    font-size: 14px;
+}
+  
+.search img {
+    position : absolute;
+    width: 17px;
+    top: 10px;
+    right: 12px;
+    margin: 0;
+}
