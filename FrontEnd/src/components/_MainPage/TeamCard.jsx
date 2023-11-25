@@ -12,9 +12,9 @@ const TeamCard = ({ lecture, title, name, date, rank, language, no}) => {
             <div className={styles.GroupCard}>
                 {lecture}
                 
-                <div>{imoArray[num]}
-                <Link to={`/post/${no}`}>{title}</Link>
-                {imoArray[num]}</div>
+                
+                <Link to={`/post/${no}`}><div>{imoArray[num]}{title} {imoArray[num]}</div></Link>
+               
                 <div>{rank}{name}</div>
                 <div>{date}</div>
                 {language}

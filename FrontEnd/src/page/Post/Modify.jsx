@@ -93,7 +93,6 @@ export default function Modify({post}) {
         fetchData(); 
     };
 
-    console.log(post)
     return (
         <div className={styles.default}>
           <Header />
