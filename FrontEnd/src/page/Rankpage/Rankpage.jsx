@@ -8,6 +8,8 @@ import Rank from '../../components/Rank';
 export default function Mypage() {
     const history = useNavigate();
 
+
+    const[number, setNumber] = useState([]);
     const[rankNo, setRankNo] = useState();
     const[rank, setRank] = useState();
     const[id, setId] = useState();
@@ -20,7 +22,7 @@ export default function Mypage() {
     let token = localStorage.getItem('token') || '';
 
     useEffect(() => {
-        const handleClick = () => {
+        const handleClick = async() => {
             try {
                 fetch('http://localhost:8080/members/rank', {
                     method: "GET",
@@ -29,22 +31,23 @@ export default function Mypage() {
                         'Authorization': `Bearer ${token}`
                     },
                     }).then(res=>res.json())        
-                        .then(res=> {
-                        console.log(res)
-                        setRankNo(res.ranking);
-                        setRank(res.rankName);
-                        setId(res.githubName);
-                        setField(res.userInterestFields);
-                        setScore(res.score);
-                        setBojrank(res.bojRank);
-                });
+                    .then(res=> {
+                    console.log(res);
+                    setNumber(res);
+                    setRankNo(res.ranking);
+                    setRank(res.rankName);
+                    setId(res.githubName);
+                    setField(res.userInterestFields);
+                    setScore(res.score);
+                    setBojrank(res.bojRank);
+            });
 
                 } catch (error) {
                     console.error("Failed to fetch data: ", error);
                 }
             };
-        }
-    )
+            handleClick();
+        },[]);
 
     return (
         <div className={styles.default}>
@@ -54,7 +57,8 @@ export default function Mypage() {
                 <div className={styles.body}>
                 <div className={styles.box__}>
                     <div className={styles.rankBox}>
-                        <Rank rankNo={rankNo} rank={rank} id={id} field={field} score={score} tier={bojrank}></Rank>
+                    {number.map(data => <Rank rankNo={data.rankNo} rank={data.rank} id={data.id} 
+                    field={data.field} score={data.score} tier={data.bojrank}/>)}
                     </div>
                 </div>
                 </div>

@@ -53,8 +53,8 @@ export default function Mypage() {
                     console.error("Failed to fetch data: ", error);
                 }
             };
-        }
-    )
+            handleClick();
+        },[]);
 
 
 
