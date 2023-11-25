@@ -4,9 +4,16 @@ import Header from "../../components/_Layout/Header";
 import bgImg from '../../image/donggae.png';
 import CheckBox from '../../components/CheckBox';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function Post() {
+    
+    let token = localStorage.getItem('token') || '';
+    const params = useParams();
+    const recruitPostId = params.recruitPostId
+    const [recruitPost, setRecruitPost] = useState('');
     const [checkedItems, setCheckedItems] = useState([])
+
     const datas = [
         { title: '아침식사'},
         { title: '아침간식'},
@@ -31,21 +38,29 @@ export default function Post() {
         e.preventDefault();
         console.log('Form Data:', checkedItems);
     };
-    
-    let token = localStorage.getItem('token') || '';
-    const recruitPostId = 2; //예시
-    const [recruitPost, setRecruitPost] = useState('');
 
-    fetch(`/recruitPost/${recruitPostId}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-    }).then(res=>res.json())        
-    .then(res=> {
-        setRecruitPost(res)
-    });
+   
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log({recruitPostId})
+            try {
+                fetch(`/recruitPost/${recruitPostId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                }).then(res=>res.json())        
+                .then(res=> {
+                    setRecruitPost(res)
+                    console.log(res)
+                });
+            } catch (error) {
+                console.error("fatch to fail : ", error);
+            }
+        };
+        fetchData(); 
+    }, []);
   return (
     <div className={styles.default}>
         <Header />

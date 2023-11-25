@@ -26,6 +26,7 @@ export default function Header() {
                     <li><Link to='/post'>post</Link></li>
                     <li><Link to='/leader'>leader</Link></li>
                     <li><Link to='/userteam'>myteam</Link></li>
+                    <li><Link to='/rank'>rank</Link></li>
                     </ul>
                 </nav>
             </div>
