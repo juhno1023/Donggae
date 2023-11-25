@@ -23,7 +23,6 @@ export default function Header() {
                     <ul>
                     <li><Link to={menus[0].path}>메인</Link></li>
                     <li><Link to='/posting'>posting</Link></li>
-                    <li><Link to='/post'>post</Link></li>
                     <li><Link to='/leader'>leader</Link></li>
                     <li><Link to='/userteam'>myteam</Link></li>
                     <li><Link to='/rank'>rank</Link></li>
