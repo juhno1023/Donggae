@@ -6,6 +6,8 @@ import Otwos.Donggae.DAO.Team.Team;
 import Otwos.Donggae.DAO.Team.TeamMember;
 import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.DAO.User.UserRank;
+import Otwos.Donggae.DTO.RecruitPost.SuggestDTO;
+import Otwos.Donggae.DTO.RecruitPost.SuggestRequestDTO;
 import Otwos.Donggae.DTO.team.showMyTeam.TeamByMember;
 import Otwos.Donggae.DTO.team.showMyTeam.TeamMemberPreview;
 import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
@@ -18,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static java.sql.Types.NULL;
 
 @Service
 public class SuggestRecruitPostServiceImpl implements SuggestRecruitPostService{
@@ -67,6 +71,24 @@ public class SuggestRecruitPostServiceImpl implements SuggestRecruitPostService{
         return suggestRecruitPosts;
     }
 
+    @Override
+    public void suggestRecruitPost(SuggestRequestDTO suggestRequestDTO) {
+
+        int userId = suggestRequestDTO.getUserId();
+        User user = memberRepository.findUserByUserId(userId);
+
+        int recruitPostId = suggestRequestDTO.getRecruitPostId();
+
+        RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(recruitPostId);
+
+        SuggestDTO suggestDTO = new SuggestDTO(
+            NULL,
+            user,
+            recruitPost
+        );
+        suggestRepository.save(suggestDTO.toEntity(user,recruitPost));
+    }
+
     private TeamMemberPreview createTeamMemberPreview(TeamMember teamMember) {
         User user = teamMember.getUserId();
         UserRank userRank = userRankRepository.findUserRankByUserId(user);
@@ -78,5 +100,6 @@ public class SuggestRecruitPostServiceImpl implements SuggestRecruitPostService{
                 userRank.getRankName(),
                 teamMember.getIsLeader());
     }
+
 
 }

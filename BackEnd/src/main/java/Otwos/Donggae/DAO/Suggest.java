@@ -4,6 +4,7 @@ import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.User.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,4 +28,11 @@ public class Suggest {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recruit_post_id")
     private RecruitPost recruitPostId;
+
+    @Builder
+    public Suggest(int suggest_id, User userId, RecruitPost recruitPostId) {
+        this.suggest_id = suggest_id;
+        this.userId = userId;
+        this.recruitPostId = recruitPostId;
+    }
 }

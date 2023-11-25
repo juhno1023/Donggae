@@ -83,6 +83,8 @@ public class MyPageServiceImpl implements MyPageService{
     public void editMyInfo(MyPageRequestDTO myPageRequestDTO, int userId) {
         User user = memberRepository.findUserByUserId(userId);
 
+        String boj_Id = myPageRequestDTO.getBoj_Id();
+
         if(myPageRequestDTO.getSelfIntro()!=null){
             user.setIntro(myPageRequestDTO.getSelfIntro());
         }

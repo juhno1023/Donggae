@@ -20,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MyPageRequestDTO {
     private String selfIntro;
+    private String boj_Id;
     private List<UserLanguage> userLanguageDTOS;
     private List<UserInterestField> userInterestFieldDTOS;
     private List<UserPersonality> userPersonalityDTOS;
