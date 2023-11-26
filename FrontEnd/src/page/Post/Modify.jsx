@@ -3,11 +3,14 @@ import styles from "./Posting.module.css"
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
 import CheckBox from '../../components/CheckBox';
+import Sidebar from "../../components/_Layout/Sidebars";
 
 export default function Modify({post}) {
     let token = localStorage.getItem('token') || '';
-    const params = useParams();
-    const recruitPostId = params.recruitPostId
+    let { recuritPostId } = useParams();
+    let checkEdit = "false"
+    localStorage.setItem("checkEdit", checkEdit)
+
     const [recruitFields, setrecruitFields] = useState([])
     const [recruitLanguages, setrecruitLanguages] = useState([])
     const [recruitPersonalities, setrecruitPersonalities] = useState([])
@@ -69,7 +72,7 @@ export default function Modify({post}) {
         console.log(formData);
         const fetchData = async() => {
             try {
-                const res = await fetch(`/recruitPost/${recruitPostId}`, {
+                const res = await fetch(`/recruitPost/${recuritPostId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -79,6 +82,7 @@ export default function Modify({post}) {
                 })
                 if (res.ok) {
                     alert("수정 완료");
+                    window.location.replace(`/post/${recuritPostId}`);
                 } 
                 else if (res.status === 400) {
                     alert(`수정에 실패하였습니다.`);
@@ -95,7 +99,7 @@ export default function Modify({post}) {
 
     return (
         <div className={styles.default}>
-          <Header />
+          <Header /><Sidebar/>
           <div className={styles.inner}>
                 <div className={styles.body}>
                 <form onSubmit={PostOn}>

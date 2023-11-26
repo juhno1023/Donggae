@@ -4,18 +4,18 @@ import Header from "../../components/_Layout/Header";
 import bgImg from '../../image/donggae.png';
 import CheckBox from '../../components/CheckBox';
 import Modify from './Modify';
+import Sidebar from "../../components/_Layout/Sidebars";
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 export default function Post() {
-    
+
     let token = localStorage.getItem('token') || '';
-    const params = useParams();
-    const recruitPostId = params.recruitPostId
+    let { recuritPostId } = useParams();
 
     // 글 수정
     const [isEditing, setIsEditing] = useState(false);
-
+    const checkEdit = localStorage.getItem("checkEdit")
 
     const [recruitPost, setRecruitPost] = useState('');
     const [recuritField, setRecruitField] = useState([]);
@@ -47,11 +47,36 @@ export default function Post() {
         e.preventDefault();
         console.log('Form Data:', checkedItems);
     };
-   
+    const Deletion = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`/recruitPost/${recuritPostId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+            if (response.ok) {
+                alert("삭제 완료");
+                window.location.replace("/userteam");
+            } else if (response.status === 400) {
+                const errorText = await response.text();
+                alert(`일치하지 않습니다. ${errorText}`);
+                console.error("삭제 실패 : ", errorText);
+            } else {
+                console.error("삭제 실패 : ", response.statusText);
+            }
+            
+        } catch (error) {
+            console.error("fatch to fail : ", error);
+        }
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                fetch(`/recruitPost/${recruitPostId}`, {
+                fetch(`/recruitPost/${recuritPostId}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -59,7 +84,6 @@ export default function Post() {
                     },
                 }).then(res=>res.json())        
                 .then(res=> {
-                    console.log(res)
                     setRecruitPost(res)
                     setRecruitField(res.recruitFields)
                     setRecruitLan(res.recruitLanguages)
@@ -71,6 +95,7 @@ export default function Post() {
         };
         fetchData(); 
     }, []);
+
     if(isEditing){
         return(
             <Modify post={recruitPost}></Modify>
@@ -78,10 +103,12 @@ export default function Post() {
     }else{
     return(
         <div className={styles.default}>
-        <Header />
+        <Header /><Sidebar/>
         <div className={styles.inner}>
             <div className={styles.body}>
             <div className={styles.box__}>
+            {checkEdit == "true" ? <button onClick={()=>setIsEditing(true)} type="submit" className={styles.modifyBtn}>수정하기</button> : null}
+            {checkEdit == "true" ? <button onClick={Deletion} type="submit" className={styles.deleteBtn}>삭제하기</button> : null}
                 <Link to='/application'><button type="submit" className={styles.submitBtn}>지원하기</button></Link>
                 <div  className={styles.text__1}>🧡{recruitPost.title}🧡</div>
                 <div className={styles.formGroup}>

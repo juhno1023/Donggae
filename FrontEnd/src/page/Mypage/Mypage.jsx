@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import styles from "./Mypage.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
-import Sidebar from "../../components/_Layout/Sidebar";
+import Sidebar from "../../components/_Layout/Sidebars";
 
 export default function Mypage() {
     const history = useNavigate();

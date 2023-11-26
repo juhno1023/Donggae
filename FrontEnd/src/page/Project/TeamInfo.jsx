@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./TeamInfo.module.css"
 import Header from "../../components/_Layout/Header";
-import Sidebar from "../../components/_Layout/Sidebar";
+import Sidebar from "../../components/_Layout/Sidebars";
 
 export default function TeamInfo() {
     const [teamData, setTeamData] = useState([]);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from "./Application.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
+import Sidebar from "../../components/_Layout/Sidebars";
 import bgImg from '../../image/donggae.png';
 
 export default function Posting() {
@@ -78,7 +79,7 @@ export default function Posting() {
     
     return (
         <div className={styles.default}>
-            <Header />
+            <Header /><Sidebar/>
             <div className={styles.inner}>
                 <div className={styles.body}>
                 <form /*onSubmit={handleSubmit}*/>
