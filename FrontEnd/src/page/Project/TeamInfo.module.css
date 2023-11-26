@@ -10,9 +10,10 @@ body{
 }
 
 .default{
-  width: 90vw;
   padding-top:200px;
 }
+
+
 .inner{
   margin : 0 auto;
   width : 50vw;
@@ -22,9 +23,8 @@ body{
 .body{
   position: absolute;
   font-size: 14px;
-  top : 230px;
+  top : 180px;
   background-color: white;
-  margin-left: 200px;
 }
 
 

@@ -1,7 +1,7 @@
 import styles from './Card.module.css';
 import { Link } from 'react-router-dom';
 
-const TeamCard = ({ lecture, title, name, date, rank, language, no}) => {
+const TeamCard = ({ lecture, title, name, date, rank, language, recruitPostId}) => {
 
     const imoArray= ["❤️", `🧡`, `💛`, `💚`, `💙`, `🩵`, `💜`, `🩷`, `🤎`, `🖤`, `🖤`, `🩶`, `🤍`, `💞`, `💟`, `💕`, `❣️`, `💝`, `💌`,`😀`, `😁`, `😃`, `😄`, `😋`, `😊`, `😉`, `😍`, `😘`, `🥰`, `😗`, `😙`, `🥲`, `🤗`, `🙂`, `☺️`, `😚`, `😐`, `😑`, `😶`, `🫥`, `😮`, `😯`, `😝`, `👻`, `😺`, `😸`, `😹`, `😻`, `😼`, `😽`, `🐱`]
     const num = Math.round(Math.random() * 50);
@@ -13,7 +13,7 @@ const TeamCard = ({ lecture, title, name, date, rank, language, no}) => {
                 {lecture}
                 
                 
-                <Link to={`/post/${no}`}><div>{imoArray[num]}{title} {imoArray[num]}</div></Link>
+                <Link to={`/post/${recruitPostId}`}><div>{imoArray[num]}{title} {imoArray[num]}</div></Link>
                
                 <div>{rank}{name}</div>
                 <div>{date}</div>

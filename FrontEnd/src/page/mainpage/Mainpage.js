@@ -95,7 +95,7 @@ export default function Home() {
                             date={data.createDate} 
                             rank={data.donggaeRank} 
                             language={data.recuritLanguages} 
-                            no = {data.recruitPostId}
+                            recruitPostId = {data.recruitPostId}
                         />)} 
                         </div>
                     </div>

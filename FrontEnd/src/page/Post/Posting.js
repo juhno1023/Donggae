@@ -77,12 +77,13 @@ export default function Posting() {
                     body: JSON.stringify(formData),
                 })
                 if (res.ok) {
-                    alert("지원 완료");
+                    alert("작성 완료");
+                    window.location.replace("/userteam");
                 } 
                 else if (res.status === 400) {
-                    alert(`지원에 실패하였습니다.`);
+                    alert(`작성에 실패하였습니다.`);
                 } else {
-                    console.error("중복확인에 실패하였습니다.", res.statusText);
+                    console.error("작성에 실패하였습니다.", res.statusText);
                 }
                 
             } catch (error) {
