@@ -1,5 +1,4 @@
 .default{
-    width: 90vw;
     padding-top:200px;
   }
 
@@ -13,13 +12,27 @@
   .body{
     position: absolute;
     font-size: 14px;
-    top : 230px;
+    top : 180px;
     background-color: white;
-    margin-left: 200px;
   }
 
-  .rankBox{
+  .leaderboard {
+    width: 1000px;
     position: relative;
   }
-
   
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    color: #141a39;
+    cursor: default;
+  }
+  
+  .text__1 {
+    font-size:23px;
+    font-weight: bold;
+    width : 100%;
+    line-height: 35px;
+    margin-bottom:20px;
+  }

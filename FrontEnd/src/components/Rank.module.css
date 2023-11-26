@@ -1,14 +1,61 @@
-.rankcontainer {
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width : 100%;
-}
+
 
 .rankinfo {
     font-size: 18px;
     font-weight: bold;
     color: #333;
 }
+  
+
+  tr{
+    border-bottom: 1px solid grey;
+  }
+  td {
+    height: 20px;
+    font-family: 'Viga';
+    font-size: 1.4rem;
+    padding: 1rem 2rem;
+    position: relative;
+  }
+  
+  .number {
+    width: 1rem;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  .name {
+    text-align: left;
+    font-size:  15px;;
+  }
+  
+  .points {
+    font-weight: bold;
+    font-size:  15px;;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  td img{
+    width : 30px;
+  }
+  
+  @media (max-width: 740px) {
+      * {
+        font-size: 70%;
+      }
+  }
+  
+  @media (max-width: 500px) {
+      * {
+        font-size: 55%;
+      }
+  }
+  
+  @media (max-width: 390px) {
+      * {
+        font-size: 45%;
+      }
+  }
