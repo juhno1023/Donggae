@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./UserTeam.module.css"
 import Header from "../../components/_Layout/Header";
-import Sidebar from "../../components/_Layout/Sidebar";
+import Sidebar from "../../components/_Layout/Sidebars";
 import TeamCard from '../../components/_UserTeam/TeamCard';
 
 export default function UserTeam() {

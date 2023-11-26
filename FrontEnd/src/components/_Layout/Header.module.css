@@ -41,106 +41,77 @@ html,body {
 }
 
 /* header */
-.header{
-    position: fixed;
+/* .header{
+    position: absolute;
     left: 0;
     top: 0;
     width: 100vw;
     height: 120px;
     background-color: white;
     z-index: 2;
-}
+} */
 
-.contents{
-    font-size: 14px;
-    width: 80vw;
-    height: 100%;
-    margin: 0 auto;
-    align-items: center;
-    justify-content: space-between;
-    margin-top : 50px;
-    border-bottom: solid 1px var(--border-grey);
-    border-width: 120%;
-    padding-bottom : 30px;
-    background-color: white;
-}
-
-.logo{
-    display: flex; 
-    width : 300px;
-}
-
-.title{
-    font-size:42px;
-    font-weight: bold;
-    font-family: 'Viga';
-    color: var(--basic-text);
-    padding : 10px;
-}
-
-.subtitle{
-    font-family: 'Viga';
-    color: var(--basic-text);
-    padding-left : 10px;
-    font-size:22px;
-}
-
-.logoimg{
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-}
-
-.navigation{
-    text-align: center;
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 90px;
+    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-.navigation ul {
-    display: flex;
-    list-style: none;
-    font-family: 'Viga';
-    font-size:30px;
-    font-weight: bold;
+    background: #fff;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
     z-index: 2;
-}
-.navigation a {
-    color:var(--basic-black);
-    text-decoration: none;
-    margin-left: 40px;
-}
-.navigation li + li {
-    margin-left: 40px;
-    
-}
+  }
+
+  .contents {
+    font-size: 14px;
+    display: flex; 
+    align-items: center; 
+    width: 100vw;
+    height: 100%;
+    padding-left: 300px;
+    border-bottom: solid 1px var(--border-grey);
+    background-color: white;
+  }
   
-.navigation a:hover {
-    color:var(--point-orange);
-}  
-
-
-/* 검색창 */
-.search {
+  .logo {
+    display: flex;
+    align-items: center; 
+  }
+  
+  .title {
+    font-size: 42px;
+    font-weight: bold;
+    font-family: 'Viga';
+    color: var(--basic-text);
+    padding: 10px;
+  }
+  
+  .subtitle {
+    font-family: 'Viga';
+    color: var(--basic-text);
+    font-size: 22px;
+  }
+  
+  .search {
     position: relative;
-    left : 200px;
-    top : 30px;
-}
+    margin-left: 100px;
+  }
   
-.search input {
-    width: 600px;
-    height : 20px;
+  .search input {
+    width: 450px; 
+    height: 20px;
     border: 1px solid #bbb;
     border-radius: 30px;
     padding: 10px 12px;
     font-size: 14px;
-}
+  }
   
-.search img {
-    position : absolute;
+  .search img {
+    position: absolute;
     width: 17px;
     top: 10px;
     right: 12px;
     margin: 0;
-}
+  }

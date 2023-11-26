@@ -1,0 +1,40 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 200px;
+  background-color: white;
+  border-right: solid 1px var(--border-grey);
+  padding: 30px;
+  z-index: 2;
+}
+.sidebar__logo {
+  display: grid;
+  place-items: center;
+  height: 120px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: "Mochiy Pop P one", sans-serif;
+}
+.sidebar__menu__item {
+  color: #555555;
+  margin: 10px 5px;
+  padding: 10px 5px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.sidebar__menu__item:hover {
+  background-color: var(--point-orange);
+}
+.sidebar__menu__item:hover a {
+  color: white;
+}
+
+.logoimg{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+

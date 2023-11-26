@@ -4,6 +4,7 @@ import Header from "../../components/_Layout/Header";
 import bgImg from '../../image/donggae.png';
 import CheckBox from '../../components/CheckBox';
 import Modify from './Modify';
+import Sidebar from "../../components/_Layout/Sidebars";
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
@@ -78,7 +79,7 @@ export default function Post() {
     }else{
     return(
         <div className={styles.default}>
-        <Header />
+        <Header /><Sidebar/>
         <div className={styles.inner}>
             <div className={styles.body}>
             <div className={styles.box__}>

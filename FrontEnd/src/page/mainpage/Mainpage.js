@@ -1,7 +1,7 @@
 import styles from "./Mainpage.module.css"
 import React, { useEffect, useState } from 'react';
 import Header from "../../components/_Layout/Header";
-import Sidebar from "../../components/_Layout/Sidebar";
+import Sidebar from "../../components/_Layout/Sidebars";
 import TeamCard from '../../components/_MainPage/TeamCard';
 import UserCard from '../../components/_MainPage/UserCard';
 

@@ -3,7 +3,7 @@ import styles from "./Leader.module.css"
 import Header from "../../components/_Layout/Header";
 import Deletion from '../../components/_Leader/Deletion';
 import Selection from '../../components/_Leader/Selection';
-import Sidebar from "../../components/_Layout/Sidebar";
+import Sidebar from "../../components/_Layout/Sidebars";
 
 export default function Leader() {
     const [team, setTeam] = useState([]);

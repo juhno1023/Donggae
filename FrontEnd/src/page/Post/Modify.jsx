@@ -3,6 +3,7 @@ import styles from "./Posting.module.css"
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
 import CheckBox from '../../components/CheckBox';
+import Sidebar from "../../components/_Layout/Sidebars";
 
 export default function Modify({post}) {
     let token = localStorage.getItem('token') || '';
@@ -95,7 +96,7 @@ export default function Modify({post}) {
 
     return (
         <div className={styles.default}>
-          <Header />
+          <Header /><Sidebar/>
           <div className={styles.inner}>
                 <div className={styles.body}>
                 <form onSubmit={PostOn}>

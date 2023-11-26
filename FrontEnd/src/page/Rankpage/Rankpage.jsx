@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from "./Rankpage.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
-import Sidebar from "../../components/_Layout/Sidebar";
+import Sidebar from "../../components/_Layout/Sidebars";
 import Rank from '../../components/Rank';
 
 export default function Mypage() {

@@ -1,6 +1,7 @@
 import React, { useState  } from 'react';
 import styles from "./Posting.module.css"
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../../components/_Layout/Sidebars";
 import Header from "../../components/_Layout/Header";
 import CheckBox from '../../components/CheckBox';
 
@@ -94,7 +95,7 @@ export default function Posting() {
 
     return (
         <div className={styles.default}>
-          <Header />
+          <Header /><Sidebar/>
           <div className={styles.inner}>
                 <div className={styles.body}>
                 <form onSubmit={PostOn}>
