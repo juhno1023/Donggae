@@ -1,8 +1,8 @@
 spring:
-#  http:
-#    encoding:
-#      charset: UTF-8
-#      force: true
+  #  http:
+  #    encoding:
+  #      charset: UTF-8
+  #      force: true
   config:
     import: dbsettings.properties, emailsettings.properties, application-oauth.properties
   mail:
@@ -54,11 +54,11 @@ logging:
           descriptor:
             sql: trace
 github:
-    client-id: ${CLIENT_ID}
-    client-secret: ${CLIENT_SECRET}
-    redirect-url: ${REDIRECT_URL}
-    token-url: "https://github.com/login/oauth/access_token"
-    user-api-url: "https://api.github.com/user"
+  client-id: ${CLIENT_ID}
+  client-secret: ${CLIENT_SECRET}
+  redirect-url: ${REDIRECT_URL}
+  token-url: "https://github.com/login/oauth/access_token"
+  user-api-url: "https://api.github.com/user"
 security:
   jwt:
     token:
