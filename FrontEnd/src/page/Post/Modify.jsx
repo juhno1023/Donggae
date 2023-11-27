@@ -1,12 +1,16 @@
 import React, { useState  } from 'react';
 import styles from "./Posting.module.css"
-import { useNavigate } from "react-router-dom";
-import Sidebar from "../../components/_Layout/Sidebars";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
 import CheckBox from '../../components/CheckBox';
+import Sidebar from "../../components/_Layout/Sidebars";
 
-export default function Posting() {
+export default function Modify({post}) {
     let token = localStorage.getItem('token') || '';
+    let { recuritPostId } = useParams();
+    let checkEdit = "false"
+    localStorage.setItem("checkEdit", checkEdit)
+
     const [recruitFields, setrecruitFields] = useState([])
     const [recruitLanguages, setrecruitLanguages] = useState([])
     const [recruitPersonalities, setrecruitPersonalities] = useState([])
@@ -68,8 +72,8 @@ export default function Posting() {
         console.log(formData);
         const fetchData = async() => {
             try {
-                const res = await fetch('http://localhost:8080/recruitPost', {
-                    method: 'POST',
+                const res = await fetch(`/recruitPost/${recuritPostId}`, {
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
@@ -77,13 +81,13 @@ export default function Posting() {
                     body: JSON.stringify(formData),
                 })
                 if (res.ok) {
-                    alert("작성 완료");
-                    window.location.replace("/userteam");
+                    alert("수정 완료");
+                    window.location.replace(`/post/${recuritPostId}`);
                 } 
                 else if (res.status === 400) {
-                    alert(`작성에 실패하였습니다.`);
+                    alert(`수정에 실패하였습니다.`);
                 } else {
-                    console.error("작성에 실패하였습니다.", res.statusText);
+                    console.error("실패하였습니다.", res.statusText);
                 }
                 
             } catch (error) {
@@ -93,21 +97,20 @@ export default function Posting() {
         fetchData(); 
     };
 
-
     return (
         <div className={styles.default}>
           <Header /><Sidebar/>
           <div className={styles.inner}>
                 <div className={styles.body}>
                 <form onSubmit={PostOn}>
-                    <button type="submit" className={styles.submitBtn}>작성완료</button>
+                    <button type="submit" className={styles.submitBtn}>수정완료</button>
                     <div className={`${styles.formGroup} ${styles.fmg1}`}>
-                    <label>팀명</label>
+                    <label>팀명</label>{post.teamName}
                     <input
                         type="text"
                         id="team_name"
                         name="teamName"
-                        placeholder="팀 이름을 작성해주세요."
+                        placeholder={post.teamName}
                         value={formData.teamName}
                         onChange={handleInputChange}
                     />
@@ -118,7 +121,7 @@ export default function Posting() {
                         type="text"
                         id="post_title"
                         name="title"
-                        placeholder="제목을 작성해주세요. (예시 : 함께 ㅇㅇ 프로젝트를 이끌어 갈 분들을 모집합니다! )"
+                        placeholder={post.title}
                         value={formData.title}
                         onChange={handleInputChange}
                     />
@@ -128,7 +131,7 @@ export default function Posting() {
                     <textarea
                         id="post_content"
                         name="content"
-                        placeholder="내용을 작성해주세요. (예시 : 이번에 간단하게 웹 프로젝트를 함께 이끌어 갈 분들을 모집합니다! 사용하고자 하는 기술 스택은 nodejs, ...)"
+                        placeholder={post.content}
                         value={formData.content}
                         onChange={handleInputChange}
                     />

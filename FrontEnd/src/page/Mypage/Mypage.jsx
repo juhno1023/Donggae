@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import styles from "./Mypage.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
-import Sidebar from "../../components/_Layout/Sidebar";
+import Sidebar from "../../components/_Layout/Sidebars";
 
 export default function Mypage() {
     const history = useNavigate();
@@ -24,7 +24,7 @@ export default function Mypage() {
     let token = localStorage.getItem('token') || '';
 
     useEffect(() => {
-        const handleClick = () => {
+        const DataInquiry = () => {
             try {
                 fetch('http://localhost:8080/mypage', {
                     method: "GET",
@@ -53,7 +53,27 @@ export default function Mypage() {
                     console.error("Failed to fetch data: ", error);
                 }
             };
-            handleClick();
+
+            // const DataModify= async() => {
+            //     try {
+            //         const res = await fetch('http://localhost:8080/mypage', {
+            //             method: 'PUT',
+            //             headers: {
+            //                 'Content-Type': 'application/json',
+            //                 'Authorization': `Bearer ${token}`
+            //             },
+            //         })     
+            //         .then(res=> {}).then(data => {
+            //             console.log(data)
+            //             setRecPj(data);
+            //             console.log(data)
+            //         })
+            //     } catch (error) {
+            //         console.error("Failed to fetch: ", error);
+            //     }
+            // };
+            DataInquiry();
+            //DataModify();
         },[]);
 
 

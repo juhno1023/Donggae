@@ -4,23 +4,22 @@ html,body {
 }
 
 .default{
-    width: 90vw;
-    padding-top:200px;
-  }
-  .inner{
-    margin : 0 auto;
-    width : 50vw;
-    height : 680px;
-  }
-  
-  .body{
-    position: absolute;
-    font-size: 14px;
-    top : 230px;
-    background-color: white;
-    margin-left: 200px;
-  }
-  
+  padding-top:200px;
+}
+
+
+.inner{
+  margin : 0 auto;
+  width : 50vw;
+  height : 680px;
+}
+
+.body{
+  position: absolute;
+  font-size: 14px;
+  top : 180px;
+  background-color: white;
+}
 
   .box__{
     width : 900px;

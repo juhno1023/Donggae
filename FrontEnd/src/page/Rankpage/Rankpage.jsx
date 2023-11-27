@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from "./Rankpage.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
-import Sidebar from "../../components/_Layout/Sidebar";
+import Sidebar from "../../components/_Layout/Sidebars";
 import Rank from '../../components/Rank';
 
 export default function Mypage() {
@@ -44,11 +44,20 @@ export default function Mypage() {
             <Sidebar/>
             <div className={styles.inner}>
                 <div className={styles.body}>
-                <div className={styles.box__}>
-                    <div className={styles.rankBox}>
+                <div className={styles.text__1}>동개 랭킹</div>
+                <div className={styles.leaderboard}>
+                    <div className={styles.ribbon}></div>
+                    <table>
+                        <tr>
+                            <td>종합순위</td>
+                            <td>id</td>
+                            <td>점수</td>
+                            <td>field</td>
+                            <td>tier</td>
+                        </tr>
                     {number.map(data => <Rank  rankNo={data.ranking} rank={data.rankName} id={data.githubName} 
                     field={data.userInterestField} score={data.score} tier={data.bojRank}/>)}
-                    </div>
+                    </table>
                 </div>
                 </div>
             </div>

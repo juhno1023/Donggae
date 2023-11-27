@@ -9,14 +9,27 @@ body{
     background-color: var(--basic-white);
 }
 
+.default{
+  padding-top:200px;
+}
+
+
+.inner{
+  margin : 0 auto;
+  width : 50vw;
+  height : 680px;
+}
+
 .body{
-    position: absolute;
-    font-size: 14px;
-    left : 520px;
-    top : 230px;
-    background-color: white;
-    width : 900px;
-    height : 680px;
+  position: absolute;
+  font-size: 14px;
+  left : 520px;
+  top : 230px;
+  width : 900px;
+  height : 680px;
+  font-size: 14px;
+  top : 180px;
+  background-color: white;
 }
 
 

@@ -9,22 +9,22 @@ body{
   background-color: var(--basic-white);
 }
 .default{
-  width: 100vw;
-  height: 100vh;
+  padding-top:200px;
 }
+
+
 .inner{
   margin : 0 auto;
-  width : 900px;
+  width : 50vw;
   height : 680px;
 }
 
 .body{
   position: absolute;
   font-size: 14px;
-  top : 230px;
+  top : 180px;
   background-color: white;
 }
-
 
 .formGroup {
   display: flex;
@@ -33,6 +33,38 @@ body{
   position: relative;
 }
 /* button */
+
+
+.modifyBtn{
+  background-color: white;
+  border:none;
+  border-radius: 6px;
+  width : 76px;
+  height : 37px;
+  right : 160px;
+  position: absolute;
+  cursor:pointer;
+
+  font-family: 'Brawler';
+  font-size:10px;
+  font-weight: bold;
+  z-index: 1;
+}
+.deleteBtn{
+  background-color: white;
+  border:none;
+  border-radius: 6px;
+  width : 76px;
+  height : 37px;
+  right : 100px;
+  position: absolute;
+  cursor:pointer;
+
+  font-family: 'Brawler';
+  font-size:10px;
+  font-weight: bold;
+  z-index: 1;
+}
 .submitBtn{
   border:none;
   border-radius: 6px;
