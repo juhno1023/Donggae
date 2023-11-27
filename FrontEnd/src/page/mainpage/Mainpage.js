@@ -70,7 +70,7 @@ export default function Home() {
             <div className={styles.inner}>
                 <div className={styles.body}>
                 <div className={styles.box__}>
-                    <div>
+                    <div className={styles.first_box}>
                         <div className={styles.text__1} >추천 동개</div>
                         <div className={styles.formGroup}>
                         {recommendUser.map(data => 
@@ -85,7 +85,7 @@ export default function Home() {
                         />)} 
                         </div>
                     </div>
-                    <div>
+                    <div className={styles.second_box}>
                     <div className={styles.text__1} >요즘 핫한 프로젝트</div>
                         <div className={styles.formGroup}>
                         {recommendPj.map(data => 
