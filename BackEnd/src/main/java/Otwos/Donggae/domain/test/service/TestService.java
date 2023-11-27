@@ -1,6 +1,7 @@
 package Otwos.Donggae.domain.test.service;
 
 import Otwos.Donggae.DTO.test.TestQuestionDTO;
+import Otwos.Donggae.DTO.test.TestResultDTO;
 import Otwos.Donggae.DTO.test.UserAnswerDTO;
 import Otwos.Donggae.DTO.test.showTestFields.TestDTO;
 
@@ -13,4 +14,5 @@ public interface TestService {
     List<TestQuestionDTO> showTestQuestions(int testId);
 
     void saveUserAnswer(int userId, ArrayList<UserAnswerDTO> userAnswerDTOs);
+    TestResultDTO showTestResult(int userId, int testId);
 }

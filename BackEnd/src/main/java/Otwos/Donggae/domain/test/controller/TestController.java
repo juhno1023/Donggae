@@ -42,7 +42,7 @@ public class TestController {
     public ResponseEntity<?> saveTestAnswer(@Auth int userId, @RequestBody ArrayList<UserAnswerDTO> userAnswerDTOs){
         try{
             testService.saveUserAnswer(userId, userAnswerDTOs);
-            return ResponseEntity.ok("임시저장 완료");
+            return ResponseEntity.ok("결과제출 완료");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

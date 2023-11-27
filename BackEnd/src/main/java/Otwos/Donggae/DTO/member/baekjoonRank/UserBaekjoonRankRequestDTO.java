@@ -1,4 +1,4 @@
-package Otwos.Donggae.DTO.test;
+package Otwos.Donggae.DTO.member.baekjoonRank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserAnswerDTO {
+public class UserBaekjoonRankRequestDTO {
 
-    private int testQuestionId;
-    private int answerOptionId;
+    private String baekjoonUserName;
+
 }
