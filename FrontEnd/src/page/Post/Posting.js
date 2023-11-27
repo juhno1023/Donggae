@@ -66,6 +66,7 @@ export default function Posting() {
     const PostOn = (e) => {
         e.preventDefault();
         console.log(formData);
+        console.log(Selected)
         const fetchData = async() => {
             try {
                 const res = await fetch('http://localhost:8080/recruitPost', {
@@ -177,13 +178,13 @@ export default function Posting() {
                     </div>
                     <div className={styles.half}>
                     <div className={styles.text__1}>전공강의 팀원 모집하기</div> 선택 된 수강강의
-                    <select onChange={handleSelect} value={Selected}>
+                    <select className={styles.majorSelect} onChange={handleSelect} value={Selected}>
                         {selectList.map((item) => (
                             <option value={item} key={item}>
                             {item}
                             </option>
                         ))}
-                        </select>
+                    </select>
                     </div>
                 </div>
                 </div>

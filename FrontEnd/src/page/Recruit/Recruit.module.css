@@ -77,6 +77,20 @@ html,body {
   margin-bottom:10px;
 }
 
+.title_text{
+  color: #898989;
+  font-family: Brawler;
+  margin-left: 10px;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding-bottom: 15px;
+  border-width:0px 0px 1px 0px;
+  border-style:solid;
+}
+
+
 .second_box{
   width: 600px;
   position: relative;

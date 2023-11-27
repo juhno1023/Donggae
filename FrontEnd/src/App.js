@@ -7,6 +7,7 @@ import Modify from './page/Post/Modify';
 import Application from './page/Application/Application';
 import Login from './page/Login/Login';
 import Mypage from './page/Mypage/Mypage';
+import Recruit from './page/Recruit/Recruit';
 import Rank from './page/Rankpage/Rankpage';
 import Signup from "./page/Signup/Signup";
 import Leader from "./page/Project/Leader";
@@ -30,6 +31,7 @@ function App() {
           <Route path="/auth/github/callback" element={<AuthCallback />} />
           <Route path="/signup" element={<Signup />}/>
           <Route path="/leader" element={<Leader />}/>
+          <Route path="/recruit" element={<Recruit />}/>
           <Route path="/teaminfo" element={<TeamInfo />}/>
           <Route path="/userteam" element={<UserTeam />}/>
         </Routes>
