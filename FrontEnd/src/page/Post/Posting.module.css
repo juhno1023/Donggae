@@ -122,7 +122,7 @@
 }
 
 /* select box */
-select {
+.majorSelect {
     appearance: none;
     font-family: inherit;
     cursor: pointer;

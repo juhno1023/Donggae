@@ -25,3 +25,20 @@
     height: 200px;
     margin-right : 10px;
   }
+
+
+
+  .pjSelect {
+    width: 70px;
+    height: 20px;
+    background: inherit;
+    padding: 0px 3px 0px 10px;
+    border-radius: 4px;
+  }
+  .pjSelect option {
+    background: inherit;
+    padding: 3px 0;
+  }
+  .pjSelect option:hover {
+    background: rgb(58, 58, 58)
+  }
