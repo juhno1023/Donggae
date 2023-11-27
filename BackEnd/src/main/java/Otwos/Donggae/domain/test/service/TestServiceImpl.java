@@ -7,6 +7,7 @@ import Otwos.Donggae.DAO.Test.TestQuestion;
 import Otwos.Donggae.DAO.Test.UserAnswer;
 import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.DTO.test.TestQuestionDTO;
+import Otwos.Donggae.DTO.test.TestResultDTO;
 import Otwos.Donggae.DTO.test.UserAnswerDTO;
 import Otwos.Donggae.DTO.test.showTestFields.TestDTO;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
@@ -104,6 +105,11 @@ public class TestServiceImpl implements TestService{
                 userAnswerRepository.save(userAnswer);
             }
         }
+    }
+
+    @Override
+    public TestResultDTO showTestResult(int userId, int testId) {
+        return null;
     }
 
 
