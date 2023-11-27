@@ -366,7 +366,7 @@ public class TeamServiceImpl implements TeamService{
                 Team team = teamMember.getTeamId(); //해당하는 팀
                 RecruitPost recruitPost = team.getRecruitPostId(); //해당하는 모집 글
 
-                if(recruitPost.getIsComplete() == Boolean.TRUE){
+                if(recruitPost.getIsComplete() == Boolean.FALSE){ // 아직 모집이 끝나지 않은 팀들만 제안할 수 있도록!
                     MyRecruitPostNameList myRecruitPostNameList1 = new MyRecruitPostNameList(
                             recruitPost.getRecruitPostId(),
                             recruitPost.getTitle()
