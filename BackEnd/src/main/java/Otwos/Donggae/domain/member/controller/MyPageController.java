@@ -11,6 +11,7 @@ import Otwos.Donggae.domain.member.service.SolvedacServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,8 +26,8 @@ public class MyPageController {
 
     @Autowired
     private SolvedacService solvedacService;
-
-    @PostMapping("/mypage")
+  
+    @GetMapping("/mypage")
     public ResponseEntity<?> showMyPage(@Auth int userId) {
         try {
             return ResponseEntity.ok(myPageService.showMyInfo(userId));
