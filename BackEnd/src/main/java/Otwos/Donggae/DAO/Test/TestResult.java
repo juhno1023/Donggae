@@ -4,6 +4,7 @@ import Otwos.Donggae.DAO.Test.Identifier.TestResultPK;
 import Otwos.Donggae.DAO.User.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,4 +30,10 @@ public class TestResult {
     @Column(name = "test_result", nullable = false)
     private int testResult;
 
+    @Builder
+    public TestResult(User userId, Test testId, int testResult) {
+        this.userId = userId;
+        this.testId = testId;
+        this.testResult = testResult;
+    }
 }
