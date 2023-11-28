@@ -100,3 +100,33 @@ html,body {
 .first_box{
   width: 600px;
 }
+
+
+.search {
+  margin-top: 10px;
+  position: relative;
+  margin-left: 15px;
+}
+
+.search input {
+  width: 450px; 
+  height: 20px;
+  border: 1px solid #bbb;
+  border-radius: 30px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.search_icon{
+  width: 30px;
+  height: 30px;
+}
+
+
+.filter_box{
+    width : 70vw;
+    height: 600px;
+    margin : 0 auto;
+    display :flex;
+    flex-wrap: wrap;
+}
