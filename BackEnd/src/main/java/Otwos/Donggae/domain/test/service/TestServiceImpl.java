@@ -8,6 +8,8 @@ import Otwos.Donggae.DAO.Test.UserAnswer;
 import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.DTO.test.TestQuestionDTO;
 import Otwos.Donggae.DTO.test.TestResultDTO;
+import Otwos.Donggae.DTO.test.TestResultDTO.QuestionResultDTO;
+import Otwos.Donggae.DTO.test.TestResultDTO.QuestionResultDTO.AnswerResultDTO;
 import Otwos.Donggae.DTO.test.UserAnswerDTO;
 import Otwos.Donggae.DTO.test.showTestFields.TestDTO;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
@@ -109,7 +111,72 @@ public class TestServiceImpl implements TestService{
 
     @Override
     public TestResultDTO showTestResult(int userId, int testId) {
-        return null;
+        int questionNum = 1;
+        int correct = 0; //맞은 문제 수
+        User user = memberRepository.findUserByUserId(userId);
+        Test test = testRepository.findByTestId(testId);
+        // 해당 분야의 문제 리스트
+        List<TestQuestion> testQuestions = testQuestionRepository.findAllByTestId(test);
+        //문제들 DTO
+        List<TestResultDTO.QuestionResultDTO> questionResultDTOS = new ArrayList<>();
+
+        for (TestQuestion testQuestion : testQuestions) {
+            int answerNum = 1;
+            Boolean selectedIsCorrect = Boolean.FALSE; //이 문제 user가 맞았는지?
+            //해당 문제의 보기 리스트
+            List<AnswerOption> answerOptions = answerOptionRepository.findAllByTestQuestionId(testQuestion);
+            //정답들 DTO
+            List<TestResultDTO.QuestionResultDTO.AnswerResultDTO> answerResultDTOS = new ArrayList<>();
+
+            for (AnswerOption answerOption : answerOptions) {
+                Boolean isSelected = Boolean.FALSE;
+                Boolean isCorrectAnswer = Boolean.FALSE;
+
+                //이 문제에 대해 user가 선택한 답
+                UserAnswer userAnswer = userAnswerRepository.findByUserIdAndTestQuestionId(user, testQuestion);
+                //user가 선택한 답과 현재 보기가 맞으면
+                if (userAnswer.getAnswerOptionId() == answerOption) {
+                    isSelected = Boolean.TRUE;
+                }
+                //이 보기가 정답이라면
+                if (answerOption.isAnswer() == Boolean.TRUE) {
+                    isCorrectAnswer = Boolean.TRUE;
+                }
+                //user가 선택한 보기가 정답이라면
+                if (isSelected == Boolean.TRUE && isCorrectAnswer == Boolean.TRUE) {
+                    selectedIsCorrect = Boolean.TRUE;
+                    correct++;
+                }
+
+                AnswerResultDTO answerResultDTO = new AnswerResultDTO(
+                        answerNum, //보기 번호
+                        isSelected, //user가 선택한 답인지?
+                        isCorrectAnswer, //실제 정답인지
+                        answerOption.getContent() //보기 내용
+                );
+                answerResultDTOS.add(answerResultDTO);
+                answerNum++;
+            }
+
+            QuestionResultDTO questionResultDTO = new QuestionResultDTO(
+                    selectedIsCorrect, //맞았는지?
+                    questionNum, //문제 번호
+                    testQuestion.getQuestionText(), //문제 내용
+                    answerResultDTOS //보기 List
+            );
+            questionResultDTOS.add(questionResultDTO);
+            questionNum++;
+        }
+
+        TestResultDTO testResultDTO = new TestResultDTO(
+                test.getTestField(), //test분야 이름
+                correct, //맞은 문제 수
+                testQuestionRepository.countAllByTestId(test), //전체 문제 수
+                questionResultDTOS //문제 List
+        );
+
+        //점수 test_result, uesr에 저장!!!
+        return testResultDTO;
     }
 
 
