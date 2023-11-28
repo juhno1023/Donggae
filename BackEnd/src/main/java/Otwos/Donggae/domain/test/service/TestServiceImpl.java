@@ -4,6 +4,7 @@ import static java.sql.Types.NULL;
 import Otwos.Donggae.DAO.Test.AnswerOption;
 import Otwos.Donggae.DAO.Test.Test;
 import Otwos.Donggae.DAO.Test.TestQuestion;
+import Otwos.Donggae.DAO.Test.TestResult;
 import Otwos.Donggae.DAO.Test.UserAnswer;
 import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.DTO.test.TestQuestionDTO;
@@ -16,6 +17,7 @@ import Otwos.Donggae.domain.member.repository.MemberRepository;
 import Otwos.Donggae.domain.test.repository.AnswerOptionRepository;
 import Otwos.Donggae.domain.test.repository.TestQuestionRepository;
 import Otwos.Donggae.domain.test.repository.TestRepository;
+import Otwos.Donggae.domain.test.repository.TestResultRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +42,8 @@ public class TestServiceImpl implements TestService{
 
     @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private TestResultRepository testResultRepository;
 
     @Override
     public List<TestDTO> showTestFields() {
@@ -175,7 +179,33 @@ public class TestServiceImpl implements TestService{
                 questionResultDTOS //문제 List
         );
 
-        //점수 test_result, uesr에 저장!!!
+        //점수 test_result에 저장
+        TestResult testResult = TestResult.builder()
+                .userId(user)
+                .testId(test)
+                .testResult(correct)
+                .build();
+        testResultRepository.save(testResult);
+
+        List<TestResult> testResults = testResultRepository.findAllByUserId(user);
+        int userDevTestScore = 0;
+        for (TestResult userTestResult : testResults) {
+            userDevTestScore += userTestResult.getTestResult();
+        }
+
+        //점수 user에 저장
+        User saveScoreUser = User.builder()
+                .userId(user.getUserId())
+                .githubName(user.getGithubName())
+                .intro(user.getIntro())
+                .teamExpCount(user.getTeamExpCount())
+                .leaderCount(user.getLeaderCount())
+                .boj_rank(user.getBoj_rank())
+                .devTestScore(userDevTestScore) //test_result에서 불러와서 저장해야함
+                .dguEmail(user.getDguEmail())
+                .build();
+        memberRepository.save(saveScoreUser);
+
         return testResultDTO;
     }
 
