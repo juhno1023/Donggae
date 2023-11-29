@@ -5,6 +5,7 @@ import Otwos.Donggae.DAO.Recruit.RecruitLanguage;
 import Otwos.Donggae.DAO.Recruit.RecruitPersonality;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.Team.Team;
+import Otwos.Donggae.DAO.Team.TeamMember;
 import Otwos.Donggae.DAO.User.*;
 import Otwos.Donggae.DTO.RecruitPost.*;
 import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitFieldDTO;
@@ -418,6 +419,29 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         recruitPost.complete();
 
         recruitPostRepository.save(recruitPost); // 변경사항 저장
+
+        //팀장의 leader_count & team_exp_count, 팀원의 team_exp_count 증가시키기
+        //team에 해당하는 teamMembers
+        List<TeamMember> teamMembers = teamMemberRepository.findTeamMembersByTeamId(team);
+        for (TeamMember teamMember : teamMembers) {
+            User user = teamMember.getUserId();
+            int userLeaderCnt = user.getLeaderCount();
+
+            if (teamMember.getIsLeader() == Boolean.TRUE) {
+                userLeaderCnt += 1;
+            }
+            User saveUser = User.builder()
+                    .userId(user.getUserId())
+                    .boj_rank(user.getBoj_rank())
+                    .devTestScore(user.getDevTestScore())
+                    .dguEmail(user.getDguEmail())
+                    .githubName(user.getGithubName())
+                    .intro(user.getIntro())
+                    .leaderCount(userLeaderCnt)
+                    .teamExpCount(user.getTeamExpCount()+1)
+                    .build();
+            memberRepository.save(saveUser);
+        }
     }
 
     private void validateTeamAndPost(Team team, RecruitPost recruitPost) throws Exception{
