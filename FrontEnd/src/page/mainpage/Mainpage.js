@@ -23,7 +23,6 @@ export default function Home() {
                 .then(res=> {
                     console.log("멤버 : ", res)
                     setRecUser(res);
-                    console.log(recommendUser)
                 });
             } catch (error) {
                 console.error("Failed to fetch: ", error);
@@ -52,7 +51,6 @@ export default function Home() {
                 }).then(data => {
                     console.log("포스트 : ", data)
                     setRecPj(data);
-                    console.log(data)
                 })
             } catch (error) {
                 console.error("Failed to fetch: ", error);
@@ -70,11 +68,13 @@ export default function Home() {
             <div className={styles.inner}>
                 <div className={styles.body}>
                 <div className={styles.box__}>
-                    <div>
+                    <div className={styles.first_box}>
                         <div className={styles.text__1} >추천 동개</div>
                         <div className={styles.formGroup}>
                         {recommendUser.map(data => 
-                        <UserCard name={data.githubName} 
+                        <UserCard 
+                            userId={data.userId}
+                            name={data.githubName} 
                             intro={data.intro} 
                             devTestScore={data.devTestScore} 
                             rank={data.boj_rank} 
@@ -85,7 +85,7 @@ export default function Home() {
                         />)} 
                         </div>
                     </div>
-                    <div>
+                    <div className={styles.second_box}>
                     <div className={styles.text__1} >요즘 핫한 프로젝트</div>
                         <div className={styles.formGroup}>
                         {recommendPj.map(data => 

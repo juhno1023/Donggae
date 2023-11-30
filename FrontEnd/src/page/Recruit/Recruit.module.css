@@ -77,6 +77,20 @@ html,body {
   margin-bottom:10px;
 }
 
+.title_text{
+  color: #898989;
+  font-family: Brawler;
+  margin-left: 10px;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding-bottom: 15px;
+  border-width:0px 0px 1px 0px;
+  border-style:solid;
+}
+
+
 .second_box{
   width: 600px;
   position: relative;
@@ -85,4 +99,34 @@ html,body {
 
 .first_box{
   width: 600px;
+}
+
+
+.search {
+  margin-top: 10px;
+  position: relative;
+  margin-left: 15px;
+}
+
+.search input {
+  width: 450px; 
+  height: 20px;
+  border: 1px solid #bbb;
+  border-radius: 30px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.search_icon{
+  width: 30px;
+  height: 30px;
+}
+
+
+.filter_box{
+    width : 70vw;
+    height: 600px;
+    margin : 0 auto;
+    display :flex;
+    flex-wrap: wrap;
 }

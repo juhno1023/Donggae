@@ -1,6 +1,7 @@
 package Otwos.Donggae.domain.test.controller;
 
 import Otwos.Donggae.DTO.test.TestQuestionDTO;
+import Otwos.Donggae.DTO.test.TestResultDTO;
 import Otwos.Donggae.DTO.test.UserAnswerDTO;
 import Otwos.Donggae.DTO.test.showTestFields.TestDTO;
 import Otwos.Donggae.Jwt.Auth;
@@ -29,8 +30,8 @@ public class TestController {
     }
 
     @GetMapping("/test/{testId}")
-    public ResponseEntity<?> showTestQuestions(@PathVariable("testId") int testId){
-        try{
+    public ResponseEntity<?> showTestQuestions(@PathVariable("testId") int testId) {
+        try {
             List<TestQuestionDTO> testQuestionDTOList = testService.showTestQuestions(testId);
             return ResponseEntity.ok().body(testQuestionDTOList);
         } catch (Exception e) {
@@ -39,10 +40,20 @@ public class TestController {
     }
 
     @PostMapping("/test/save")
-    public ResponseEntity<?> saveTestAnswer(@Auth int userId, @RequestBody ArrayList<UserAnswerDTO> userAnswerDTOs){
-        try{
+    public ResponseEntity<?> saveTestAnswer(@Auth int userId, @RequestBody ArrayList<UserAnswerDTO> userAnswerDTOs) {
+        try {
             testService.saveUserAnswer(userId, userAnswerDTOs);
-            return ResponseEntity.ok("임시저장 완료");
+            return ResponseEntity.ok("결과제출 완료");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/test/result/{testId}")
+    public ResponseEntity<?> showTestResult(@Auth int userId, @PathVariable("testId") int testId) {
+        try {
+            TestResultDTO testResultDTO = testService.showTestResult(userId, testId);
+            return ResponseEntity.ok().body(testResultDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
