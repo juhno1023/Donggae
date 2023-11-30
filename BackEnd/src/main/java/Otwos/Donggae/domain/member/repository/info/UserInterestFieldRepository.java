@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserInterestFieldRepository extends JpaRepository<UserInterestField, UserInterestFieldPK> {
     List<UserInterestField> findAllByUserId(User user);
+    void deleteAllByUserId(User user);
 }

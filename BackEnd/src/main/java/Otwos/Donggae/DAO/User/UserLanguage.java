@@ -3,13 +3,11 @@ package Otwos.Donggae.DAO.User;
 import Otwos.Donggae.DAO.User.Identifier.UserLanguagePK;
 import Otwos.Donggae.Global.LanguageEnum;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @Entity
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @IdClass(UserLanguagePK.class)
 @Table(name = "user_language")
