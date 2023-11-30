@@ -79,4 +79,25 @@ public class User {
         this.devTestScore = devTestScore;
         this.dguEmail = dguEmail;
     }
+
+    @Builder
+    public User(int userId, String githubName,
+                String intro, int teamExpCount,
+                int leaderCount, BaekjoonRank boj_rank,
+                int devTestScore, String dguEmail, Set<UserLanguage> userLanguages,
+                Set<UserInterestField> userInterestFields, Set<UserPersonality> userPersonalities
+                ) {
+
+        this.userId = userId;
+        this.githubName = githubName;
+        this.intro = intro;
+        this.teamExpCount = teamExpCount;
+        this.leaderCount = leaderCount;
+        this.boj_rank = boj_rank;
+        this.devTestScore = devTestScore;
+        this.dguEmail = dguEmail;
+        this.userLanguages = userLanguages;
+        this.userInterestFields = userInterestFields;
+        this.userPersonalities = userPersonalities;
+    }
 }
