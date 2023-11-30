@@ -7,7 +7,6 @@ import styles from "./Sidebar.module.css"
 
 
 const Sidebar = () => {
-    const navigate = useNavigate();
     
     const sidebarRef = useRef();
     const logout = () => {

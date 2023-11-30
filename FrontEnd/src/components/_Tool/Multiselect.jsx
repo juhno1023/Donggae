@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import { Multiselect } from "multiselect-react-dropdown";
-import { useNavigate } from "react-router-dom";
+import styles from "./Multiselect.module.css"
 
-const options = [
-  { name: "Option 1", id: 1 },
-  { name: "Option 2", id: 2 },
-  { name: "Option 3", id: 3 },
-  { name: "Option 4", id: 4 },
-  { name: "Option 5", id: 5 }
-];
 
-const MultiselectTest = () => {
-  const navigate = useNavigate();
+
+const MultiselectTest = ({options, placehdr}) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [removedOptions, setRemovedOptions] = useState([]);
   const onSelectOptions = (selectedList, selectedItem) => {
@@ -31,14 +24,11 @@ const MultiselectTest = () => {
           onRemove={onRemoveOptions}
           displayValue="name"
           closeIcon="cancel"
-          placeholder="Select Options"
+          placeholder={placehdr}
           selectedValues={selectedOptions}
-          className="multiSelectContainer"
+          className={styles.multiSelectContainer}
         />
       </form>
-      <br />
-      <br />
-      <button onClick={() => navigate("/random/")}>Go to another page</button>
     </div>
   );
 };

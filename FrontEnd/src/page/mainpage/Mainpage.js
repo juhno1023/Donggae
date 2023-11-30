@@ -136,10 +136,11 @@ export default function Home() {
 
                     <div className={styles.formGroup}>
                     {suggestPj.map(data => 
-                    <SuggestCard lecture={data.majorLectureName} 
+                    <SuggestCard  
                         name={data.userName} 
                         title = {data.title} 
                         info ={data.teamMemberPreview}
+                        recruitPostId = {data.recruitPostId}
                     />)} 
                     </div>
                 </div>
