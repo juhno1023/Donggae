@@ -63,45 +63,48 @@ export default function Home() {
 
   return (
     <div className={styles.default}>
-            <Header />
-            <Sidebar/>
-            <div className={styles.inner}>
-                <div className={styles.body}>
-                <div className={styles.box__}>
-                    <div className={styles.first_box}>
-                        <div className={styles.text__1} >추천 동개</div>
-                        <div className={styles.formGroup}>
-                        {recommendUser.map(data => 
-                        <UserCard 
-                            userId={data.userId}
-                            name={data.githubName} 
-                            intro={data.intro} 
-                            devTestScore={data.devTestScore} 
-                            rank={data.boj_rank} 
-                            language={data.recuritLanguages} 
-                            interest={data.userInterestFields} 
-                            personal={data.userPersonalities} 
-                            study={data.userStudyFields} 
-                        />)} 
-                        </div>
-                    </div>
-                    <div className={styles.second_box}>
-                    <div className={styles.text__1} >요즘 핫한 프로젝트</div>
-                        <div className={styles.formGroup}>
-                        {recommendPj.map(data => 
-                        <TeamCard lecture={data.majorLectureName} 
-                            name={data.userName} 
-                            title = {data.title} 
-                            date={data.createDate} 
-                            rank={data.donggaeRank} 
-                            language={data.recuritLanguages} 
-                            recruitPostId = {data.recruitPostId}
-                        />)} 
-                        </div>
+        <Header />
+        <Sidebar/>
+        <div className={styles.inner}>
+            <div className={styles.body}>
+            <div className={styles.box__}>
+                <div className={styles.first_box}>
+                    <div className={styles.text__1} >추천 동개</div>
+                    <div className={styles.title_text}>함께듣는 강의를 위한 동개를 모집 하고 있어요!</div>
+                    <div className={styles.formGroup}>
+                    {recommendUser.map(data => 
+                    <UserCard 
+                        userId={data.userId}
+                        name={data.githubName} 
+                        intro={data.intro} 
+                        devTestScore={data.devTestScore} 
+                        rank={data.boj_rank} 
+                        language={data.recuritLanguages} 
+                        interest={data.userInterestFields} 
+                        personal={data.userPersonalities} 
+                        study={data.userStudyFields} 
+                    />)} 
                     </div>
                 </div>
+                <div className={styles.second_box}>
+                <div className={styles.text__1} >요즘 핫한 프로젝트</div>
+                <div className={styles.title_text}>대외적으로 프로젝트 진행을 위한 동개를 모집 하고 있어요!</div>
+
+                    <div className={styles.formGroup}>
+                    {recommendPj.map(data => 
+                    <TeamCard lecture={data.majorLectureName} 
+                        name={data.userName} 
+                        title = {data.title} 
+                        date={data.createDate} 
+                        rank={data.donggaeRank} 
+                        language={data.recuritLanguages} 
+                        recruitPostId = {data.recruitPostId}
+                    />)} 
+                    </div>
                 </div>
             </div>
+            </div>
         </div>
+    </div>
 );
 }

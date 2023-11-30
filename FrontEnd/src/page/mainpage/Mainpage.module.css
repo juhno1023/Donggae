@@ -7,13 +7,6 @@ html,body {
   padding-top:200px;
 }
 
-
-.inner{
-  margin : 0 auto;
-  width : 50vw;
-  height : 680px;
-}
-
 .body{
   position: absolute;
   font-size: 14px;
@@ -23,11 +16,7 @@ html,body {
 }
 
   .box__{
-    width : 70vw;
-    height: 600px;
-    margin : 0 auto;
     display :flex;
-    flex-wrap: wrap;
   }
   
   .formGroup__{
@@ -36,9 +25,7 @@ html,body {
     flex-direction: row ;
     margin-bottom: 20px;
     position: relative;
-    padding: 5px;
     border-radius: 12px;
-    height: 20px;
     line-height: 36px;
     word-wrap: break-word;
     padding : 10px;
@@ -68,7 +55,7 @@ html,body {
 
 
 .text__1 {
-  font-size:23px;
+  font-size:25px;
   font-weight: bold;
   width : 100%;
   line-height: 35px;
@@ -77,12 +64,20 @@ html,body {
   margin-bottom:10px;
 }
 
+.first_box{
+  width: 500px;
+}
+
 .second_box{
-  width: 600px;
+  width: 500px;
   position: relative;
   left: 100px;
 }
 
-.first_box{
-  width: 600px;
+.title_text{
+  color: #898989;
+  margin-left: 10px;
+  font-size: 13px;
+  padding-bottom: 15px;
+  border-bottom: #898989 1px solid;
 }
