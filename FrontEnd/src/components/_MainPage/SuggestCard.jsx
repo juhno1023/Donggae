@@ -2,7 +2,7 @@ import styles from './Card.module.css';
 import { Link } from 'react-router-dom';
 import React, { useState ,useEffect} from 'react';
 
-const TeamCard = ({ lecture, title, name, date, rank, language, recruitPostId}) => {
+const TeamCard = ({name, title, info, recruitPostId}) => {
 
     const imoArray= ["❤️", `🧡`, `💛`, `💚`, `💙`, `🩵`, `💜`, `🩷`, `🤎`, `🖤`, `🖤`, `🩶`, `🤍`, `💞`, `💟`, `💕`, `❣️`, `💝`, `💌`,`😀`, `😁`, `😃`, `😄`, `😋`, `😊`, `😉`, `😍`, `😘`, `🥰`, `😗`, `😙`, `🥲`, `🤗`, `🙂`, `☺️`, `😚`, `😐`, `😑`, `😶`, `🫥`, `😮`, `😯`, `😝`, `👻`, `😺`, `😸`, `😹`, `😻`, `😼`, `😽`, `🐱`]
     const num = Math.round(Math.random() * 50);
@@ -13,24 +13,16 @@ const TeamCard = ({ lecture, title, name, date, rank, language, recruitPostId}) 
         }
         setColor(getRandomColor());
     }, []);
-    var lecture = "개인"; // Assuming you want to set a default value if lecture is not defined
+    
 
     return (
     <>
-        <div className={styles.GroupCard}>
-        <span className={styles.Lecture} style={{backgroundColor : color}}>{lecture}</span>
+        <div className={styles.SuggetCard}>
             <div className={styles.title}><Link to={`/post/${recruitPostId}`}>
-                {title} {imoArray[num]}
-                </Link></div>  
-                {language ? (
-                    language.map((data, index) => (
-                    <span key={index} className={styles.tag}>
-                        {data}
-                    </span>
-                    ))
-                ) : null}
-            <div>{name}</div>{rank}
-            <div>{date}</div>
+                {title} {imoArray[num]}</Link> </div>
+                 <div>
+                {info.name} {info.bojRank} 
+                {info.donggaeRank} {name}</div>
         </div>
     </>
     );
