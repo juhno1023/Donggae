@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserLanguageRepository extends JpaRepository<UserLanguage, UserLanguagePK> {
     List<UserLanguage> findAllByUserId(User user);
+
+    void deleteAllByUserId(User user);
 }

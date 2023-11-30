@@ -36,7 +36,7 @@ public class MyPageController {
     }
 
     @PutMapping("/mypage")
-    public ResponseEntity<?> editMyPage(MyPageRequestDTO myPageRequestDTO, @Auth int userId) {
+    public ResponseEntity<?> editMyPage(@RequestBody MyPageRequestDTO myPageRequestDTO, @Auth int userId) {
         try {
             myPageService.editMyInfo(myPageRequestDTO, userId);
             return ResponseEntity.ok("Successfully edited My Info");

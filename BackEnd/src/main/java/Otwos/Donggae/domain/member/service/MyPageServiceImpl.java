@@ -1,15 +1,25 @@
 package Otwos.Donggae.domain.member.service;
 
+import Otwos.Donggae.DAO.Recruit.RecruitLanguage;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.User.*;
+import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
+import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitLanguageDTO;
 import Otwos.Donggae.DTO.member.myPage.MyPageRequestDTO;
 import Otwos.Donggae.DTO.member.myPage.MyPageResponseDTO;
 import Otwos.Donggae.DTO.member.previewInfo.PreviewUserInfoDTO;
+import Otwos.Donggae.DTO.member.userinfo.UserInterestFieldDTO;
+import Otwos.Donggae.DTO.member.userinfo.UserLanguageDTO;
+import Otwos.Donggae.DTO.member.userinfo.UserPersonalityDTO;
 import Otwos.Donggae.DTO.member.userinfo.response.UserInterestFieldResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserLanguageResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserPersonalityResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserStudyFieldResponse;
+import Otwos.Donggae.Global.FieldEnum;
+import Otwos.Donggae.Global.LanguageEnum;
+import Otwos.Donggae.Global.PersonalityEnum;
 import Otwos.Donggae.Global.Rank.DonggaeRank;
+import Otwos.Donggae.Global.StudyFieldEnum;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
 import Otwos.Donggae.domain.member.repository.info.UserInterestFieldRepository;
 import Otwos.Donggae.domain.member.repository.info.UserLanguageRepository;
@@ -21,6 +31,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class MyPageServiceImpl implements MyPageService{
@@ -83,53 +94,45 @@ public class MyPageServiceImpl implements MyPageService{
     public void editMyInfo(MyPageRequestDTO myPageRequestDTO, int userId) {
         User user = memberRepository.findUserByUserId(userId);
 
-        String boj_Id = myPageRequestDTO.getBoj_Id();
-
         if(myPageRequestDTO.getSelfIntro()!=null){
             user.setIntro(myPageRequestDTO.getSelfIntro());
         }
 
-        if(myPageRequestDTO.getUserLanguageDTOS()!=null){
+        if(myPageRequestDTO.getUserLanguages()!=null){
 
-            List<UserLanguage> userLanguageList = myPageRequestDTO.getUserLanguageDTOS();
+            List<UserLanguageDTO> userLanguageDTOS = addUserLanguageDTO(user, myPageRequestDTO);
 
-            Set<UserLanguage> aSet = new HashSet<UserLanguage>();
-            for (UserLanguage x : userLanguageList)
-                aSet.add(x);
-            user.setUserLanguages(aSet);
+            List<UserLanguage> userLanguageList = convertToUserLanguageEntities(userLanguageDTOS,user);
+
+            userLanguageRepository.deleteAllByUserId(user);
+
+            userLanguageRepository.saveAll(userLanguageList);
+
         }
 
-        if(myPageRequestDTO.getUserPersonalityDTOS()!=null){
+        if(myPageRequestDTO.getUserPersonalities()!=null){
 
-            List<UserPersonality> userPersonalityList = myPageRequestDTO.getUserPersonalityDTOS();
+            List<UserPersonalityDTO> userPersonalityDTOS = addUserPersonalityDTO(user, myPageRequestDTO);
 
-            Set<UserPersonality> bSet = new HashSet<UserPersonality>();
-            for (UserPersonality x : userPersonalityList)
-                bSet.add(x);
-            user.setUserPersonalities(bSet);
+            List<UserPersonality> userPersonalityList = convertToUserPersonalityEntities(userPersonalityDTOS, user);
+
+            userPersonalityRepository.deleteAllByUserId(user);
+
+            userPersonalityRepository.saveAll(userPersonalityList);
         }
 
-        if(myPageRequestDTO.getUserInterestFieldDTOS()!=null){
+        if(myPageRequestDTO.getUserInterestFields()!=null){
 
-            List<UserInterestField> userInterestFieldList = myPageRequestDTO.getUserInterestFieldDTOS();
+            List<UserInterestFieldDTO> userInterestFieldDTOS = addUserInterestFieldDTO(user, myPageRequestDTO);
 
-            Set<UserInterestField> cSet = new HashSet<UserInterestField>();
-            for (UserInterestField x : userInterestFieldList)
-                cSet.add(x);
-            user.setUserInterestFields(cSet);
+            List<UserInterestField> userInterestFieldList = convertToUserInterestEntities(userInterestFieldDTOS, user);
+
+            userInterestFieldRepository.deleteAllByUserId(user);
+
+            userInterestFieldRepository.saveAll(userInterestFieldList);
         }
 
-        if(myPageRequestDTO.getUserStudyFieldDTOS()!=null){
 
-            List<UserStudyField> userStudyFieldList = myPageRequestDTO.getUserStudyFieldDTOS();
-
-            Set<UserStudyField> dSet = new HashSet<UserStudyField>();
-            for (UserStudyField x : userStudyFieldList)
-                dSet.add(x);
-            user.setUserStudyFields(dSet);
-        }
-
-        memberRepository.save(user);
     }
 
     private List<UserLanguageResponse> getLanguageResponse(User user) {
@@ -187,5 +190,79 @@ public class MyPageServiceImpl implements MyPageService{
         return responses;
     }
 
+    private List<UserLanguageDTO> addUserLanguageDTO(User user, MyPageRequestDTO myPageRequestDTO){
+        List<UserLanguageDTO> userLanguageDTOS = new ArrayList<>(); //빈 리스트 생성
+        List<String> userLanguages = myPageRequestDTO.getUserLanguages();
+
+        for (String language : userLanguages) {
+            // 문자열을 Enum으로 변환
+            LanguageEnum languageEnum = LanguageEnum.valueOf(language);
+
+            UserLanguageDTO userLanguageDTO = new UserLanguageDTO(
+                    user.getUserId(),
+                    languageEnum
+            );
+            userLanguageDTOS.add(userLanguageDTO);
+        }
+        return userLanguageDTOS;
+    }
+
+    private List<UserLanguage> convertToUserLanguageEntities(List<UserLanguageDTO> userLanguageDTOS, User user) {
+        return userLanguageDTOS.stream()
+                .map(dto -> {
+                    return new UserLanguage(user, dto.getLanguage());
+                })
+                .collect(Collectors.toList());
+    }
+
+    private List<UserPersonalityDTO> addUserPersonalityDTO(User user, MyPageRequestDTO myPageRequestDTO){
+        List<UserPersonalityDTO> userPersonalityDTOS = new ArrayList<>(); //빈 리스트 생성
+        List<String> userPersonality = myPageRequestDTO.getUserPersonalities();
+
+        for (String personality : userPersonality) {
+            // 문자열을 Enum으로 변환
+            PersonalityEnum personalityEnum = PersonalityEnum.valueOf(personality);
+
+            UserPersonalityDTO userPersonalityDTO = new UserPersonalityDTO(
+                    user.getUserId(),
+                    personalityEnum
+            );
+            userPersonalityDTOS.add(userPersonalityDTO);
+        }
+        return userPersonalityDTOS;
+    }
+
+    private List<UserPersonality> convertToUserPersonalityEntities(List<UserPersonalityDTO> userPersonalityDTOS, User user) {
+        return userPersonalityDTOS.stream()
+                .map(dto -> {
+                    return new UserPersonality(user, dto.getPersonality());
+                })
+                .collect(Collectors.toList());
+    }
+
+    private List<UserInterestFieldDTO> addUserInterestFieldDTO(User user, MyPageRequestDTO myPageRequestDTO){
+        List<UserInterestFieldDTO> userInterestFieldDTOS = new ArrayList<>(); //빈 리스트 생성
+        List<String> userFields = myPageRequestDTO.getUserInterestFields();
+
+        for (String fields : userFields) {
+            // 문자열을 Enum으로 변환
+            FieldEnum fieldEnum = FieldEnum.valueOf(fields);
+
+            UserInterestFieldDTO userInterestFieldDTO = new UserInterestFieldDTO(
+                    user.getUserId(),
+                    fieldEnum
+            );
+            userInterestFieldDTOS.add(userInterestFieldDTO);
+        }
+        return userInterestFieldDTOS;
+    }
+
+    private List<UserInterestField> convertToUserInterestEntities(List<UserInterestFieldDTO> userInterestFieldDTOS, User user) {
+        return userInterestFieldDTOS.stream()
+                .map(dto -> {
+                    return new UserInterestField(user, dto.getInterestField());
+                })
+                .collect(Collectors.toList());
+    }
 
 }

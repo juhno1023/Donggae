@@ -353,15 +353,17 @@ public class TeamServiceImpl implements TeamService{
 
     @Override
     public List<MyRecruitPostNameList> showMyRecruitPostNameAsLeaderAndCompleteList(int userId) {
+
         User user = memberRepository.findUserByUserId(userId);
 
         List<MyRecruitPostNameList> myRecruitPostNameList = new ArrayList<>();
+
         // userId에 해당하는 teamMember 모두 찾기 - team과 1:1매칭 가능
         List<TeamMember> teams = teamMemberRepository.findTeamMembersByUserId(user);
 
         for (TeamMember teamMember : teams) {
 
-            if (teamMember.getIsLeader() == Boolean.TRUE) { //user가 팀장인 경우
+            if ((teamMember.getIsLeader() == Boolean.TRUE) && (teamMember.getUserId() == user)) { // user가 팀장인 경우
 
                 Team team = teamMember.getTeamId(); //해당하는 팀
                 RecruitPost recruitPost = team.getRecruitPostId(); //해당하는 모집 글
