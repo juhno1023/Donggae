@@ -98,7 +98,7 @@ export default function Posting() {
         fetchData(); 
     };
 
-
+    {}
     return (
         <div className={styles.default}>
           <Header /><Sidebar/>

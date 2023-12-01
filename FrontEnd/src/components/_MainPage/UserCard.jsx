@@ -10,7 +10,6 @@ const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest,
     const handleSelect = (e) => {
         setSelected(e.target.value);
     };
-    console.log("selected", selected)
 
     const Suggestion = (e) => {
         e.preventDefault();
@@ -29,7 +28,6 @@ const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest,
                         recruitPostId:selected,
                     }),
                 })
-                console.log("값: ", userId, selected)
                 if (res.ok) {
                     alert("제안 성공");
                 } 
@@ -60,7 +58,6 @@ const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest,
                 .then(res=>res.json())        
                 .then(res=> {
                     setSelectList(res);
-                    console.log(res)
                 });
             } catch (error) {
                 console.error("Failed to fetch: ", error);
@@ -78,11 +75,11 @@ const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest,
                 <div>#{language}#{interest}#{personal},#{study}</div>
                 <select className={styles.pjSelect} onChange={handleSelect} value={selected}>
                     <option value="0">내 프로젝트 🍊</option>
-                    {selectList.map((item) => (
-                        <option value={item.recruitPostId}>
+                    {selectList ? selectList.map((item) => (
+                        <option value={item.recruitPostId} key={item.recruitPostId}>
                         {item.title}
                         </option>
-                    ))}
+                    )): null}
                 </select>
                 <button onClick={Suggestion} type="submit" className={styles.submitBtn}>제안하기</button>
             </div>
