@@ -59,6 +59,7 @@ github:
     redirect-url: ${REDIRECT_URL}
     token-url: "https://github.com/login/oauth/access_token"
     user-api-url: "https://api.github.com/user"
+    graphql-url: "https://api.github.com/graphql"
 security:
   jwt:
     token:
