@@ -2,20 +2,19 @@ package Otwos.Donggae.domain.rank.controller;
 
 import Otwos.Donggae.DTO.member.donggaeRank.UserRankInfoDTO;
 import Otwos.Donggae.domain.rank.service.RankService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class RankController {
 
-    @Autowired
-    private RankService rankService;
+    private final RankService rankService;
 
     @GetMapping("/members/rank")
     public ResponseEntity<?> getRankList(){
