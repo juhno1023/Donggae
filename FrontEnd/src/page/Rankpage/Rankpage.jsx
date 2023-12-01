@@ -3,7 +3,7 @@ import styles from "./Rankpage.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebars";
-import Rank from '../../components/Rank';
+import Rank from '../../components/_Tool/Rank';
 
 export default function Mypage() {
     const history = useNavigate();
