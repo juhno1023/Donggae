@@ -11,6 +11,7 @@ export default function Home() {
     const [recommendPj, setRecPj] = useState([]);
     const [suggestPj, setsgPj] = useState([]);
     let token = localStorage.getItem('token') || '';
+    localStorage.setItem('checkPost', JSON.stringify(''))
     useEffect(() => {
         const fetchData1 = async() => {
             try {
@@ -23,7 +24,6 @@ export default function Home() {
                 })
                 .then(res=>res.json())        
                 .then(res=> {
-                    console.log("멤버 : ", res)
                     setRecUser(res);
                 });
             } catch (error) {
@@ -51,7 +51,6 @@ export default function Home() {
                     }
                     return res.json();
                 }).then(data => {
-                    console.log("포스트 : ", data)
                     setRecPj(data);
                 })
             } catch (error) {
@@ -78,7 +77,6 @@ export default function Home() {
                     }
                     return res.json();
                 }).then(data => {
-                    console.log("제안당한 : ", data)
                     setsgPj(data);
                 })
             } catch (error) {
@@ -89,7 +87,6 @@ export default function Home() {
         fetchData(); 
         fetchData2();
     }, []);
-;
   return (
     <div className={styles.default}>
         <Header />

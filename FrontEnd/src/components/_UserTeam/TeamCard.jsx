@@ -1,7 +1,7 @@
 import styles from './TeamCard.module.css';
 import { Link } from 'react-router-dom';
 
-const TeamCard = ({ name, title, member, recruitPost}) => {
+const TeamCard = ({ name, title, member, recruitPost, teamId}) => {
 
     const imoArray= ["❤️", `🧡`, `💛`, `💚`, `💙`, `🩵`, `💜`, `🩷`, `🤎`, `🖤`, `🖤`, `🩶`, `🤍`, `💞`, `💟`, `💕`, `❣️`, `💝`, `💌`,`😀`, `😁`, `😃`, `😄`, `😋`, `😊`, `😉`, `😍`, `😘`, `🥰`, `😗`, `😙`, `🥲`, `🤗`, `🙂`, `☺️`, `😚`, `😐`, `😑`, `😶`, `🫥`, `😮`, `😯`, `😝`, `👻`, `😺`, `😸`, `😹`, `😻`, `😼`, `😽`, `🐱`]
     const num = Math.round(Math.random() * 50);
@@ -37,7 +37,33 @@ const TeamCard = ({ name, title, member, recruitPost}) => {
             console.error("fatch to fail : ", error);
         }
     };
-
+    const Complete = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`/recruitPost/complete`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },body: JSON.stringify({
+                    teamId: teamId,
+                }),
+            })
+            if (response.ok) {
+                alert("마감 완료");
+                window.location.replace("/userteam");
+            } else if (response.status === 400) {
+                const errorText = await response.text();
+                alert(`일치하지 않습니다. ${errorText}`);
+                console.error("마감 실패 : ", errorText);
+            } else {
+                console.error("마감 실패 : ", response.statusText);
+            }
+            
+        } catch (error) {
+            console.error("fatch to fail : ", error);
+        }
+    };
     return (
         <> 
             <div className={styles.GroupCard}>
@@ -49,6 +75,9 @@ const TeamCard = ({ name, title, member, recruitPost}) => {
                 </button>
                 <button  type="submit" className={styles.modifyBtn} onClick={Deletion}>
                     <Link to={`/main`}>삭제</Link>
+                </button>
+                <button  type="submit" className={styles.completeBtn} onClick={Complete}>
+                    <Link to={`/main`}>마감하기</Link>
                 </button>
             </div>
         </>

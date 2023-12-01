@@ -32,6 +32,7 @@ function AuthCallback() {
             })
             .then(data => {
                 if (data.token) {
+                    localStorage.setItem('profile', data.profileUrl);
                     localStorage.setItem('token', data.token);
                     navigate('/main', { replace: true }); //로그인 성공 시 메인페이지
                 }

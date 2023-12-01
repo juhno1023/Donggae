@@ -97,7 +97,7 @@ export default function Modify({post}) {
         };
         fetchData(); 
     };
-
+    console.log("checkPost", checkPost)
     return (
         <div className={styles.default}>
           <Header /><Sidebar/>

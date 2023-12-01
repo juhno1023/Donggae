@@ -10,9 +10,8 @@ export default function UserTeam() {
     const user = {
         token: localStorage.getItem('token')
     };
-    console.log(user.token);
     let token = localStorage.getItem('token') || '';
-   
+    localStorage.setItem('checkPost', JSON.stringify(''))
     
     useEffect(() => {
         const fetchData = async() => {
@@ -26,9 +25,9 @@ export default function UserTeam() {
                 })
                 .then(res=>res.json())        
                 .then(res=> {
-                    console.log(res)
                     setTeamL(res.teamByLeaders);
                     setTeamM(res.teamByMembers);
+                    console.log(res)
                 });
             } catch (error) {
                 console.error("Failed to fetch: ", error);
@@ -46,7 +45,7 @@ export default function UserTeam() {
                 <div className={styles.box__}>
                     <div className={styles.text__1} >팀장으로 속한 팀</div>
                     <div className={styles.formGroup}>
-                        {teambyL.map(data => <TeamCard team = {data} name={data.teamName} title={data.title} member={data.teamMemberPreview} recruitPost = {data.recruitPostId}/>)} 
+                        {teambyL.map(data => <TeamCard team = {data} name={data.teamName} title={data.title} member={data.teamMemberPreview} recruitPost = {data.recruitPostId} teamId = {data.teamId}/>)} 
                     </div>
                 </div>
                 <div className={styles.box__}>

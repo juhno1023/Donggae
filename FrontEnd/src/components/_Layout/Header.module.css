@@ -64,11 +64,8 @@ html,body {
     top: 0;
     left: 0;
     height: 90px;
-    width: 100%;
-    display: flex;
-    align-items: center;
+    width: 100vw;
     background: #fff;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
     z-index: 2;
   }
 
@@ -76,7 +73,7 @@ html,body {
     font-size: 14px;
     display: flex; 
     align-items: center; 
-    width: 100vw;
+    width: 100%;
     height: 100%;
     padding-left: 300px;
     border-bottom: solid 1px var(--border-grey);
@@ -86,9 +83,11 @@ html,body {
   .logo {
     display: flex;
     align-items: center; 
+    width : 800px;
   }
   
   .title {
+    width : 200px;
     font-size: 42px;
     font-weight: bold;
     font-family: 'Viga';
@@ -102,6 +101,7 @@ html,body {
     color: var(--basic-text);
   }
   .subtitle {
+    width : 200px;
     font-family: 'Viga';
     color: var(--basic-text);
     font-size: 22px;
@@ -128,5 +128,17 @@ html,body {
     right: 12px;
     margin: 0;
   }
-
-  
+.userBox{
+  position:absolute;
+  right : 120px;
+}
+.userBox span{
+  padding : 10px;
+  font-size: 12px;
+}
+.profileImg{
+  position:absolute;
+  right : 50px;
+  border-radius : 50%;
+  width : 50px;
+}
