@@ -1,8 +1,6 @@
 package Otwos.Donggae.DAO.Recruit;
 
 import Otwos.Donggae.DAO.Recruit.Identifier.RecruitLanguagePK;
-import Otwos.Donggae.DAO.User.User;
-import Otwos.Donggae.Global.FieldEnum;
 import Otwos.Donggae.Global.LanguageEnum;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

@@ -22,13 +22,10 @@ html,body {
   background-color: white;
 }
 
-  .box__{
-    width : 70vw;
-    height: 600px;
-    margin : 0 auto;
-    display :flex;
-    flex-wrap: wrap;
-  }
+.box__{
+  display :flex;
+}
+
   
   .formGroup__{
     display: flex;
@@ -60,7 +57,7 @@ html,body {
   word-wrap: break-word;
   padding : 10px;
   width : 600px;
-  height: 440px;
+  height: 400px;
 }
 
 
@@ -79,11 +76,10 @@ html,body {
 
 .title_text{
   color: #898989;
-  font-family: Brawler;
-  margin-left: 10px;
+  /* font-family: Brawler; */
   font-size: 22px;
   font-style: normal;
-  font-weight: 700;
+  /* font-weight: 700; */
   line-height: normal;
   padding-bottom: 15px;
   border-width:0px 0px 1px 0px;
@@ -91,14 +87,13 @@ html,body {
 }
 
 
-.second_box{
-  width: 600px;
-  position: relative;
-  left: 100px;
-}
-
 .first_box{
   width: 600px;
+  margin-right: 40px;
+}
+
+.second_box{
+  width: 1000px;
 }
 
 
@@ -123,10 +118,3 @@ html,body {
 }
 
 
-.filter_box{
-    width : 70vw;
-    height: 600px;
-    margin : 0 auto;
-    display :flex;
-    flex-wrap: wrap;
-}

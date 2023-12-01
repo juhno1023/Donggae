@@ -111,8 +111,8 @@ public class TeamServiceImpl implements TeamService{
                 TeamMemberPreview teamMemberPreview = new TeamMemberPreview(
                         userId,
                         user.getGithubName(), //팀장 이름
-                        user.getBoj_rank(), //팀장 백준랭크
-                        userRank.getRankName(), //팀장 동개랭크
+                        user.getBoj_rank().label(), //팀장 백준랭크
+                        userRank.getRankName().label(), //팀장 동개랭크
                         teamMember.getIsLeader());
 
                 TeamByLeader teamByLeader = new TeamByLeader(
@@ -140,8 +140,8 @@ public class TeamServiceImpl implements TeamService{
                         teamMemberPreview = new TeamMemberPreview(
                                 user1.getUserId(),
                                 user1.getGithubName(), //팀장 이름
-                                user1.getBoj_rank(), //팀장 백준랭크
-                                userRank.getRankName(), //팀장 동개랭크
+                                user1.getBoj_rank().label(), //팀장 백준랭크
+                                userRank.getRankName().label(), //팀장 동개랭크
                                 teamMember1.getIsLeader());
                     }
                 }
@@ -182,8 +182,8 @@ public class TeamServiceImpl implements TeamService{
             TeamMemberPreview teamMemberPreview = new TeamMemberPreview(
                     user.getUserId(),
                     user.getGithubName(), //이름
-                    user.getBoj_rank(), //백준랭크
-                    userRank.getRankName(), //동개랭크
+                    user.getBoj_rank().label(), //백준랭크
+                    userRank.getRankName().label(), //동개랭크
                     teamMember.getIsLeader());
             teamMemberPreviews.add(teamMemberPreview);
         }
@@ -219,8 +219,8 @@ public class TeamServiceImpl implements TeamService{
             TeamMemberPreview teamMemberPreview = new TeamMemberPreview(
                     user.getUserId(),
                     user.getGithubName(), //이름
-                    user.getBoj_rank(), //백준랭크
-                    userRank.getRankName(), //동개랭크
+                    user.getBoj_rank().label(), //백준랭크
+                    userRank.getRankName().label(), //동개랭크
                     teamMember.getIsLeader());
             teamMemberList.add(teamMemberPreview);
         }
@@ -262,8 +262,8 @@ public class TeamServiceImpl implements TeamService{
             ApplyMemberPreview teamMemberPreview = new ApplyMemberPreview(
                     user.getUserId(),
                     user.getGithubName(), //이름
-                    user.getBoj_rank(), //백준랭크
-                    userRank.getRankName() //동개랭크
+                    user.getBoj_rank().label(), //백준랭크
+                    userRank.getRankName().label() //동개랭크
             );
             applyMemberPreviews.add(teamMemberPreview);
         }

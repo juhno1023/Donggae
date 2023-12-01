@@ -1,13 +1,8 @@
 package Otwos.Donggae.domain.member.service;
 
-import Otwos.Donggae.DAO.Recruit.RecruitLanguage;
-import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.User.*;
-import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
-import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitLanguageDTO;
 import Otwos.Donggae.DTO.member.myPage.MyPageRequestDTO;
 import Otwos.Donggae.DTO.member.myPage.MyPageResponseDTO;
-import Otwos.Donggae.DTO.member.previewInfo.PreviewUserInfoDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserInterestFieldDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserLanguageDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserPersonalityDTO;
@@ -19,7 +14,6 @@ import Otwos.Donggae.Global.FieldEnum;
 import Otwos.Donggae.Global.LanguageEnum;
 import Otwos.Donggae.Global.PersonalityEnum;
 import Otwos.Donggae.Global.Rank.DonggaeRank;
-import Otwos.Donggae.Global.StudyFieldEnum;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
 import Otwos.Donggae.domain.member.repository.info.UserInterestFieldRepository;
 import Otwos.Donggae.domain.member.repository.info.UserLanguageRepository;
@@ -68,16 +62,16 @@ public class MyPageServiceImpl implements MyPageService{
 
         //rank 엔티티에 없으면 그냥 "똥개" 보냄
         UserRank userRank = userRankRepository.findUserRankByUserId(user);
-        DonggaeRank donggaeRank = DonggaeRank.똥개;
+        DonggaeRank donggaeRank = DonggaeRank.DDONGGAE;
         if (userRank != null){
             donggaeRank = userRank.getRankName();
         }
         MyPageResponseDTO myPageResponseDTO = new MyPageResponseDTO(
                 user.getGithubName(),
                 user.getIntro(),
-                user.getBoj_rank(),
+                user.getBoj_rank().label(),
                 user.getDguEmail(),
-                donggaeRank,
+                donggaeRank.label(),
                 teamExpCount,
                 leaderCount,
                 devTestScore,
@@ -141,7 +135,7 @@ public class MyPageServiceImpl implements MyPageService{
 
         for (UserLanguage userLanguage : userLanguages) {
             UserLanguageResponse userLanguageResponse = new UserLanguageResponse(
-                    userLanguage.getLanguage()
+                    userLanguage.getLanguage().label()
             );
             responses.add(userLanguageResponse);
         }
@@ -155,7 +149,7 @@ public class MyPageServiceImpl implements MyPageService{
 
         for (UserInterestField userInterestField : userInterestFields) {
             UserInterestFieldResponse userInterestFieldResponse = new UserInterestFieldResponse(
-                    userInterestField.getInterestField()
+                    userInterestField.getInterestField().label()
             );
             responses.add(userInterestFieldResponse);
         }
@@ -169,7 +163,7 @@ public class MyPageServiceImpl implements MyPageService{
 
         for (UserPersonality userPersonality : userPersonalities) {
             UserPersonalityResponse userPersonalityResponse = new UserPersonalityResponse(
-                    userPersonality.getPersonality()
+                    userPersonality.getPersonality().label()
             );
             responses.add(userPersonalityResponse);
         }
@@ -183,7 +177,7 @@ public class MyPageServiceImpl implements MyPageService{
 
         for (UserStudyField userStudyField : userStudyFields) {
             UserStudyFieldResponse userStudyFieldResponse = new UserStudyFieldResponse(
-                    userStudyField.getStudyField()
+                    userStudyField.getStudyField().label()
             );
             responses.add(userStudyFieldResponse);
         }
@@ -195,12 +189,9 @@ public class MyPageServiceImpl implements MyPageService{
         List<String> userLanguages = myPageRequestDTO.getUserLanguages();
 
         for (String language : userLanguages) {
-            // 문자열을 Enum으로 변환
-            LanguageEnum languageEnum = LanguageEnum.valueOf(language);
-
             UserLanguageDTO userLanguageDTO = new UserLanguageDTO(
                     user.getUserId(),
-                    languageEnum
+                    language
             );
             userLanguageDTOS.add(userLanguageDTO);
         }
@@ -210,7 +201,7 @@ public class MyPageServiceImpl implements MyPageService{
     private List<UserLanguage> convertToUserLanguageEntities(List<UserLanguageDTO> userLanguageDTOS, User user) {
         return userLanguageDTOS.stream()
                 .map(dto -> {
-                    return new UserLanguage(user, dto.getLanguage());
+                    return new UserLanguage(user, LanguageEnum.valueOfLabel(dto.getLanguage()));
                 })
                 .collect(Collectors.toList());
     }
@@ -220,12 +211,9 @@ public class MyPageServiceImpl implements MyPageService{
         List<String> userPersonality = myPageRequestDTO.getUserPersonalities();
 
         for (String personality : userPersonality) {
-            // 문자열을 Enum으로 변환
-            PersonalityEnum personalityEnum = PersonalityEnum.valueOf(personality);
-
             UserPersonalityDTO userPersonalityDTO = new UserPersonalityDTO(
                     user.getUserId(),
-                    personalityEnum
+                    personality
             );
             userPersonalityDTOS.add(userPersonalityDTO);
         }
@@ -235,7 +223,7 @@ public class MyPageServiceImpl implements MyPageService{
     private List<UserPersonality> convertToUserPersonalityEntities(List<UserPersonalityDTO> userPersonalityDTOS, User user) {
         return userPersonalityDTOS.stream()
                 .map(dto -> {
-                    return new UserPersonality(user, dto.getPersonality());
+                    return new UserPersonality(user, PersonalityEnum.valueOfLabel(dto.getPersonality()));
                 })
                 .collect(Collectors.toList());
     }
@@ -250,7 +238,7 @@ public class MyPageServiceImpl implements MyPageService{
 
             UserInterestFieldDTO userInterestFieldDTO = new UserInterestFieldDTO(
                     user.getUserId(),
-                    fieldEnum
+                    fieldEnum.label()
             );
             userInterestFieldDTOS.add(userInterestFieldDTO);
         }
@@ -260,7 +248,7 @@ public class MyPageServiceImpl implements MyPageService{
     private List<UserInterestField> convertToUserInterestEntities(List<UserInterestFieldDTO> userInterestFieldDTOS, User user) {
         return userInterestFieldDTOS.stream()
                 .map(dto -> {
-                    return new UserInterestField(user, dto.getInterestField());
+                    return new UserInterestField(user, FieldEnum.valueOfLabel(dto.getInterestField()));
                 })
                 .collect(Collectors.toList());
     }

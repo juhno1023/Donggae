@@ -97,8 +97,8 @@ public class SuggestRecruitPostServiceImpl implements SuggestRecruitPostService{
         return new TeamMemberPreview(
                 user.getUserId(),
                 user.getGithubName(),
-                user.getBoj_rank(),
-                userRank.getRankName(),
+                user.getBoj_rank().label(),
+                userRank.getRankName().label(),
                 teamMember.getIsLeader());
     }
 

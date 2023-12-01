@@ -3,7 +3,6 @@ package Otwos.Donggae.DTO.RecruitPost.search;
 import Otwos.Donggae.DTO.member.userinfo.response.UserInterestFieldResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserLanguageResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserPersonalityResponse;
-import Otwos.Donggae.Global.MajorLectureEnum;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,5 +15,5 @@ public class SearchRequest {
     List<UserLanguageResponse> languageS;
     List<UserInterestFieldResponse> fieldS;
     List<UserPersonalityResponse> personalityS;
-    private MajorLectureEnum majorLecture;
+    private String majorLecture;
 }

@@ -15,7 +15,6 @@ import Otwos.Donggae.domain.rank.repository.UserRankRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -124,7 +123,7 @@ public class RecRecruitPostServiceImpl implements RecRecruitPostService {
             BaekjoonRank bojRank = teamLeader.getBoj_rank();
             String userName = teamLeader.getGithubName();
 
-            RecRecruitPostDTO recRecruitPostDTO = new RecRecruitPostDTO(postId, majorLectureName, title, recruitLanguages, donggaeRank, bojRank, userName, createdDate);
+            RecRecruitPostDTO recRecruitPostDTO = new RecRecruitPostDTO(postId, majorLectureName.label(), title, recruitLanguages, donggaeRank.label(), bojRank.label(), userName, createdDate);
             recommendPostsResponse.add(recRecruitPostDTO);
         }
 

@@ -114,6 +114,8 @@ export default function Posting() {
                 <div className={styles.box__}>
                     <div className={styles.half}>
                         <div className={styles.text__1}>팀장 정보</div>
+                        {/* <img src='https://avatars.githubusercontent.com/u/92643238?s=400&u=bc3b92d5192e7952d1698ec1d834ee86bb0b0bd5&v=4' /> */}
+                        
                         <div className={styles.profile_box}>
                             <div className={styles.logo}>
                             <img className={styles.logoimg} src={bgImg} alt="Donggae Logo" />
