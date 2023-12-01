@@ -51,7 +51,7 @@ public class TestServiceImpl implements TestService{
         List<TestDTO> testDTOS = new ArrayList<>();
 
         for (Test test : tests) {
-            TestDTO testDTO = new TestDTO(test.getTestId(), test.getTestField());
+            TestDTO testDTO = new TestDTO(test.getTestId(), test.getTestField().label());
             testDTOS.add(testDTO);
         }
 
@@ -173,7 +173,7 @@ public class TestServiceImpl implements TestService{
         }
 
         TestResultDTO testResultDTO = new TestResultDTO(
-                test.getTestField(), //test분야 이름
+                test.getTestField().label(), //test분야 이름
                 correct, //맞은 문제 수
                 testQuestionRepository.countAllByTestId(test), //전체 문제 수
                 questionResultDTOS //문제 List
