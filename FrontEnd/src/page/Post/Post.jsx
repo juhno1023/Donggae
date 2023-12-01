@@ -2,7 +2,7 @@ import React, { useState ,useEffect } from 'react';
 import styles from "./Post.module.css"
 import Header from "../../components/_Layout/Header";
 import bgImg from '../../image/donggae.png';
-import CheckBox from '../../components/CheckBox';
+import CheckBox from '../../components/_Tool/CheckBox';
 import Modify from './Modify';
 import Sidebar from "../../components/_Layout/Sidebars";
 import { Link } from 'react-router-dom';

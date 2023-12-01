@@ -83,7 +83,7 @@ html,body {
   .logo {
     display: flex;
     align-items: center; 
-    width : 800px;
+    width : 400px;
   }
   
   .title {

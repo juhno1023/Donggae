@@ -2,7 +2,7 @@ import React, { useEffect, useState  } from 'react';
 import styles from "./Posting.module.css"
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
-import CheckBox from '../../components/CheckBox';
+import CheckBox from '../../components/_Tool/CheckBox';
 import Sidebar from "../../components/_Layout/Sidebars";
 
 export default function Modify({post}) {
