@@ -7,6 +7,7 @@ import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.DTO.member.GithubStatsDTO;
 import Otwos.Donggae.DTO.member.login.GitHubUserInfo;
 import Otwos.Donggae.DTO.member.login.GithubToken;
+import Otwos.Donggae.domain.member.GraphQLQueryUtils;
 import Otwos.Donggae.domain.member.repository.GithubStatusRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
@@ -94,33 +95,8 @@ public class LoginServiceImpl implements LoginService{
         headers.set("Authorization", "bearer " + githubToken.getAccessToken());
         headers.set("Accept", "application/vnd.github.cloak-preview");
 
-        String query =
-                "              query userInfo {\n" +
-                "                viewer {\n" +
-                "                  name\n" +
-                "                  login\n" +
-                "                  contributionsCollection {\n" +
-                "                    totalCommitContributions\n" +
-                "                  }\n" +
-                "                  repositoriesContributedTo(first: 1, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {\n" +
-                "                    totalCount\n" +
-                "                  }\n" +
-                "                  pullRequests(first: 1) {\n" +
-                "                    totalCount\n" +
-                "                  }\n" +
-                "                  issues(first: 1) {\n" +
-                "                    totalCount\n" +
-                "                  }\n" +
-                "                  repositories(first: 100, ownerAffiliations: OWNER, isFork: false, orderBy: {direction: DESC, field: STARGAZERS}) {\n" +
-                "                    totalCount\n" +
-                "                    nodes {\n" +
-                "                      stargazers {\n" +
-                "                        totalCount\n" +
-                "                      }\n" +
-                "                    }\n" +
-                "                  }\n" +
-                "                }\n" +
-                "              }";
+        String query = GraphQLQueryUtils.readGraphQLQuery("userInfoQuery.graphql");
+
         Map<String, String> requestPayload = Map.of("query", query);
 
         HttpEntity<Map<String, String>> request = new HttpEntity<>(requestPayload, headers);

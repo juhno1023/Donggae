@@ -5,6 +5,7 @@ import Otwos.Donggae.DAO.Recruit.RecruitLanguage;
 import Otwos.Donggae.DAO.Recruit.RecruitPersonality;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.Team.Team;
+import Otwos.Donggae.DAO.Team.TeamMember;
 import Otwos.Donggae.DAO.User.*;
 import Otwos.Donggae.DTO.RecruitPost.*;
 import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitFieldDTO;
@@ -21,7 +22,6 @@ import Otwos.Donggae.DTO.team.TeamDTO;
 import Otwos.Donggae.DTO.team.TeamMemberDTO;
 import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
 import Otwos.Donggae.Global.FieldEnum;
-import Otwos.Donggae.Global.LanguageEnum;
 import Otwos.Donggae.Global.MajorLectureEnum;
 import Otwos.Donggae.Global.PersonalityEnum;
 import Otwos.Donggae.Global.Rank.DonggaeRank;
@@ -37,7 +37,6 @@ import Otwos.Donggae.domain.member.repository.info.UserStudyFieldRepository;
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
 import Otwos.Donggae.domain.team.repository.TeamMemberRepository;
 import Otwos.Donggae.domain.team.repository.TeamRepository;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -94,7 +93,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         String title = recruitPostRequestDTO.getTitle();
         String content = recruitPostRequestDTO.getContent();
         Timestamp createdDate = new Timestamp(System.currentTimeMillis());
-        MajorLectureEnum majorLectureName = recruitPostRequestDTO.getMajorLectureName();
+        String majorLectureName = recruitPostRequestDTO.getMajorLectureName();
         String teamName = recruitPostRequestDTO.getTeamName();
 
         RecruitPostDTO recruitPostDTO = new RecruitPostDTO(
@@ -168,12 +167,9 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         List<String> recruitLanguages = recruitPostRequestDTO.getRecruitLanguages();
 
         for (String language : recruitLanguages) {
-            // 문자열을 Enum으로 변환
-            LanguageEnum languageEnum = LanguageEnum.valueOf(language);
-
             RecruitLanguageDTO recruitLanguageDTO = new RecruitLanguageDTO(
                     recruitPost.getRecruitPostId(),
-                    languageEnum
+                    language
             );
             recruitLanguageDTOS.add(recruitLanguageDTO);
         }
@@ -199,7 +195,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
             RecruitFieldDTO recruitFieldDTO = new RecruitFieldDTO(
                     recruitPost.getRecruitPostId(),
-                    fieldEnum
+                    fieldEnum.label()
             );
             recruitFieldDTOS.add(recruitFieldDTO);
         }
@@ -220,12 +216,9 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         List<String> recruitPersonalities = recruitPostRequestDTO.getRecruitPersonalities();
 
         for (String personality : recruitPersonalities) {
-            // 문자열을 Enum으로 변환
-            PersonalityEnum personalityEnum = PersonalityEnum.valueOf(personality);
-
             RecruitPersonalityDTO recruitPersonalityDTO = new RecruitPersonalityDTO(
                     recruitPost.getRecruitPostId(),
-                    personalityEnum
+                    personality
             );
             recruitPersonalityDTOS.add(recruitPersonalityDTO);
         }
@@ -265,7 +258,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
             recruitPost.setContent(recruitPostRequestDTO.getContent());
         }
         if(recruitPostRequestDTO.getMajorLectureName()!=null){
-            recruitPost.setMajorLectureName(recruitPostRequestDTO.getMajorLectureName());
+            recruitPost.setMajorLectureName(MajorLectureEnum.valueOfLabel(recruitPostRequestDTO.getMajorLectureName()));
         }
 
         recruitPostRepository.save(recruitPost);
@@ -277,7 +270,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(recruitPostId);
         User teamLeader = recruitPost.getUserId();
         UserRank userRank = userRankRepository.findUserRankByUserId(teamLeader);
-        DonggaeRank donggaeRank = DonggaeRank.똥개;
+        DonggaeRank donggaeRank = DonggaeRank.DDONGGAE;
         if (userRank != null){
             donggaeRank = userRank.getRankName();
         }
@@ -294,7 +287,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
                 recruitPost.getRecruitPostId(),
                 recruitPost.getTitle(),
                 recruitPost.getContent(),
-                recruitPost.getMajorLectureName(),
+                recruitPost.getMajorLectureName().label(),
                 recruitPost.getCreatedDate(),
                 recruitFieldResponses,
                 recruitLanguageResponses,
@@ -303,8 +296,8 @@ public class RecruitPostServiceImpl implements RecruitPostService {
                 teamLeader.getGithubName(),
                 teamLeader.getDguEmail(),
                 teamLeader.getIntro(),
-                teamLeader.getBoj_rank(),
-                donggaeRank,
+                teamLeader.getBoj_rank().label(),
+                donggaeRank.label(),
                 userLanguageDTOS,
                 userInterestFieldDTOS,
                 userPersonalityDTOS
@@ -318,7 +311,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (RecruitLanguage recruitLanguage : recruitLanguages) {
             RecruitLanguageResponse recruitLanguageResponse = new RecruitLanguageResponse(
-                    recruitLanguage.getLanguage()
+                    recruitLanguage.getLanguage().label()
             );
             responses.add(recruitLanguageResponse);
         }
@@ -331,7 +324,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (RecruitField recruitField : recruitFields) {
             RecruitFieldResponse recruitFieldResponse = new RecruitFieldResponse(
-                    recruitField.getField()
+                    recruitField.getField().label()
             );
             responses.add(recruitFieldResponse);
         }
@@ -343,7 +336,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (RecruitPersonality recruitPersonality : recruitPersonalities) {
             RecruitPersonalityResponse recruitPersonalityResponse = new RecruitPersonalityResponse(
-                    recruitPersonality.getPersonality()
+                    recruitPersonality.getPersonality().label()
             );
             responses.add(recruitPersonalityResponse);
         }
@@ -356,7 +349,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (UserLanguage userLanguage : userLanguages) {
             UserLanguageResponse userLanguageResponse = new UserLanguageResponse(
-                    userLanguage.getLanguage()
+                    userLanguage.getLanguage().label()
             );
             responses.add(userLanguageResponse);
         }
@@ -370,7 +363,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (UserInterestField userInterestField : userInterestFields) {
             UserInterestFieldResponse userInterestFieldResponse = new UserInterestFieldResponse(
-                    userInterestField.getInterestField()
+                    userInterestField.getInterestField().label()
             );
             responses.add(userInterestFieldResponse);
         }
@@ -384,7 +377,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (UserPersonality userPersonality : userPersonalities) {
             UserPersonalityResponse userPersonalityResponse = new UserPersonalityResponse(
-                    userPersonality.getPersonality()
+                    userPersonality.getPersonality().label()
             );
             responses.add(userPersonalityResponse);
         }
@@ -398,7 +391,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (UserStudyField userStudyField : userStudyFields) {
             UserStudyFieldResponse userStudyFieldResponse = new UserStudyFieldResponse(
-                    userStudyField.getStudyField()
+                    userStudyField.getStudyField().label()
             );
             responses.add(userStudyFieldResponse);
         }
@@ -418,6 +411,29 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         recruitPost.complete();
 
         recruitPostRepository.save(recruitPost); // 변경사항 저장
+
+        //팀장의 leader_count & team_exp_count, 팀원의 team_exp_count 증가시키기
+        //team에 해당하는 teamMembers
+        List<TeamMember> teamMembers = teamMemberRepository.findTeamMembersByTeamId(team);
+        for (TeamMember teamMember : teamMembers) {
+            User user = teamMember.getUserId();
+            int userLeaderCnt = user.getLeaderCount();
+
+            if (teamMember.getIsLeader() == Boolean.TRUE) {
+                userLeaderCnt += 1;
+            }
+            User saveUser = User.builder()
+                    .userId(user.getUserId())
+                    .boj_rank(user.getBoj_rank())
+                    .devTestScore(user.getDevTestScore())
+                    .dguEmail(user.getDguEmail())
+                    .githubName(user.getGithubName())
+                    .intro(user.getIntro())
+                    .leaderCount(userLeaderCnt)
+                    .teamExpCount(user.getTeamExpCount()+1)
+                    .build();
+            memberRepository.save(saveUser);
+        }
     }
 
     private void validateTeamAndPost(Team team, RecruitPost recruitPost) throws Exception{

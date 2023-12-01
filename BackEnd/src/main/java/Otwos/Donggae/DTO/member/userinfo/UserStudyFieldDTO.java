@@ -10,12 +10,12 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserStudyFieldDTO {
     private int userId;
-    private StudyFieldEnum studyField;
+    private String studyField;
 
     public UserStudyField toEntity(User user) {
         return UserStudyField.builder()
                 .userId(user)
-                .studyField(studyField)
+                .studyField(StudyFieldEnum.valueOfLabel(studyField))
                 .build();
     }
 }

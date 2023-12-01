@@ -9,10 +9,10 @@
     "axios": "^1.6.1",
     "dotenv": "^16.3.1",
     "http-proxy-middleware": "^2.0.6",
-    "multiselect-react-dropdown": "^2.0.25",
     "nodemailer": "^6.9.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-multi-select-component": "^4.3.4",
     "react-router-dom": "^6.19.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"

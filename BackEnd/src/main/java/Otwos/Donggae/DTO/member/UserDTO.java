@@ -13,7 +13,7 @@ public class UserDTO {
     private String intro;
     private int teamExpCount;
     private int leaderCount;
-    private BaekjoonRank bojRank;
+    private String bojRank;
     private int devTestScore;
     private String dguEmail;
 
@@ -24,7 +24,7 @@ public class UserDTO {
                 .intro(intro)
                 .teamExpCount(teamExpCount)
                 .leaderCount(leaderCount)
-                .boj_rank(bojRank)
+                .boj_rank(BaekjoonRank.valueOfLabel(bojRank))
                 .devTestScore(devTestScore)
                 .dguEmail(dguEmail)
                 .build();

@@ -1,0 +1,26 @@
+query userInfo {
+  viewer {
+    name
+    login
+    contributionsCollection {
+      totalCommitContributions
+    }
+    repositoriesContributedTo(first: 1, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {
+      totalCount
+    }
+    pullRequests(first: 1) {
+      totalCount
+    }
+    issues(first: 1) {
+      totalCount
+    }
+    repositories(first: 100, ownerAffiliations: OWNER, isFork: false, orderBy: {direction: DESC, field: STARGAZERS}) {
+      totalCount
+      nodes {
+        stargazers {
+          totalCount
+        }
+      }
+    }
+  }
+}

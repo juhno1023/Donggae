@@ -10,12 +10,12 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserLanguageDTO {
     private int userId;
-    private LanguageEnum language;
+    private String language;
 
     public UserLanguage toEntity(User user) {
         return UserLanguage.builder()
                 .userId(user)
-                .language(language)
+                .language(LanguageEnum.valueOfLabel(language))
                 .build();
     }
 }

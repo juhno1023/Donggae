@@ -26,7 +26,7 @@ public class UserRank {
     @Column(name = "score")
     private Integer score;
 
-    @Column(name = "rank_name", length = 200, columnDefinition = "VARCHAR(10) DEFAULT '똥개'")
+    @Column(name = "rank_name", length = 200, columnDefinition = "VARCHAR(200) DEFAULT 'DDONGGAE'")
     @Enumerated(EnumType.STRING)
     private DonggaeRank rankName;
 
