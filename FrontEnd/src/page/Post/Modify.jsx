@@ -1,15 +1,15 @@
-import React, { useState  } from 'react';
+import React, { useEffect, useState  } from 'react';
 import styles from "./Posting.module.css"
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
-import CheckBox from '../../components/CheckBox';
+import CheckBox from '../../components/_Tool/CheckBox';
 import Sidebar from "../../components/_Layout/Sidebars";
 
 export default function Modify({post}) {
     let token = localStorage.getItem('token') || '';
     let { recuritPostId } = useParams();
-    let checkEdit = "false"
-    localStorage.setItem("checkEdit", checkEdit)
+    
+    let checkPost = localStorage.getItem('checkPost') || '';
 
     const [recruitFields, setrecruitFields] = useState([])
     const [recruitLanguages, setrecruitLanguages] = useState([])
@@ -82,6 +82,7 @@ export default function Modify({post}) {
                 })
                 if (res.ok) {
                     alert("수정 완료");
+                    localStorage.setItem('checkPost', JSON.stringify(''))
                     window.location.replace(`/post/${recuritPostId}`);
                 } 
                 else if (res.status === 400) {
@@ -96,7 +97,7 @@ export default function Modify({post}) {
         };
         fetchData(); 
     };
-
+    console.log("checkPost", checkPost)
     return (
         <div className={styles.default}>
           <Header /><Sidebar/>

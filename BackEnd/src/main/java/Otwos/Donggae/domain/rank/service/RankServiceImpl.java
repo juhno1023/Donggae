@@ -9,6 +9,7 @@ import Otwos.Donggae.Global.Rank.DonggaeRank;
 import Otwos.Donggae.domain.member.repository.GithubStatusRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,16 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class RankServiceImpl implements RankService{
 
-    @Autowired
-    private UserRankRepository userRankRepository;
+    private final UserRankRepository userRankRepository;
 
-    @Autowired
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
-    @Autowired
-    private GithubStatusRepository githubStatusRepository;
+    private final GithubStatusRepository githubStatusRepository;
 
     @Override
     public int calAllUserRankScore(){
@@ -71,7 +70,7 @@ public class RankServiceImpl implements RankService{
         int rankGoldDonggaeCount = (int) (userCount * 0.1); // 황금동개
         int rankEundonggaeCount = (int) (userCount * 0.2); // 은동개
         int rankDongdonggaeCount = (int) (userCount * 0.4); // 동동개
-        int rankDDonggaeCount = userCount - rankDiaDonggaeCount - rankGoldDonggaeCount - rankEundonggaeCount - rankDongdonggaeCount; // 똥개
+        // 똥개는 남은 인원 모두
 
         // 랭크 재할당
         for (int i = 0; i < userRanks.size(); i++) {

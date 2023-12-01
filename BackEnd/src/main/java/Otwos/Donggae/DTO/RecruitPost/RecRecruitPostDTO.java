@@ -1,12 +1,13 @@
 package Otwos.Donggae.DTO.RecruitPost;
 
-import lombok.AllArgsConstructor;
+
+import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
-@AllArgsConstructor
+@Builder
 public class RecRecruitPostDTO {
 
     private int recruitPostId;
@@ -15,7 +16,7 @@ public class RecRecruitPostDTO {
 
     private String title;
 
-    private List<String> recruitLanguages;
+    private Set<String> recruitLanguages;
 
     private String donggaeRank;
 
@@ -24,7 +25,4 @@ public class RecRecruitPostDTO {
     private String userName;
 
     private String createDate;
-
-
-
 }
