@@ -33,7 +33,7 @@ export default function Home() {
 
         const fetchData = async() => {
             try {
-                const res = await fetch('/recruitPost/recommend', {
+                fetch('/recruitPost/recommend', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ export default function Home() {
                 })     
                 .then(res=> {
                     if (res.status === 400) {
-                        alert(`400 Error`);
+                        alert(`400 Error in recommend post`);
                         return;
                     }
                     if(res.status === 404){
@@ -60,7 +60,7 @@ export default function Home() {
         };
         const fetchData2 = async() => {
             try {
-                const res = await fetch('/recruitPost/suggest', {
+                fetch('/recruitPost/suggest', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ export default function Home() {
                 })     
                 .then(res=> {
                     if (res.status === 400) {
-                        alert(`400 Error`);
+                        alert(`400 Error in suggest post`);
                         return;
                     }
                     if(res.status === 404){
@@ -101,7 +101,7 @@ export default function Home() {
                     <div className={styles.text__1} >추천 동개</div>
                     <div className={styles.title_text}>함께듣는 강의를 위한 동개를 모집 하고 있어요!</div>
                     <div className={styles.formGroup}>
-                    {recommendUser.map(data => 
+                    {recommendUser ? recommendUser.map(data => 
                     <UserCard 
                         userId={data.userId}
                         name={data.githubName} 
@@ -112,14 +112,14 @@ export default function Home() {
                         interest={data.userInterestFields} 
                         personal={data.userPersonalities} 
                         study={data.userStudyFields} 
-                    />)} 
+                    />): null} 
                     </div>
                 </div>
                 <div className={styles.first_box}>
                 <div className={styles.text__1} >요즘 핫한 프로젝트</div>
                 <div className={styles.title_text}>대외적으로 프로젝트 진행을 위한 동개를 모집 하고 있어요!</div>
                     <div className={styles.formGroup}>
-                    {recommendPj.map(data => 
+                    {recommendPj ? recommendPj.map(data => 
                     <TeamCard lecture={data.majorLectureName} 
                         name={data.userName} 
                         title = {data.title} 
@@ -127,7 +127,7 @@ export default function Home() {
                         rank={data.donggaeRank} 
                         language={data.recruitLanguages} 
                         recruitPostId = {data.recruitPostId}
-                    />)} 
+                    />): null} 
                     </div>
                 </div>
                 <div className={styles.second_box}>
@@ -135,13 +135,13 @@ export default function Home() {
                 <div className={styles.title_text}>제안요청을 보낸 프로젝트에요</div>
 
                     <div className={styles.formGroup}>
-                    {suggestPj.map(data => 
+                    {suggestPj ? suggestPj.map(data => 
                     <SuggestCard  
                         name={data.userName} 
                         title = {data.title} 
                         info ={data.teamMemberPreview}
                         recruitPostId = {data.recruitPostId}
-                    />)} 
+                    />): null} 
                     </div>
                 </div>
             </div>

@@ -11,8 +11,9 @@ export default function UserTeam() {
         token: localStorage.getItem('token')
     };
     console.log(user.token);
-   
     let token = localStorage.getItem('token') || '';
+   
+    
     useEffect(() => {
         const fetchData = async() => {
             try {

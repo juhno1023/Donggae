@@ -78,11 +78,11 @@ const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest,
                 <div>#{language}#{interest}#{personal},#{study}</div>
                 <select className={styles.pjSelect} onChange={handleSelect} value={selected}>
                     <option value="0">내 프로젝트 🍊</option>
-                    {selectList.map((item) => (
-                        <option value={item.recruitPostId}>
+                    {selectList ? selectList.map((item) => (
+                        <option value={item.recruitPostId} key={item.recruitPostId}>
                         {item.title}
                         </option>
-                    ))}
+                    )): null}
                 </select>
                 <button onClick={Suggestion} type="submit" className={styles.submitBtn}>제안하기</button>
             </div>

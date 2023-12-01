@@ -12,3 +12,21 @@
     height: 200px;
     margin-right : 10px;
   }
+
+  .modifyBtn{
+    border:none;
+    /* border-radius: 6px; */
+    /* background: var(--point-orange); */
+    width : 30px;
+    height : 20px;
+    cursor:pointer;
+
+    font-size:10px;
+    z-index: 1;
+}
+
+.modifyBtn a{
+  text-decoration: none;
+  color : black;
+  font-family: 'Brawler';
+}
