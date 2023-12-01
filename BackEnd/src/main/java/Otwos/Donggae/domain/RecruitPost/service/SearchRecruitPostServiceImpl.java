@@ -64,15 +64,18 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
         //language, field, personality (request에서 받은거 모두 들어가야 검색되게)
         Set<LanguageEnum> requestedLanguages = searchRequest.getLanguageS().stream()
                 .map(UserLanguageResponse::getLanguage)
+                .map(LanguageEnum::valueOfLabel)
                 .collect(Collectors.toSet());
         Set<FieldEnum> requestedFields = searchRequest.getFieldS().stream()
                 .map(UserInterestFieldResponse::getInterestField)
+                .map(FieldEnum::valueOfLabel)
                 .collect(Collectors.toSet());
         Set<PersonalityEnum> requestedPersonalities = searchRequest.getPersonalityS().stream()
                 .map(UserPersonalityResponse::getPersonality)
+                .map(PersonalityEnum::valueOfLabel)
                 .collect(Collectors.toSet());
 
-        MajorLectureEnum requestedMajorLecture = searchRequest.getMajorLecture();
+        MajorLectureEnum requestedMajorLecture = MajorLectureEnum.valueOfLabel(searchRequest.getMajorLecture());
 
         //모든 모집 글 불러옴
         List<RecruitPost> allPosts = recruitPostRepository.findAll();
@@ -128,7 +131,7 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
             //모집 언어들
             List<RecruitLanguage> recruitLanguages = recruitLanguageRepository.findAllByRecruitPostId(recruitPost);
             List<UserLanguageResponse> languages = recruitLanguages.stream()
-                    .map(lang -> new UserLanguageResponse(lang.getLanguage()))
+                    .map(lang -> new UserLanguageResponse(lang.getLanguage().label()))
                     .collect(Collectors.toList());
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -142,7 +145,7 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
                         languages, //모집 언어들
                         teamLeader, //팀장
                         createdDate, //작성날짜
-                        recruitPost.getMajorLectureName() //해당 강의
+                        recruitPost.getMajorLectureName().label() //해당 강의
                 );
                 lectureRecruitPosts.add(lectureRecruitPost);
             }
@@ -177,8 +180,8 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
         ApplyMemberPreview teamLeader = new ApplyMemberPreview(
                 teamMember.getUserId().getUserId(), //userId
                 teamMember.getUserId().getGithubName(), //이름
-                teamMember.getUserId().getBoj_rank(), //백준랭크
-                userRank.getRankName() //동개랭크
+                teamMember.getUserId().getBoj_rank().label(), //백준랭크
+                userRank.getRankName().label() //동개랭크
         );
 
         return teamLeader;

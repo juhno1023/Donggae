@@ -10,12 +10,12 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserInterestFieldDTO {
     private int userId;
-    private FieldEnum interestField;
+    private String interestField;
 
     public UserInterestField toEntity(User user) {
         return UserInterestField.builder()
                 .userId(user)
-                .interestField(interestField)
+                .interestField(FieldEnum.valueOfLabel(interestField))
                 .build();
     }
 }

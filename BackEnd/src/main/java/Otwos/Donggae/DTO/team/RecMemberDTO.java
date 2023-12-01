@@ -1,12 +1,9 @@
 package Otwos.Donggae.DTO.team;
 
-import Otwos.Donggae.DAO.User.UserInterestField;
-import Otwos.Donggae.Global.Rank.BaekjoonRank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -21,7 +18,7 @@ public class RecMemberDTO {
 
     private int leaderCount; // 팀장 경험 횟수
 
-    private BaekjoonRank boj_rank; // 백준 랭크
+    private String boj_rank; // 백준 랭크
 
     private int devTestScore; // 역량 평가 총 점수
 

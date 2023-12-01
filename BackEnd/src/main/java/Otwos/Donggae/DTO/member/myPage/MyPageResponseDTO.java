@@ -4,8 +4,6 @@ import Otwos.Donggae.DTO.member.userinfo.response.UserInterestFieldResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserLanguageResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserPersonalityResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserStudyFieldResponse;
-import Otwos.Donggae.Global.Rank.BaekjoonRank;
-import Otwos.Donggae.Global.Rank.DonggaeRank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -16,9 +14,9 @@ import java.util.List;
 public class MyPageResponseDTO {
     private String githubName;
     private String selfIntro;
-    private BaekjoonRank bojRank;
+    private String bojRank;
     private String dguEmail;
-    private DonggaeRank userRank;
+    private String userRank;
     private int teamExpCount;
     private int leaderCount;
     private int devTestScore;
