@@ -38,7 +38,6 @@ import Otwos.Donggae.domain.member.repository.info.UserStudyFieldRepository;
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
 import Otwos.Donggae.domain.team.repository.TeamMemberRepository;
 import Otwos.Donggae.domain.team.repository.TeamRepository;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -200,7 +199,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
             RecruitFieldDTO recruitFieldDTO = new RecruitFieldDTO(
                     recruitPost.getRecruitPostId(),
-                    fieldEnum
+                    fieldEnum.label()
             );
             recruitFieldDTOS.add(recruitFieldDTO);
         }
@@ -266,7 +265,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
             recruitPost.setContent(recruitPostRequestDTO.getContent());
         }
         if(recruitPostRequestDTO.getMajorLectureName()!=null){
-            recruitPost.setMajorLectureName(MajorLectureEnum.valueofLabel(recruitPostRequestDTO.getMajorLectureName()));
+            recruitPost.setMajorLectureName(MajorLectureEnum.valueOfLabel(recruitPostRequestDTO.getMajorLectureName()));
         }
 
         recruitPostRepository.save(recruitPost);
@@ -332,7 +331,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (RecruitField recruitField : recruitFields) {
             RecruitFieldResponse recruitFieldResponse = new RecruitFieldResponse(
-                    recruitField.getField()
+                    recruitField.getField().label()
             );
             responses.add(recruitFieldResponse);
         }
@@ -371,7 +370,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (UserInterestField userInterestField : userInterestFields) {
             UserInterestFieldResponse userInterestFieldResponse = new UserInterestFieldResponse(
-                    userInterestField.getInterestField()
+                    userInterestField.getInterestField().label()
             );
             responses.add(userInterestFieldResponse);
         }

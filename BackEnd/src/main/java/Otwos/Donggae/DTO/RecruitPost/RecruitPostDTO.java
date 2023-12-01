@@ -43,7 +43,7 @@ public class RecruitPostDTO {
                 .userId(userId)
                 .title(title)
                 .content(content)
-                .majorLectureName(MajorLectureEnum.valueofLabel(majorLectureName))
+                .majorLectureName(MajorLectureEnum.valueOfLabel(majorLectureName))
                 .createdDate(createdDate)
                 .isComplete(isComplete)
                 .build();

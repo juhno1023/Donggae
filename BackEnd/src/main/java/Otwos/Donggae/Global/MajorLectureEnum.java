@@ -29,7 +29,7 @@ public enum MajorLectureEnum {
     private static final Map<String, MajorLectureEnum> BY_LABEL =
             Stream.of(values()).collect(Collectors.toMap(MajorLectureEnum::label, e -> e));
 
-    public static MajorLectureEnum valueofLabel(String label) {
+    public static MajorLectureEnum valueOfLabel(String label) {
         return BY_LABEL.get(label);
     }
 }

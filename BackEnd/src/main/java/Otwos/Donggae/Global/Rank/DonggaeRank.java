@@ -22,7 +22,7 @@ public enum DonggaeRank {
     private static final Map<String, DonggaeRank> BY_LABEL =
             Stream.of(values()).collect(Collectors.toMap(DonggaeRank::label, e -> e));
 
-    public static DonggaeRank valueofLabel(String label) {
+    public static DonggaeRank valueOfLabel(String label) {
         return BY_LABEL.get(label);
     }
 }

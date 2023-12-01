@@ -1,13 +1,8 @@
 package Otwos.Donggae.domain.member.service;
 
-import Otwos.Donggae.DAO.Recruit.RecruitLanguage;
-import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.User.*;
-import Otwos.Donggae.DTO.RecruitPost.RecruitPostRequestDTO;
-import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.RecruitLanguageDTO;
 import Otwos.Donggae.DTO.member.myPage.MyPageRequestDTO;
 import Otwos.Donggae.DTO.member.myPage.MyPageResponseDTO;
-import Otwos.Donggae.DTO.member.previewInfo.PreviewUserInfoDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserInterestFieldDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserLanguageDTO;
 import Otwos.Donggae.DTO.member.userinfo.UserPersonalityDTO;
@@ -19,7 +14,6 @@ import Otwos.Donggae.Global.FieldEnum;
 import Otwos.Donggae.Global.LanguageEnum;
 import Otwos.Donggae.Global.PersonalityEnum;
 import Otwos.Donggae.Global.Rank.DonggaeRank;
-import Otwos.Donggae.Global.StudyFieldEnum;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
 import Otwos.Donggae.domain.member.repository.info.UserInterestFieldRepository;
 import Otwos.Donggae.domain.member.repository.info.UserLanguageRepository;
@@ -155,7 +149,7 @@ public class MyPageServiceImpl implements MyPageService{
 
         for (UserInterestField userInterestField : userInterestFields) {
             UserInterestFieldResponse userInterestFieldResponse = new UserInterestFieldResponse(
-                    userInterestField.getInterestField()
+                    userInterestField.getInterestField().label()
             );
             responses.add(userInterestFieldResponse);
         }
@@ -250,7 +244,7 @@ public class MyPageServiceImpl implements MyPageService{
 
             UserInterestFieldDTO userInterestFieldDTO = new UserInterestFieldDTO(
                     user.getUserId(),
-                    fieldEnum
+                    fieldEnum.label()
             );
             userInterestFieldDTOS.add(userInterestFieldDTO);
         }
@@ -260,7 +254,7 @@ public class MyPageServiceImpl implements MyPageService{
     private List<UserInterestField> convertToUserInterestEntities(List<UserInterestFieldDTO> userInterestFieldDTOS, User user) {
         return userInterestFieldDTOS.stream()
                 .map(dto -> {
-                    return new UserInterestField(user, dto.getInterestField());
+                    return new UserInterestField(user, FieldEnum.valueOfLabel(dto.getInterestField()));
                 })
                 .collect(Collectors.toList());
     }

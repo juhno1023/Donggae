@@ -67,12 +67,13 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
                 .collect(Collectors.toSet());
         Set<FieldEnum> requestedFields = searchRequest.getFieldS().stream()
                 .map(UserInterestFieldResponse::getInterestField)
+                .map(FieldEnum::valueOfLabel)
                 .collect(Collectors.toSet());
         Set<PersonalityEnum> requestedPersonalities = searchRequest.getPersonalityS().stream()
                 .map(UserPersonalityResponse::getPersonality)
                 .collect(Collectors.toSet());
 
-        MajorLectureEnum requestedMajorLecture = MajorLectureEnum.valueofLabel(searchRequest.getMajorLecture());
+        MajorLectureEnum requestedMajorLecture = MajorLectureEnum.valueOfLabel(searchRequest.getMajorLecture());
 
         //모든 모집 글 불러옴
         List<RecruitPost> allPosts = recruitPostRepository.findAll();

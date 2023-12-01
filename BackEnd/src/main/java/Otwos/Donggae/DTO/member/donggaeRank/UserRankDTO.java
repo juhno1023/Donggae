@@ -19,7 +19,7 @@ public class UserRankDTO {
                 .id(id)
                 .user(user)
                 .score(score)
-                .rankName(DonggaeRank.valueofLabel(donggaeRank))
+                .rankName(DonggaeRank.valueOfLabel(donggaeRank))
                 .build();
     }
 }
