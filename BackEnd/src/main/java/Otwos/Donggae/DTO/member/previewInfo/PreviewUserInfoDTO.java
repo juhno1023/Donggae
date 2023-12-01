@@ -22,7 +22,7 @@ public class PreviewUserInfoDTO {
     private String selfIntro;
     private BaekjoonRank bojRank;
     private String dguEmail;
-    private DonggaeRank userRank;
+    private String userRank;
     private List<UserLanguageResponse> userLanguageDTOS;
     private List<UserInterestFieldResponse> userInterestFieldDTOS;
     private List<UserPersonalityResponse> userPersonalityDTOS;

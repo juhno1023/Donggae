@@ -23,7 +23,7 @@ public class RecRecruitPostDTO {
 
     private List<String> recruitLanguages;
 
-    private DonggaeRank donggaeRank;
+    private String donggaeRank;
 
     private BaekjoonRank bojRank;
 

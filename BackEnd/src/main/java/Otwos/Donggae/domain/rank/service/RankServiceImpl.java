@@ -82,15 +82,15 @@ public class RankServiceImpl implements RankService{
 
             DonggaeRank updatedRank;
             if (i < rankDiaDonggaeCount) {
-                updatedRank = DonggaeRank.다이아동개;
+                updatedRank = DonggaeRank.DIADONGGAE;
             } else if (i < rankDiaDonggaeCount + rankGoldDonggaeCount) {
-                updatedRank = DonggaeRank.황금동개;
+                updatedRank = DonggaeRank.GOLDDONGGAE;
             } else if (i < rankDiaDonggaeCount + rankGoldDonggaeCount + rankEundonggaeCount) {
-                updatedRank = DonggaeRank.은동개;
+                updatedRank = DonggaeRank.SILVERDONGGAE;
             } else if (i < rankDiaDonggaeCount + rankGoldDonggaeCount + rankEundonggaeCount + rankDongdonggaeCount) {
-                updatedRank = DonggaeRank.동동개;
+                updatedRank = DonggaeRank.DONGDONGGAE;
             } else {
-                updatedRank = DonggaeRank.똥개;
+                updatedRank = DonggaeRank.DDONGGAE;
             }
             UserRank updatedUserRank = UserRank.builder().id(userRank.getId()).rankName(updatedRank).score(userRank.getScore()).user(userRank.getUserId()).build();
             userRankRepository.save(updatedUserRank);
@@ -112,7 +112,7 @@ public class RankServiceImpl implements RankService{
             BaekjoonRank bojRank = user.getBoj_rank();
             int score = userRank.getScore();
 
-            UserRankInfoDTO userRankInfoDTO = new UserRankInfoDTO(index, rankName, githubName, userInterestFields, score, bojRank);
+            UserRankInfoDTO userRankInfoDTO = new UserRankInfoDTO(index, rankName.label(), githubName, userInterestFields, score, bojRank);
 
             userRankInfoDTOList.add(userRankInfoDTO);
 

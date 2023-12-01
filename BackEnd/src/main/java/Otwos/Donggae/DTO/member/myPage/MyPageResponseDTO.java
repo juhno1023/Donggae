@@ -18,7 +18,7 @@ public class MyPageResponseDTO {
     private String selfIntro;
     private BaekjoonRank bojRank;
     private String dguEmail;
-    private DonggaeRank userRank;
+    private String userRank;
     private int teamExpCount;
     private int leaderCount;
     private int devTestScore;

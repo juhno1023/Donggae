@@ -68,7 +68,7 @@ public class MyPageServiceImpl implements MyPageService{
 
         //rank 엔티티에 없으면 그냥 "똥개" 보냄
         UserRank userRank = userRankRepository.findUserRankByUserId(user);
-        DonggaeRank donggaeRank = DonggaeRank.똥개;
+        DonggaeRank donggaeRank = DonggaeRank.DDONGGAE;
         if (userRank != null){
             donggaeRank = userRank.getRankName();
         }
@@ -77,7 +77,7 @@ public class MyPageServiceImpl implements MyPageService{
                 user.getIntro(),
                 user.getBoj_rank(),
                 user.getDguEmail(),
-                donggaeRank,
+                donggaeRank.label(),
                 teamExpCount,
                 leaderCount,
                 devTestScore,

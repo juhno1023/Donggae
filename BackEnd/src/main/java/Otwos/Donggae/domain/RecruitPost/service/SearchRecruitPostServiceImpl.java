@@ -178,7 +178,7 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
                 teamMember.getUserId().getUserId(), //userId
                 teamMember.getUserId().getGithubName(), //이름
                 teamMember.getUserId().getBoj_rank(), //백준랭크
-                userRank.getRankName() //동개랭크
+                userRank.getRankName().label() //동개랭크
         );
 
         return teamLeader;

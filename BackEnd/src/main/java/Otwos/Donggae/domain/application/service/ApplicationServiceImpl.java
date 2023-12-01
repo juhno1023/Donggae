@@ -138,14 +138,14 @@ public class ApplicationServiceImpl implements ApplicationService{
 
         DonggaeRank donggaeRank = Optional.ofNullable(userRankRepository.findUserRankByUserId(user))
                 .map(UserRank::getRankName)
-                .orElse(DonggaeRank.똥개);
+                .orElse(DonggaeRank.DDONGGAE);
 
         return new PreviewUserInfoDTO(
                 user.getGithubName(),
                 user.getIntro(),
                 user.getBoj_rank(),
                 user.getDguEmail(),
-                donggaeRank,
+                donggaeRank.label(),
                 userLanguageDTOS,
                 userInterestFieldDTOS,
                 userPersonalityDTOS,

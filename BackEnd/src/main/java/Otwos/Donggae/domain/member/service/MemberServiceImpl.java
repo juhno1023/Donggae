@@ -53,7 +53,7 @@ public class MemberServiceImpl implements MemberService{
                 NULL,
                 user.getUserId(),
                 0,
-                DonggaeRank.똥개
+                DonggaeRank.DDONGGAE.label()
         );
         userRankRepository.save(userRankDTO.toEntity(user));
     }

@@ -12,7 +12,7 @@ import java.util.List;
 public class UserRankInfoDTO {
 
     private int ranking;
-    private DonggaeRank rankName;
+    private String rankName;
     private String githubName;
     private List<String> userInterestFields;
     private int score;
