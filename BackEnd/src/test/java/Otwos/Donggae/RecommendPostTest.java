@@ -178,7 +178,7 @@ public class RecommendPostTest {
             BaekjoonRank bojRank = teamLeader.getBoj_rank();
             String userName = teamLeader.getGithubName();
 
-            RecRecruitPostDTO recRecruitPostDTO = new RecRecruitPostDTO(postId, majorLectureName.label(), title, recruitLanguages, donggaeRank.label(), bojRank, userName, createdDate);
+            RecRecruitPostDTO recRecruitPostDTO = new RecRecruitPostDTO(postId, majorLectureName.label(), title, recruitLanguages, donggaeRank.label(), bojRank.label(), userName, createdDate);
             recommendPostsResponse.add(recRecruitPostDTO);
         }
 
