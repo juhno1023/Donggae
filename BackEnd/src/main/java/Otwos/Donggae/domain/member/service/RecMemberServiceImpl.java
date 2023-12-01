@@ -146,7 +146,7 @@ public class RecMemberServiceImpl implements RecMemberService {
                     .stream()
                     .map(userStudyField -> userStudyField.getStudyField().name()).toList();
 
-            RecMemberDTO recMemberDTO = new RecMemberDTO(userid, githubName, intro, teamExpCount, leaderCount, bojRank, devTestScore, userLanguages, userPersonalities, userInterestFields, userStudyFields);
+            RecMemberDTO recMemberDTO = new RecMemberDTO(userid, githubName, intro, teamExpCount, leaderCount, bojRank.label(), devTestScore, userLanguages, userPersonalities, userInterestFields, userStudyFields);
             recommendMembersResponse.add(recMemberDTO);
         }
 

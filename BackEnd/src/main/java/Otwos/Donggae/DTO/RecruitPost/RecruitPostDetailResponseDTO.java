@@ -7,7 +7,6 @@ import Otwos.Donggae.DTO.RecruitPost.recruitPostInfo.response.RecruitPersonality
 import Otwos.Donggae.DTO.member.userinfo.response.UserInterestFieldResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserLanguageResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserPersonalityResponse;
-import Otwos.Donggae.Global.Rank.BaekjoonRank;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,7 +39,7 @@ public class RecruitPostDetailResponseDTO {
     private String githubName;
     private String dguEmail;
     private String selfIntro;
-    private BaekjoonRank bojRank;
+    private String bojRank;
     private String userRank;
     private List<UserLanguageResponse> userLanguageDTOS;
     private List<UserInterestFieldResponse> userInterestFieldDTOS;

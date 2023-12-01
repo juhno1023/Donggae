@@ -2,9 +2,7 @@ package Otwos.Donggae.domain.rank.service;
 
 import Otwos.Donggae.DAO.GithubStatus;
 import Otwos.Donggae.DAO.User.User;
-import Otwos.Donggae.DAO.User.UserInterestField;
 import Otwos.Donggae.DAO.User.UserRank;
-import Otwos.Donggae.DTO.member.donggaeRank.UserRankDTO;
 import Otwos.Donggae.DTO.member.donggaeRank.UserRankInfoDTO;
 import Otwos.Donggae.Global.Rank.BaekjoonRank;
 import Otwos.Donggae.Global.Rank.DonggaeRank;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class RankServiceImpl implements RankService{
@@ -112,7 +109,7 @@ public class RankServiceImpl implements RankService{
             BaekjoonRank bojRank = user.getBoj_rank();
             int score = userRank.getScore();
 
-            UserRankInfoDTO userRankInfoDTO = new UserRankInfoDTO(index, rankName.label(), githubName, userInterestFields, score, bojRank);
+            UserRankInfoDTO userRankInfoDTO = new UserRankInfoDTO(index, rankName.label(), githubName, userInterestFields, score, bojRank.label());
 
             userRankInfoDTOList.add(userRankInfoDTO);
 

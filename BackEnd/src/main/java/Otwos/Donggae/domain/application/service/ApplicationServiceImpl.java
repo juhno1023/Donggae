@@ -143,7 +143,7 @@ public class ApplicationServiceImpl implements ApplicationService{
         return new PreviewUserInfoDTO(
                 user.getGithubName(),
                 user.getIntro(),
-                user.getBoj_rank(),
+                user.getBoj_rank().label(),
                 user.getDguEmail(),
                 donggaeRank.label(),
                 userLanguageDTOS,
@@ -170,7 +170,7 @@ public class ApplicationServiceImpl implements ApplicationService{
 
         for (UserLanguage userLanguage : userLanguages) {
             UserLanguageResponse userLanguageResponse = new UserLanguageResponse(
-                    userLanguage.getLanguage()
+                    userLanguage.getLanguage().label()
             );
             responses.add(userLanguageResponse);
         }
@@ -184,7 +184,7 @@ public class ApplicationServiceImpl implements ApplicationService{
 
         for (UserInterestField userInterestField : userInterestFields) {
             UserInterestFieldResponse userInterestFieldResponse = new UserInterestFieldResponse(
-                    userInterestField.getInterestField()
+                    userInterestField.getInterestField().label()
             );
             responses.add(userInterestFieldResponse);
         }
@@ -198,7 +198,7 @@ public class ApplicationServiceImpl implements ApplicationService{
 
         for (UserPersonality userPersonality : userPersonalities) {
             UserPersonalityResponse userPersonalityResponse = new UserPersonalityResponse(
-                    userPersonality.getPersonality()
+                    userPersonality.getPersonality().label()
             );
             responses.add(userPersonalityResponse);
         }
@@ -212,7 +212,7 @@ public class ApplicationServiceImpl implements ApplicationService{
 
         for (UserStudyField userStudyField : userStudyFields) {
             UserStudyFieldResponse userStudyFieldResponse = new UserStudyFieldResponse(
-                    userStudyField.getStudyField()
+                    userStudyField.getStudyField().label()
             );
             responses.add(userStudyFieldResponse);
         }

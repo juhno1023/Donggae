@@ -41,7 +41,7 @@ public class MemberServiceImpl implements MemberService{
                 null,
                 0,
                 0,
-                BaekjoonRank.Unrated, // 회원가입할때 기본으로 Unrated 주입
+                BaekjoonRank.UNRATED.label(), // 회원가입할때 기본으로 Unrated 주입
                 0,
                 signUpDTO.getDguEmail()
         );

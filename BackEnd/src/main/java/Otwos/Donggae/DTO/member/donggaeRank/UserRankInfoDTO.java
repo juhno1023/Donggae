@@ -1,6 +1,5 @@
 package Otwos.Donggae.DTO.member.donggaeRank;
 
-import Otwos.Donggae.Global.Rank.BaekjoonRank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -15,6 +14,6 @@ public class UserRankInfoDTO {
     private String githubName;
     private List<String> userInterestFields;
     private int score;
-    private BaekjoonRank bojRank;
+    private String bojRank;
 
 }

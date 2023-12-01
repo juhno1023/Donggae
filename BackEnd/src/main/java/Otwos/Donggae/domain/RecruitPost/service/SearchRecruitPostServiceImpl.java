@@ -180,7 +180,7 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
         ApplyMemberPreview teamLeader = new ApplyMemberPreview(
                 teamMember.getUserId().getUserId(), //userId
                 teamMember.getUserId().getGithubName(), //이름
-                teamMember.getUserId().getBoj_rank(), //백준랭크
+                teamMember.getUserId().getBoj_rank().label(), //백준랭크
                 userRank.getRankName().label() //동개랭크
         );
 

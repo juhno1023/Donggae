@@ -69,7 +69,7 @@ public class MyPageServiceImpl implements MyPageService{
         MyPageResponseDTO myPageResponseDTO = new MyPageResponseDTO(
                 user.getGithubName(),
                 user.getIntro(),
-                user.getBoj_rank(),
+                user.getBoj_rank().label(),
                 user.getDguEmail(),
                 donggaeRank.label(),
                 teamExpCount,
@@ -177,7 +177,7 @@ public class MyPageServiceImpl implements MyPageService{
 
         for (UserStudyField userStudyField : userStudyFields) {
             UserStudyFieldResponse userStudyFieldResponse = new UserStudyFieldResponse(
-                    userStudyField.getStudyField()
+                    userStudyField.getStudyField().label()
             );
             responses.add(userStudyFieldResponse);
         }

@@ -296,7 +296,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
                 teamLeader.getGithubName(),
                 teamLeader.getDguEmail(),
                 teamLeader.getIntro(),
-                teamLeader.getBoj_rank(),
+                teamLeader.getBoj_rank().label(),
                 donggaeRank.label(),
                 userLanguageDTOS,
                 userInterestFieldDTOS,
@@ -391,7 +391,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (UserStudyField userStudyField : userStudyFields) {
             UserStudyFieldResponse userStudyFieldResponse = new UserStudyFieldResponse(
-                    userStudyField.getStudyField()
+                    userStudyField.getStudyField().label()
             );
             responses.add(userStudyFieldResponse);
         }

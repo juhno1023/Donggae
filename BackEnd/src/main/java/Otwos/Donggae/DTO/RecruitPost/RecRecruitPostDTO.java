@@ -1,6 +1,5 @@
 package Otwos.Donggae.DTO.RecruitPost;
 
-import Otwos.Donggae.Global.Rank.BaekjoonRank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -20,7 +19,7 @@ public class RecRecruitPostDTO {
 
     private String donggaeRank;
 
-    private BaekjoonRank bojRank;
+    private String bojRank;
 
     private String userName;
 
