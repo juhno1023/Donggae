@@ -3,10 +3,33 @@ import styles from "./Mypage.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebars";
+import donggae from '../../image/donggae.png';
+import MultiSelect from '../../components/_Tool/Multiselect';
 
 export default function Mypage() {
     const history = useNavigate();
 
+    const languages = [
+        { name: "JavaScrpit", id: 1 },
+        { name: "C++", id: 2 },
+        { name: "Python", id: 3 },
+        { name: "Java", id: 4 },
+        { name: "React", id: 5 },
+        { name: "C#", id: 6 },
+      ];
+
+    const fields = [
+        { name: "알고리즘", id: 1 },
+        { name: "웹", id: 2 },
+        { name: "모바일", id: 3 },
+        { name: "BackEnd", id: 4 },
+        { name: "FrontEnd", id: 5 },
+      ];
+
+    const personalitys = [
+        { name: "분석적인", id: 1 },
+        { name: "침착한", id: 2 },
+      ];
 
     const[name, setName] = useState();
     const[selfIntro, setSelfIntro] = useState();
@@ -22,6 +45,38 @@ export default function Mypage() {
     const[userStudyFieldDTOS, setUserStudyFieldDTOS] = useState([]);
 
     let token = localStorage.getItem('token') || '';
+
+
+    const [formData, setFormData] = useState() //자기소개 내용
+    const handleInputChange = (e) => {
+        setFormData(e.target.value);
+    };
+
+    const [exp, setExp] = useState();
+    const expInputChange = (e) => {
+        setFormData(e.target.value);
+    };
+
+
+    const DataModify= async() => {
+        try {
+            const res = await fetch('http://localhost:8080/mypage', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            })     
+            .then(res=> {}).then(data => {
+                console.log(data)
+                setRecPj(data);
+                console.log(data)
+            })
+        } catch (error) {
+            console.error("Failed to fetch: ", error);
+        }
+    };
+    
 
     useEffect(() => {
         const DataInquiry = () => {
@@ -54,26 +109,7 @@ export default function Mypage() {
                 }
             };
 
-            // const DataModify= async() => {
-            //     try {
-            //         const res = await fetch('http://localhost:8080/mypage', {
-            //             method: 'PUT',
-            //             headers: {
-            //                 'Content-Type': 'application/json',
-            //                 'Authorization': `Bearer ${token}`
-            //             },
-            //         })     
-            //         .then(res=> {}).then(data => {
-            //             console.log(data)
-            //             setRecPj(data);
-            //             console.log(data)
-            //         })
-            //     } catch (error) {
-            //         console.error("Failed to fetch: ", error);
-            //     }
-            // };
             DataInquiry();
-            //DataModify();
         },[]);
 
 
@@ -84,7 +120,35 @@ export default function Mypage() {
             <Sidebar/>
             <div className={styles.inner}>
                 <div className={styles.body}>
-                    <div>{name} {selfIntro} {bojRank} {dguEmail} {userRank} {teamExpCount} {leaderCount} {devTestScore} {userLanguageDTOS} {userInterestFieldDTOS} {userPersonalityDTOS} {userStudyFieldDTOS}</div>
+                    <div className={styles.box__}>
+                        <img className={styles.user_icon} alt="Image" src={donggae} />
+                        <div className={styles.user_box}>
+                            <p className={styles.user_name_text}>{name}님</p>
+                            <p className={styles.user_email_text}>{dguEmail} @dgu.ac.kr</p>
+                        </div>
+
+                        <div className={styles.data_area}><p>언어 설정</p><MultiSelect options ={languages} placehdr = '언어 설정'/></div>
+                        <div className={styles.data_area}><p>관심 분야 설정</p><MultiSelect options ={fields} placehdr = '관심 분야 설정'/></div>
+                        <div className={styles.data_area}><p>자기 소개</p>
+                            <textarea
+                                id="myself"
+                                name="content"
+                                placeholder="내용을 작성해주세요."
+                                value={formData}
+                                onChange={handleInputChange}
+                            /></div>
+                        <div className={styles.data_area}><p>관심 분야 설정</p><MultiSelect options ={personalitys} placehdr = '성격 키워드'/></div>
+                        <div className={styles.data_area}><p>팀플 경험 횟수</p>
+                            <textarea
+                                id="exp"
+                                name="content"
+                                placeholder="횟수를 입력해주세요."
+                                value={exp}
+                                onChange={expInputChange}
+                            />
+                        </div>
+                        <div className={styles.data_area}></div>
+                    </div>
                 </div>
             </div>
         </div>
