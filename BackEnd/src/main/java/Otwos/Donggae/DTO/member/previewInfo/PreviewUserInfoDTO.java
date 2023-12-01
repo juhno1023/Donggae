@@ -1,15 +1,10 @@
 package Otwos.Donggae.DTO.member.previewInfo;
 
-import Otwos.Donggae.DTO.member.userinfo.UserInterestFieldDTO;
-import Otwos.Donggae.DTO.member.userinfo.UserLanguageDTO;
-import Otwos.Donggae.DTO.member.userinfo.UserPersonalityDTO;
-import Otwos.Donggae.DTO.member.userinfo.UserStudyFieldDTO;
 import Otwos.Donggae.DTO.member.userinfo.response.UserInterestFieldResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserLanguageResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserPersonalityResponse;
 import Otwos.Donggae.DTO.member.userinfo.response.UserStudyFieldResponse;
 import Otwos.Donggae.Global.Rank.BaekjoonRank;
-import Otwos.Donggae.Global.Rank.DonggaeRank;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;

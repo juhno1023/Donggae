@@ -1,7 +1,6 @@
 package Otwos.Donggae.DTO.team.teamDetail;
 
 import Otwos.Donggae.Global.Rank.BaekjoonRank;
-import Otwos.Donggae.Global.Rank.DonggaeRank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

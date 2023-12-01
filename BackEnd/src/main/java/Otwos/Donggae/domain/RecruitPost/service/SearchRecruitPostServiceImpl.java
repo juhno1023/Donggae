@@ -72,7 +72,7 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
                 .map(UserPersonalityResponse::getPersonality)
                 .collect(Collectors.toSet());
 
-        MajorLectureEnum requestedMajorLecture = searchRequest.getMajorLecture();
+        MajorLectureEnum requestedMajorLecture = MajorLectureEnum.valueofLabel(searchRequest.getMajorLecture());
 
         //모든 모집 글 불러옴
         List<RecruitPost> allPosts = recruitPostRepository.findAll();
@@ -142,7 +142,7 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
                         languages, //모집 언어들
                         teamLeader, //팀장
                         createdDate, //작성날짜
-                        recruitPost.getMajorLectureName() //해당 강의
+                        recruitPost.getMajorLectureName().label() //해당 강의
                 );
                 lectureRecruitPosts.add(lectureRecruitPost);
             }

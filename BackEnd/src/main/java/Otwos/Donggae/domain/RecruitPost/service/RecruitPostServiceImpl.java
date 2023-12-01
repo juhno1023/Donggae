@@ -95,7 +95,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         String title = recruitPostRequestDTO.getTitle();
         String content = recruitPostRequestDTO.getContent();
         Timestamp createdDate = new Timestamp(System.currentTimeMillis());
-        MajorLectureEnum majorLectureName = recruitPostRequestDTO.getMajorLectureName();
+        String majorLectureName = recruitPostRequestDTO.getMajorLectureName();
         String teamName = recruitPostRequestDTO.getTeamName();
 
         RecruitPostDTO recruitPostDTO = new RecruitPostDTO(
@@ -266,7 +266,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
             recruitPost.setContent(recruitPostRequestDTO.getContent());
         }
         if(recruitPostRequestDTO.getMajorLectureName()!=null){
-            recruitPost.setMajorLectureName(recruitPostRequestDTO.getMajorLectureName());
+            recruitPost.setMajorLectureName(MajorLectureEnum.valueofLabel(recruitPostRequestDTO.getMajorLectureName()));
         }
 
         recruitPostRepository.save(recruitPost);
@@ -295,7 +295,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
                 recruitPost.getRecruitPostId(),
                 recruitPost.getTitle(),
                 recruitPost.getContent(),
-                recruitPost.getMajorLectureName(),
+                recruitPost.getMajorLectureName().label(),
                 recruitPost.getCreatedDate(),
                 recruitFieldResponses,
                 recruitLanguageResponses,
@@ -305,7 +305,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
                 teamLeader.getDguEmail(),
                 teamLeader.getIntro(),
                 teamLeader.getBoj_rank(),
-                donggaeRank,
+                donggaeRank.label(),
                 userLanguageDTOS,
                 userInterestFieldDTOS,
                 userPersonalityDTOS
