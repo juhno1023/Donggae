@@ -135,7 +135,7 @@ public class MyPageServiceImpl implements MyPageService{
 
         for (UserLanguage userLanguage : userLanguages) {
             UserLanguageResponse userLanguageResponse = new UserLanguageResponse(
-                    userLanguage.getLanguage()
+                    userLanguage.getLanguage().label()
             );
             responses.add(userLanguageResponse);
         }
@@ -189,12 +189,9 @@ public class MyPageServiceImpl implements MyPageService{
         List<String> userLanguages = myPageRequestDTO.getUserLanguages();
 
         for (String language : userLanguages) {
-            // 문자열을 Enum으로 변환
-            LanguageEnum languageEnum = LanguageEnum.valueOf(language);
-
             UserLanguageDTO userLanguageDTO = new UserLanguageDTO(
                     user.getUserId(),
-                    languageEnum
+                    language
             );
             userLanguageDTOS.add(userLanguageDTO);
         }
@@ -204,7 +201,7 @@ public class MyPageServiceImpl implements MyPageService{
     private List<UserLanguage> convertToUserLanguageEntities(List<UserLanguageDTO> userLanguageDTOS, User user) {
         return userLanguageDTOS.stream()
                 .map(dto -> {
-                    return new UserLanguage(user, dto.getLanguage());
+                    return new UserLanguage(user, LanguageEnum.valueOfLabel(dto.getLanguage()));
                 })
                 .collect(Collectors.toList());
     }

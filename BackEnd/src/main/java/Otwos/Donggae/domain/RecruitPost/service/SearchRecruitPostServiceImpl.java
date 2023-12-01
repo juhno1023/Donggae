@@ -64,6 +64,7 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
         //language, field, personality (request에서 받은거 모두 들어가야 검색되게)
         Set<LanguageEnum> requestedLanguages = searchRequest.getLanguageS().stream()
                 .map(UserLanguageResponse::getLanguage)
+                .map(LanguageEnum::valueOfLabel)
                 .collect(Collectors.toSet());
         Set<FieldEnum> requestedFields = searchRequest.getFieldS().stream()
                 .map(UserInterestFieldResponse::getInterestField)
@@ -129,7 +130,7 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
             //모집 언어들
             List<RecruitLanguage> recruitLanguages = recruitLanguageRepository.findAllByRecruitPostId(recruitPost);
             List<UserLanguageResponse> languages = recruitLanguages.stream()
-                    .map(lang -> new UserLanguageResponse(lang.getLanguage()))
+                    .map(lang -> new UserLanguageResponse(lang.getLanguage().label()))
                     .collect(Collectors.toList());
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

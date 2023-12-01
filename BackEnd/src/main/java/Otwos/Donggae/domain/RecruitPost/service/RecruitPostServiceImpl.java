@@ -22,7 +22,6 @@ import Otwos.Donggae.DTO.team.TeamDTO;
 import Otwos.Donggae.DTO.team.TeamMemberDTO;
 import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
 import Otwos.Donggae.Global.FieldEnum;
-import Otwos.Donggae.Global.LanguageEnum;
 import Otwos.Donggae.Global.MajorLectureEnum;
 import Otwos.Donggae.Global.PersonalityEnum;
 import Otwos.Donggae.Global.Rank.DonggaeRank;
@@ -168,12 +167,9 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         List<String> recruitLanguages = recruitPostRequestDTO.getRecruitLanguages();
 
         for (String language : recruitLanguages) {
-            // 문자열을 Enum으로 변환
-            LanguageEnum languageEnum = LanguageEnum.valueOf(language);
-
             RecruitLanguageDTO recruitLanguageDTO = new RecruitLanguageDTO(
                     recruitPost.getRecruitPostId(),
-                    languageEnum
+                    language
             );
             recruitLanguageDTOS.add(recruitLanguageDTO);
         }
@@ -318,7 +314,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (RecruitLanguage recruitLanguage : recruitLanguages) {
             RecruitLanguageResponse recruitLanguageResponse = new RecruitLanguageResponse(
-                    recruitLanguage.getLanguage()
+                    recruitLanguage.getLanguage().label()
             );
             responses.add(recruitLanguageResponse);
         }
@@ -356,7 +352,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (UserLanguage userLanguage : userLanguages) {
             UserLanguageResponse userLanguageResponse = new UserLanguageResponse(
-                    userLanguage.getLanguage()
+                    userLanguage.getLanguage().label()
             );
             responses.add(userLanguageResponse);
         }
