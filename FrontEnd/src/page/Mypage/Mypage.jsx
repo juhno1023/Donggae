@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebars";
 import donggae from '../../image/donggae.png';
-import MultiSelect from '../../components/_Tool/Multiselect';
+import { MultiSelect } from "react-multi-select-component";
 
 export default function Mypage() {
     const history = useNavigate();
@@ -58,25 +58,25 @@ export default function Mypage() {
     };
 
 
-    const DataModify= async() => {
-        try {
-            const res = await fetch('http://localhost:8080/mypage', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-            })     
-            .then(res=> {}).then(data => {
-                console.log(data)
-                setRecPj(data);
-                console.log(data)
-            })
-        } catch (error) {
-            console.error("Failed to fetch: ", error);
-        }
-    };
-    
+    // const DataModify= async() => {
+    //     try {
+    //         const res = await fetch('http://localhost:8080/mypage', {
+    //             method: 'PUT',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': `Bearer ${token}`
+    //             },
+    //         })     
+    //         .then(res=> {}).then(data => {
+    //             console.log(data)
+    //             setRecPj(data);
+    //             console.log(data)
+    //         })
+    //     } catch (error) {
+    //         console.error("Failed to fetch: ", error);
+    //     }
+    // };
+
 
     useEffect(() => {
         const DataInquiry = () => {
@@ -121,7 +121,7 @@ export default function Mypage() {
             <div className={styles.inner}>
                 <div className={styles.body}>
                     <div className={styles.box__}>
-                        <img className={styles.user_icon} alt="Image" src={donggae} />
+                        <img className={styles.user_icon} alt="Image" src={localStorage.getItem('profile')} />
                         <div className={styles.user_box}>
                             <p className={styles.user_name_text}>{name}님</p>
                             <p className={styles.user_email_text}>{dguEmail} @dgu.ac.kr</p>
