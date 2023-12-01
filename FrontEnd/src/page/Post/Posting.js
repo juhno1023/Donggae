@@ -3,8 +3,7 @@ import styles from "./Posting.module.css"
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/_Layout/Sidebars";
 import Header from "../../components/_Layout/Header";
-import CheckBox from '../../components/CheckBox';
-import MultiSelect from '../../components/_Tool/Multiselect';
+import CheckBox from '../../components/_Tool/CheckBox';
 
 export default function Posting() {
     let token = localStorage.getItem('token') || '';
@@ -145,15 +144,15 @@ export default function Posting() {
                         <div className={styles.text__1}>세부사항 설정</div>
                         모집 분야
                         <div className={styles.container}>
-                            <MultiSelect options ={datas} placehdr = '모집분야'/>
+                            {/* <MultiSelect options ={datas} placehdr = '모집분야'/> */}
                         </div>
                         선호 언어
                         <div className={styles.container}>
-                            <MultiSelect options ={datas} placehdr = '선호언어'/>
+                            {/* <MultiSelect options ={datas} placehdr = '선호언어'/> */}
                         </div>
                         선호 성향
                         <div className={styles.container}>
-                            <MultiSelect options ={datas} placehdr = '선호성향'/>
+                            {/* <MultiSelect options ={datas} placehdr = '선호성향'/> */}
                         </div>
                     </div>
                     <div className={styles.half}>
