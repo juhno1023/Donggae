@@ -7,16 +7,27 @@ html,body {
   padding-top:200px;
 }
 
+
+.inner{
+  margin : 0 auto;
+  width : 50vw;
+  height : 680px;
+}
+
 .body{
   position: absolute;
   font-size: 14px;
   top : 120px;
-  left: 350px;
+  left: 400px;
   background-color: white;
 }
 
   .box__{
+    width : 70vw;
+    height: 600px;
+    margin : 0 auto;
     display :flex;
+    flex-wrap: wrap;
   }
   
   .formGroup__{
@@ -25,7 +36,9 @@ html,body {
     flex-direction: row ;
     margin-bottom: 20px;
     position: relative;
+    padding: 5px;
     border-radius: 12px;
+    height: 20px;
     line-height: 36px;
     word-wrap: break-word;
     padding : 10px;
@@ -55,7 +68,7 @@ html,body {
 
 
 .text__1 {
-  font-size:25px;
+  font-size:23px;
   font-weight: bold;
   width : 100%;
   line-height: 35px;
@@ -64,19 +77,56 @@ html,body {
   margin-bottom:10px;
 }
 
-.first_box{
-  width: 450px;
-  margin-right: 40px;
-}
-
-.second_box{
-  width: 250px;
-}
-
 .title_text{
   color: #898989;
+  font-family: Brawler;
   margin-left: 10px;
-  font-size: 13px;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
   padding-bottom: 15px;
-  border-bottom: #898989 1px solid;
+  border-width:0px 0px 1px 0px;
+  border-style:solid;
+}
+
+
+.second_box{
+  width: 600px;
+  position: relative;
+  left: 100px;
+}
+
+.first_box{
+  width: 600px;
+}
+
+
+.search {
+  margin-top: 10px;
+  position: relative;
+  margin-left: 15px;
+}
+
+.search input {
+  width: 450px; 
+  height: 20px;
+  border: 1px solid #bbb;
+  border-radius: 30px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.search_icon{
+  width: 30px;
+  height: 30px;
+}
+
+
+.filter_box{
+    width : 70vw;
+    height: 600px;
+    margin : 0 auto;
+    display :flex;
+    flex-wrap: wrap;
 }

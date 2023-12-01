@@ -122,7 +122,7 @@
 }
 
 /* select box */
-select {
+.majorSelect {
     appearance: none;
     font-family: inherit;
     cursor: pointer;
@@ -133,3 +133,4 @@ select {
     border: 1px solid var(--box-bg);
     margin-left: 10px;
 }
+

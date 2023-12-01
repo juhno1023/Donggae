@@ -1,14 +1,13 @@
 
 .UserCard{
-    padding: 5px;
     border-radius: 16px;
     border: 1px solid var(--box-bg);
     background: var(--box-bg2);
     height: 20px;
     line-height: 36px;
     word-wrap: break-word;
-    padding : 10px;
-    width : 160px;
+    padding : 15px;
+    width : 180px;
     height: 200px;
     margin-right : 10px;
   }
@@ -16,12 +15,74 @@
   .GroupCard{
     padding: 5px;
     border-radius: 16px;
-    border: 1px solid var(--box-border);
+    border: 1px solid var(--box-bg);
     height: 20px;
     line-height: 36px;
     word-wrap: break-word;
-    padding : 10px;
-    width : 160px;
-    height: 200px;
+    padding : 15px;
+    width : 180px;
+    height: 210px;
     margin-right : 10px;
+    margin-bottom: 10px;
+  }
+
+.GroupCard{
+  line-height: 3.2cap;
+}
+
+
+.SuggetCard{
+  padding: 5px;
+  border-radius: 16px;
+  border: 1px solid var(--box-bg);
+  height: 20px;
+  line-height: 36px;
+  word-wrap: break-word;
+  padding : 15px;
+  width : 200px;
+  height: 60px;
+  margin-right : 10px;
+  /* box-shadow: 0px 0px 5px rgb(0 0 0); */
+}
+
+
+.Lecture{
+  color: white;
+  padding : 2px 20px;
+  border-radius: 15px;
+}
+
+.title a{
+  color : black;
+  text-decoration: none;
+  transition: all 0.2s;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.title a:hover {
+  color: var(--point-orange);  
+}
+
+.tag{
+  padding : 2px 13px;
+  margin-right: 5px;
+  border-radius: 15px;
+  background-color: var(--select-bg);
+}
+
+
+  .pjSelect {
+    width: 70px;
+    height: 20px;
+    background: inherit;
+    padding: 0px 3px 0px 10px;
+    border-radius: 4px;
+  }
+  .pjSelect option {
+    background: inherit;
+    padding: 3px 0;
+  }
+  .pjSelect option:hover {
+    background: rgb(58, 58, 58)
   }

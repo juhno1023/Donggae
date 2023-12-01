@@ -92,10 +92,15 @@ html,body {
     font-size: 42px;
     font-weight: bold;
     font-family: 'Viga';
-    color: var(--basic-text);
     padding: 10px;
+    list-style: none;
+    text-decoration: none;
   }
-  
+  .header a {
+    list-style: none;
+    text-decoration: none;
+    color: var(--basic-text);
+  }
   .subtitle {
     font-family: 'Viga';
     color: var(--basic-text);
@@ -123,3 +128,5 @@ html,body {
     right: 12px;
     margin: 0;
   }
+
+  

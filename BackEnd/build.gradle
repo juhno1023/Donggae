@@ -57,3 +57,7 @@ tasks.named('bootBuildImage') {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+springBoot {
+	mainClass = 'Otwos.Donggae.BackEndApplication'
+}
