@@ -163,7 +163,7 @@ public class MyPageServiceImpl implements MyPageService{
 
         for (UserPersonality userPersonality : userPersonalities) {
             UserPersonalityResponse userPersonalityResponse = new UserPersonalityResponse(
-                    userPersonality.getPersonality()
+                    userPersonality.getPersonality().label()
             );
             responses.add(userPersonalityResponse);
         }
@@ -211,12 +211,9 @@ public class MyPageServiceImpl implements MyPageService{
         List<String> userPersonality = myPageRequestDTO.getUserPersonalities();
 
         for (String personality : userPersonality) {
-            // 문자열을 Enum으로 변환
-            PersonalityEnum personalityEnum = PersonalityEnum.valueOf(personality);
-
             UserPersonalityDTO userPersonalityDTO = new UserPersonalityDTO(
                     user.getUserId(),
-                    personalityEnum
+                    personality
             );
             userPersonalityDTOS.add(userPersonalityDTO);
         }
@@ -226,7 +223,7 @@ public class MyPageServiceImpl implements MyPageService{
     private List<UserPersonality> convertToUserPersonalityEntities(List<UserPersonalityDTO> userPersonalityDTOS, User user) {
         return userPersonalityDTOS.stream()
                 .map(dto -> {
-                    return new UserPersonality(user, dto.getPersonality());
+                    return new UserPersonality(user, PersonalityEnum.valueOfLabel(dto.getPersonality()));
                 })
                 .collect(Collectors.toList());
     }

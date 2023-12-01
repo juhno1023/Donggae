@@ -72,6 +72,7 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
                 .collect(Collectors.toSet());
         Set<PersonalityEnum> requestedPersonalities = searchRequest.getPersonalityS().stream()
                 .map(UserPersonalityResponse::getPersonality)
+                .map(PersonalityEnum::valueOfLabel)
                 .collect(Collectors.toSet());
 
         MajorLectureEnum requestedMajorLecture = MajorLectureEnum.valueOfLabel(searchRequest.getMajorLecture());

@@ -216,12 +216,9 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         List<String> recruitPersonalities = recruitPostRequestDTO.getRecruitPersonalities();
 
         for (String personality : recruitPersonalities) {
-            // 문자열을 Enum으로 변환
-            PersonalityEnum personalityEnum = PersonalityEnum.valueOf(personality);
-
             RecruitPersonalityDTO recruitPersonalityDTO = new RecruitPersonalityDTO(
                     recruitPost.getRecruitPostId(),
-                    personalityEnum
+                    personality
             );
             recruitPersonalityDTOS.add(recruitPersonalityDTO);
         }
@@ -339,7 +336,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (RecruitPersonality recruitPersonality : recruitPersonalities) {
             RecruitPersonalityResponse recruitPersonalityResponse = new RecruitPersonalityResponse(
-                    recruitPersonality.getPersonality()
+                    recruitPersonality.getPersonality().label()
             );
             responses.add(recruitPersonalityResponse);
         }
@@ -380,7 +377,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
 
         for (UserPersonality userPersonality : userPersonalities) {
             UserPersonalityResponse userPersonalityResponse = new UserPersonalityResponse(
-                    userPersonality.getPersonality()
+                    userPersonality.getPersonality().label()
             );
             responses.add(userPersonalityResponse);
         }

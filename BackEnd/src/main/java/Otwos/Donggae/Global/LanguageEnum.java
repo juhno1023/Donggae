@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LanguageEnum {
-
     JAVASCRIPT("JavaScript"),
     TYPESCRIPT("TypeScript"),
     REACT("React"),

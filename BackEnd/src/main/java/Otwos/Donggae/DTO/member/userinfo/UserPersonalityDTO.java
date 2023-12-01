@@ -10,12 +10,12 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserPersonalityDTO {
     private int userId;
-    private PersonalityEnum personality;
+    private String personality;
 
     public UserPersonality toEntity(User user) {
         return UserPersonality.builder()
                 .userId(user)
-                .personality(personality)
+                .personality(PersonalityEnum.valueOfLabel(personality))
                 .build();
     }
 }
