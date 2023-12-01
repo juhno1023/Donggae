@@ -7,13 +7,8 @@ import Otwos.Donggae.DAO.Recruit.RecruitPersonality;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.Global.MajorLectureEnum;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -29,7 +24,7 @@ public class RecruitPostDTO {
 
     private String content;
 
-    private MajorLectureEnum majorLectureName;
+    private String majorLectureName;
 
     private Timestamp createdDate;
     private Boolean isComplete;
@@ -48,7 +43,7 @@ public class RecruitPostDTO {
                 .userId(userId)
                 .title(title)
                 .content(content)
-                .majorLectureName(majorLectureName)
+                .majorLectureName(MajorLectureEnum.valueOfLabel(majorLectureName))
                 .createdDate(createdDate)
                 .isComplete(isComplete)
                 .build();

@@ -7,7 +7,7 @@ import Otwos.Donggae.DTO.application.read.ReadApplicationResponse;
 import Otwos.Donggae.DTO.member.previewInfo.PreviewUserInfoDTO;
 
 public interface ApplicationService {
-    public void applyFor(int userId, ApplyTeamRequest request);
-    public ReadApplicationResponse readApplication(ReadApplicationRequest applicationRequest);
-    public PreviewUserInfoDTO applyPageInfo(int userId);
+    void applyFor(int userId, ApplyTeamRequest request);
+    ReadApplicationResponse readApplication(ReadApplicationRequest applicationRequest);
+    PreviewUserInfoDTO applyPageInfo(int userId);
 }

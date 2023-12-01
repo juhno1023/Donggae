@@ -12,14 +12,14 @@ public class UserRankDTO {
     private int id;
     private int userId;
     private int score;
-    private DonggaeRank donggaeRank;
+    private String donggaeRank;
 
     public UserRank toEntity(User user) {
         return UserRank.builder()
                 .id(id)
                 .user(user)
                 .score(score)
-                .rankName(donggaeRank)
+                .rankName(DonggaeRank.valueOfLabel(donggaeRank))
                 .build();
     }
 }

@@ -1,7 +1,6 @@
 package Otwos.Donggae.DTO.RecruitPost.recruitPostInfo;
 
 import Otwos.Donggae.DAO.Recruit.RecruitLanguage;
-import Otwos.Donggae.DAO.Recruit.RecruitPersonality;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
 import Otwos.Donggae.Global.LanguageEnum;
 import lombok.AllArgsConstructor;
@@ -12,11 +11,11 @@ import lombok.Data;
 public class RecruitLanguageDTO {
 
     private int recruitPostId;
-    private LanguageEnum language;
+    private String language;
     public RecruitLanguage toEntity(RecruitPost recruitPost) {
         return RecruitLanguage.builder()
                 .recruitPostId(recruitPost)
-                .language(language)
+                .language(LanguageEnum.valueOfLabel(language))
                 .build();
     }
 }
