@@ -25,12 +25,7 @@ const Sidebar = () => {
                 <li className={`sidebar__menu__item`}><Link to='/rank'>rank</Link></li>
                 <li className={`sidebar__menu__item`}><Link to='/recruit'>searching</Link></li>
                 <li className={`sidebar__menu__item`}><Link to='/teaminfo'>내가 속한 팀</Link></li>
-<<<<<<< HEAD
-                <li className={`sidebar__menu__item`}><Link to='/mypage'>마이페이지</Link></li>
                 <li className={`sidebar__menu__item`}><Link to='/recruit'>팀원 모집 검색</Link></li>
-                <li className={`sidebar__menu__item`} onClick={logout}><Link to='/'>로그아웃</Link></li>
-=======
->>>>>>> 74fac9d01a0bc7c6dba1080a69663bbef90a93e1
                 </ul>
             </nav>
            
