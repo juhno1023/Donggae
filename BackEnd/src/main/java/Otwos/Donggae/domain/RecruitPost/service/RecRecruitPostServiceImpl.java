@@ -12,6 +12,7 @@ import Otwos.Donggae.Global.Rank.DonggaeRank;
 import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,16 +21,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class RecRecruitPostServiceImpl implements RecRecruitPostService {
 
-    @Autowired
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
-    @Autowired
-    private RecruitPostRepository recruitPostRepository;
+    private final RecruitPostRepository recruitPostRepository;
 
-    @Autowired
-    private UserRankRepository userRankRepository;
+    private final UserRankRepository userRankRepository;
 
     @Override
     public List<RecRecruitPostDTO> recommendRecruitPost(int userId) {
@@ -111,9 +110,9 @@ public class RecRecruitPostServiceImpl implements RecRecruitPostService {
             int postId = topPost.getRecruitPostId();
             MajorLectureEnum majorLectureName = topPost.getMajorLectureName();
             String title = topPost.getTitle();
-            List<String> recruitLanguages = topPost.getRecruitLanguages()
+            Set<String> recruitLanguages = topPost.getRecruitLanguages()
                     .stream()
-                    .map(recruitLanguage -> recruitLanguage.getLanguage().name()).toList();
+                    .map(recruitLanguage -> recruitLanguage.getLanguage().name()).collect(Collectors.toSet());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String createdDate = simpleDateFormat.format(topPost.getCreatedDate());
 
@@ -123,7 +122,17 @@ public class RecRecruitPostServiceImpl implements RecRecruitPostService {
             BaekjoonRank bojRank = teamLeader.getBoj_rank();
             String userName = teamLeader.getGithubName();
 
-            RecRecruitPostDTO recRecruitPostDTO = new RecRecruitPostDTO(postId, majorLectureName.label(), title, recruitLanguages, donggaeRank.label(), bojRank.label(), userName, createdDate);
+            RecRecruitPostDTO recRecruitPostDTO = RecRecruitPostDTO.builder()
+                    .recruitPostId(postId)
+                    .majorLectureName(majorLectureName == null ? null : majorLectureName.label())
+                    .title(title)
+                    .recruitLanguages(recruitLanguages)
+                    .donggaeRank(donggaeRank == null ? null : donggaeRank.label())
+                    .bojRank(bojRank == null ? null : bojRank.label())
+                    .userName(userName)
+                    .createDate(createdDate)
+                    .build();
+
             recommendPostsResponse.add(recRecruitPostDTO);
         }
 

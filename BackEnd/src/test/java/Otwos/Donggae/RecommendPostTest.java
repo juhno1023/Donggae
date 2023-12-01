@@ -166,9 +166,9 @@ public class RecommendPostTest {
             int postId = topPost.getRecruitPostId();
             MajorLectureEnum majorLectureName = topPost.getMajorLectureName();
             String title = topPost.getTitle();
-            List<String> recruitLanguages = topPost.getRecruitLanguages()
+            Set<String> recruitLanguages = topPost.getRecruitLanguages()
                                                     .stream()
-                                                    .map(recruitLanguage -> recruitLanguage.getLanguage().name()).toList();
+                                                    .map(recruitLanguage -> recruitLanguage.getLanguage().name()).collect(Collectors.toSet());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String createdDate = simpleDateFormat.format(topPost.getCreatedDate());
 
@@ -178,7 +178,17 @@ public class RecommendPostTest {
             BaekjoonRank bojRank = teamLeader.getBoj_rank();
             String userName = teamLeader.getGithubName();
 
-            RecRecruitPostDTO recRecruitPostDTO = new RecRecruitPostDTO(postId, majorLectureName.label(), title, recruitLanguages, donggaeRank.label(), bojRank.label(), userName, createdDate);
+            RecRecruitPostDTO recRecruitPostDTO = RecRecruitPostDTO.builder()
+                    .recruitPostId(postId)
+                    .majorLectureName(majorLectureName.label())
+                    .title(title)
+                    .recruitLanguages(recruitLanguages)
+                    .donggaeRank(donggaeRank.label())
+                    .bojRank(bojRank.label())
+                    .userName(userName)
+                    .createDate(createdDate)
+                    .build();
+
             recommendPostsResponse.add(recRecruitPostDTO);
         }
 
