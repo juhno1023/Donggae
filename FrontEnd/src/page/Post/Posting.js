@@ -26,11 +26,11 @@ export default function Posting() {
     };
     
     const handleTeamNameChange = (event) => {
-    setTeamName(event.target.value);
+        setTeamName(event.target.value);
     };
     
     const handleContentChange = (event) => {
-    setContent(event.target.value);
+        setContent(event.target.value);
     };
 
     const languageA = [

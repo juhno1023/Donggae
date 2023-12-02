@@ -14,7 +14,8 @@ export default function Recruit() {
     const [fieSelected, setFieSelected] = useState([]);
     const [perSelected, setPerSelected] = useState([]);
     const [majSelected, setMajSelected] = useState("");
-    const [recommendPj, setRecPj] = useState([]);
+    const [recNatPj, setNatPj] = useState([]);
+    const [recLecPj, setLecPj] = useState([]);
 
     const handleSelect = (e) => {
         setMajSelected(e.target.value);
@@ -130,8 +131,8 @@ export default function Recruit() {
                 })
                 .then(res=>res.json())        
                 .then(res=> {
-                console.log(res.naturalRecruitPosts);
-                setRecPj(res.naturalRecruitPosts);
+                setLecPj(res.lectureRecruitPosts);
+                setNatPj(res.naturalRecruitPosts);
                 });
             
         } catch (error) {
@@ -220,7 +221,20 @@ export default function Recruit() {
                         </div>
                     </div>
                     <div className={styles.formGroup}>
-                    {recommendPj ? recommendPj.map(data => 
+                    {recNatPj ? recNatPj.map(data => 
+                    <TeamCard lecture={data.majorLectureName} 
+                        name={data.userName} 
+                        title = {data.title} 
+                        date={data.createdDate} 
+                        rank={data.donggaeRank} 
+                        // language={data.languageS} 
+                        recruitPostId = {data.postId}
+                    />): (
+                        <div>No data available</div>
+                      )}
+                    </div>
+                    <div className={styles.formGroup}>
+                    {recLecPj ? recLecPj.map(data => 
                     <TeamCard lecture={data.majorLectureName} 
                         name={data.userName} 
                         title = {data.title} 

@@ -56,7 +56,7 @@ export default function Mypage() {
                             <td>tier</td>
                         </tr>
                     {number.map(data => <Rank  rankNo={data.ranking} rank={data.rankName} id={data.githubName} 
-                    field={data.userInterestField} score={data.score} tier={data.bojRank}/>)}
+                    field={data.userInterestFields} score={data.score} tier={data.bojRank}/>)}
                     </table>
                 </div>
                 </div>
