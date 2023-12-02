@@ -116,9 +116,9 @@ export default function Mypage() {
     };
 
 
-    const selectedLanguagesV = selectedLanguages.map((data) => data.value);
-    const selectedFieldsV = selectedFields.map((data) => data.value);
-    const selectedPersonalitiesV = selectedPersonalities.map((data) => data.value);
+    const selectedLanguagesV = selectedLanguages.map(data => data.value);
+    const selectedFieldsV = selectedFields.map(data => data.value);
+    const selectedPersonalitiesV = selectedPersonalities.map(data => data.value);
 
     const Modify = {
         selfIntro : formData,
@@ -130,7 +130,7 @@ export default function Mypage() {
     const DataModify= async() => {
         console.log(Modify);
         try {
-            const res = await fetch('http://localhost:8080/mypage', {
+            const res = await fetch('/mypage', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -142,7 +142,7 @@ export default function Mypage() {
                 alert("작성 완료");
             } 
             else if (res.status === 400) {
-                alert(`수정 성공.`);
+                alert(`수정에 실패하였습니다.`);
             } else {
                 console.error("수정 실패.");
             }
