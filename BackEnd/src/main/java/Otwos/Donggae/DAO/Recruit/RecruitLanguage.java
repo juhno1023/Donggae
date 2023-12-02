@@ -34,7 +34,7 @@ public class RecruitLanguage {
 
     public RecruitLanguage(RecruitPost recruitPostId, String language) {
         this.recruitPostId = recruitPostId;
-        this.language = LanguageEnum.valueOf(language); // Enum으로 변환
+        this.language = LanguageEnum.valueOfLabel(language); // Enum으로 변환
     }
 
     public RecruitLanguage toEntity(RecruitPost recruitPostId, LanguageEnum language) {

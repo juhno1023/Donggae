@@ -190,12 +190,9 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         List<String> recruitFields = recruitPostRequestDTO.getRecruitFields();
 
         for (String field : recruitFields) {
-            // 문자열을 Enum으로 변환
-            FieldEnum fieldEnum = FieldEnum.valueOf(field);
-
             RecruitFieldDTO recruitFieldDTO = new RecruitFieldDTO(
                     recruitPost.getRecruitPostId(),
-                    fieldEnum.label()
+                    field
             );
             recruitFieldDTOS.add(recruitFieldDTO);
         }
