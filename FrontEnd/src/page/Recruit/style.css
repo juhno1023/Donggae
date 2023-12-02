@@ -1,0 +1,11 @@
+.rmsc {
+    --rmsc-main: var(--point-orange) !important;
+    --rmsc-hover: #f1f3f5 !important;
+    --rmsc-selected: #e2e6ea !important;
+    --rmsc-border: #ccc !important;
+    --rmsc-gray: #000000 !important;
+    --rmsc-bg: #fff !important;
+    --rmsc-p: 10px !important;
+    --rmsc-radius: 8px !important;
+    --rmsc-h: 38px !important;
+  }

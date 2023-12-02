@@ -34,6 +34,6 @@ public class RecruitPersonality {
 
     public RecruitPersonality(RecruitPost recruitPostId, String personality) {
         this.recruitPostId = recruitPostId;
-        this.personality = PersonalityEnum.valueOf(personality); // Enum으로 변환
+        this.personality = PersonalityEnum.valueOfLabel(personality); // Enum으로 변환
     }
 }

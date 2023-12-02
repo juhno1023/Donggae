@@ -12,8 +12,11 @@ export default function Header() {
   }
   const logout = () => {
     alert('로그아웃 되었습니다.')
-    window.localStorage.clear();
-}
+  }
+  
+  let token = localStorage.getItem('token') || '';
+  if(!token) window.localStorage.clear();
+  
   return (
     <div className={styles.header}>
       <div className={styles.contents}>

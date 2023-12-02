@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MemberServiceImpl implements MemberService{
-    private MemberRepository memberRepository;
-    private UserRankRepository userRankRepository;
+    private final MemberRepository memberRepository;
+    private final UserRankRepository userRankRepository;
 
     @Autowired
     public MemberServiceImpl(MemberRepository memberRepository, UserRankRepository userRankRepository) {
