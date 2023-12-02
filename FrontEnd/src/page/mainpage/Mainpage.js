@@ -51,6 +51,7 @@ export default function Home() {
                     }
                     return res.json();
                 }).then(data => {
+                    console.log(data)
                     setRecPj(data);
                 })
             } catch (error) {

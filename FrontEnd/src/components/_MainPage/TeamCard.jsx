@@ -13,12 +13,11 @@ const TeamCard = ({ lecture, title, name, date, rank, language, recruitPostId}) 
         }
         setColor(getRandomColor());
     }, []);
-    var lecture = "개인"; // Assuming you want to set a default value if lecture is not defined
 
     return (
     <>
         <div className={styles.GroupCard}>
-        <span className={styles.Lecture} style={{backgroundColor : color}}>{lecture}</span>
+        <span className={styles.Lecture} style={{backgroundColor : color}}>{lecture || "개인"}</span>
             <div className={styles.title}><Link to={`/post/${recruitPostId}`}>
                 {title} {imoArray[num]}
                 </Link></div>  
