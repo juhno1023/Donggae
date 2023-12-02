@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './style.css';
 import donggae from '../../image/donggae.png';
 import github from '../../image/GitHub.png';
+import styles from "./Login.module.css"
 
 export default function Login() {
     const navigate = useNavigate();
@@ -24,29 +24,27 @@ export default function Login() {
     };
 
     return (
-        <div className="login-page">
-            <div className="div">
-                <div className="overlap">
-                    <div className="group" />
-                    <button className="text-wrapper" onClick={handleLogin}>로그인</button>
-                    <div className="text-wrapper-2">
-                        <button size="large" className="button" onClick={navigateToSignup}>회원가입</button>
-                    </div>
-                    <img className="image" alt="GitHub login" src={github} />
-                </div>
-                <div className="overlap-group-wrapper">
-                    <div className="overlap-group">
-                        <div className="text-wrapper-3">Donggae</div>
-                        <p className="p">
-                            <span className="span">동</span>
-                            <span className="text-wrapper-4">국대</span>
-                            <span className="span"> 개</span>
-                            <span className="text-wrapper-4">발자들</span>
-                        </p>
+        <div className={styles.loginPage}>
+            <div className={styles.div}>
+                <div className={styles.logo}>
+                    <img className="img" alt="Donggae" src={donggae} />
+                    <div className={styles.center_text}>
+                        <div className={styles.title}>Donggae</div>
+                        <b>동</b>국대<b>개</b>발자들
                     </div>
                 </div>
-                <img className="img" alt="Donggae" src={donggae} />
-                <div className="text-wrapper-5">프로젝트 팀원을 찾으세요!</div>
+                <div className={styles.div}>
+                    <br/><br/><br/>
+                    <div className={styles.title_text}>프로젝트 팀원을 찾으세요!</div><br/><br/><br/>
+                    <div className={styles.group} onClick={handleLogin}>
+                        <div><img alt="GitHub login" src={github}></img></div>
+                        <span>로그인</span>
+                    </div>
+                    <div className={styles.signBtn}>
+                        <button className={styles.signin} onClick={navigateToSignup}>회원가입</button>
+                    </div>
+
+                </div>
             </div>
         </div>
     );
