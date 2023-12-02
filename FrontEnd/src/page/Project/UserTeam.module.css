@@ -40,8 +40,9 @@ body{
   word-wrap: break-word;
   padding : 10px;
   width : 850px;
-  height: 220px;
+  height: 247px;
   border: 1px solid var(--box-bg);
+  overflow-x: scroll;
 }
 
 
