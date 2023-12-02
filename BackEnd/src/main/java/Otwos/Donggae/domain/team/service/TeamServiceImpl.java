@@ -13,7 +13,6 @@ import Otwos.Donggae.DTO.team.teamDetail.ApplyMemberPreview;
 import Otwos.Donggae.DTO.team.teamDetail.DetailByLeader;
 import Otwos.Donggae.DTO.team.teamDetail.DetailByMember;
 import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
-import Otwos.Donggae.domain.RecruitPost.Repository.RecruitPostRepository;
 import Otwos.Donggae.domain.application.repository.ApplicationRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
@@ -41,8 +40,6 @@ public class TeamServiceImpl implements TeamService{
     private MemberRepository memberRepository;
     @Autowired
     private UserRankRepository userRankRepository;
-    @Autowired
-    private RecruitPostRepository recruitPostRepository;
     @Autowired
     private ApplicationRepository applicationRepository;
 
@@ -157,8 +154,7 @@ public class TeamServiceImpl implements TeamService{
 
             }
         }
-        MyTeamList myTeamList = new MyTeamList(leaders, members);
-        return myTeamList;
+        return new MyTeamList(leaders, members);
     }
 
     //팀원으로 속한 팀 상세보기
@@ -188,14 +184,13 @@ public class TeamServiceImpl implements TeamService{
             teamMemberPreviews.add(teamMemberPreview);
         }
 
-        DetailByMember detailByMember = new DetailByMember(
+        return new DetailByMember(
                 teamIdRequest.getTeamId(),
                 recruitPost.getTitle(),
                 team.getTeamName(),
                 recruitPost.getContent(),
                 teamMemberPreviews
         );
-        return detailByMember;
     }
 
     //팀장으로 속한 팀 상세보기
@@ -241,7 +236,7 @@ public class TeamServiceImpl implements TeamService{
         List<ApplyMemberPreview> applyMemberList = new ArrayList<>();
         hashToDTO(applicationPriority, applyMemberList);
 
-        DetailByLeader detailByLeader = new DetailByLeader(
+        return new DetailByLeader(
                 teamIdRequest.getTeamId(),
                 recruitPost.getTitle(),
                 team.getTeamName(),
@@ -249,8 +244,6 @@ public class TeamServiceImpl implements TeamService{
                 teamMemberList,
                 applyMemberList
         );
-
-        return detailByLeader;
     }
 
     // dto로 변환 (지원자 리스트만)

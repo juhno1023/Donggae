@@ -177,14 +177,12 @@ public class SearchRecruitPostServiceImpl implements SearchRecruitPostService{
             throw new RuntimeException(e);
         }
 
-        ApplyMemberPreview teamLeader = new ApplyMemberPreview(
+        return new ApplyMemberPreview(
                 teamMember.getUserId().getUserId(), //userId
                 teamMember.getUserId().getGithubName(), //이름
                 teamMember.getUserId().getBoj_rank().label(), //백준랭크
                 userRank.getRankName().label() //동개랭크
         );
-
-        return teamLeader;
     }
 
     private void validateSearchRequest(Team team, TeamMember teamMember, UserRank userRank) throws Exception{
