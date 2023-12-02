@@ -122,15 +122,6 @@
 }
 
 /* select box */
-.majorSelect {
-    appearance: none;
-    font-family: inherit;
-    cursor: pointer;
-    padding: 10px 16px;
-    font-size: 12px;
-    border-radius: 30px;
-    background-color: var(--select-bg);
-    border: 1px solid var(--box-bg);
-    margin-left: 10px;
-}
-
+.selectBox{
+    width :200px;
+  }
