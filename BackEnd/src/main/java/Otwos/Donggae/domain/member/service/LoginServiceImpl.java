@@ -1,7 +1,5 @@
 package Otwos.Donggae.domain.member.service;
 
-import static java.sql.Types.NULL;
-
 import Otwos.Donggae.DAO.GithubStatus;
 import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.DTO.member.GithubStatsDTO;
@@ -10,9 +8,8 @@ import Otwos.Donggae.DTO.member.login.GithubToken;
 import Otwos.Donggae.domain.member.GraphQLQueryUtils;
 import Otwos.Donggae.domain.member.repository.GithubStatusRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
-import Otwos.Donggae.domain.rank.repository.UserRankRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -31,6 +28,7 @@ import java.util.Objects;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService{
 
     @Value("${github.client-id}")
@@ -45,13 +43,12 @@ public class LoginServiceImpl implements LoginService{
     @Value("${github.user-api-url}")
     private String userUrl;
 
-    private final String githubApiUrl = "https://api.github.com/graphql";
+    @Value("${github.graphql-url}")
+    private String githubApiUrl;
 
-    @Autowired
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
-    @Autowired
-    private GithubStatusRepository githubStatusRepository;
+    private final GithubStatusRepository githubStatusRepository;
 
     public GithubToken getAccessToken(String code) {
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();

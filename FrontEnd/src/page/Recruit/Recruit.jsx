@@ -4,35 +4,62 @@ import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebars";
 import TeamCard from '../../components/_MainPage/TeamCard';
 import UserCard from '../../components/_MainPage/UserCard';
-// import Multielect from "../../components/_Tool/Multiselect";
-
 import { MultiSelect } from "react-multi-select-component";
 export default function Recruit() {
-
+    
+    let token = localStorage.getItem('token') || '';
     const [language, setLanguage] = useState([]);
     const [field, setField] = useState([]);
     const [personality, setPersonality] = useState([]);
     const [major, setMajor] = useState();
-
+    const [selected, setSelected] = useState([]);
     const [fetchData, setFetchData] = useState([]);
-    const datas = [
-        { name: "BackEnd", id: 1 },
-        { name: "FrontEn", id: 2 },
-        { name: "iOS", id: 3 },
-        { name: "AI", id: 4 },
-        { name: "Option 5", id: 5 },
-        { name: "AUIUXI", id: 6 },
-      ];
+    
+    const options = [
+        { value: "JavaScript", label: "JavaScript🥝" },
+        { value: "TypeScript", label: "TypeScript🥥" },
+        { value: "React", label: "React🍇" },
+        { value: "Vue", label: "Vue🍈" },
+        { value: "Svelte", label: "Svelte🍉" },
+        { value: "Nextjs", label: "Next.js🍊" },
+        { value: "Nodejs", label: "Node.js🍋" },
+        { value: "Java", label: "Java🍍" },
+        { value: "Spring", label: "Spring🥭" },
+        { value: "Go", label: "Go🍎" },
+        { value: "Nestjs", label: "Nest.js🍏" },
+        { value: "Kotlin", label: "Kotlin🍐" },
+        { value: "Express", label: "Express🍑" },
+        { value: "MySQL", label: "MySQL🍒" },
+        { value: "MongoDB", label: "MongoDB🍓" },
+        { value: "Python", label: "Python🫐" },
+        { value: "Django", label: "Django🍅" },
+        { value: "php", label: "PHP🫒" },
+        { value: "GraphQL", label: "GraphQL🍆" },
+        { value: "Firebase", label: "Firebase🫑" },
+        { value: "Flutter", label: "Flutter🥑" },
+        { value: "Swift", label: "Swift🥬" },
+        { value: "ReactNative", label: "React Native🥕" },
+        { value: "Unity", label: "Unity🌸" },
+        { value: "AWS", label: "AWS🌺" },
+        { value: "kubernetes", label: "Kubernetes🌽" },
+        { value: "Docker", label: "Docker🥒" },
+        { value: "Git", label: "Git🥦" },
+        { value: "Figma", label: "Figma🥔" },
+        { value: "Zeplin", label: "Zeplin🌶️" },
+        { value: "Jest", label: "Jest🍄" },
+    ];
+    
+    const optionValues = selected.map((option) => option.value);
+
     const Data = {
-        languageS : language,
+        languageS : optionValues,
         fieldS : field,
         personalityS : personality,
         majorLecture : major
     };
-    
-    let token = localStorage.getItem('token') || '';
 
     const RecruitSearch = async() => {
+        console.log(Data);
         try {
             fetch('http://localhost:8080/recruitPost/search', {
                 method: "POST",
@@ -47,17 +74,10 @@ export default function Recruit() {
                 setFetchData(res);
         });
 
-            } catch (error) {
-                console.error("Failed to fetch data: ", error);
-            }
+        } catch (error) {
+            console.error("Failed to fetch data: ", error);
+        }
         };
-
-    const options = [
-        { label: "Grapes 🍇", value: "grapes" },
-        { label: "Mango 🥭", value: "mango" },
-        { label: "Strawberry 🍓", value: "strawberry", disabled: true },
-        ];
-    const [selected, setSelected] = useState([]);
 
     return (
         <div className={styles.default}>
@@ -87,16 +107,17 @@ export default function Recruit() {
                     </div>
                     <div className={styles.second_box}>
                         <div className={styles.title_text}>필터로 검색하기</div>
-                        <div>
-                            <h1>Select Fruits</h1>
-                            <pre>{JSON.stringify(selected)}</pre>
+                        <div className={styles.selectBox}> 
                             <MultiSelect
                                 options={options}
                                 value={selected}
                                 onChange={setSelected}
                                 labelledBy="Select"
                             />
-                            </div>
+                        </div>
+                        <button  type="submit" className={styles.completeBtn} onClick={RecruitSearch}>
+                            마감하기
+                        </button>
                     </div>
                     </div>
                 </div>
