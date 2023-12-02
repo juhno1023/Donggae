@@ -114,7 +114,7 @@ export default function Recruit() {
         languageS : lanValues,
         fieldS : fieValues,
         personalityS : perValues,
-        majorLecture : majSelected.value, 
+        majorLecture : majSelected, 
     };
 
     const RecruitSearch = async() => {
@@ -131,6 +131,7 @@ export default function Recruit() {
                 })
                 .then(res=>res.json())        
                 .then(res=> {
+                    console.log(res)
                 setLecPj(res.lectureRecruitPosts);
                 setNatPj(res.naturalRecruitPosts);
                 });
@@ -220,29 +221,35 @@ export default function Recruit() {
                             </button>
                         </div>
                     </div>
-                    <div className={styles.formGroup}>
-                    {recNatPj ? recNatPj.map(data => 
-                    <TeamCard lecture={data.majorLectureName} 
-                        name={data.userName} 
-                        title = {data.title} 
-                        date={data.createdDate} 
-                        rank={data.donggaeRank} 
-                        // language={data.languageS} 
-                        recruitPostId = {data.postId}
-                    />): (
-                        <div>No data available</div>
-                      )}
-                    </div>
-                    <div className={styles.formGroup}>
-                    {recLecPj ? recLecPj.map(data => 
-                    <TeamCard lecture={data.majorLectureName} 
-                        name={data.userName} 
-                        title = {data.title} 
-                        date={data.createdDate} 
-                        rank={data.donggaeRank} 
-                        // language={data.languageS} 
-                        recruitPostId = {data.postId}
-                    />): null} 
+                    <div className={styles.box__}>
+                        <div className={styles.first_box}>
+                            <div className={styles.formGroup}>
+                            <div className={styles.text__1} >개인 프로젝트</div>
+                            {recNatPj ? recNatPj.map(data => 
+                            <TeamCard 
+                                name={data.userName} 
+                                title = {data.title} 
+                                date={data.createdDate} 
+                                rank={data.donggaeRank} 
+                                // language={data.languageS} 
+                                recruitPostId = {data.postId}
+                            />): null}
+                            </div>
+                        </div>
+                        <div className={styles.first_box}>
+                            <div className={styles.text__1} >수업 프로젝트</div>
+                            <div className={styles.formGroup}>
+                            {recLecPj ? recLecPj.map(data => 
+                            <TeamCard lecture={data.lecture} 
+                                name={data.userName} 
+                                title = {data.title} 
+                                date={data.createdDate} 
+                                rank={data.donggaeRank} 
+                                // language={data.languageS} 
+                                recruitPostId = {data.postId}
+                            />): null} 
+                            </div>
+                        </div>
                     </div>
                     </div>
                 </div>

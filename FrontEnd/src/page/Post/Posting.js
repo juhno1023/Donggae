@@ -24,11 +24,9 @@ export default function Posting() {
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
     };
-    
     const handleTeamNameChange = (event) => {
         setTeamName(event.target.value);
     };
-    
     const handleContentChange = (event) => {
         setContent(event.target.value);
     };

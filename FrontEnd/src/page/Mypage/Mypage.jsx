@@ -48,12 +48,12 @@ export default function Mypage() {
 
     const [selectedFields, setSelectedFields] = useState([]);
     const fields = [
-        { value: "BackEnd", label: "BackEnd ☘️" },
-        { value: "FrontEnd", label: "FrontEnd 🌱" },
-        { value: "iOS", label: "iOS 🌲" },
-        { value: "Android", label: "Android 🌳" },
+        { value: "BACKEND", label: "BackEnd ☘️" },
+        { value: "FRONTEND", label: "FrontEnd 🌱" },
+        { value: "IOS", label: "iOS 🌲" },
+        { value: "ANDROID", label: "Android 🌳" },
         { value: "AI", label: "AI 🍀" },
-        { value: "Game", label: "Game 🌿" },
+        { value: "GAME", label: "Game 🌿" },
         { value: "UIUX", label: "UIUX 🌵" },
       ];
 
