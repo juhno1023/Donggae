@@ -114,13 +114,11 @@ public class ApplicationServiceImpl implements ApplicationService{
 
         Application application = applicationRepository.findApplicationByUserIdAndRecruitPostId(user, recruitPost);
 
-        ReadApplicationResponse readApplicationResponse = new ReadApplicationResponse(
+        return new ReadApplicationResponse(
                 previewUserInfoDTO,
                 application.getSelfIntro(),
                 application.getContent()
         );
-
-        return readApplicationResponse;
     }
 
     //지원하기 페이지 갔을 때 내정보 표시
