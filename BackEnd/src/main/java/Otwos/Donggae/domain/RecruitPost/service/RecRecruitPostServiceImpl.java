@@ -112,7 +112,7 @@ public class RecRecruitPostServiceImpl implements RecRecruitPostService {
             String title = topPost.getTitle();
             Set<String> recruitLanguages = topPost.getRecruitLanguages()
                     .stream()
-                    .map(recruitLanguage -> recruitLanguage.getLanguage().name()).collect(Collectors.toSet());
+                    .map(recruitLanguage -> recruitLanguage.getLanguage().label()).collect(Collectors.toSet());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String createdDate = simpleDateFormat.format(topPost.getCreatedDate());
 
