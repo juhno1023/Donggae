@@ -3,7 +3,7 @@
     box-sizing: inherit;
     margin: 0;
     padding: 0;
-    font-family: 'Viga';
+    font-family: var(--body-font);
 }
 body{
     background-color: var(--basic-white);

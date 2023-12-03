@@ -149,7 +149,7 @@ export default function Recruit() {
                 <Sidebar/>
                 <div className={styles.inner}>
                     <div className={styles.body}>
-                    {/* <div className={styles.box__}>
+                    <div className={styles.box__}>
                         <div className={styles.first_box}>
                             <div className={styles.title_text}>함께듣는 강의를 위한 동개를 모집 하고 있어요!</div>
                             <div className={styles.search}>
@@ -168,7 +168,7 @@ export default function Recruit() {
                             <div className={styles.formGroup}>
                             </div>
                         </div>
-                    </div> */}
+                    </div>
                     <div className={styles.second_box}>
                         <div className={styles.title_text}>필터로 검색하기</div>
                         <div className={styles.search_form__alert}>
