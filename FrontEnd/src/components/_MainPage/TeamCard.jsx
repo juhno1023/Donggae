@@ -17,7 +17,7 @@ const TeamCard = ({ lecture, title, name, date, rank, language, recruitPostId}) 
     return (
     <>
         <div className={styles.GroupCard}>
-        <span className={styles.Lecture} style={{backgroundColor : color}}>{lecture || "개인"}</span>
+        <span className={styles.Lecture} style={{ backgroundColor: !lecture ? "black" : color }}>{lecture || "개인"}</span>
             <div className={styles.title}><Link to={`/post/${recruitPostId}`}>
                 {title} {imoArray[num]}
                 </Link></div>  
@@ -28,8 +28,8 @@ const TeamCard = ({ lecture, title, name, date, rank, language, recruitPostId}) 
                     </span>
                     ))
                 ) : null}
-            <div>{name}</div>{rank}
-            <div>{date}</div>
+            <div className={styles.UserName_}>{name}{rank}</div>
+            <div className={styles.UserCateInfo}>{date}</div>
         </div>
     </>
     );
