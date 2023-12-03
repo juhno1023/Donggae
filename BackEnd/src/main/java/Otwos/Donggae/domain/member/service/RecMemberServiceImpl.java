@@ -132,19 +132,19 @@ public class RecMemberServiceImpl implements RecMemberService {
             int devTestScore = topUser.getDevTestScore();
             List<String> userLanguages = topUser.getUserLanguages()
                     .stream()
-                    .map(userLanguage -> userLanguage.getLanguage().name()).toList();
+                    .map(userLanguage -> userLanguage.getLanguage().label()).toList();
 
             List<String> userPersonalities = topUser.getUserPersonalities()
                     .stream()
-                    .map(userPersonality -> userPersonality.getPersonality().name()).toList();
+                    .map(userPersonality -> userPersonality.getPersonality().label()).toList();
 
             List<String> userInterestFields = topUser.getUserInterestFields()
                     .stream()
-                    .map(userInterestField -> userInterestField.getInterestField().name()).toList();
+                    .map(userInterestField -> userInterestField.getInterestField().label()).toList();
 
             List<String> userStudyFields = topUser.getUserStudyFields()
                     .stream()
-                    .map(userStudyField -> userStudyField.getStudyField().name()).toList();
+                    .map(userStudyField -> userStudyField.getStudyField().label()).toList();
 
             RecMemberDTO recMemberDTO = new RecMemberDTO(userid, githubName, intro, teamExpCount, leaderCount, bojRank.label(), devTestScore, userLanguages, userPersonalities, userInterestFields, userStudyFields);
             recommendMembersResponse.add(recMemberDTO);
