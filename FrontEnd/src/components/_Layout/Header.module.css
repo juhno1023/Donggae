@@ -11,17 +11,17 @@
     font-weight: 400;
     font-style: normal;
 }
-
-
+@import url('https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&family=Lobster&family=Rubik&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Noto+Sans+KR&family=Ubuntu:ital,wght@1,500&display=swap');
 :root {
-    --body-font: "", sans-serif;
+    --body-font: "Noto Sans KR", sans-serif;
     --basic-white: #fff;
     --basic-black: #000000;
 
     --border-grey: #A49F9F;
     --box-border:#E6EBEE;
-    --box-bg:#B9B9B9;
-    --box-bg2:#F1F1F1;
+    --box-bg:#AFAFAF;
+    --box-bg2:#FBFBFB;
     --box-bg3:#F9F9F9;
     --point-orange:#FAAB23;
     
@@ -90,7 +90,7 @@ html,body {
     width : 200px;
     font-size: 42px;
     font-weight: bold;
-    font-family: 'Viga';
+
     padding: 10px;
     list-style: none;
     text-decoration: none;
@@ -99,10 +99,12 @@ html,body {
     list-style: none;
     text-decoration: none;
     color: var(--basic-text);
+    font-family: 'Ubuntu', sans-serif;
+
   }
   .subtitle {
     width : 200px;
-    font-family: 'Viga';
+    font-family: 'Noto Sans KR', sans-serif;
     color: var(--basic-text);
     font-size: 22px;
   }
@@ -142,3 +144,4 @@ html,body {
   border-radius : 50%;
   width : 50px;
 }
+

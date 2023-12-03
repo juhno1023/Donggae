@@ -70,7 +70,7 @@ const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest,
     return (
         <> 
             <div className={styles.UserCard}>                
-                <div>{name}</div>
+                <div className={styles.UserName}>{name}</div>
                 <div>{intro}{devTestScore}{rank}</div>
                 <div>#{language}#{interest}#{personal},#{study}</div>
                 <select className={styles.pjSelect} onChange={handleSelect} value={selected}>

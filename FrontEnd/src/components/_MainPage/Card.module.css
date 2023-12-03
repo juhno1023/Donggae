@@ -86,3 +86,10 @@
   .pjSelect option:hover {
     background: rgb(58, 58, 58)
   }
+
+
+/* User Card */
+.UserName{
+  font-weight: 600;
+  font-family: 'Hedvig Letters Serif', serif;
+}

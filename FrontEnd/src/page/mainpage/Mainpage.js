@@ -24,6 +24,7 @@ export default function Home() {
                 })
                 .then(res=>res.json())        
                 .then(res=> {
+                    console.log(res)
                     setRecUser(res);
                 });
             } catch (error) {

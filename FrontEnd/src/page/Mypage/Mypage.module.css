@@ -50,7 +50,7 @@
 
 .user_email_text{
   color: #727272;
-  font-family: Viga;
+  font-family: var(--body-font);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
