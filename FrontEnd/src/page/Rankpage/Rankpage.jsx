@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebars";
 import Rank from '../../components/_Tool/Rank';
+import tearImg from '../../image/tearInfo.png';
 
 export default function Mypage() {
     const history = useNavigate();
@@ -45,6 +46,7 @@ export default function Mypage() {
             <div className={styles.inner}>
                 <div className={styles.body}>
                 <div className={styles.text__1}>동개 랭킹</div>
+                <img className={styles.tearImg} src={tearImg} alt="Donggae Logo" />
                 <div className={styles.leaderboard}>
                     <div className={styles.ribbon}></div>
                     <table>
@@ -56,7 +58,7 @@ export default function Mypage() {
                             <td>tier</td>
                         </tr>
                     {number.map(data => <Rank  rankNo={data.ranking} rank={data.rankName} id={data.githubName} 
-                    field={data.userInterestField} score={data.score} tier={data.bojRank}/>)}
+                    field={data.userInterestFields} score={data.score} tier={data.bojRank}/>)}
                     </table>
                 </div>
                 </div>

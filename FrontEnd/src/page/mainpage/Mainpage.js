@@ -77,6 +77,7 @@ export default function Home() {
                     }
                     return res.json();
                 }).then(data => {
+                    console.log(data)
                     setsgPj(data);
                 })
             } catch (error) {
@@ -128,12 +129,13 @@ export default function Home() {
                     </div>
                 </div>
                 <div className={styles.second_box}>
-                <div className={styles.text__1} >제안받은 프로젝트</div>
+                <div className={styles.text__1} >제안됨</div>
                 <div className={styles.title_text}>제안요청을 보낸 프로젝트에요</div>
 
-                    <div className={styles.formGroup}>
+                    <div className={styles.suggestGroup}>
                     {suggestPj ? suggestPj.map(data => 
                     <SuggestCard  
+                        teamName ={data.teamName}
                         name={data.userName} 
                         title = {data.title} 
                         info ={data.teamMemberPreview}

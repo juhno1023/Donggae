@@ -62,6 +62,7 @@ export default function Post() {
                     setRecruitField(res.recruitFields)
                     setRecruitLan(res.recruitLanguages)
                     setRecruitPers(res.recruitPersonalities)
+                    console.log(res)
                 });
             } catch (error) {
                 console.error("fatch to fail : ", error);

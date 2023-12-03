@@ -79,7 +79,7 @@
   
   .signup .text-wrapper-2 {
     color: #000000;
-    font-family: "Viga-Regular", Helvetica;
+    font-family: var(--body-font);
     font-size: 64px;
     font-weight: 400;
     height: 79px;

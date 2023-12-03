@@ -77,6 +77,27 @@ export default function Posting() {
         fetchData(); 
     };
     
+    useEffect(() => {
+        const getUserInfo = async() => {
+            try {
+                fetch('/applypage', {
+                    method: 'GET', // 사용하는 HTTP 메서드 (GET, POST, PUT 등)
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                })
+                .then(res=>res.json())        
+                .then(res=> {
+                    console.log(res)
+                });
+            } catch (error) {
+                console.error("Failed to fetch: ", error);
+            }
+        };
+        getUserInfo();   
+    }, []);
+
     return (
         <div className={styles.default}>
             <Header /><Sidebar/>
