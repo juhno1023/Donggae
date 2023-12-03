@@ -280,11 +280,15 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         List<RecruitPersonalityResponse> recruitPersonalityResponses = getRecruitPersonalityResponse(recruitPost);
         List<RecruitFieldResponse> recruitFieldResponses = getRecruitFieldResponse(recruitPost);
 
+        String majorLecture = null;
+        if (recruitPost.getMajorLectureName() != null)
+            majorLecture = recruitPost.getMajorLectureName().label();
+
         RecruitPostDetailResponseDTO recruitPostDetailResponseDTO = new RecruitPostDetailResponseDTO(
                 recruitPost.getRecruitPostId(),
                 recruitPost.getTitle(),
                 recruitPost.getContent(),
-                recruitPost.getMajorLectureName().label(),
+                majorLecture,
                 recruitPost.getCreatedDate(),
                 recruitFieldResponses,
                 recruitLanguageResponses,
