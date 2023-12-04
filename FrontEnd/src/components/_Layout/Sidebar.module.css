@@ -21,7 +21,7 @@
 .sidenav ul {
     padding-top: 20px;
     list-style: none;
-    font-family: 'Viga';
+    font-family: var(--body-font);
     font-size: 26px;
     font-weight: bold;
     display: flex;
@@ -79,7 +79,7 @@
 .title{
     font-size:20px;
     font-weight: bold;
-    font-family: 'Viga';
+    font-family: var(--body-font);
     color: var(--basic-text);
     padding-top : 20px;
     padding-left : 10px;
@@ -89,7 +89,7 @@
 
 .navigation ul {
     list-style: none;
-    font-family: 'Viga';
+    font-family: var(--body-font);
     font-size:20px;
     z-index: 2;
 }

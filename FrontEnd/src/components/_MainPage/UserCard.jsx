@@ -70,11 +70,32 @@ const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest,
     return (
         <> 
             <div className={styles.UserCard}>                
-                <div>{name}</div>
-                <div>{intro}{devTestScore}{rank}</div>
-                <div>#{language}#{interest}#{personal},#{study}</div>
+                <div className={styles.UserName}>{rank} {name}</div>
+                <div className={styles.UserIntro}>{intro}</div>
+                <div className={styles.UserCate}> 기술스택 </div>
+                <div className={styles.UserCateInfo}> 
+                {language}
+                {language ? language.map((per, index) => (
+                    <span key={index}>{index === language.length - 1 ? per : `${per}, `}</span>))
+                    : null}
+                 </div>
+                <div className={styles.UserCate}> 관심분야 </div>
+                <div className={styles.UserCateInfo}> 
+                {interest ? interest.map((per, index) => (
+                    <span key={index}>{index === interest.length - 1 ? per : `${per}, `}</span>))
+                    : null} 
+                </div>
+                <div className={styles.UserCate}> 개인성향 </div>
+                <div className={styles.UserCateInfo}> 
+                {personal ? personal.map((per, index) => (
+                    <span key={index}>{index === personal.length - 1 ? per : `${per}, `}</span>))
+                    : null}
+                </div>
+
+                {devTestScore}
+                <div>{study}</div>
                 <select className={styles.pjSelect} onChange={handleSelect} value={selected}>
-                    <option value="0">내 프로젝트 🍊</option>
+                    <option value="0">프로젝트 이름 🍊</option>
                     {selectList ? selectList.map((item) => (
                         <option value={item.recruitPostId} key={item.recruitPostId}>
                         {item.title}

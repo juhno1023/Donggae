@@ -48,12 +48,12 @@ export default function Mypage() {
 
     const [selectedFields, setSelectedFields] = useState([]);
     const fields = [
-        { value: "BackEnd", label: "BackEnd ☘️" },
-        { value: "FrontEnd", label: "FrontEnd 🌱" },
-        { value: "iOS", label: "iOS 🌲" },
-        { value: "Android", label: "Android 🌳" },
+        { value: "BACKEND", label: "BackEnd ☘️" },
+        { value: "FRONTEND", label: "FrontEnd 🌱" },
+        { value: "IOS", label: "iOS 🌲" },
+        { value: "ANDROID", label: "Android 🌳" },
         { value: "AI", label: "AI 🍀" },
-        { value: "Game", label: "Game 🌿" },
+        { value: "GAME", label: "Game 🌿" },
         { value: "UIUX", label: "UIUX 🌵" },
       ];
 
@@ -105,16 +105,10 @@ export default function Mypage() {
         setFormData(e.target.value);
     };
 
-    const [exp, setExp] = useState();
-    const expInputChange = (e) => {
-        setExp(e.target.value);
+    const [baekjoon, setBaekjoon] = useState() //자기소개 내용
+    const baekjoonInputChange = (e) => {
+        setBaekjoon(e.target.value);
     };
-
-    const [leader, setLeader] = useState();
-    const leaderInputChange = (e) => {
-        setLeader(e.target.value);
-    };
-
 
     const selectedLanguagesV = selectedLanguages.map((data) => data.value);
     const selectedFieldsV = selectedFields.map((data) => data.value);
@@ -127,14 +121,34 @@ export default function Mypage() {
         userPersonalities : selectedPersonalitiesV,
     };
 
+    const BojId = {
+        baekjoonUserName : baekjoon
+    }
+
+    const BaekJoon = async() => {
+        console.log(BojId);
+        try {
+            const res = await fetch('/mypage/addRank', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer {token}`
+                },
+                body: JSON.stringify(BojId),
+            })     
+        } catch (error) {
+            console.error("Failed to fetch: ", error);
+        }
+    }
+
     const DataModify= async() => {
         console.log(Modify);
         try {
-            const res = await fetch('http://localhost:8080/mypage', {
+            const res = await fetch('/mypage', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer {token}`
                 },
                 body: JSON.stringify(Modify),
             })     
@@ -198,7 +212,7 @@ export default function Mypage() {
                         <img className={styles.user_icon} alt="Image" src={localStorage.getItem('profile')} />
                         <div className={styles.user_box}>
                             <p className={styles.user_name_text}>{name}님</p>
-                            <p className={styles.user_email_text}>{dguEmail} @dgu.ac.kr</p>
+                            <p className={styles.user_email_text}>{dguEmail} @ dgu.ac.kr</p>
                         </div>
 
                         <div className={styles.data_area}><p>언어 설정</p><MultiSelect options ={languages}
@@ -221,32 +235,57 @@ export default function Mypage() {
                                 value={selectedPersonalities}
                                 onChange={setSelectedPersonalities}
                                 labelledBy="Select"/></div>
-                        <div className={styles.data_area}><p>팀플 경험 횟수</p>
-                            <textarea
-                                id="exp"
+                        <div className={styles.data_area}><p>백준 아이디</p>
+                        <textarea
+                                id="baekjoon"
                                 name="content"
-                                placeholder="횟수를 입력해주세요."
-                                value={exp}
-                                onChange={expInputChange}
+                                placeholder="내용을 작성해주세요."
+                                value={baekjoon}
+                                onChange={baekjoonInputChange}
                             />
                         </div>
-                        <div className={styles.data_area}><p>팀장 횟수</p>
-                            <textarea
-                                id="leader"
-                                name="content"
-                                placeholder="횟수를 입력해주세요."
-                                value={leader}
-                                onChange={leaderInputChange}
-                            /></div>
-                        <div className={styles.data_second_area}><p>백준 티어 {bojRank}</p>
-                        </div>
-                        <div className={styles.data_second_area}><p>역량평가점수 {devTestScore}/100</p>
-                        </div>
-                        <div className={styles.data_second_area}><p>동개등급 {userRank}</p>
-                        </div>
 
-                        <button onClick={DataModify}>버튼</button>
+                        <button onClick={() => {
+                        DataModify();
+                        BaekJoon();
+                        }}>수정하기</button>
                     </div>
+
+                    <div className={styles.preview_box}>
+
+                        <p className={styles.preview_title_text}>내 정보 미리보기</p>
+
+                        <div className={styles.preview_inner_box}>
+                            <div className={styles.profile_box}>
+                                <div className={styles.logo}>
+                                <img className={styles.logoimg} alt="Image" src={localStorage.getItem('profile')} />
+                                <div className={styles.profile_info}>
+                                    <div className={styles.text__2}>헤헤</div>
+                                    <br></br>
+                                    이익
+                                </div>
+                                </div>
+                            </div>
+
+                            <div className={styles.profile_more}>
+                                <div className={styles.keyword_box}>
+                                    <div className={styles.keyword}>
+                                        모집 분야
+                                    </div>
+                                    <div className={styles.keyword}>
+                                        선호 언어
+                                    </div>
+                                </div>
+                                <div className={styles.keyword_box}>
+                                    <div className={styles.keyword}>
+                                        성격 특성
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>

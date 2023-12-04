@@ -12,7 +12,7 @@
   }
   td {
     height: 20px;
-    font-family: 'Viga';
+    font-family: var(--body-font);
     font-size: 1.4rem;
     padding: 1rem 2rem;
     position: relative;
