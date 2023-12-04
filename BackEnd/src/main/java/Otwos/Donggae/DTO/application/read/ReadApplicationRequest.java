@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReadApplicationRequest {
     private int userId;
-    private int recruitPostId;
+    private int teamId;
 }
