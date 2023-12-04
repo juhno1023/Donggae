@@ -1,5 +1,7 @@
 import styles from './Card.module.css';
 import React, { useState ,useEffect} from 'react';
+import github from '../../image/GitHub.png';
+import { Link } from 'react-router-dom';
 
 const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest, personal, study}) => {
 
@@ -66,11 +68,15 @@ const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest,
         fetchData1();  
     }, []);
 
-    
+    const url = `https://github.com/${name}`
     return (
         <> 
-            <div className={styles.UserCard}>                
-                <div className={styles.UserName}>{rank} {name}</div>
+            <div className={styles.UserCard}>  
+                <img onClick={()=>{window.open(url)}} alt="GitHub login" src={github}></img>
+                <div className={styles.UserName}>
+                {rank} {name}
+                </div>
+                
                 <div className={styles.UserIntro}>{intro}</div>
                 <div className={styles.UserCate}> 기술스택 </div>
                 <div className={styles.UserCateInfo}> 

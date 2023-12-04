@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ApplyModal from './ApplyModal';
+import { useParams } from 'react-router-dom';
 
 const Selection = ({ name, rank, id, value}) => {
 
@@ -11,11 +12,14 @@ const Selection = ({ name, rank, id, value}) => {
     const showModal = () => {
         setModalOpen(true);
     };
+    
+    let { teamId } = useParams();
+    
     const user = {
         // teamId: sessionStorage.getItem('teamId')
         // 세션 스토리지가 아니라 URL로 받아오는 것 : 팀 상세보기 클릭 후 나오는 화면이기 때문에
         // 임시로 2라 설정함
-        teamId: 1,
+        
         postId: 1,
     };
 
@@ -28,7 +32,7 @@ const Selection = ({ name, rank, id, value}) => {
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    teamId: user.teamId,
+                    teamId: teamId,
                     userId: id
                 }),
             });

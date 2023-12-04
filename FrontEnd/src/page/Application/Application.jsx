@@ -59,15 +59,6 @@ export default function Posting() {
                 } else {
                     console.error("중복확인에 실패하였습니다.", res.statusText);
                 }
-
-                // if () {
-                //     alert(`해당 아이디가 없습니다`);
-                    
-                // }
-                // if(){
-                //     alert(`해당 모집글이 없습니다`);
-                    
-                // }
                 
                 
             } catch (error) {
@@ -77,6 +68,10 @@ export default function Posting() {
         fetchData(); 
     };
     
+    const [userInfo, setUserInfo] = useState([]);
+    const [userRecuritField, setUserRecruitField] = useState([]);
+    const [userRecuritLan, setUserRecruitLan] = useState([]);
+    const [userRecuritPers, setUserRecruitPers] = useState([]);
     useEffect(() => {
         const getUserInfo = async() => {
             try {
@@ -90,6 +85,10 @@ export default function Posting() {
                 .then(res=>res.json())        
                 .then(res=> {
                     console.log(res)
+                    setUserInfo(res)
+                    setUserRecruitField(res.userInterestFieldDTOS)
+                    setUserRecruitLan(res.userLanguageDTOS)
+                    setUserRecruitPers(res.userPersonalityDTOS)
                 });
             } catch (error) {
                 console.error("Failed to fetch: ", error);
@@ -134,17 +133,15 @@ export default function Posting() {
                 
                 <div className={styles.box__}>
                     <div className={styles.half}>
-                        <div className={styles.text__1}>팀장 정보</div>
-                        {/* <img src='https://avatars.githubusercontent.com/u/92643238?s=400&u=bc3b92d5192e7952d1698ec1d834ee86bb0b0bd5&v=4' /> */}
-                        
+                        <div className={styles.text__1}>내 정보</div>
                         <div className={styles.profile_box}>
                             <div className={styles.logo}>
                             <img className={styles.logoimg} src={bgImg} alt="Donggae Logo" />
                             <div className={styles.profile_info}>
-                                <div className={styles.text__2}>Dabin</div>
-                                vhlekqls@naver.com
+                                <div className={styles.text__2}>{userInfo.githubName}</div>
+                                
                                 <br></br>
-                                웹프로젝트 장인입니다.
+                                {userInfo.selfIntro}
                             </div>
                             </div>
                         </div>
@@ -152,21 +149,18 @@ export default function Posting() {
                             <div className={styles.keyword_box}>
                                 <div className={styles.keyword}>
                                     모집 분야
-                                    <span>JavaScript</span>
+                                    {userRecuritField ? userRecuritField.slice(0, 2).map((item, index) => (<span>{item.field}</span>)) : null}
                                 </div>
                                 <div className={styles.keyword}>
-                                    모집 분야
-                                    <span>C++</span>
+                                    선호 언어
+                                    {userRecuritLan ? userRecuritLan.slice(0, 2).map((item, index) => (<span key={index}>{item.language}</span>)) : null}
+
                                 </div>
                             </div>
                             <div className={styles.keyword_box}>
                                 <div className={styles.keyword}>
-                                    모집 분야
-                                    <span>성실함</span>
-                                </div>
-                                <div className={styles.keyword}>
-                                    모집 분야
-                                    <span>냠냠</span>
+                                    성격 특성
+                                    {userRecuritPers ? userRecuritPers.slice(0, 2).map((item, index) => (<span key={index}>{item.personality}</span>)) : null}
                                 </div>
                             </div>
                         </div>

@@ -30,9 +30,9 @@ function App() {
           <Route path="/application" element={<Application />} />
           <Route path="/auth/github/callback" element={<AuthCallback />} />
           <Route path="/signup" element={<Signup />}/>
-          <Route path="/leader" element={<Leader />}/>
+          <Route path="/leader/:teamId" element={<Leader />}/>
           <Route path="/recruit" element={<Recruit />}/>
-          <Route path="/teaminfo" element={<TeamInfo />}/>
+          <Route path="/teaminfo/:teamId" element={<TeamInfo />}/>
           <Route path="/userteam" element={<UserTeam />}/>
         </Routes>
       </BrowserRouter>

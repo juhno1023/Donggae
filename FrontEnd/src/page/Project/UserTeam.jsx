@@ -45,13 +45,13 @@ export default function UserTeam() {
                 <div className={styles.box__}>
                     <div className={styles.text__1} >팀장으로 속한 팀</div>
                     <div className={styles.formGroup}>
-                        {teambyL.map(data => <TeamCard team = {data} name={data.teamName} title={data.title} member={data.teamMemberPreview} recruitPost = {data.recruitPostId} teamId = {data.teamId}/>)} 
+                        {teambyL.map(data => <TeamCard leader = {true} team = {data} name={data.teamName} title={data.title} member={data.teamMemberPreview} recruitPost = {data.recruitPostId} teamId = {data.teamId}/>)} 
                     </div>
                 </div>
                 <div className={styles.box__}>
                 <div className={styles.text__1} >팀원으로 속한 팀</div>
                     <div className={styles.formGroup}>
-                        {teambyM.map(data => <TeamCard name={data.teamName} title={data.title} member={data.teamMemberPreview} />)} 
+                        {teambyM.map(data => <TeamCard leader = {false} name={data.teamName} title={data.title} member={data.teamMemberPreview} teamId = {data.teamId}/>)} 
                     </div>
                 </div>
                 </div>

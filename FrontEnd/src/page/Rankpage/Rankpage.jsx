@@ -54,11 +54,10 @@ export default function Mypage() {
                             <td>종합순위</td>
                             <td>id</td>
                             <td>점수</td>
-                            <td>field</td>
                             <td>tier</td>
                         </tr>
                     {number.map(data => <Rank  rankNo={data.ranking} rank={data.rankName} id={data.githubName} 
-                    field={data.userInterestFields} score={data.score} tier={data.bojRank}/>)}
+                    score={data.score} tier={data.bojRank}/>)}
                     </table>
                 </div>
                 </div>
