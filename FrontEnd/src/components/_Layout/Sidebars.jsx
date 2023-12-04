@@ -19,11 +19,9 @@ const Sidebar = () => {
             <nav className={styles.navigation}>
                 <ul>
                 <li className={`sidebar__menu__item`}><Link to='/main'>메인</Link></li>
-                <li className={`sidebar__menu__item`}><Link to='/posting'>posting</Link></li>
-                <li className={`sidebar__menu__item`}><Link to='/leader'>leader</Link></li>
-                <li className={`sidebar__menu__item`}><Link to='/userteam'>myteam</Link></li>
-                <li className={`sidebar__menu__item`}><Link to='/rank'>rank</Link></li>
-                <li className={`sidebar__menu__item`}><Link to='/teaminfo'>내가 속한 팀</Link></li>
+                <li className={`sidebar__menu__item`}><Link to='/posting'>글 작성</Link></li>
+                <li className={`sidebar__menu__item`}><Link to='/userteam'>내 팀</Link></li>
+                <li className={`sidebar__menu__item`}><Link to='/rank'>순위</Link></li>
                 <li className={`sidebar__menu__item`}><Link to='/recruit'>팀원 모집 검색</Link></li>
                 </ul>
             </nav>

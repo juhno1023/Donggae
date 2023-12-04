@@ -62,7 +62,15 @@ export default function Leader() {
                     <div className={styles.text__1}>현재 팀원 리스트</div>
                     <div className={styles.listed}>
                         <div className={styles.line}>
-                        {teamData.map(data => <Deletion name={data.name} rank={data.donggaeRank} id={data.userId}  value="추방"/>)}
+                        {teamData ? teamData.map(data => (
+                            <div key={data.userId}>
+                                {data.isLeader ? (
+                                <>팀장: {data.name} {data.donggaeRank}</>
+                                ) : (
+                                <Deletion name={data.name} rank={data.donggaeRank} id={data.userId} value="추방" />
+                                )}
+                            </div>
+                        )) : null}
                         </div>
                     </div>
                 </div>

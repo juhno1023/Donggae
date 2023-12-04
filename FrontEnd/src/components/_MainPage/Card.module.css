@@ -39,7 +39,10 @@
   background-color: #F8F8F8;
   /* box-shadow: 0px 0px 5px rgb(0 0 0); */
 }
-
+.SuggetCard a{
+  color : black;
+  text-decoration: none;
+}
 
 .Lecture{
   color: white;
@@ -51,14 +54,16 @@
 .title{
   line-height: 25px;
 }
-
+.title_{
+  line-height: 25px;
+  font-weight: bold;
+}
 .title a{
   color : black;
   text-decoration: none;
   transition: all 0.2s;
   font-size: 15px;
   font-weight: bold;
-
 }
 
 .title a:hover {
@@ -133,4 +138,10 @@
   font-weight: bold;
   z-index: 1;
   margin-left: 10px;
+}
+
+.UserCard img{
+  position: absolute;
+  width : 27px; 
+  cursor: pointer;
 }

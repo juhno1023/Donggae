@@ -1,7 +1,7 @@
 import styles from './TeamCard.module.css';
 import { Link } from 'react-router-dom';
 
-const TeamCard = ({ name, title, member, recruitPost, teamId}) => {
+const TeamCard = ({ leader, name, title, member, recruitPost, teamId}) => {
 
     const imoArray= ["❤️", `🧡`, `💛`, `💚`, `💙`, `🩵`, `💜`, `🩷`, `🤎`, `🖤`, `🖤`, `🩶`, `🤍`, `💞`, `💟`, `💕`, `❣️`, `💝`, `💌`,`😀`, `😁`, `😃`, `😄`, `😋`, `😊`, `😉`, `😍`, `😘`, `🥰`, `😗`, `😙`, `🥲`, `🤗`, `🙂`, `☺️`, `😚`, `😐`, `😑`, `😶`, `🫥`, `😮`, `😯`, `😝`, `👻`, `😺`, `😸`, `😹`, `😻`, `😼`, `😽`, `🐱`]
     const num = Math.round(Math.random() * 50);
@@ -64,25 +64,48 @@ const TeamCard = ({ name, title, member, recruitPost, teamId}) => {
             console.error("fatch to fail : ", error);
         }
     };
-    return (
-        <> 
-            <div className={styles.GroupCard}>
-                {imoArray[num]}{name}{imoArray[num]}
-                <div className={styles.title}><Link to={`/leader/${teamId}`}>
-                {title}</Link></div> 
-                <div>{member.name}</div>
-                <button  type="submit" className={styles.modifyBtn} onClick={checkModify}>
-                    <Link to={`/post/${recruitPost}`}>수정</Link>
-                </button>
-                <button  type="submit" className={styles.modifyBtn} onClick={Deletion}>
-                    <Link to={`/main`}>삭제</Link>
-                </button>
-                <button  type="submit" className={styles.completeBtn} onClick={Complete}>
-                    <Link to={`/main`}>마감하기</Link>
-                </button>
-            </div>
-        </>
-    );
+    if(leader){
+        return (
+            <> 
+                <div className={styles.GroupCard}>
+                    {imoArray[num]}{name}{imoArray[num]}
+                    <div className={styles.title}><Link to={`/leader/${teamId}`}>
+                    {title}</Link></div> 
+                    <div>{member.name}</div>
+                    <button  type="submit" className={styles.modifyBtn} onClick={checkModify}>
+                        <Link to={`/post/${recruitPost}`}>수정</Link>
+                    </button>
+                    <button  type="submit" className={styles.modifyBtn} onClick={Deletion}>
+                        <Link to={`/main`}>삭제</Link>
+                    </button>
+                    <button  type="submit" className={styles.completeBtn} onClick={Complete}>
+                        <Link to={`/main`}>마감하기</Link>
+                    </button>
+                </div>
+            </>
+        );
+    }
+    else{
+        return (
+            <> 
+                <div className={styles.GroupCard}>
+                    {imoArray[num]}{name}{imoArray[num]}
+                    <div className={styles.title}><Link to={`/teaminfo/${teamId}`}>
+                    {teamId}{title}</Link></div> 
+                    <div>{member.name}</div>
+                    <button  type="submit" className={styles.modifyBtn} onClick={checkModify}>
+                        <Link to={`/post/${recruitPost}`}>수정</Link>
+                    </button>
+                    <button  type="submit" className={styles.modifyBtn} onClick={Deletion}>
+                        <Link to={`/main`}>삭제</Link>
+                    </button>
+                    <button  type="submit" className={styles.completeBtn} onClick={Complete}>
+                        <Link to={`/main`}>마감하기</Link>
+                    </button>
+                </div>
+            </>
+        );
+    }
 };
 
 export default TeamCard;
