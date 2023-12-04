@@ -16,7 +16,7 @@
   .modifyBtn{
     border:none;
     /* border-radius: 6px; */
-    /* background: var(--point-orange); */
+    background: inherit;
     width : 30px;
     height : 20px;
     cursor:pointer;
@@ -33,6 +33,7 @@
   border:none;
   /* border-radius: 6px; */
   /* background: var(--point-orange); */
+    background: inherit;
   width : 50px;
   height : 20px;
   cursor:pointer;

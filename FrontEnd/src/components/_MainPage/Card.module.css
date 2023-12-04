@@ -48,13 +48,17 @@
   font-size: 13px;
 }
 
+.title{
+  line-height: 25px;
+}
 
 .title a{
   color : black;
   text-decoration: none;
   transition: all 0.2s;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: bold;
+
 }
 
 .title a:hover {
@@ -99,7 +103,7 @@
 .UserName_{
   font-weight: 600;
   font-family: 'Hedvig Letters Serif', serif;
-  font-size: 13px;
+  font-size: 11px;
 }
 .UserIntro{
   font-size: 12px;

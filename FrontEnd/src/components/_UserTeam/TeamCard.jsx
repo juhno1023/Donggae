@@ -68,7 +68,8 @@ const TeamCard = ({ name, title, member, recruitPost, teamId}) => {
         <> 
             <div className={styles.GroupCard}>
                 {imoArray[num]}{name}{imoArray[num]}
-                <div>{title}</div>
+                <div className={styles.title}><Link to={`/leader/${teamId}`}>
+                {title}</Link></div> 
                 <div>{member.name}</div>
                 <button  type="submit" className={styles.modifyBtn} onClick={checkModify}>
                     <Link to={`/post/${recruitPost}`}>수정</Link>
