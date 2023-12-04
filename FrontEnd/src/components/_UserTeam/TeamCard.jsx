@@ -93,15 +93,6 @@ const TeamCard = ({ leader, name, title, member, recruitPost, teamId}) => {
                     <div className={styles.title}><Link to={`/teaminfo/${teamId}`}>
                     {teamId}{title}</Link></div> 
                     <div>{member.name}</div>
-                    <button  type="submit" className={styles.modifyBtn} onClick={checkModify}>
-                        <Link to={`/post/${recruitPost}`}>수정</Link>
-                    </button>
-                    <button  type="submit" className={styles.modifyBtn} onClick={Deletion}>
-                        <Link to={`/main`}>삭제</Link>
-                    </button>
-                    <button  type="submit" className={styles.completeBtn} onClick={Complete}>
-                        <Link to={`/main`}>마감하기</Link>
-                    </button>
                 </div>
             </>
         );
