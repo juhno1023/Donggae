@@ -4,6 +4,7 @@ import static java.sql.Types.NULL;
 
 import Otwos.Donggae.DAO.Application;
 import Otwos.Donggae.DAO.Recruit.RecruitPost;
+import Otwos.Donggae.DAO.Team.Team;
 import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.DAO.User.UserInterestField;
 import Otwos.Donggae.DAO.User.UserLanguage;
@@ -28,6 +29,7 @@ import Otwos.Donggae.domain.member.repository.info.UserLanguageRepository;
 import Otwos.Donggae.domain.member.repository.info.UserPersonalityRepository;
 import Otwos.Donggae.domain.member.repository.info.UserStudyFieldRepository;
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
+import Otwos.Donggae.domain.team.repository.TeamRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -52,6 +54,8 @@ public class ApplicationServiceImpl implements ApplicationService{
     private UserStudyFieldRepository userStudyFieldRepository;
     @Autowired
     private UserRankRepository userRankRepository;
+    @Autowired
+    private TeamRepository teamRepository;
 
     //지원하는 글 쓰고 지원하기 버튼 클릭 시
     @Override
@@ -99,7 +103,8 @@ public class ApplicationServiceImpl implements ApplicationService{
     @Override
     public ReadApplicationResponse readApplication(ReadApplicationRequest applicationRequest) {
         User user = memberRepository.findUserByUserId(applicationRequest.getUserId());
-        RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(applicationRequest.getRecruitPostId());
+        Team team = teamRepository.findTeamByTeamId(applicationRequest.getTeamId());
+        RecruitPost recruitPost = team.getRecruitPostId();
 
         //예외처리
         try {
