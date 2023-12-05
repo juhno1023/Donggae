@@ -41,6 +41,7 @@ public class RecruitPostDetailResponseDTO {
     private String selfIntro;
     private String bojRank;
     private String userRank;
+    private String userProfile;
     private List<UserLanguageResponse> userLanguageDTOS;
     private List<UserInterestFieldResponse> userInterestFieldDTOS;
     private List<UserPersonalityResponse> userPersonalityDTOS;

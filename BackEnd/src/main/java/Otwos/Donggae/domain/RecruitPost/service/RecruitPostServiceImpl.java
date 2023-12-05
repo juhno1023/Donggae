@@ -267,6 +267,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(recruitPostId);
         User teamLeader = recruitPost.getUserId();
         UserRank userRank = userRankRepository.findUserRankByUserId(teamLeader);
+        String userProfile = teamLeader.getUserProfile();
         DonggaeRank donggaeRank = DonggaeRank.DDONGGAE;
         if (userRank != null){
             donggaeRank = userRank.getRankName();
@@ -299,6 +300,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
                 teamLeader.getIntro(),
                 teamLeader.getBoj_rank().label(),
                 donggaeRank.label(),
+                userProfile,
                 userLanguageDTOS,
                 userInterestFieldDTOS,
                 userPersonalityDTOS

@@ -130,6 +130,8 @@ public class RecMemberServiceImpl implements RecMemberService {
             int leaderCount = topUser.getLeaderCount();
             BaekjoonRank bojRank = topUser.getBoj_rank();
             int devTestScore = topUser.getDevTestScore();
+            String userProfile = topUser.getUserProfile();
+
             List<String> userLanguages = topUser.getUserLanguages()
                     .stream()
                     .map(userLanguage -> userLanguage.getLanguage().label()).toList();
@@ -146,14 +148,14 @@ public class RecMemberServiceImpl implements RecMemberService {
                     .stream()
                     .map(userStudyField -> userStudyField.getStudyField().label()).toList();
 
-            RecMemberDTO recMemberDTO = new RecMemberDTO(userid, githubName, intro, teamExpCount, leaderCount, bojRank.label(), devTestScore, userLanguages, userPersonalities, userInterestFields, userStudyFields);
+            RecMemberDTO recMemberDTO = new RecMemberDTO(userid, githubName, intro, teamExpCount, leaderCount, bojRank.label(), devTestScore, userProfile, userLanguages, userPersonalities, userInterestFields, userStudyFields);
             recommendMembersResponse.add(recMemberDTO);
         }
 
         return recommendMembersResponse;
     }
 
-    private static List<User> selectTopPriorityUsers(Map<User, Integer> priorityMap, int limitSize) {
+    private static List<User> selectTopPriorityUsers(Map<User, Integer> priorityMap, long limitSize) {
         List<User> topPriorityUsers = priorityMap.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
