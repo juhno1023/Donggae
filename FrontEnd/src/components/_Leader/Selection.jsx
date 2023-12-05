@@ -15,13 +15,6 @@ const Selection = ({ name, rank, id, value}) => {
     
     let { teamId } = useParams();
     
-    const user = {
-        // teamId: sessionStorage.getItem('teamId')
-        // 세션 스토리지가 아니라 URL로 받아오는 것 : 팀 상세보기 클릭 후 나오는 화면이기 때문에
-        // 임시로 2라 설정함
-        
-        postId: 1,
-    };
 
     const clickSelection = async(e) => {
         try {
@@ -52,7 +45,6 @@ const Selection = ({ name, rank, id, value}) => {
 
     const showApplication = async(e) => {
         try {
-            console.log(user)
             fetch("http://localhost:8080/apply/show", {
                 method: "POST",
                 headers: {
@@ -61,7 +53,7 @@ const Selection = ({ name, rank, id, value}) => {
                 },
                 body: JSON.stringify({
                     userId: id,
-                    recruitPostId: user.postId,
+                    teamId: teamId,
                 }),
                 })
                 .then(res=>res.json())        
