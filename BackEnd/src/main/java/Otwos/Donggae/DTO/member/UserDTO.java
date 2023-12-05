@@ -16,6 +16,7 @@ public class UserDTO {
     private String bojRank;
     private int devTestScore;
     private String dguEmail;
+    private String userProfile;
 
     public User toEntity() {
         return User.builder()
@@ -27,6 +28,7 @@ public class UserDTO {
                 .boj_rank(BaekjoonRank.valueOfLabel(bojRank))
                 .devTestScore(devTestScore)
                 .dguEmail(dguEmail)
+                .userProfile(userProfile)
                 .build();
     }
 }

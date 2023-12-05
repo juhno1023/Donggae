@@ -110,7 +110,8 @@ public class TeamServiceImpl implements TeamService{
                         user.getGithubName(), //팀장 이름
                         user.getBoj_rank().label(), //팀장 백준랭크
                         userRank.getRankName().label(), //팀장 동개랭크
-                        teamMember.getIsLeader());
+                        teamMember.getIsLeader(),
+                        user.getUserProfile());
 
                 TeamByLeader teamByLeader = new TeamByLeader(
                         recruitPost.getRecruitPostId(),
@@ -139,7 +140,8 @@ public class TeamServiceImpl implements TeamService{
                                 user1.getGithubName(), //팀장 이름
                                 user1.getBoj_rank().label(), //팀장 백준랭크
                                 userRank.getRankName().label(), //팀장 동개랭크
-                                teamMember1.getIsLeader());
+                                teamMember1.getIsLeader(),
+                                user.getUserProfile());
                     }
                 }
 
@@ -180,7 +182,8 @@ public class TeamServiceImpl implements TeamService{
                     user.getGithubName(), //이름
                     user.getBoj_rank().label(), //백준랭크
                     userRank.getRankName().label(), //동개랭크
-                    teamMember.getIsLeader());
+                    teamMember.getIsLeader(),
+                    user.getUserProfile());
             teamMemberPreviews.add(teamMemberPreview);
         }
 
@@ -216,7 +219,8 @@ public class TeamServiceImpl implements TeamService{
                     user.getGithubName(), //이름
                     user.getBoj_rank().label(), //백준랭크
                     userRank.getRankName().label(), //동개랭크
-                    teamMember.getIsLeader());
+                    teamMember.getIsLeader(),
+                    user.getUserProfile());
             teamMemberList.add(teamMemberPreview);
         }
 

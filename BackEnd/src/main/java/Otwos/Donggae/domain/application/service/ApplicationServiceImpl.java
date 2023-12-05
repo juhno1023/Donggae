@@ -149,6 +149,7 @@ public class ApplicationServiceImpl implements ApplicationService{
                 user.getBoj_rank().label(),
                 user.getDguEmail(),
                 donggaeRank.label(),
+                user.getUserProfile(),
                 userLanguageDTOS,
                 userInterestFieldDTOS,
                 userPersonalityDTOS,

@@ -20,6 +20,7 @@ public class MyPageResponseDTO {
     private int teamExpCount;
     private int leaderCount;
     private int devTestScore;
+    private String userProfile;
     private List<UserLanguageResponse> userLanguageDTOS;
     private List<UserInterestFieldResponse> userInterestFieldDTOS;
     private List<UserPersonalityResponse> userPersonalityDTOS;
