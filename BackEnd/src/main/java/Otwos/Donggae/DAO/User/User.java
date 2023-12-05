@@ -49,6 +49,9 @@ public class User {
     @Column(name = "dgu_email", length = 30, nullable = false)
     private String dguEmail; // 동국대 이메일
 
+    @Column(name = "user_profile", nullable = false)
+    private String userProfile;
+
     // 1:N userLanguage
     @OneToMany(mappedBy = "userId")
     private Set<UserLanguage> userLanguages;

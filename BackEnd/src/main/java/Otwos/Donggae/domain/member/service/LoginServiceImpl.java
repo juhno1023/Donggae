@@ -87,7 +87,9 @@ public class LoginServiceImpl implements LoginService{
     }
 
     @Override
-    public void getUserRepositories(String username, GithubToken githubToken, Long githubId) {
+    public void getUserRepositories(String username, GithubToken githubToken, GitHubUserInfo gitHubUserInfo) {
+        Long githubId = gitHubUserInfo.getIdNumber();
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "bearer " + githubToken.getAccessToken());
         headers.set("Accept", "application/vnd.github.cloak-preview");
@@ -114,6 +116,9 @@ public class LoginServiceImpl implements LoginService{
         log.info("totalStars = {}", totalStars);
 
         User user = memberRepository.findUserByGithubName(username);
+        user.setUserProfile(gitHubUserInfo.getProfileUrl());
+        memberRepository.save(user);
+
         GithubStatus githubStatus = GithubStatus.builder()
                                                 .githubId(githubId)
                                                 .userId(user)
