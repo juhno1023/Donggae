@@ -52,6 +52,7 @@ export default function Home() {
                     return res.json();
                 }).then(data => {
                     setRecPj(data);
+                    console.log(data)
                 })
             } catch (error) {
                 console.error("Failed to fetch: ", error);
@@ -122,7 +123,8 @@ export default function Home() {
                         name={data.userName} 
                         title = {data.title} 
                         date={data.createDate} 
-                        rank={data.donggaeRank} 
+                        rank={data.bojRank} 
+                        donggaerank={data.donggaeRank} 
                         language={data.recruitLanguages} 
                         recruitPostId = {data.recruitPostId}
                     />): null} 
