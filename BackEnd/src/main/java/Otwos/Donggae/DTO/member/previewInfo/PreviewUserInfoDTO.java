@@ -17,6 +17,7 @@ public class PreviewUserInfoDTO {
     private String bojRank;
     private String dguEmail;
     private String userRank;
+    private String userProfile;
     private List<UserLanguageResponse> userLanguageDTOS;
     private List<UserInterestFieldResponse> userInterestFieldDTOS;
     private List<UserPersonalityResponse> userPersonalityDTOS;
