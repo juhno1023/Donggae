@@ -22,6 +22,8 @@ public class RecMemberDTO {
 
     private int devTestScore; // 역량 평가 총 점수
 
+    private String userProfile;
+
     private List<String> userLanguages; //유저 언어
 
     private List<String> userPersonalities; //유저 성향
