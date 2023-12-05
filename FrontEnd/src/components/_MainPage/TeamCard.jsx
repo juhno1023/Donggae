@@ -31,7 +31,7 @@ const selectImage = (condition) => {
 
 }
 
-const TeamCard = ({ lecture, title, name, date, rank, language, recruitPostId}) => {
+const TeamCard = ({ lecture, title, name, date, rank, donggaeRank, language, recruitPostId}) => {
 
     const imoArray= ["❤️", `🧡`, `💛`, `💚`, `💙`, `🩵`, `💜`, `🩷`, `🤎`, `🖤`, `🖤`, `🩶`, `🤍`, `💞`, `💟`, `💕`, `❣️`, `💝`, `💌`,`😀`, `😁`, `😃`, `😄`, `😋`, `😊`, `😉`, `😍`, `😘`, `🥰`, `😗`, `😙`, `🥲`, `🤗`, `🙂`, `☺️`, `😚`, `😐`, `😑`, `😶`, `🫥`, `😮`, `😯`, `😝`, `👻`, `😺`, `😸`, `😹`, `😻`, `😼`, `😽`, `🐱`]
     const num = Math.round(Math.random() * 50);
@@ -64,8 +64,12 @@ const TeamCard = ({ lecture, title, name, date, rank, language, recruitPostId}) 
                     </span>
                     ))
                 ) : null}
-            <div className={styles.UserName_}>{name}<img className={styles.image} src={selectImage(rank)} alt="Image" /></div>
             <div className={styles.UserName_}>
+                <img
+                    className={styles.donggae_icon}
+                    src={selectImage(donggaeRank)}
+                    alt="Rank"
+                /> 
             <img
                 className={styles.rankImg}
                 src={rankImg(rank)}
