@@ -77,7 +77,7 @@ export default function Post() {
                 <div className={styles.text__1}>팀장 정보</div>
                 <div className={styles.profile_box}>
                     <div className={styles.logo}>
-                    <img className={styles.logoimg} src={bgImg} alt="Donggae Logo" />
+                    <img className={styles.logoimg} src={recruitPost.userProfile}/>
                     <div className={styles.profile_info}>
                         <div className={styles.text__2}>{recruitPost.githubName}</div>
                         <br></br>

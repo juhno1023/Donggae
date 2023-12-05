@@ -3,7 +3,7 @@ import React, { useState ,useEffect} from 'react';
 import github from '../../image/GitHub.png';
 import { Link } from 'react-router-dom';
 
-const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest, personal, study}) => {
+const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest, personal, study, userProfile}) => {
 
     let token = localStorage.getItem('token') || '';
     // Option Select Input
@@ -72,7 +72,8 @@ const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest,
     return (
         <> 
             <div className={styles.UserCard}>  
-                <img onClick={()=>{window.open(url)}} alt="GitHub login" src={github}></img>
+                <img className={styles.profileImg} src={userProfile}/>
+                <img className={styles.gitImg} onClick={()=>{window.open(url)}} alt="GitHub login" src={github}></img>
                 <div className={styles.UserName}>
                 {rank} {name}
                 </div>
@@ -82,13 +83,13 @@ const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest,
                 <div className={styles.UserCateInfo}> 
                 {language}
                 {language ? language.map((per, index) => (
-                    <span key={index}>{index === language.length - 1 ? per : `${per}, `}</span>))
+                    <span className={styles.name} key={index}>{index === language.length - 1 ? per : `${per}, `}</span>))
                     : null}
                  </div>
                 <div className={styles.UserCate}> 관심분야 </div>
                 <div className={styles.UserCateInfo}> 
                 {interest ? interest.map((per, index) => (
-                    <span key={index}>{index === interest.length - 1 ? per : `${per}, `}</span>))
+                    <span className={styles.name} key={index}>{index === interest.length - 1 ? per : `${per}, `}</span>))
                     : null} 
                 </div>
                 <div className={styles.UserCate}> 개인성향 </div>
@@ -97,9 +98,6 @@ const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest,
                     <span key={index}>{index === personal.length - 1 ? per : `${per}, `}</span>))
                     : null}
                 </div>
-
-                {devTestScore}
-                <div>{study}</div>
                 <select className={styles.pjSelect} onChange={handleSelect} value={selected}>
                     <option value="0">프로젝트 이름 🍊</option>
                     {selectList ? selectList.map((item) => (

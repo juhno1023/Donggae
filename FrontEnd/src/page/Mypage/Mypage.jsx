@@ -286,7 +286,7 @@ export default function Mypage() {
                                         <img
                                         className={styles.donggae_icon}
                                         src={selectImage(userInfo.userRank)}
-                                        alt="Image"
+                                        alt="Rank"
                                         />
                                         </div>
                                     {userInfo.dguEmail} @ dgu.ac.kr
