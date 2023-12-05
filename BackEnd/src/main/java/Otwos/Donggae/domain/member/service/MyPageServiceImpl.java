@@ -236,11 +236,9 @@ public class MyPageServiceImpl implements MyPageService{
 
         for (String fields : userFields) {
             // 문자열을 Enum으로 변환
-            FieldEnum fieldEnum = FieldEnum.valueOf(fields);
-
             UserInterestFieldDTO userInterestFieldDTO = new UserInterestFieldDTO(
                     user.getUserId(),
-                    fieldEnum.label()
+                    fields
             );
             userInterestFieldDTOS.add(userInterestFieldDTO);
         }
