@@ -1,5 +1,6 @@
 import styles from "./Evaluation.module.css"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
+import {Link} from 'react-router-dom'
 import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebars";
 
@@ -9,6 +10,7 @@ export default function Home() {
 
     const [testInfo, setTestInfo] = useState([]);
 
+    
     useEffect(() => {
         const fetchData = async() => {
             try {
@@ -33,6 +35,7 @@ export default function Home() {
         
     }, []);
 
+
     return(
         <div className={styles.default}>
         <Header />
@@ -40,9 +43,18 @@ export default function Home() {
         <div className={styles.inner}>
             <div className={styles.body}>
             <div className={styles.box__}>
-                <p className={styles.title_text}>역량 평가</p>
 
-                
+                <p className={styles.title_text}>역량 평가</p>
+                {testInfo.length > 0 && (
+                <div className={styles.test_box}>
+                        {testInfo.map(item => (
+                        <div className={styles.problem_box}>
+                        ID: {item.id}, Test Field: {item.testField}
+                        <Link to={`/evaluation/${item.id}`}><button type="submit" className={styles.submitBtn} onClick={()=>testInfo}>응시하기</button></Link>
+                        </div>
+                    ))}
+                </div>
+                 )}
             </div>
             </div>
         </div>
