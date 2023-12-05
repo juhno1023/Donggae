@@ -23,6 +23,7 @@ const Sidebar = () => {
                 <li className={`sidebar__menu__item`}><Link to='/userteam'>내 팀</Link></li>
                 <li className={`sidebar__menu__item`}><Link to='/rank'>순위</Link></li>
                 <li className={`sidebar__menu__item`}><Link to='/recruit'>팀원 모집 검색</Link></li>
+                <li className={`sidebar__menu__item`}><Link to='/evaluation'>역량 평가</Link></li>
                 </ul>
             </nav>
            
