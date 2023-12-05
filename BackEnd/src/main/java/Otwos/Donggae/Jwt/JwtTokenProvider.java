@@ -23,7 +23,7 @@ public class JwtTokenProvider implements TokenProvider{
 
     public JwtTokenProvider(@Value("${security.jwt.token.secret-key}") String secretKey) {
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
-        this.validityInMilliseconds = 3600000 * 2; // 2 시간
+        this.validityInMilliseconds = (long)3600000 * (long)2; // 2 시간
     }
 
     @Override
