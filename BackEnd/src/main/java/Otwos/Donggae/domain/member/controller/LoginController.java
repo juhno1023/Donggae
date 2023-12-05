@@ -46,7 +46,7 @@ public class LoginController {
             String userEmail = memberService.getUserEmail(userId);// 이메일
 
             // github_stats 저장
-            loginService.getUserRepositories(userName, githubToken, gitHubUserInfo.getIdNumber());
+            loginService.getUserRepositories(userName, githubToken, gitHubUserInfo);
 
             LoginResponse loginResponse = new LoginResponse(token, userName, profile, userEmail); //response 생성
             log.info("token = {}", token);

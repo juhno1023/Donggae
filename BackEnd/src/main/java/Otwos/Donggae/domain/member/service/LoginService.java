@@ -12,5 +12,5 @@ public interface LoginService {
     public GitHubUserInfo getGitHubUserInfo(GithubToken githubToken);
 
     // 랭킹에 활용할 정보 가져오기
-    public void getUserRepositories(String username, GithubToken githubToken, Long githubId);
+    public void getUserRepositories(String username, GithubToken githubToken, GitHubUserInfo gitHubUserInfo);
 }
