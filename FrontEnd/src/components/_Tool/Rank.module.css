@@ -20,6 +20,7 @@
   
   .number {
     width: 1rem;
+    
     font-size: 15px;
     font-weight: bold;
     text-align: left;
@@ -30,6 +31,11 @@
     font-size:  15px;;
   }
   
+  .image{
+    width: 30px;
+    height: 40px;
+  }
+
   .points {
     font-weight: bold;
     font-size:  15px;;
