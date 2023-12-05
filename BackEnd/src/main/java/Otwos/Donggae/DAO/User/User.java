@@ -72,7 +72,7 @@ public class User {
     public User(int userId, String githubName,
                 String intro, int teamExpCount,
                 int leaderCount, BaekjoonRank boj_rank,
-                int devTestScore, String dguEmail) {
+                int devTestScore, String dguEmail, String userProfile) {
         this.userId = userId;
         this.githubName = githubName;
         this.intro = intro;
@@ -81,13 +81,14 @@ public class User {
         this.boj_rank = boj_rank;
         this.devTestScore = devTestScore;
         this.dguEmail = dguEmail;
+        this.userProfile = userProfile;
     }
 
     @Builder
     public User(int userId, String githubName,
                 String intro, int teamExpCount,
                 int leaderCount, BaekjoonRank boj_rank,
-                int devTestScore, String dguEmail, Set<UserLanguage> userLanguages,
+                int devTestScore, String dguEmail, String userProfile, Set<UserLanguage> userLanguages,
                 Set<UserInterestField> userInterestFields, Set<UserPersonality> userPersonalities
                 ) {
 
@@ -99,6 +100,7 @@ public class User {
         this.boj_rank = boj_rank;
         this.devTestScore = devTestScore;
         this.dguEmail = dguEmail;
+        this.userProfile = userProfile;
         this.userLanguages = userLanguages;
         this.userInterestFields = userInterestFields;
         this.userPersonalities = userPersonalities;

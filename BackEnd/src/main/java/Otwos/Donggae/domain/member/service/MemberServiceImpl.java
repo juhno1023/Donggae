@@ -43,7 +43,8 @@ public class MemberServiceImpl implements MemberService{
                 0,
                 BaekjoonRank.UNRATED.label(), // 회원가입할때 기본으로 Unrated 주입
                 0,
-                signUpDTO.getDguEmail()
+                signUpDTO.getDguEmail(),
+                null
         );
         memberRepository.save(userDTO.toEntity());
         User user = memberRepository.findUserByDguEmail(signUpDTO.getDguEmail());
