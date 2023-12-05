@@ -77,7 +77,6 @@ export default function Home() {
                     }
                     return res.json();
                 }).then(data => {
-                    console.log(data)
                     setsgPj(data);
                 })
             } catch (error) {
@@ -110,6 +109,7 @@ export default function Home() {
                         interest={data.userInterestFields} 
                         personal={data.userPersonalities} 
                         study={data.userStudyFields} 
+                        userProfile={data.userProfile} 
                     />): null} 
                     </div>
                 </div>
