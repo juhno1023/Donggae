@@ -6,6 +6,12 @@ import Sidebar from "../../components/_Layout/Sidebars";
 import donggae from '../../image/donggae.png';
 import { MultiSelect } from "react-multi-select-component";
 
+import DongD from '../../image/DongDonggae.png';
+import BronzeD from '../../image/BronzeDonggae.png';
+import SilverD from '../../image/SilverDonggae.png';
+import GoldD from '../../image/GoldDonggae.png';
+import DiamondD from '../../image/DiamondDonggae.png';
+
 export default function Mypage() {
     const history = useNavigate();
 
@@ -109,17 +115,16 @@ export default function Mypage() {
     };
 
     const BojId = {
-        baekjoonUserName : baekjoon
+        baekjoonUserName : baekjoon,
     }
 
     const BaekJoon = async() => {
-        console.log(BojId);
         try {
             const res = await fetch('/mypage/addRank', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer {token}`
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(BojId),
             })     
@@ -135,7 +140,7 @@ export default function Mypage() {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer {token}`
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(Modify),
             })     
@@ -198,6 +203,27 @@ export default function Mypage() {
         const personalMap = userInfo.userPersonalityDTOS ? userInfo.userPersonalityDTOS.map(item => item.personality) : [];
 
 
+        const selectImage = (condition) => {
+            // 조건에 따라 다른 이미지를 선택하는 함수
+            if (condition === '다이아동개') {
+              return DiamondD;
+            } 
+            else if (condition === '황금동개') {
+                return GoldD;
+            } 
+            else if (condition === '은동개') {
+                return SilverD;
+            }
+            else if (condition === '동동개') {
+                return BronzeD;
+            }
+            else {
+                return DongD;
+            };
+        
+        }
+
+
     return (
         <div className={styles.default}>
             <Header />
@@ -256,7 +282,13 @@ export default function Mypage() {
                                 <div className={styles.logo}>
                                 <img className={styles.logoimg} alt="Image" src={localStorage.getItem('profile')} />
                                 <div className={styles.profile_info}>
-                                    <div className={styles.text__2}>{userInfo.githubName}</div>
+                                    <div className={styles.text__2}>{userInfo.githubName}
+                                        <img
+                                        className={styles.donggae_icon}
+                                        src={selectImage(userInfo.userRank)}
+                                        alt="Image"
+                                        />
+                                        </div>
                                     {userInfo.dguEmail} @ dgu.ac.kr
                                     <br></br>
                                     {userInfo.selfIntro}
