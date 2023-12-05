@@ -22,6 +22,7 @@ import Otwos.Donggae.DTO.team.TeamDTO;
 import Otwos.Donggae.DTO.team.TeamMemberDTO;
 import Otwos.Donggae.DTO.team.teamDetail.TeamIdRequest;
 import Otwos.Donggae.Global.FieldEnum;
+import Otwos.Donggae.Global.LanguageEnum;
 import Otwos.Donggae.Global.MajorLectureEnum;
 import Otwos.Donggae.Global.PersonalityEnum;
 import Otwos.Donggae.Global.Rank.DonggaeRank;
@@ -179,8 +180,8 @@ public class RecruitPostServiceImpl implements RecruitPostService {
     private List<RecruitLanguage> convertToRecruitLanguageEntities(List<RecruitLanguageDTO> recruitLanguageDTOS, String title) {
         return recruitLanguageDTOS.stream()
                 .map(dto -> {
-                    RecruitPost recruitPost = recruitPostRepository.findRecruitPostByTitle(title);
-                    return new RecruitLanguage(recruitPost, dto.getLanguage());
+                    RecruitPost recruitPostId = recruitPostRepository.findRecruitPostByTitle(title);
+                    return new RecruitLanguage(recruitPostId, dto.getLanguage());
                 })
                 .collect(Collectors.toList());
     }
@@ -202,8 +203,8 @@ public class RecruitPostServiceImpl implements RecruitPostService {
     private List<RecruitField> convertToRecruitFieldEntities(List<RecruitFieldDTO> recruitFieldDTOS, String title) {
         return recruitFieldDTOS.stream()
                 .map(dto -> {
-                    RecruitPost recruitPost = recruitPostRepository.findRecruitPostByTitle(title);
-                    return new RecruitField(recruitPost, dto.getField());
+                    RecruitPost recruitPostId = recruitPostRepository.findRecruitPostByTitle(title);
+                    return new RecruitField(recruitPostId, dto.getField());
                 })
                 .collect(Collectors.toList());
     }
@@ -225,8 +226,8 @@ public class RecruitPostServiceImpl implements RecruitPostService {
     private List<RecruitPersonality> convertToRecruitPersonalityEntities(List<RecruitPersonalityDTO> recruitPersonalityDTOS, String title) {
         return recruitPersonalityDTOS.stream()
                 .map(dto -> {
-                    RecruitPost recruitPost = recruitPostRepository.findRecruitPostByTitle(title);
-                    return new RecruitPersonality(recruitPost, dto.getPersonality());
+                    RecruitPost recruitPostId = recruitPostRepository.findRecruitPostByTitle(title);
+                    return new RecruitPersonality(recruitPostId, dto.getPersonality());
                 })
                 .collect(Collectors.toList());
     }
@@ -248,6 +249,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
     @Transactional //게시글 수정
     public void editRecruitPost(int recruitPostId, RecruitPostRequestDTO recruitPostRequestDTO, int userId){
         RecruitPost recruitPost = recruitPostRepository.findRecruitPostByRecruitPostId(recruitPostId);
+
         if(recruitPostRequestDTO.getTitle()!=null){
             recruitPost.setTitle(recruitPostRequestDTO.getTitle());
         }
@@ -259,6 +261,51 @@ public class RecruitPostServiceImpl implements RecruitPostService {
         }
 
         recruitPostRepository.save(recruitPost);
+
+        if(recruitPostRequestDTO.getTeamName() !=null){
+
+            Team team = teamRepository.findTeamByRecruitPostId(recruitPost);
+
+            String newTeamName = recruitPostRequestDTO.getTeamName();
+
+            TeamDTO teamDTO = new TeamDTO(
+                    team.getTeamId(),
+                    recruitPostId,
+                    newTeamName
+            );
+            // Team 저장
+            teamRepository.save(teamDTO.toEntity(recruitPost));
+        }
+
+        String tempTitle = recruitPost.getTitle();
+
+        if(recruitPostRequestDTO.getRecruitLanguages() != null) {
+            List<RecruitLanguageDTO> recruitLanguageDTOS = addRecruitPostLanguageDTO(recruitPost, recruitPostRequestDTO);
+            //게시글 모집 언어를 추가하기위한 DTO 리스트
+            List<RecruitLanguage> recruitLanguages = convertToRecruitLanguageEntities(recruitLanguageDTOS, tempTitle);
+            //게시글 모집 언어를 추가하기위한 DTO 리스트를 엔티티로 변환
+            recruitLanguageRepository.deleteAllByRecruitPostId(recruitPost);
+            recruitLanguageRepository.saveAll(recruitLanguages);
+        }
+
+        if(recruitPostRequestDTO.getRecruitFields() != null) {
+            List<RecruitFieldDTO> recruitFieldDTOS = addRecruitPostFieldDTO(recruitPost, recruitPostRequestDTO);
+            //게시글 모집 분야를 추가하기위한 DTO 리스트
+            List<RecruitField> recruitFields = convertToRecruitFieldEntities(recruitFieldDTOS, tempTitle);
+            //게시글 모집 언어를 추가하기위한 DTO 리스트를 엔티티로 변환
+            recruitFieldRepository.deleteAllByRecruitPostId(recruitPost);
+            recruitFieldRepository.saveAll(recruitFields);
+        }
+
+        if(recruitPostRequestDTO.getRecruitPersonalities() != null) {
+            List<RecruitPersonalityDTO> recruitPersonalityDTOS = addRecruitPostPersonalityDTO(recruitPost, recruitPostRequestDTO);
+            //게시글 모집 성향를 추가하기위한 DTO 리스트
+            List<RecruitPersonality> recruitPersonalities = convertToRecruitPersonalityEntities(recruitPersonalityDTOS, tempTitle);
+            //게시글 모집 언어를 추가하기위한 DTO 리스트를 엔티티로 변환
+            recruitPersonalityRepository.deleteAllByRecruitPostId(recruitPost);
+            recruitPersonalityRepository.saveAll(recruitPersonalities);
+            //저장
+        }
     }
 
     @Override // 게시글 조회
