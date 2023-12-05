@@ -110,7 +110,8 @@ export default function Home() {
                         interest={data.userInterestFields} 
                         personal={data.userPersonalities} 
                         study={data.userStudyFields} 
-                        userProfile={data.userProfile} 
+                        userProfile={data.userProfile}
+                        isPj = {true}
                     />): null} 
                     </div>
                 </div>

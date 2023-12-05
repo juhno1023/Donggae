@@ -153,7 +153,6 @@ export default function Signup() {
             <img className="image" alt="Image" src={donggae} />
             </div>
             <div className="text-wrapper-4">깃허브 ID</div>
-            <div className="text-wrapper-5">회원가입</div>
             <img className="line" alt="Line" src="line-1.svg" />
             <div className="overlap-2">
             <div className="rectangle-wrapper">

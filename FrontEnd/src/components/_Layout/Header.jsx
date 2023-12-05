@@ -27,7 +27,7 @@ export default function Header() {
           </div>
         </div>
         <div className={styles.search}>
-          <Link to='/recruit'><input value={searchValue} onClick={saveSearch} type="text" placeholder="검색하러가기" /></Link>
+          <Link to='/recruit'><input value={searchValue} onClick={saveSearch} type="text" placeholder="프로젝트 검색하러가기" /></Link>
           <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" />
         </div>
         <div className={styles.userBox}>

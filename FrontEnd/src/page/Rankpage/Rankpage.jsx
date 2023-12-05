@@ -58,10 +58,10 @@ export default function Mypage() {
                     <table>
                         <tr>
                             <td>종합순위</td>
-                            <td>동개등급</td>
                             <td>id</td>
                             <td>점수</td>
-                            <td>tier</td>
+                            <td>동개등급</td>
+                            <td>백준 티어</td>
                         </tr>
                     {number.map(data => <Rank  rankNo={data.ranking} rank={data.rankName} id={data.githubName} 
                     score={data.score} tier={data.bojRank}/>)}
