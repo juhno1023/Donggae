@@ -143,7 +143,7 @@ public class RecRecruitPostServiceImpl implements RecRecruitPostService {
         List<RecruitPost> topPriorityPosts  = priorityMap.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .limit(limitSize*2) // 추천할 개수의 두 배를 추출
+                .limit((long) limitSize * 2L) // 추천할 개수의 두 배를 추출
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
 
