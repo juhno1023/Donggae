@@ -2,8 +2,18 @@ import styles from './Card.module.css';
 import React, { useState ,useEffect} from 'react';
 import github from '../../image/GitHub.png';
 import { Link } from 'react-router-dom';
+import Bronze2 from '../../image/Bronze2.svg';
+import Silver2 from '../../image/Silver2.svg';
+import Unrated from '../../image/Unrated.svg';
 
 const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest, personal, study, userProfile}) => {
+
+    const rankMap = {
+        'Bronze_II': Bronze2,
+        'Silver_II': Silver2,
+        'Unrated': Unrated,
+    };
+    const rankImg = (condition) => rankMap[condition];
 
     let token = localStorage.getItem('token') || '';
     // Option Select Input
@@ -75,7 +85,12 @@ const UserCard = ({ userId, name, intro, devTestScore, rank, language, interest,
                 <img className={styles.profileImg} src={userProfile}/>
                 <img className={styles.gitImg} onClick={()=>{window.open(url)}} alt="GitHub login" src={github}></img>
                 <div className={styles.UserName}>
-                {rank} {name}
+                <img
+                    className={styles.rankImg}
+                    src={rankImg(rank)}
+                    alt="Rank"
+                /> 
+                {name}
                 </div>
                 
                 <div className={styles.UserIntro}>{intro}</div>
