@@ -104,7 +104,7 @@ public class RankServiceImpl implements RankService{
             User user = userRank.getUserId();
             DonggaeRank rankName = userRank.getRankName();
             String githubName = user.getGithubName();
-            List<String> userInterestFields = user.getUserInterestFields().stream().map(userInterestField -> userInterestField.getInterestField().name()).toList();
+            List<String> userInterestFields = user.getUserInterestFields().stream().map(userInterestField -> userInterestField.getInterestField().label()).toList();
             BaekjoonRank bojRank = user.getBoj_rank();
             int score = userRank.getScore();
 

@@ -19,8 +19,7 @@ const TeamCard = ({ lecture, title, name, date, rank, language, recruitPostId}) 
         <div className={styles.GroupCard}>
         <span className={styles.Lecture} style={{ backgroundColor: !lecture ? "black" : color }}>{lecture || "개인"}</span>
             <div className={styles.title}><Link to={`/post/${recruitPostId}`}>
-                {title} {imoArray[num]}
-                </Link></div>  
+                {title}</Link></div>  
                 {language ? (
                     language.map((data, index) => (
                     <span key={index} className={styles.tag}>

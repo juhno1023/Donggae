@@ -9,6 +9,7 @@
     word-wrap: break-word;
     padding : 10px;
     min-width : 150px;
+    width : 150px;
     height: 200px;
     margin-right : 10px;
   }
@@ -16,7 +17,7 @@
   .modifyBtn{
     border:none;
     /* border-radius: 6px; */
-    /* background: var(--point-orange); */
+    background: inherit;
     width : 30px;
     height : 20px;
     cursor:pointer;
@@ -33,6 +34,7 @@
   border:none;
   /* border-radius: 6px; */
   /* background: var(--point-orange); */
+    background: inherit;
   width : 50px;
   height : 20px;
   cursor:pointer;

@@ -4,19 +4,15 @@ import Header from "../../components/_Layout/Header";
 import Deletion from '../../components/_Leader/Deletion';
 import Selection from '../../components/_Leader/Selection';
 import Sidebar from "../../components/_Layout/Sidebars";
+import { useParams } from 'react-router-dom';
 
 export default function Leader() {
     const [team, setTeam] = useState([]);
     const [teamData, setTeamData] = useState([]);
     const [applyData, setApplyData] = useState([]);
     let token = localStorage.getItem('token') || '';
+    let { teamId } = useParams();
 
-    const user = {
-        // teamId: sessionStorage.getItem('teamId')
-        // 세션 스토리지가 아니라 URL로 받아오는 것 : 팀 상세보기 클릭 후 나오는 화면이기 때문에
-        // 임시로 2라 설정함
-        teamId: 1,
-    };
     const teamName = '';
     useEffect(() => {
         const handleClick = () => {
@@ -28,7 +24,7 @@ export default function Leader() {
                         'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({
-                        teamId: user.teamId,
+                        teamId: teamId,
                     }),
                     }).then(res=>res.json())        
                         .then(res=> {
@@ -66,7 +62,15 @@ export default function Leader() {
                     <div className={styles.text__1}>현재 팀원 리스트</div>
                     <div className={styles.listed}>
                         <div className={styles.line}>
-                        {teamData.map(data => <Deletion name={data.name} rank={data.donggaeRank} id={data.userId}  value="추방"/>)}
+                        {teamData ? teamData.map(data => (
+                            <div key={data.userId}>
+                                {data.isLeader ? (
+                                <>팀장: {data.name} {data.donggaeRank}</>
+                                ) : (
+                                <Deletion name={data.name} rank={data.donggaeRank} id={data.userId} value="추방" />
+                                )}
+                            </div>
+                        )) : null}
                         </div>
                     </div>
                 </div>
