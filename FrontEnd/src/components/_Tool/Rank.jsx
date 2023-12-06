@@ -55,7 +55,6 @@ const Rank = ({ rankNo, rank, id, field, score, tier}) => {
                                         src={selectImage(rank)}
                                         alt="Image"
                                         /></td>
-                <td className={styles.name}>{field}</td>
                 <td className={styles.name}>
                     <img
                     className={styles.rankImg}
