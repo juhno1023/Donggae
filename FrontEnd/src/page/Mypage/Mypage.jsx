@@ -120,6 +120,7 @@ export default function Mypage() {
     }
 
     const BaekJoon = async() => {
+        console.log(BojId)
         try {
             const res = await fetch('/mypage/addRank', {
                 method: 'POST',
@@ -129,8 +130,18 @@ export default function Mypage() {
                 },
                 body: JSON.stringify(BojId),
             })     
+
+            console.log("Response status:", res.status);
+            
+            if (res.ok) {
+                alert("중복확인 완료");
+            } else if (res.status === 400) {
+                alert(`중복된 ID입니다.`);
+            } else {
+                console.error("중복확인에 실패하였습니다.", res.statusText);
+            }
         } catch (error) {
-            console.error("Failed to fetch: ", error);
+            console.error("오류오류: ", error);
         }
     }
 
@@ -177,7 +188,7 @@ export default function Mypage() {
 
         const DataInquiry = async() => {
             try {
-                const res = await fetch('http://localhost:8080/mypage', {
+                const res = await fetch('/mypage', {
                     method: "GET",
                     headers: {
                         'Content-Type': 'application/json',
@@ -258,6 +269,9 @@ export default function Mypage() {
                                 value={selectedPersonalities}
                                 onChange={setSelectedPersonalities}
                                 labelledBy="Select"/></div>
+                        <button onClick={() => {
+                            DataModify();
+                        }}>수정하기</button>   
                         <div className={styles.data_area}><p>백준 아이디</p>
                         <textarea
                                 id="baekjoon"
@@ -268,10 +282,9 @@ export default function Mypage() {
                             />
                         </div>
 
-                        <button onClick={() => {
-                        DataModify();
+                    <button onClick={() => {
                         BaekJoon();
-                        }}>수정하기</button>
+                        }}>입력하기</button>
                     </div>
 
                     <div className={styles.preview_box}>

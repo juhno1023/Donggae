@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import React, { useState ,useEffect} from 'react';
 import Bronze2 from '../../image/Bronze2.svg';
 import Silver2 from '../../image/Silver2.svg';
+import Silver1 from '../../image/Silver1.svg';
+import Gold5 from '../../image/Gold5.svg';
 import Unrated from '../../image/Unrated.svg';
 
 import DongD from '../../image/DongDonggae.png';
@@ -39,6 +41,8 @@ const TeamCard = ({ lecture, title, name, date, rank, donggaeRank, language, rec
     const rankMap = {
         'Bronze_II': Bronze2,
         'Silver_II': Silver2,
+        'Silver_I': Silver1,
+        'Gold_V' : Gold5,
         'Unrated': Unrated,
     };
     const rankImg = (condition) => rankMap[condition];

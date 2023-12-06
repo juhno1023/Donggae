@@ -8,6 +8,8 @@ import GoldD from '../../image/GoldDonggae.png';
 import DiamondD from '../../image/DiamondDonggae.png';
 import Bronze2 from '../../image/Bronze2.svg';
 import Silver2 from '../../image/Silver2.svg';
+import Silver1 from '../../image/Silver1.svg';
+import Gold5 from '../../image/Gold5.svg';
 import Unrated from '../../image/Unrated.svg';
 
 
@@ -41,9 +43,11 @@ const TeamCard = ({teamName, name, title, info, recruitPostId}) => {
         '은동개': SilverD,
         '동동개': BronzeD,
       };
-    const rankMap = {
+      const rankMap = {
         'Bronze_II': Bronze2,
         'Silver_II': Silver2,
+        'Silver_I': Silver1,
+        'Gold_V' : Gold5,
         'Unrated': Unrated,
     };
 
