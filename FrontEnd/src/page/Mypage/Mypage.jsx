@@ -252,7 +252,7 @@ export default function Mypage() {
                                 onChange={setSelectedLanguages}
                                 labelledBy="Select"
                                 hasSelectAll = {false}
-                                disableSearch = {true}
+                                    disableSearch = {true}
                                 />
                         </div>
                         <div className={styles.data_area}>

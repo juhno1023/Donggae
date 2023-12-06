@@ -88,12 +88,11 @@ body{
   border-radius: 12px;
   border: 1px solid var(--box-bg);
   background: var(--box-bg3);
-  height: 20px;
-  line-height: 36px;
+  line-height: 28px;
   word-wrap: break-word;
   padding : 10px;
   width : 850px;
-  height: 140px;
+  height: 170px;
 }
 
 
