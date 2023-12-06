@@ -75,3 +75,15 @@ html,body {
   z-index: 1;
   margin-left: 10px;
 }
+
+.subject{
+  position: relative;
+  top:15px;
+  left : 100px; 
+}
+
+.btn{
+  position: relative;
+  top:330px;
+  left : 115px;
+}

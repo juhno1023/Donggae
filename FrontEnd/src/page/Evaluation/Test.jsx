@@ -1,5 +1,6 @@
 import styles from "./Test.module.css"
 import React, { useEffect, useState} from 'react';
+import {Link} from 'react-router-dom'
 
 import { useParams } from 'react-router-dom';
 
@@ -105,9 +106,11 @@ export default function Test() {
     return (
         <>
         <div className={styles.label}>
+            <span className={styles.exit}><Link to='/evaluation'>나가기</Link></span>
             <div className={styles.title_text}>문제
             <button type="submit" onClick={ResultBtn}>문제 저장</button>
             <button type="submit" onClick={GradeBtn}>문제 채점</button>
+            <p>{result.correct} / {result.total}</p>
             </div>
         </div>
 
