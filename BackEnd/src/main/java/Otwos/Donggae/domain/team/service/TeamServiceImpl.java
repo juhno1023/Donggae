@@ -53,6 +53,7 @@ public class TeamServiceImpl implements TeamService{
         Team team = teamRepository.findTeamByTeamId(request.getTeamId());
 
         try {
+            validateTeam(team);
             validateSelectRequest(user, team);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -76,6 +77,7 @@ public class TeamServiceImpl implements TeamService{
         Team team = teamRepository.findTeamByTeamId(request.getTeamId());
 
         try {
+            validateTeam(team);
             validateDeleteRequest(user, team);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -314,30 +316,20 @@ public class TeamServiceImpl implements TeamService{
     }
 
     private void validateSelectRequest(User user, Team team) throws Exception{
+        validateUser(user);
         TeamMember teamMember = teamMemberRepository.findTeamMemberByTeamIdAndUserId(team, user);
-        if (user == null) {
-            throw new Exception("존재하지 않는 user입니다.");
-        }
-        if (team == null) {
-            throw new Exception("존재하지 않는 team입니다.");
-        }
         if (teamMember != null) {
             throw new Exception("이미 팀에 존재하는 팀원입니다.");
         }
     }
 
     private void validateDeleteRequest(User user, Team team) throws Exception{
+        validateUser(user);
         TeamMember teamMember = teamMemberRepository.findTeamMemberByTeamIdAndUserId(team, user);
-        if (user == null) {
-            throw new Exception("존재하지 않는 user입니다.");
-        }
-        if (team == null) {
-            throw new Exception("존재하지 않는 team입니다.");
-        }
         if (teamMember == null) {
             throw new Exception("존재하지 않는 팀원입니다.");
         }
-        if (teamMember.getIsLeader() == Boolean.TRUE) {
+        if (Boolean.TRUE.equals(teamMember.getIsLeader())) {
             throw new Exception("팀장은 추방 불가.");
         }
     }
@@ -347,6 +339,13 @@ public class TeamServiceImpl implements TeamService{
             throw new Exception("존재하지 않는 team입니다.");
         }
     }
+
+    private void validateUser(User user) throws Exception {
+        if (user == null) {
+            throw new Exception("존재하지 않는 user입니다.");
+        }
+    }
+
 
     @Override
     public List<MyRecruitPostNameList> showMyRecruitPostNameAsLeaderAndCompleteList(int userId) {
