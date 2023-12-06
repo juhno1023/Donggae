@@ -38,36 +38,25 @@
   border-radius: 43px;
 }
 
-.user_name_text{
-  color: #727272;
-  font-family: Voces;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  margin-left: 20px;
-}
 
 .user_email_text{
-  color: #727272;
-  font-family: var(--body-font);
+  color: #525252;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-left :20px;
-  margin-top: 15px;
 }
 
 .data_area{
+  margin-top: 30px;
   width: 40vw;
-  height: 100px;
   color: #000;
   font-family: Voces;
   font-size: 19px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  display: flex;
 }
 
 .data_second_area{
@@ -175,4 +164,81 @@
   margin-left: 40px;
   width: 20px;
   height: 20px;
+}
+
+.data_area input, .data_area textarea {
+  padding: 5px;
+  border-radius: 12px;
+  border: 1px solid var(--box-bg);
+  background: var(--box-bg3);
+  height: 20px;
+  line-height: 30px;
+  word-wrap: break-word;
+  padding : 10px;
+  width : 500px;
+}
+
+.fmg3 input{
+  width: 130px;
+}
+
+.fmg2 textarea{
+  width: 500px;
+  height: 30px;
+  margin-top:10px;
+}
+
+.submitBtn{
+  border:none;
+  border-radius: 6px;
+  background: var(--point-orange);
+  width : 76px;
+  height : 37px;
+  left : 700px;
+  position: relative;
+  cursor:pointer;
+
+  font-family: 'Brawler';
+  color : white;
+  font-size:15px;
+  font-weight: bold;
+  z-index: 1;
+}
+.inputBtn{
+  border:none;
+  border-radius: 6px;
+  width : 76px;
+  height : 37px;
+  left : 40px;
+  position: relative;
+  cursor:pointer;
+  background-color: inherit;
+  font-size:14px;
+  z-index: 1;
+}
+.profileImg{
+  border-radius : 50%;
+  width : 80px;
+  border: 1px solid white;
+  margin-right: 10px;
+}
+
+.flex{
+  margin-top : 20px;
+  display: flex;
+}
+
+.name{
+  font-family: 'Hedvig Letters Serif', serif;
+  font-size: 20px;
+}
+
+.setting{
+  width : 150px;
+  font-size: 15px;
+}
+
+.multiselect{
+  width :200px;
+  font-size: 15px;
 }

@@ -27,7 +27,7 @@ export default function Home() {
                     setRecUser(res);
                 });
             } catch (error) {
-                console.error("Failed to fetch: ", error);
+                console.error("안됨: ", error);
             }
         };
 

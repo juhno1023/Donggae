@@ -35,10 +35,11 @@ public class SolvedacServiceImpl implements SolvedacService {
 
         // Solved.ac에서 가져온 정보를 기반으로 백준 랭크 계산
         String solvedacTier = calculateSolvedacTier(userTier);
-        BaekjoonRank baekjoonRank = BaekjoonRank.valueOf(solvedacTier.replace(" ", "_"));
+        BaekjoonRank baekjoonRank = BaekjoonRank.valueOfLabel(solvedacTier.replace(" ", "_"));
 
         // 해당 유저의 백준 랭크 업데이트
         User user = userRepository.findUserByUserId(userId);
+        SOLVEDAC_API_URL = "https://solved.ac/api/v3/user/show?handle=";
 
         if (user != null) {
             user.setBoj_rank(baekjoonRank);

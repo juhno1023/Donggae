@@ -8,8 +8,6 @@
 }
 .container {
     position: absolute;
-    width: 250px;
-    height: 250px;
     z-index: 9;
     top: 50%;
     left: 50%;

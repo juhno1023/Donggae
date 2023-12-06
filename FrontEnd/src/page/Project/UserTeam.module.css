@@ -34,14 +34,13 @@ body{
   margin-bottom: 20px;
   position: relative;
   padding: 5px;
-  border-radius: 12px;
   height: 20px;
   line-height: 36px;
   word-wrap: break-word;
   padding : 10px;
   width : 850px;
   height: 247px;
-  border: 1px solid var(--box-bg);
+  /* border-bottom: 1px solid var(--box-bg); */
   overflow-x: scroll;
 }
 

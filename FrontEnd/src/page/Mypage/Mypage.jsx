@@ -3,14 +3,16 @@ import styles from "./Mypage.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebars";
-import donggae from '../../image/donggae.png';
 import { MultiSelect } from "react-multi-select-component";
+import './style.css';
 
 import DongD from '../../image/DongDonggae.png';
 import BronzeD from '../../image/BronzeDonggae.png';
 import SilverD from '../../image/SilverDonggae.png';
 import GoldD from '../../image/GoldDonggae.png';
 import DiamondD from '../../image/DiamondDonggae.png';
+
+import UserCard from '../../components/_Card/UserCard';
 
 export default function Mypage() {
     const history = useNavigate();
@@ -119,6 +121,7 @@ export default function Mypage() {
     }
 
     const BaekJoon = async() => {
+        console.log(BojId)
         try {
             const res = await fetch('/mypage/addRank', {
                 method: 'POST',
@@ -128,8 +131,9 @@ export default function Mypage() {
                 },
                 body: JSON.stringify(BojId),
             })     
+
         } catch (error) {
-            console.error("Failed to fetch: ", error);
+            console.error("오류오류: ", error);
         }
     }
 
@@ -176,7 +180,7 @@ export default function Mypage() {
 
         const DataInquiry = async() => {
             try {
-                const res = await fetch('http://localhost:8080/mypage', {
+                const res = await fetch('/mypage', {
                     method: "GET",
                     headers: {
                         'Content-Type': 'application/json',
@@ -231,21 +235,39 @@ export default function Mypage() {
             <div className={styles.inner}>
                 <div className={styles.body}>
                     <div className={styles.box__}>
-                        <img className={styles.user_icon} alt="Image" src={localStorage.getItem('profile')} />
-                        <div className={styles.user_box}>
-                            <p className={styles.user_name_text}>{userInfo.githubName}님</p>
-                            <p className={styles.user_email_text}>{userInfo.dguEmail} @ dgu.ac.kr</p>
-                        </div>
-
-                        <div className={styles.data_area}><p>언어 설정</p><MultiSelect options ={languages}
+                        <div className={styles.flex}> 
+                            <img className={styles.profileImg} src={localStorage.getItem('profile')}/>
+                            <div>
+                            <span className={styles.name}>{userInfo.githubName}님</span>
+                            <br/>
+                            <span className={styles.user_email_text}>{userInfo.dguEmail} @ dgu.ac.kr</span>
+                            </div>
+                        </div> 
+                        <div className={styles.data_area}>
+                            <div className={styles.setting}>언어 설정</div> 
+                            <MultiSelect 
+                                className={styles.multiselect}
+                                options ={languages}
                                 value={selectedLanguages}
                                 onChange={setSelectedLanguages}
-                                labelledBy="Select"/></div>
-                        <div className={styles.data_area}><p>관심 분야 설정</p><MultiSelect options ={fields}
+                                labelledBy="Select"
+                                hasSelectAll = {false}
+                                disableSearch = {true}
+                                />
+                        </div>
+                        <div className={styles.data_area}>
+                        <div className={styles.setting}>관심 분야 설정</div> 
+                        <MultiSelect 
+                                className={styles.multiselect}
+                                options ={fields}
                                 value={selectedFields}
                                 onChange={setSelectedFields}
-                                labelledBy="Select"/></div>
-                        <div className={styles.data_area}><p>자기 소개</p>
+                                labelledBy="Select"
+                                hasSelectAll = {false}
+                                disableSearch = {true}
+                                /></div>
+                        <div className={`${styles.data_area} ${styles.fmg2}`}>
+                            <div className={styles.setting}>자기 소개</div> 
                             <textarea
                                 id="myself"
                                 name="content"
@@ -253,73 +275,56 @@ export default function Mypage() {
                                 value={formData}
                                 onChange={handleInputChange}
                             /></div>
-                        <div className={styles.data_area}><p>성격 특성</p><MultiSelect options ={personalitys} 
+                        <div className={styles.data_area}>
+                            <div className={styles.setting}>성격 특성</div> 
+                            <MultiSelect 
+                                className={styles.multiselect}
+                                options ={personalitys} 
                                 value={selectedPersonalities}
                                 onChange={setSelectedPersonalities}
-                                labelledBy="Select"/></div>
-                        <div className={styles.data_area}><p>백준 아이디</p>
-                        <textarea
+                                labelledBy="Select"
+                                hasSelectAll = {false}
+                                disableSearch = {true}
+                                /></div>
+                        <button className ={styles.submitBtn} onClick={() => {
+                            DataModify();
+                        }}>수정하기</button>
+                           
+                        <div className={`${styles.data_area} ${styles.fmg3}`}>
+                            <div className={styles.setting}>백준 아이디</div> 
+                            <input
+                                type="text"
                                 id="baekjoon"
                                 name="content"
                                 placeholder="내용을 작성해주세요."
                                 value={baekjoon}
                                 onChange={baekjoonInputChange}
                             />
+                        <button  className ={styles.inputBtn}onClick={() => {
+                            BaekJoon();
+                        }}>입력하기</button>
                         </div>
 
-                        <button onClick={() => {
-                        DataModify();
-                        BaekJoon();
-                        }}>수정하기</button>
                     </div>
 
                     <div className={styles.preview_box}>
 
                         <p className={styles.preview_title_text}>내 정보 미리보기</p>
-
-                        <div className={styles.preview_inner_box}>
-                            <div className={styles.profile_box}>
-                                <div className={styles.logo}>
-                                <img className={styles.logoimg} alt="Image" src={localStorage.getItem('profile')} />
-                                <div className={styles.profile_info}>
-                                    <div className={styles.text__2}>{userInfo.githubName}
-                                        <img
-                                        className={styles.donggae_icon}
-                                        src={selectImage(userInfo.userRank)}
-                                        alt="Rank"
-                                        />
-                                        </div>
-                                    {userInfo.dguEmail} @ dgu.ac.kr
-                                    <br></br>
-                                    {userInfo.selfIntro}
-                                </div>
-                                </div>
-                            </div>
-
-                            <div className={styles.profile_more}>
-                                <div className={styles.keyword_box}>
-                                    <div className={styles.keyword}>
-                                        선호 언어
-                                        {languageMap.map((language, index) => (
-                                            <p key={index}>{language}</p>
-                                        ))}
-                                    </div>
-                                    <div className={styles.keyword}>
-                                        관심 분야
-                                        {fieldMap.map((field, index) => (
-                                            <p key={index}>{field}</p>
-                                        ))}
-                                    </div>
-                                    <div className={styles.keyword}>
-                                        성격 특성
-                                        {personalMap.map((personal, index) => (
-                                            <p key={index}>{personal}</p>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                        <UserCard 
+                            userId={userInfo.userId}
+                            content = {userInfo.selfIntro}
+                            name={userInfo.githubName} 
+                            intro={userInfo.intro} 
+                            devTestScore={userInfo.devTestScore} 
+                            rank={userInfo.bojRank} 
+                            donggaeRank ={userInfo.userRank} 
+                            language={languageMap} 
+                            interest={fieldMap} 
+                            personal={personalMap} 
+                            study={userInfo.userStudyFields} 
+                            userProfile={userInfo.userProfile} 
+                            isPj ={false}
+                        />
                     </div>
                     
                 </div>
