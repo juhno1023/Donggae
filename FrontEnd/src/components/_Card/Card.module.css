@@ -1,5 +1,5 @@
 /* usercard */
-.UserCard{
+/* .UserCard{
     border-radius: 13px;
     border: 1px solid var(--box-bg);
     background: var(--box-bg2);
@@ -8,11 +8,23 @@
     word-wrap: break-word;
     padding : 15px;
     width : 190px;
-    height: 300px;
+    height: 280px;
+    margin-right : 10px;
+  } */
+  .UserCard{
+    border-radius: 13px;
+    border: 1px solid var(--box-bg);
+    background: var(--box-bg2);
+    height: 20px;
+    line-height: 36px;
+    word-wrap: break-word;
+    padding : 15px;
+    width : 190px;
+    height: 330px;
     margin-right : 10px;
   }
   .UserCard .profileImg{
-    margin-left: 55px;
+    margin-left: 65px;
     border-radius : 50%;
     width : 65px;
     border: 1px solid black;
