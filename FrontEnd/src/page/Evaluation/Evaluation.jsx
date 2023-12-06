@@ -4,6 +4,10 @@ import {Link} from 'react-router-dom'
 import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebars";
 
+import DataStructure from '../../image/DataStructure.png';
+import Database from '../../image/Database.png';
+import OperatingSystem from '../../image/OperatingSystem.png';
+
 export default function Home() { 
 
     let token = localStorage.getItem('token') || '';
@@ -36,6 +40,15 @@ export default function Home() {
     }, []);
 
 
+    const ImgSelect = (num) =>{
+        if(num === 1)
+            return DataStructure;
+        else if(num === 2)
+            return Database;
+        else
+            return OperatingSystem;
+    }
+
     return(
         <div className={styles.default}>
         <Header />
@@ -50,6 +63,7 @@ export default function Home() {
                         {testInfo.map(item => (
                         <div className={styles.problem_box}>
                             <div className={styles.subject}>{item.testField}</div>
+                            <img className={styles.i} src={ImgSelect(item.id)}/>
                             <Link className={styles.btn} to={`/evaluation/${item.id}`}><button type="submit" className={styles.submitBtn} onClick={()=>testInfo}>응시하기</button></Link>
                         </div>
                     ))}

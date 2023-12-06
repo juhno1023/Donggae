@@ -54,18 +54,17 @@ export default function Test() {
         setItems(newItems);
       };
 
-    
-
+    const [input, setInput] = useState([]);
     const [selectedQuestionIndex, setSelectedQuestionIndex] = useState([]);
-    const handleQuestionSelect = (index,event) => {
+    const handleQuestionSelect = (problemInfo,index,event) => {
 
         const newIndex = [...selectedQuestionIndex];
 
-        newIndex[index] = parseInt(event.target.value,10)
+        const indexAnswerId = problemInfo[index].answerOptions.map(data=>data.answerId);
+
+        newIndex[index] = indexAnswerId[parseInt(event.target.value,10)-1];
 
         setSelectedQuestionIndex(newIndex);
-
-        console.log(selectedQuestionIndex);
       };
 
     const ResultBtn = () => {
@@ -108,8 +107,8 @@ export default function Test() {
         <div className={styles.label}>
             <span className={styles.exit}><Link to='/evaluation'>나가기</Link></span>
             <div className={styles.title_text}>문제
-            <button type="submit" onClick={ResultBtn}>문제 저장</button>
-            <button type="submit" onClick={GradeBtn}>문제 채점</button>
+            <button className={styles.submitBtn} type="submit" onClick={ResultBtn}>문제 저장</button>
+            <button className={styles.submitBtn} type="submit" onClick={GradeBtn}>문제 채점</button>
             <p>{result.correct} / {result.total}</p>
             </div>
         </div>
@@ -117,32 +116,34 @@ export default function Test() {
         <div className={styles.question}>
             {problemInfo.map((item,index) => (
                         <div className={styles.tt}>
-                        {item.questionNum}. 
-                        {item.questionText.split('\n').map(line => {
-                            return (
-                            <>
-                                {line}
-                                <br />
-                            
-                                <textarea
-                                    id={index}
-                                    name="content"
-                                    placeholder=" "
-                                    value={selectedQuestionIndex[index]}
-                                    onChange={(e)=>handleQuestionSelect(index,e)}
-                                />
+                            <p className={styles.tt_in}>
+                                {item.questionNum}. {item.questionText.split('\n').map(line => {
+                                    return (
+                                    <>
+                                        {line}
+                                    
+                                        <textarea
+                                            className={styles.text_box}
+                                            id={index}
+                                            name="content"
+                                            placeholder=" "
+                                            value={input[index]}
+                                            onChange={(e)=>handleQuestionSelect(problemInfo,index,e)}
+                                        />
 
-                            </>
-                            );
-                        })}
-
-                        {item.answerOptions.map(num => (
-                            <>
-                            <div>
-                                <p>{num.answerNum}. {num.answerText}</p>
-                            </div>
-                            </>
-                        ))}
+                                    </>
+                                    );
+                                })}
+                            </p>
+                            <p className={styles.tt_ini}>
+                                {item.answerOptions.map(num => (
+                                    <>
+                                    <div>
+                                        <p>{num.answerNum}. {num.answerText}</p>
+                                    </div>
+                                    </>
+                                ))}
+                            </p>
                         </div>
                     ))}
             <div>

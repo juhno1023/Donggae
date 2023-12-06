@@ -29,10 +29,47 @@ html,body {
 
 .tt{
     height: 250px;
+    margin-left: 40px;
+    border-radius: 15px;
+    border: 1px solid #B9B9B9;
+    background: #F1F1F1;
 }
 
 .exit{
-    position: fixed;
+    position: absolute;
     top : 50px;
     left: 50px;
+}
+
+.submitBtn{
+    border:none;
+    border-radius: 5px;
+    background: var(--point-orange);
+    width : 56px;
+    height : 25px;
+    cursor:pointer;
+    font-family: 'Brawler';
+    color : white;
+    font-size:10px;
+    font-weight: bold;
+    z-index: 1;
+    margin-left: 10px;
+    }
+    
+
+.tt_in{
+    position: relative;
+    top : 25px;
+    left: 35px;
+}
+
+.tt_ini{
+    position: relative;
+    top : 40px;
+    left: 35px;
+}
+
+.text_box{
+    width: 35px;
+    height: 25px;
 }

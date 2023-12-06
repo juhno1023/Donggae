@@ -116,7 +116,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div className={styles.first_box}>
-                <div className={styles.text__1} >요즘 핫한 프로젝트</div>
+                <div className={styles.text__1} >추천된 프로젝트</div>
                 <div className={styles.title_text}>대외적으로 프로젝트 진행을 위한 동개를 모집 하고 있어요!</div>
                     <div className={styles.formGroup}>
                     {recommendPj ? recommendPj.map(data => 
