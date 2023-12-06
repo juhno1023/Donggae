@@ -481,6 +481,7 @@ public class RecruitPostServiceImpl implements RecruitPostService {
                     .intro(user.getIntro())
                     .leaderCount(userLeaderCnt)
                     .teamExpCount(user.getTeamExpCount()+1)
+                    .userProfile(user.getUserProfile())
                     .build();
             memberRepository.save(saveUser);
         }

@@ -12,6 +12,7 @@ export default function Post() {
     let token = localStorage.getItem('token') || '';
     let checkPost = localStorage.getItem('checkPost') || '';
     let { recuritPostId } = useParams();
+    localStorage.setItem('recuritPostId', recuritPostId)
 
     // 글 수정
     const [recruitPost, setRecruitPost] = useState('');

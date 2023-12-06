@@ -5,7 +5,7 @@ html,body {
 
 .label {
     margin-top: 50px;
-    height: 100px;
+    height: 130px;
     width: 100%;
     border-width:0px 0px 1px 0px;
     border-style:solid;
@@ -24,9 +24,15 @@ html,body {
 
 .question{
     position: relative;
-    top : 200px;
+    top : 100px;
 }
 
 .tt{
     height: 250px;
+}
+
+.exit{
+    position: fixed;
+    top : 50px;
+    left: 50px;
 }

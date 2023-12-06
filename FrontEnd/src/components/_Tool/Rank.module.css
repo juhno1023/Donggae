@@ -11,16 +11,15 @@
     border-bottom: 1px solid grey;
   }
   td {
-    height: 20px;
+    width: 100px;
+    height: 30px;
     font-family: var(--body-font);
     font-size: 1.4rem;
-    padding: 1rem 2rem;
-    position: relative;
+    padding: 10px 30px;
   }
   
   .number {
     width: 1rem;
-    
     font-size: 15px;
     font-weight: bold;
     text-align: left;
@@ -40,7 +39,6 @@
     font-weight: bold;
     font-size:  15px;;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
   }
   

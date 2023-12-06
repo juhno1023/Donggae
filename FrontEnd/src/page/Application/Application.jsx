@@ -11,12 +11,12 @@ export default function Posting() {
 
     const [selfIntroValue, setSelfIntro] = useState('');
     const [contentValue, setContent] = useState('');
-    const [RecruitPostIdValue, setRecruitPostId] = useState('');
+
 
     const Data = {
         selfIntro : selfIntroValue,
         content : contentValue,
-        recruitPostId : 2 //예시
+        recruitPostId : localStorage.getItem('recuritPostId')
     }
 
     const saveSelfIntro = event =>{
@@ -26,11 +26,6 @@ export default function Posting() {
 
     const saveContent = event =>{
         setContent(event.target.value);
-        console.log(event.target.value);
-    }
-
-    const saveRecruitPostId = event =>{
-        setRecruitPostId(event.target.value);
         console.log(event.target.value);
     }
 

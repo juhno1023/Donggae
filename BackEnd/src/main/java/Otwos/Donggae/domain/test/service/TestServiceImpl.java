@@ -25,6 +25,7 @@ import java.util.Optional;
 import Otwos.Donggae.domain.test.repository.UserAnswerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TestServiceImpl implements TestService{
@@ -93,12 +94,20 @@ public class TestServiceImpl implements TestService{
         return testQuestionDTOS;
     }
 
+    @Transactional
     @Override
     public void saveUserAnswer(int userId, ArrayList<UserAnswerDTO> userAnswerDTOs) {
         for (UserAnswerDTO userAnswerDTO : userAnswerDTOs) {
             User user = memberRepository.findUserByUserId(userId);
+
             Optional<TestQuestion> testQuestion = testQuestionRepository.findById(userAnswerDTO.getTestQuestionId());
             Optional<AnswerOption> answerOption = answerOptionRepository.findById(userAnswerDTO.getAnswerOptionId());
+
+            TestQuestion existTestQuestion = testQuestionRepository.findTestQuestionByTestQuestionId(
+                    userAnswerDTO.getTestQuestionId());
+            if (userAnswerRepository.findByUserIdAndTestQuestionId(user, existTestQuestion) != null) {
+                userAnswerRepository.deleteByTestQuestionIdAndUserId(existTestQuestion, user);
+            }
 
             if(testQuestion.isPresent() && answerOption.isPresent()){
                 UserAnswer userAnswer = UserAnswer.builder()
@@ -203,6 +212,7 @@ public class TestServiceImpl implements TestService{
                 .boj_rank(user.getBoj_rank())
                 .devTestScore(userDevTestScore) //test_result에서 불러와서 저장해야함
                 .dguEmail(user.getDguEmail())
+                .userProfile(user.getUserProfile())
                 .build();
         memberRepository.save(saveScoreUser);
 

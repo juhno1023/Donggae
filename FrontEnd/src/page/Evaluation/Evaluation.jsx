@@ -49,11 +49,8 @@ export default function Home() {
                 <div className={styles.test_box}>
                         {testInfo.map(item => (
                         <div className={styles.problem_box}>
-                        ID: {item.id}
-                        <br></br>
-                        Test Field: {item.testField}
-                        <br></br>
-                        <Link to={`/evaluation/${item.id}`}><button type="submit" className={styles.submitBtn} onClick={()=>testInfo}>응시하기</button></Link>
+                            <div className={styles.subject}>{item.testField}</div>
+                            <Link className={styles.btn} to={`/evaluation/${item.id}`}><button type="submit" className={styles.submitBtn} onClick={()=>testInfo}>응시하기</button></Link>
                         </div>
                     ))}
                 </div>

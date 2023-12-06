@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebars";
 import { MultiSelect } from "react-multi-select-component";
+import './style.css';
 
 import DongD from '../../image/DongDonggae.png';
 import BronzeD from '../../image/BronzeDonggae.png';
@@ -131,15 +132,6 @@ export default function Mypage() {
                 body: JSON.stringify(BojId),
             })     
 
-            console.log("Response status:", res.status);
-            
-            if (res.ok) {
-                alert("중복확인 완료");
-            } else if (res.status === 400) {
-                alert(`중복된 ID입니다.`);
-            } else {
-                console.error("중복확인에 실패하였습니다.", res.statusText);
-            }
         } catch (error) {
             console.error("오류오류: ", error);
         }
@@ -243,21 +235,39 @@ export default function Mypage() {
             <div className={styles.inner}>
                 <div className={styles.body}>
                     <div className={styles.box__}>
-                        <img className={styles.user_icon} alt="Image" src={localStorage.getItem('profile')} />
-                        <div className={styles.user_box}>
-                            <p className={styles.user_name_text}>{userInfo.githubName}님</p>
-                            <p className={styles.user_email_text}>{userInfo.dguEmail} @ dgu.ac.kr</p>
-                        </div>
-
-                        <div className={styles.data_area}><p>언어 설정</p><MultiSelect options ={languages}
+                        <div className={styles.flex}> 
+                            <img className={styles.profileImg} src={localStorage.getItem('profile')}/>
+                            <div>
+                            <span className={styles.name}>{userInfo.githubName}님</span>
+                            <br/>
+                            <span className={styles.user_email_text}>{userInfo.dguEmail} @ dgu.ac.kr</span>
+                            </div>
+                        </div> 
+                        <div className={styles.data_area}>
+                            <div className={styles.setting}>언어 설정</div> 
+                            <MultiSelect 
+                                className={styles.multiselect}
+                                options ={languages}
                                 value={selectedLanguages}
                                 onChange={setSelectedLanguages}
-                                labelledBy="Select"/></div>
-                        <div className={styles.data_area}><p>관심 분야 설정</p><MultiSelect options ={fields}
+                                labelledBy="Select"
+                                hasSelectAll = {false}
+                                    disableSearch = {true}
+                                />
+                        </div>
+                        <div className={styles.data_area}>
+                        <div className={styles.setting}>관심 분야 설정</div> 
+                        <MultiSelect 
+                                className={styles.multiselect}
+                                options ={fields}
                                 value={selectedFields}
                                 onChange={setSelectedFields}
-                                labelledBy="Select"/></div>
-                        <div className={styles.data_area}><p>자기 소개</p>
+                                labelledBy="Select"
+                                hasSelectAll = {false}
+                                disableSearch = {true}
+                                /></div>
+                        <div className={`${styles.data_area} ${styles.fmg2}`}>
+                            <div className={styles.setting}>자기 소개</div> 
                             <textarea
                                 id="myself"
                                 name="content"
@@ -265,26 +275,36 @@ export default function Mypage() {
                                 value={formData}
                                 onChange={handleInputChange}
                             /></div>
-                        <div className={styles.data_area}><p>성격 특성</p><MultiSelect options ={personalitys} 
+                        <div className={styles.data_area}>
+                            <div className={styles.setting}>성격 특성</div> 
+                            <MultiSelect 
+                                className={styles.multiselect}
+                                options ={personalitys} 
                                 value={selectedPersonalities}
                                 onChange={setSelectedPersonalities}
-                                labelledBy="Select"/></div>
-                        <button onClick={() => {
+                                labelledBy="Select"
+                                hasSelectAll = {false}
+                                disableSearch = {true}
+                                /></div>
+                        <button className ={styles.submitBtn} onClick={() => {
                             DataModify();
-                        }}>수정하기</button>   
-                        <div className={styles.data_area}><p>백준 아이디</p>
-                        <textarea
+                        }}>수정하기</button>
+                           
+                        <div className={`${styles.data_area} ${styles.fmg3}`}>
+                            <div className={styles.setting}>백준 아이디</div> 
+                            <input
+                                type="text"
                                 id="baekjoon"
                                 name="content"
                                 placeholder="내용을 작성해주세요."
                                 value={baekjoon}
                                 onChange={baekjoonInputChange}
                             />
+                        <button  className ={styles.inputBtn}onClick={() => {
+                            BaekJoon();
+                        }}>입력하기</button>
                         </div>
 
-                    <button onClick={() => {
-                        BaekJoon();
-                        }}>입력하기</button>
                     </div>
 
                     <div className={styles.preview_box}>
