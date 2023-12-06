@@ -235,7 +235,7 @@ export default function Posting() {
                     </div>
                     <div className={styles.half}>
                     <div className={styles.text__1}>전공강의 팀원 모집하기</div> 선택 된 수강강의
-                    <select className={styles.search_form__select} onChange={handleSelect} value={majSelected}>
+                    <select className={styles.pjSelect} onChange={handleSelect} value={majSelected}>
                         {majorA.map(({value, label}) => (
                             <option value={value} key={label}>
                             {label}

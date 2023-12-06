@@ -12,4 +12,6 @@ import java.util.List;
 public interface RecruitFieldRepository extends JpaRepository<RecruitField, RecruitFieldPK> {
 
     List<RecruitField> findAllByRecruitPostId(RecruitPost recruitPost);
+
+    void deleteAllByRecruitPostId(RecruitPost recruitPost);
 }

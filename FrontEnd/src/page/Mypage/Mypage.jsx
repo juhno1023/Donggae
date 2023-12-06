@@ -6,6 +6,12 @@ import Sidebar from "../../components/_Layout/Sidebars";
 import donggae from '../../image/donggae.png';
 import { MultiSelect } from "react-multi-select-component";
 
+import DongD from '../../image/DongDonggae.png';
+import BronzeD from '../../image/BronzeDonggae.png';
+import SilverD from '../../image/SilverDonggae.png';
+import GoldD from '../../image/GoldDonggae.png';
+import DiamondD from '../../image/DiamondDonggae.png';
+
 export default function Mypage() {
     const history = useNavigate();
 
@@ -48,12 +54,12 @@ export default function Mypage() {
 
     const [selectedFields, setSelectedFields] = useState([]);
     const fields = [
-        { value: "BACKEND", label: "BackEnd ☘️" },
-        { value: "FRONTEND", label: "FrontEnd 🌱" },
-        { value: "IOS", label: "iOS 🌲" },
-        { value: "ANDROID", label: "Android 🌳" },
+        { value: "BackEnd", label: "BackEnd ☘️" },
+        { value: "FrontEnd", label: "FrontEnd 🌱" },
+        { value: "iOS", label: "iOS 🌲" },
+        { value: "Android", label: "Android 🌳" },
         { value: "AI", label: "AI 🍀" },
-        { value: "GAME", label: "Game 🌿" },
+        { value: "Game", label: "Game 🌿" },
         { value: "UIUX", label: "UIUX 🌵" },
       ];
 
@@ -81,21 +87,8 @@ export default function Mypage() {
       ];
 
 
-    
 
-
-    const[name, setName] = useState();
-    const[selfIntro, setSelfIntro] = useState();
-    const[bojRank, setBojRank] = useState();
-    const[dguEmail, setDguEmail] = useState();
-    const[userRank, setUserRank] = useState();
-    const[teamExpCount, setTeamExpCount] = useState();
-    const[leaderCount, setLeaderCount] = useState();
-    const[devTestScore, setDevTestScore] = useState();
-    const[userLanguageDTOS , setUserLanguageDTOS] =useState([]);
-    const[userInterestFieldDTOS, setUserInterestFieldDTOS] = useState([]);
-    const[userPersonalityDTOS, setUserPersonalityDTOS] =useState([]);
-    const[userStudyFieldDTOS, setUserStudyFieldDTOS] = useState([]);
+    const [userInfo, setUserInfo] = useState([]);
 
     let token = localStorage.getItem('token') || '';
 
@@ -122,17 +115,16 @@ export default function Mypage() {
     };
 
     const BojId = {
-        baekjoonUserName : baekjoon
+        baekjoonUserName : baekjoon,
     }
 
     const BaekJoon = async() => {
-        console.log(BojId);
         try {
             const res = await fetch('/mypage/addRank', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer {token}`
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(BojId),
             })     
@@ -148,7 +140,7 @@ export default function Mypage() {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer {token}`
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(Modify),
             })     
@@ -160,6 +152,20 @@ export default function Mypage() {
             } else {
                 console.error("수정 실패.");
             }
+
+            
+            const re = await fetch('/mypage', {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                }).then(re=>re.json())        
+                    .then(re=> {
+                    console.log(re)
+                    setUserInfo(re);
+            });
+
         } catch (error) {
             console.error("Failed to fetch: ", error);
         }
@@ -167,9 +173,10 @@ export default function Mypage() {
 
 
     useEffect(() => {
-        const DataInquiry = () => {
+
+        const DataInquiry = async() => {
             try {
-                fetch('http://localhost:8080/mypage', {
+                const res = await fetch('http://localhost:8080/mypage', {
                     method: "GET",
                     headers: {
                         'Content-Type': 'application/json',
@@ -178,18 +185,7 @@ export default function Mypage() {
                     }).then(res=>res.json())        
                         .then(res=> {
                         console.log(res)
-                        setName(res.githubName);
-                        setSelfIntro(res.selfIntro);
-                        setBojRank(res.bojRank);
-                        setDguEmail(res.dguEmail);
-                        setUserRank(res.userRank);
-                        setTeamExpCount(res.teamExpCount);
-                        setLeaderCount(res.leaderCount);
-                        setDevTestScore(res.devTestScore);
-                        setUserLanguageDTOS(res.userLanguageDTOS);
-                        setUserInterestFieldDTOS(res.userInterestFieldDTOS);
-                        setUserPersonalityDTOS(res.userPersonalityDTOS);
-                        setUserStudyFieldDTOS(res.setUserStudyFieldDTOS);
+                        setUserInfo(res);
                 });
 
                 } catch (error) {
@@ -201,6 +197,32 @@ export default function Mypage() {
         },[]);
 
 
+        //각 정보 JSON 배열에서 값만을 추출함
+        const languageMap = userInfo.userLanguageDTOS ? userInfo.userLanguageDTOS.map(item => item.language) : [];
+        const fieldMap = userInfo.userInterestFieldDTOS ? userInfo.userInterestFieldDTOS.map(item => item.interestField) : [];
+        const personalMap = userInfo.userPersonalityDTOS ? userInfo.userPersonalityDTOS.map(item => item.personality) : [];
+
+
+        const selectImage = (condition) => {
+            // 조건에 따라 다른 이미지를 선택하는 함수
+            if (condition === '다이아동개') {
+              return DiamondD;
+            } 
+            else if (condition === '황금동개') {
+                return GoldD;
+            } 
+            else if (condition === '은동개') {
+                return SilverD;
+            }
+            else if (condition === '동동개') {
+                return BronzeD;
+            }
+            else {
+                return DongD;
+            };
+        
+        }
+
 
     return (
         <div className={styles.default}>
@@ -211,8 +233,8 @@ export default function Mypage() {
                     <div className={styles.box__}>
                         <img className={styles.user_icon} alt="Image" src={localStorage.getItem('profile')} />
                         <div className={styles.user_box}>
-                            <p className={styles.user_name_text}>{name}님</p>
-                            <p className={styles.user_email_text}>{dguEmail} @ dgu.ac.kr</p>
+                            <p className={styles.user_name_text}>{userInfo.githubName}님</p>
+                            <p className={styles.user_email_text}>{userInfo.dguEmail} @ dgu.ac.kr</p>
                         </div>
 
                         <div className={styles.data_area}><p>언어 설정</p><MultiSelect options ={languages}
@@ -231,7 +253,7 @@ export default function Mypage() {
                                 value={formData}
                                 onChange={handleInputChange}
                             /></div>
-                        <div className={styles.data_area}><p>관심 분야 설정</p><MultiSelect options ={personalitys} 
+                        <div className={styles.data_area}><p>성격 특성</p><MultiSelect options ={personalitys} 
                                 value={selectedPersonalities}
                                 onChange={setSelectedPersonalities}
                                 labelledBy="Select"/></div>
@@ -260,9 +282,16 @@ export default function Mypage() {
                                 <div className={styles.logo}>
                                 <img className={styles.logoimg} alt="Image" src={localStorage.getItem('profile')} />
                                 <div className={styles.profile_info}>
-                                    <div className={styles.text__2}>헤헤</div>
+                                    <div className={styles.text__2}>{userInfo.githubName}
+                                        <img
+                                        className={styles.donggae_icon}
+                                        src={selectImage(userInfo.userRank)}
+                                        alt="Rank"
+                                        />
+                                        </div>
+                                    {userInfo.dguEmail} @ dgu.ac.kr
                                     <br></br>
-                                    이익
+                                    {userInfo.selfIntro}
                                 </div>
                                 </div>
                             </div>
@@ -270,15 +299,22 @@ export default function Mypage() {
                             <div className={styles.profile_more}>
                                 <div className={styles.keyword_box}>
                                     <div className={styles.keyword}>
-                                        모집 분야
+                                        선호 언어
+                                        {languageMap.map((language, index) => (
+                                            <p key={index}>{language}</p>
+                                        ))}
                                     </div>
                                     <div className={styles.keyword}>
-                                        선호 언어
+                                        관심 분야
+                                        {fieldMap.map((field, index) => (
+                                            <p key={index}>{field}</p>
+                                        ))}
                                     </div>
-                                </div>
-                                <div className={styles.keyword_box}>
                                     <div className={styles.keyword}>
                                         성격 특성
+                                        {personalMap.map((personal, index) => (
+                                            <p key={index}>{personal}</p>
+                                        ))}
                                     </div>
                                 </div>
                             </div>

@@ -125,3 +125,25 @@
 .selectBox{
     width :200px;
   }
+
+  
+.pjSelect {
+    margin-left: 10px;
+    width: 140px;
+    height: 29px;
+    background: inherit;
+    padding: 0px 1px 0px 1px;
+    border-radius: 10px;
+    background-color: var(--select-bg);
+    border: none;
+    font-size: 12px;
+    margin-top : 15px;
+  }
+  .pjSelect option {
+    background: white;
+    padding: 3px 0;
+  }
+  .pjSelect option:hover {
+    background: rgb(58, 58, 58)
+  }
+  

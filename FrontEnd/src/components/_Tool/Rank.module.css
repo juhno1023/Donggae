@@ -20,6 +20,7 @@
   
   .number {
     width: 1rem;
+    
     font-size: 15px;
     font-weight: bold;
     text-align: left;
@@ -30,6 +31,11 @@
     font-size:  15px;;
   }
   
+  .image{
+    width: 30px;
+    height: 30px;
+  }
+
   .points {
     font-weight: bold;
     font-size:  15px;;
@@ -58,4 +64,8 @@
       * {
         font-size: 45%;
       }
+  }
+
+  .rankImg{
+    width: 20px;
   }

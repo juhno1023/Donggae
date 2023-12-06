@@ -1,4 +1,4 @@
-
+/* usercard */
 .UserCard{
     border-radius: 13px;
     border: 1px solid var(--box-bg);
@@ -8,9 +8,28 @@
     word-wrap: break-word;
     padding : 15px;
     width : 180px;
-    height: 250px;
+    height: 300px;
     margin-right : 10px;
   }
+  .UserCard .profileImg{
+    margin-left: 55px;
+    border-radius : 50%;
+    width : 65px;
+    border: 1px solid black;
+    margin-right: 10px;
+  }
+  
+  .UserCard .gitImg{
+    position: absolute;
+    width : 27px; 
+    cursor: pointer;
+    margin-left: 26px;
+    margin-top:-10px;
+  }
+  
+  
+
+
 
   .GroupCard{
     border-radius: 13px;
@@ -24,17 +43,16 @@
     margin-bottom: 10px;
   }
 
-
+/* suggest Card */
 
 .SuggetCard{
-  padding: 5px;
   border-radius: 16px;
   border: 1px solid #717171;
   line-height: 36px;
   word-wrap: break-word;
   padding : 15px;
   width : 200px;
-  height: 100px;
+  height: 120px;
   margin-right : 10px;
   background-color: #F8F8F8;
   /* box-shadow: 0px 0px 5px rgb(0 0 0); */
@@ -43,6 +61,38 @@
   color : black;
   text-decoration: none;
 }
+
+.SuggetCard .profileImg{
+  border-radius : 50%;
+  width : 40px;
+  border: 1px solid black;
+  margin-right: 10px;
+}
+
+.flex{
+  margin-top : 20px;
+  display: flex;
+}
+
+.UserCateInfo div{
+  position: relative;
+  top :-20px;
+  height: 9px;
+}
+
+.donggae_icon{
+  width: 19px;
+}
+
+.rankImg{
+  width: 14px;
+  margin-right: 10px;
+}
+
+
+
+
+
 
 .Lecture{
   color: white;
@@ -89,6 +139,7 @@
   border: none;
   font-weight: bold;
   font-size: 12px;
+  margin-top : 15px;
 }
 .pjSelect option {
   background: white;
@@ -100,16 +151,20 @@
 
 
 /* User Card */
+.letterfont, .UserName, .UserName_, .name{
+  font-family: 'Hedvig Letters Serif', serif;
+}
+
 .UserName{
   font-weight: 600;
-  font-family: 'Hedvig Letters Serif', serif;
   text-align: center;
 }
-.UserName_{
+.UserName_, .name{
   font-weight: 600;
-  font-family: 'Hedvig Letters Serif', serif;
   font-size: 11px;
 }
+
+
 .UserIntro{
   font-size: 12px;
   color : rgb(90, 90, 90);
@@ -140,8 +195,3 @@
   margin-left: 10px;
 }
 
-.UserCard img{
-  position: absolute;
-  width : 27px; 
-  cursor: pointer;
-}

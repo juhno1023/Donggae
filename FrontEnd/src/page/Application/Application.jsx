@@ -136,7 +136,7 @@ export default function Posting() {
                         <div className={styles.text__1}>내 정보</div>
                         <div className={styles.profile_box}>
                             <div className={styles.logo}>
-                            <img className={styles.logoimg} src={bgImg} alt="Donggae Logo" />
+                            <img className={styles.logoimg} src={userInfo.userProfile}/>
                             <div className={styles.profile_info}>
                                 <div className={styles.text__2}>{userInfo.githubName}</div>
                                 
