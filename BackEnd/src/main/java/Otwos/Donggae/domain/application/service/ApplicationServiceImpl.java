@@ -83,10 +83,10 @@ public class ApplicationServiceImpl implements ApplicationService{
 
     private void validateUserAndRecruitPost(User user, RecruitPost recruitPost) throws Exception {
         if (user == null) {
-            throw new Exception("해당 user가 없습니다.");
+            throw new Exception("this user doesn't exist");
         }
         if (recruitPost == null) {
-            throw new Exception("해당 recruitPost가 없습니다.");
+            throw new Exception("this recruitPost doesn't exist");
         }
     }
 
@@ -163,7 +163,7 @@ public class ApplicationServiceImpl implements ApplicationService{
         Application application = applicationRepository.findApplicationByUserIdAndRecruitPostId(
                 user, recruitPost);
         if (application == null) {
-            throw new Exception("해당 지원서가 없습니다.");
+            throw new Exception("this application doesn't exist");
         }
     }
 
