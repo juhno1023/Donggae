@@ -2,7 +2,7 @@
 .GroupCard{
     padding: 5px;
     border-radius: 16px;
-    border: 1px solid var(--box-bg);
+    border: 1px solid #717171;
     background: var(--box-bg2);
     height: 20px;
     line-height: 36px;
@@ -29,15 +29,12 @@
 .title{
   line-height: 25px;
 }
-.title_{
-  line-height: 25px;
-  font-weight: bold;
-}
+
 .title a{
   color : black;
   text-decoration: none;
   transition: all 0.2s;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
 }
 
@@ -66,3 +63,36 @@
   width: 10px;  /* 세로축 스크롤바 폭 너비 */
   height: 20px;  /* 가로축 스크롤바 폭 너비 */
 }
+
+/* profile */
+
+.flex{
+  margin-top : 10px;
+  display: flex;
+  line-height: 10px;
+}
+.GroupCard{
+  font-size: 13px;
+}
+.donggae_icon{
+  width: 19px;
+}
+
+.rankImg{
+  width: 14px;
+  margin-right: 10px;
+}
+
+.profileImg{
+  border-radius : 50%;
+  width : 45px;
+  border: 1px solid white;
+  margin-right: 10px;
+}
+
+.name{
+  font-family: 'Hedvig Letters Serif', serif;
+  font-size: 12px;
+}
+
+

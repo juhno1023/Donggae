@@ -1,19 +1,33 @@
 import styles from './ApplyModal.module.css';
+import UserCard from '../_Card/UserCard';
 
-function ApplyModal({setModalOpen, content, selfIntro, userInfo}) {
+function ApplyModal({setModalOpen, content, selfIntro, userInfo, language, interest, personal}) {
     // 모달 끄기 
     const closeModal = () => {
         setModalOpen(false);
     };
-    //userinfo의 userInterest? Language, PersonalitiesDTO 넣어야함. (Selection에서)
     return (
         <div className={styles.background}>
             <div className={styles.container}>
                 <button className={styles.close} onClick={closeModal}>
                     X
                 </button>
-                자기소개 : {content} <br/>
-                지원동기 및 나의 역량 : {selfIntro}
+                <UserCard 
+                        userId={userInfo.userId}
+                        name={userInfo.githubName} 
+                        selfIntro ={selfIntro}
+                        content ={content}
+                        intro={userInfo.intro} 
+                        devTestScore={userInfo.devTestScore} 
+                        rank={userInfo.bojRank} 
+                        donggaeRank ={userInfo.userRank} 
+                        language={language} 
+                        interest={interest} 
+                        personal={personal} 
+                        study={userInfo.userStudyFields} 
+                        userProfile={userInfo.userProfile} 
+                        isPj ={false}
+                    />
             </div>
         </div>
     );

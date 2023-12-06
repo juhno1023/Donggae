@@ -155,6 +155,7 @@ export default function Recruit() {
                 .then(res=> {
                     setLecPj(res.lectureRecruitPosts);
                     setNatPj(res.naturalRecruitPosts);
+                    console.log(res)
                 });
             } catch (error) {
                 console.error("Failed to fetch: ", error);
@@ -223,7 +224,7 @@ export default function Recruit() {
                     <div className={styles.box__}>
                     <div className={styles.first_box}>
                     <div className={styles.text__1} >개인 프로젝트</div>
-                    <div className={styles.title_text}>함께듣는 강의를 위한 동개를 모집 하고 있어요!</div>
+                    <div className={styles.title_text}>대외적으로 프로젝트 진행을 위한 동개를 모집 하고 있어요!</div>
                     <div className={styles.formGroup}>
                     {recNatPj ? recNatPj.slice(0, 4).map(data => 
                             <TeamCard 
@@ -232,20 +233,23 @@ export default function Recruit() {
                                 date={data.createdDate} 
                                 rank={data.teamLeader.bojRank} 
                                 donggaerank={data.teamLeader.donggaeRank}
+                                language={data.languageS.map(item => item.language)} 
                                 recruitPostId = {data.postId}
                             />): null}
                     </div>
                     </div>
                     <div className={styles.first_box}>
                     <div className={styles.text__1} >수업 프로젝트</div>
-                    <div className={styles.title_text}>대외적으로 프로젝트 진행을 위한 동개를 모집 하고 있어요!</div>
+                    <div className={styles.title_text}>함께듣는 강의를 위한 동개를 모집 하고 있어요!</div>
                         <div className={styles.formGroup}>
-                        {recLecPj ? recLecPj.slice(0, 4).map(data => 
-                                <TeamCard lecture={data.lecture} 
+                        {recLecPj ? recLecPj.slice(0, 4).map(data =>
+                                <TeamCard 
+                                    lecture={data.lecture} 
                                     name={data.teamLeader.name} 
                                     title = {data.title} 
                                     date={data.createdDate} 
                                     rank={data.teamLeader.bojRank} 
+                                    language={data.languageS.map(item => item.language)} 
                                     donggaerank={data.teamLeader.donggaeRank}
                                     recruitPostId = {data.postId}
                                 />): null} 

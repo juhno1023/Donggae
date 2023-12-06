@@ -5,7 +5,7 @@ import Modify from './Modify';
 import Sidebar from "../../components/_Layout/Sidebars";
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import UserCard from '../../components/_MainPage/UserCard';
+import UserCard from '../../components/_Card/UserCard';
 
 export default function Post() {
 
@@ -84,39 +84,10 @@ export default function Post() {
                         personal={recuritPers} 
                         study={recruitPost.userStudyFields} 
                         userProfile={recruitPost.userProfile} 
-                        isPj 
+                        isPj ={false}
                     />
                     </div>
 
-
-                {/* <div className={styles.profile_box}>
-                    <div className={styles.logo}>
-                    <img className={styles.logoimg} src={bgImg} alt="Donggae Logo" />
-                    <div className={styles.profile_info}>
-                        <div className={styles.text__2}>{recruitPost.githubName}</div>
-                        <br></br>
-                        {recruitPost.selfIntro}
-                    </div>
-                    </div>
-                </div> */}
-                {/* <div className={styles.profile_more}>
-                    <div className={styles.keyword_box}>
-                        <div className={styles.keyword}>
-                        모집 분야
-                        {userRecuritField ? userRecuritField.slice(0, 2).map((item, index) => (<span>{item.field}</span>)) : null}
-                        </div>
-                        <div className={styles.keyword}>
-                        선호 언어
-                        {userRecuritLan ? userRecuritLan.slice(0, 2).map((item, index) => (<span key={index}>{item.language}</span>)) : null}
-                        </div>
-                    </div>
-                    <div className={styles.keyword_box}>
-                        <div className={styles.keyword}>
-                        성격 특성
-                        {userRecuritPers ? userRecuritPers.slice(0, 2).map((item, index) => (<span key={index}>{item.personality}</span>)) : null}
-                        </div>
-                    </div>
-                </div> */}
                 
                 </div>
                 <div className={styles.half}>

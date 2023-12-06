@@ -3,7 +3,6 @@ import styles from "./Mypage.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebars";
-import donggae from '../../image/donggae.png';
 import { MultiSelect } from "react-multi-select-component";
 
 import DongD from '../../image/DongDonggae.png';
@@ -11,6 +10,8 @@ import BronzeD from '../../image/BronzeDonggae.png';
 import SilverD from '../../image/SilverDonggae.png';
 import GoldD from '../../image/GoldDonggae.png';
 import DiamondD from '../../image/DiamondDonggae.png';
+
+import UserCard from '../../components/_Card/UserCard';
 
 export default function Mypage() {
     const history = useNavigate();
@@ -276,50 +277,21 @@ export default function Mypage() {
                     <div className={styles.preview_box}>
 
                         <p className={styles.preview_title_text}>내 정보 미리보기</p>
-
-                        <div className={styles.preview_inner_box}>
-                            <div className={styles.profile_box}>
-                                <div className={styles.logo}>
-                                <img className={styles.logoimg} alt="Image" src={localStorage.getItem('profile')} />
-                                <div className={styles.profile_info}>
-                                    <div className={styles.text__2}>{userInfo.githubName}
-                                        <img
-                                        className={styles.donggae_icon}
-                                        src={selectImage(userInfo.userRank)}
-                                        alt="Rank"
-                                        />
-                                        </div>
-                                    {userInfo.dguEmail} @ dgu.ac.kr
-                                    <br></br>
-                                    {userInfo.selfIntro}
-                                </div>
-                                </div>
-                            </div>
-
-                            <div className={styles.profile_more}>
-                                <div className={styles.keyword_box}>
-                                    <div className={styles.keyword}>
-                                        선호 언어
-                                        {languageMap.map((language, index) => (
-                                            <p key={index}>{language}</p>
-                                        ))}
-                                    </div>
-                                    <div className={styles.keyword}>
-                                        관심 분야
-                                        {fieldMap.map((field, index) => (
-                                            <p key={index}>{field}</p>
-                                        ))}
-                                    </div>
-                                    <div className={styles.keyword}>
-                                        성격 특성
-                                        {personalMap.map((personal, index) => (
-                                            <p key={index}>{personal}</p>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                        <UserCard 
+                            userId={userInfo.userId}
+                            content = {userInfo.selfIntro}
+                            name={userInfo.githubName} 
+                            intro={userInfo.intro} 
+                            devTestScore={userInfo.devTestScore} 
+                            rank={userInfo.bojRank} 
+                            donggaeRank ={userInfo.userRank} 
+                            language={languageMap} 
+                            interest={fieldMap} 
+                            personal={personalMap} 
+                            study={userInfo.userStudyFields} 
+                            userProfile={userInfo.userProfile} 
+                            isPj ={false}
+                        />
                     </div>
                     
                 </div>
