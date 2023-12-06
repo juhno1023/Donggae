@@ -143,7 +143,7 @@ public class TeamServiceImpl implements TeamService{
                                 user1.getBoj_rank().label(), //팀장 백준랭크
                                 userRank.getRankName().label(), //팀장 동개랭크
                                 teamMember1.getIsLeader(),
-                                user.getUserProfile());
+                                user1.getUserProfile());
                     }
                 }
 
