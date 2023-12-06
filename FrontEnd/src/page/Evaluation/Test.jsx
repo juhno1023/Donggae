@@ -139,7 +139,7 @@ export default function Test() {
                                 {item.answerOptions.map(num => (
                                     <>
                                     <div>
-                                        <p>{num.answerNum}. {num.answerText}</p>
+                                        <div className={styles.between}>{num.answerNum}. {num.answerText}</div>
                                     </div>
                                     </>
                                 ))}
