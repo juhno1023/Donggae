@@ -12,6 +12,8 @@ import Rank from './page/Rankpage/Rankpage';
 import Signup from "./page/Signup/Signup";
 import Leader from "./page/Project/Leader";
 import TeamInfo from "./page/Project/TeamInfo";
+import Evaluation from "./page/Evaluation/Evaluation"
+import Test from "./page/Evaluation/Test"
 import UserTeam from "./page/Project/UserTeam";
 import AuthCallback from './page/Login/AuthCallback';
 
@@ -32,6 +34,8 @@ function App() {
           <Route path="/signup" element={<Signup />}/>
           <Route path="/leader/:teamId" element={<Leader />}/>
           <Route path="/recruit" element={<Recruit />}/>
+          <Route path="/evaluation" element={<Evaluation />}/>
+          <Route path="/evaluation/:testId" element={<Test />}/>
           <Route path="/teaminfo/:teamId" element={<TeamInfo />}/>
           <Route path="/userteam" element={<UserTeam />}/>
         </Routes>

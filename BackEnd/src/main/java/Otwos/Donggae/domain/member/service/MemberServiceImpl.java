@@ -43,7 +43,8 @@ public class MemberServiceImpl implements MemberService{
                 0,
                 BaekjoonRank.UNRATED.label(), // 회원가입할때 기본으로 Unrated 주입
                 0,
-                signUpDTO.getDguEmail()
+                signUpDTO.getDguEmail(),
+                "https://avatars.githubusercontent.com/u/55657581?s=100&v=4" //기본 이미지 프로필로 주입
         );
         memberRepository.save(userDTO.toEntity());
         User user = memberRepository.findUserByDguEmail(signUpDTO.getDguEmail());
@@ -71,7 +72,7 @@ public class MemberServiceImpl implements MemberService{
     private void validateGIt(ValidGithubIdRequest request) throws Exception {
         User userByGithubName = memberRepository.findUserByGithubName(request.getGithubName());
         if (userByGithubName != null) {
-            throw new Exception("GitHub 이름이 중복됩니다: " + request.getGithubName());
+            throw new Exception("GitHub name already exists: " + request.getGithubName());
         }
     }
 
@@ -80,10 +81,10 @@ public class MemberServiceImpl implements MemberService{
         User userByGithubName = memberRepository.findUserByGithubName(signUpDTO.getGithubName());
         User userByDguEmail = memberRepository.findUserByDguEmail(signUpDTO.getDguEmail());
         if (userByGithubName != null) {
-            throw new Exception("GitHub 이름이 중복됩니다: " + signUpDTO.getGithubName());
+            throw new Exception("GitHub name already exists:  " + signUpDTO.getGithubName());
         }
         if (userByDguEmail != null) {
-            throw new Exception("DGU 이메일이 중복됩니다: " + signUpDTO.getDguEmail());
+            throw new Exception("DGU email already exists: " + signUpDTO.getDguEmail());
         }
     }
 

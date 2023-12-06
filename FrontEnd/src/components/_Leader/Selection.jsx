@@ -9,19 +9,15 @@ const Selection = ({ name, rank, id, value}) => {
     const [content, setContent] = useState();
     const [selfIntro, setSelfIntro] = useState();
     const [userInfo, setUserInfo] = useState([]);
+    const [recuritField, setRecruitField] = useState([]);
+    const [recuritLan, setRecruitLan] = useState([]);
+    const [recuritPers, setRecruitPers] = useState([]);
     const showModal = () => {
         setModalOpen(true);
     };
     
     let { teamId } = useParams();
     
-    const user = {
-        // teamId: sessionStorage.getItem('teamId')
-        // 세션 스토리지가 아니라 URL로 받아오는 것 : 팀 상세보기 클릭 후 나오는 화면이기 때문에
-        // 임시로 2라 설정함
-        
-        postId: 1,
-    };
 
     const clickSelection = async(e) => {
         try {
@@ -52,7 +48,6 @@ const Selection = ({ name, rank, id, value}) => {
 
     const showApplication = async(e) => {
         try {
-            console.log(user)
             fetch("http://localhost:8080/apply/show", {
                 method: "POST",
                 headers: {
@@ -61,15 +56,18 @@ const Selection = ({ name, rank, id, value}) => {
                 },
                 body: JSON.stringify({
                     userId: id,
-                    recruitPostId: user.postId,
+                    teamId: teamId,
                 }),
                 })
                 .then(res=>res.json())        
                     .then(res=> {
-                    setContent(res.content);
-                    setSelfIntro(res.selfIntro);
-                    setUserInfo(res.previewUserInfoDTO);
-                    console.log(res)
+                        console.log(res)
+                        setContent(res.content);
+                        setSelfIntro(res.selfIntro);
+                        setUserInfo(res.previewUserInfoDTO);
+                        setRecruitField( res.previewUserInfoDTO.userInterestFieldDTOS.map(item => item.interestField) )
+                        setRecruitLan(res.previewUserInfoDTO.userLanguageDTOS.map(item => item.language) )
+                        setRecruitPers(res.previewUserInfoDTO.userPersonalityDTOS.map(item => item.personality) );
                 });
                 setModalOpen(true);
 
@@ -80,7 +78,14 @@ const Selection = ({ name, rank, id, value}) => {
 
     return (
         <> 
-        {modalOpen && <ApplyModal setModalOpen={setModalOpen} content={content} selfIntro={selfIntro} userInfo={userInfo}/>}
+        {modalOpen && <ApplyModal setModalOpen={setModalOpen} 
+                                    content={content} 
+                                    selfIntro={selfIntro} 
+                                    userInfo={userInfo}
+                                    language={recuritLan} 
+                                    interest={recuritField} 
+                                    personal={recuritPers} 
+                                    />}
 
             <div>팀원 : {name} {rank}
             <label>

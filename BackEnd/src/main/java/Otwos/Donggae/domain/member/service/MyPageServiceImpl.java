@@ -59,6 +59,7 @@ public class MyPageServiceImpl implements MyPageService{
         int teamExpCount = user.getTeamExpCount();
         int leaderCount = user.getLeaderCount();
         int devTestScore = user.getDevTestScore();
+        String userProfile = user.getUserProfile();
 
         //rank 엔티티에 없으면 그냥 "똥개" 보냄
         UserRank userRank = userRankRepository.findUserRankByUserId(user);
@@ -75,6 +76,7 @@ public class MyPageServiceImpl implements MyPageService{
                 teamExpCount,
                 leaderCount,
                 devTestScore,
+                userProfile,
                 userLanguageDTOS,
                 userInterestFieldDTOS,
                 userPersonalityDTOS,
@@ -234,11 +236,9 @@ public class MyPageServiceImpl implements MyPageService{
 
         for (String fields : userFields) {
             // 문자열을 Enum으로 변환
-            FieldEnum fieldEnum = FieldEnum.valueOf(fields);
-
             UserInterestFieldDTO userInterestFieldDTO = new UserInterestFieldDTO(
                     user.getUserId(),
-                    fieldEnum.label()
+                    fields
             );
             userInterestFieldDTOS.add(userInterestFieldDTO);
         }

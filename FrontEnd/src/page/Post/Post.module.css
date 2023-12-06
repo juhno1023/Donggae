@@ -26,7 +26,7 @@ body{
   background-color: white;
 }
 
-.formGroup {
+.conTent {
   display: flex;
   flex-direction: row ;
   margin-bottom: 20px;
@@ -83,7 +83,7 @@ body{
 }
 /* input */
 
-.formGroup div{
+.conTent div{
   padding: 5px;
   border-radius: 12px;
   border: 1px solid var(--box-bg);
@@ -97,7 +97,7 @@ body{
 }
 
 
-.formGroup input:focus {
+.conTent input:focus {
   outline:none;
 }
 
@@ -109,7 +109,7 @@ body{
   flex-wrap: wrap;
 }
 .half{
-  width : 450px;
+  width : 250px;
 }
 
 /* profile box */
@@ -171,11 +171,15 @@ body{
 .keyword{
   width : 200px;
 }
-.keyword_box span{
+
+.keyword span{
   position: relative;
   display: inline-block;
   font-size: 12px;
   margin-left: 10px;
+}
+.keyword .span{
+  font-family: 'Hedvig Letters Serif', serif;
 }
 
 /* checkbox */

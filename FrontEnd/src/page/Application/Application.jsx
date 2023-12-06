@@ -3,7 +3,7 @@ import styles from "./Application.module.css"
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/_Layout/Header";
 import Sidebar from "../../components/_Layout/Sidebars";
-import bgImg from '../../image/donggae.png';
+import UserCard from '../../components/_Card/UserCard';
 
 export default function Posting() {
 
@@ -69,9 +69,7 @@ export default function Posting() {
     };
     
     const [userInfo, setUserInfo] = useState([]);
-    const [userRecuritField, setUserRecruitField] = useState([]);
-    const [userRecuritLan, setUserRecruitLan] = useState([]);
-    const [userRecuritPers, setUserRecruitPers] = useState([]);
+ 
     useEffect(() => {
         const getUserInfo = async() => {
             try {
@@ -86,9 +84,6 @@ export default function Posting() {
                 .then(res=> {
                     console.log(res)
                     setUserInfo(res)
-                    setUserRecruitField(res.userInterestFieldDTOS)
-                    setUserRecruitLan(res.userLanguageDTOS)
-                    setUserRecruitPers(res.userPersonalityDTOS)
                 });
             } catch (error) {
                 console.error("Failed to fetch: ", error);
@@ -96,7 +91,6 @@ export default function Posting() {
         };
         getUserInfo();   
     }, []);
-
     return (
         <div className={styles.default}>
             <Header /><Sidebar/>
@@ -134,36 +128,22 @@ export default function Posting() {
                 <div className={styles.box__}>
                     <div className={styles.half}>
                         <div className={styles.text__1}>내 정보</div>
-                        <div className={styles.profile_box}>
-                            <div className={styles.logo}>
-                            <img className={styles.logoimg} src={bgImg} alt="Donggae Logo" />
-                            <div className={styles.profile_info}>
-                                <div className={styles.text__2}>{userInfo.githubName}</div>
-                                
-                                <br></br>
-                                {userInfo.selfIntro}
-                            </div>
-                            </div>
-                        </div>
-                        <div className={styles.profile_more}>
-                            <div className={styles.keyword_box}>
-                                <div className={styles.keyword}>
-                                    모집 분야
-                                    {userRecuritField ? userRecuritField.slice(0, 2).map((item, index) => (<span>{item.field}</span>)) : null}
-                                </div>
-                                <div className={styles.keyword}>
-                                    선호 언어
-                                    {userRecuritLan ? userRecuritLan.slice(0, 2).map((item, index) => (<span key={index}>{item.language}</span>)) : null}
-
-                                </div>
-                            </div>
-                            <div className={styles.keyword_box}>
-                                <div className={styles.keyword}>
-                                    성격 특성
-                                    {userRecuritPers ? userRecuritPers.slice(0, 2).map((item, index) => (<span key={index}>{item.personality}</span>)) : null}
-                                </div>
-                            </div>
-                        </div>
+                        <UserCard 
+                            userId={userInfo.userId}
+                            content = {userInfo.selfIntro}
+                            name={userInfo.githubName} 
+                            intro={userInfo.intro} 
+                            devTestScore={userInfo.devTestScore} 
+                            rank={userInfo.bojRank} 
+                            donggaeRank ={userInfo.userRank} 
+                            language={userInfo.userLanguageDTOS ? userInfo.userLanguageDTOS.map(item => item.language) : []} 
+                            interest={userInfo.userInterestFieldDTOS ? userInfo.userInterestFieldDTOS.map(item => item.interestField) : []} 
+                            personal={userInfo.userPersonalityDTOS ? userInfo.userPersonalityDTOS.map(item => item.personality) : []} 
+                            study={userInfo.userStudyFields} 
+                            userProfile={userInfo.userProfile} 
+                            isPj ={false}
+                        />
+                       
                     </div>
                 </div>
                 </div>
