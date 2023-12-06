@@ -199,7 +199,7 @@ export default function Posting() {
                         <div className={styles.text__1}>세부사항 설정</div>
                         <div className={styles.search_form__alert}>
                             <div className={styles.selectBox}> 
-                            모집분야
+                            선호언어
                                 <MultiSelect
                                     options={languageA}
                                     value={lanSelected}
@@ -210,7 +210,7 @@ export default function Posting() {
                                 />
                             </div>
                             <div className={styles.selectBox}> 
-                            선호언어
+                            모집분야
                                 <MultiSelect
                                     options={fieldA}
                                     value={fieSelected}
