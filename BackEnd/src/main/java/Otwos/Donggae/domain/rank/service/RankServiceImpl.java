@@ -1,6 +1,7 @@
 package Otwos.Donggae.domain.rank.service;
 
 import Otwos.Donggae.DAO.GithubStatus;
+import Otwos.Donggae.DAO.Test.TestResult;
 import Otwos.Donggae.DAO.User.User;
 import Otwos.Donggae.DAO.User.UserRank;
 import Otwos.Donggae.DTO.member.donggaeRank.UserRankInfoDTO;
@@ -9,6 +10,7 @@ import Otwos.Donggae.Global.Rank.DonggaeRank;
 import Otwos.Donggae.domain.member.repository.GithubStatusRepository;
 import Otwos.Donggae.domain.member.repository.MemberRepository;
 import Otwos.Donggae.domain.rank.repository.UserRankRepository;
+import Otwos.Donggae.domain.test.repository.TestResultRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,8 @@ public class RankServiceImpl implements RankService{
 
     private final GithubStatusRepository githubStatusRepository;
 
+    private final TestResultRepository testResultRepository;
+
     @Override
     public int calAllUserRankScore(){
         // 모든 user의 랭크 점수 갱신
@@ -41,6 +45,7 @@ public class RankServiceImpl implements RankService{
         User user = memberRepository.findUserByUserId(usrId);
         UserRank userRank = userRankRepository.findUserRankByUserId(user);
         GithubStatus userGithubStatus = githubStatusRepository.findByUserId(user);
+        TestResult userTestResult = testResultRepository.findByUserId(user);
 
         float new_score = 0f;
 
@@ -49,6 +54,10 @@ public class RankServiceImpl implements RankService{
             new_score += userGithubStatus.getIssueNum() * 5; //5점
             new_score += userGithubStatus.getPrNum() * 5; // 5점
             new_score += userGithubStatus.getStarNum() * 3; //3점
+        }
+
+        if(userTestResult != null){
+            new_score += userTestResult.getTestResult(); //역량 평가 점수
         }
 
         new_score += user.getBoj_rank().getScore(); // 백준 랭크
