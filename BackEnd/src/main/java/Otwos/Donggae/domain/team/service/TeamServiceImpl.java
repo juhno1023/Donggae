@@ -319,7 +319,7 @@ public class TeamServiceImpl implements TeamService{
         validateUser(user);
         TeamMember teamMember = teamMemberRepository.findTeamMemberByTeamIdAndUserId(team, user);
         if (teamMember != null) {
-            throw new Exception("이미 팀에 존재하는 팀원입니다.");
+            throw new Exception("this teamMember already exist in the team");
         }
     }
 
@@ -327,22 +327,22 @@ public class TeamServiceImpl implements TeamService{
         validateUser(user);
         TeamMember teamMember = teamMemberRepository.findTeamMemberByTeamIdAndUserId(team, user);
         if (teamMember == null) {
-            throw new Exception("존재하지 않는 팀원입니다.");
+            throw new Exception("this teamMember doesn't exist");
         }
         if (Boolean.TRUE.equals(teamMember.getIsLeader())) {
-            throw new Exception("팀장은 추방 불가.");
+            throw new Exception("can't delete leader");
         }
     }
 
     private void validateTeam(Team team) throws Exception {
         if (team == null) {
-            throw new Exception("존재하지 않는 team입니다.");
+            throw new Exception("this team doesn't exist");
         }
     }
 
     private void validateUser(User user) throws Exception {
         if (user == null) {
-            throw new Exception("존재하지 않는 user입니다.");
+            throw new Exception("this user doesn't exist");
         }
     }
 
