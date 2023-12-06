@@ -203,6 +203,7 @@ public class TestServiceImpl implements TestService{
                 .boj_rank(user.getBoj_rank())
                 .devTestScore(userDevTestScore) //test_result에서 불러와서 저장해야함
                 .dguEmail(user.getDguEmail())
+                .userProfile(user.getUserProfile())
                 .build();
         memberRepository.save(saveScoreUser);
 
