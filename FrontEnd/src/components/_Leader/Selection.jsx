@@ -9,6 +9,9 @@ const Selection = ({ name, rank, id, value}) => {
     const [content, setContent] = useState();
     const [selfIntro, setSelfIntro] = useState();
     const [userInfo, setUserInfo] = useState([]);
+    const [recuritField, setRecruitField] = useState([]);
+    const [recuritLan, setRecruitLan] = useState([]);
+    const [recuritPers, setRecruitPers] = useState([]);
     const showModal = () => {
         setModalOpen(true);
     };
@@ -58,10 +61,13 @@ const Selection = ({ name, rank, id, value}) => {
                 })
                 .then(res=>res.json())        
                     .then(res=> {
-                    setContent(res.content);
-                    setSelfIntro(res.selfIntro);
-                    setUserInfo(res.previewUserInfoDTO);
-                    console.log(res)
+                        console.log(res)
+                        setContent(res.content);
+                        setSelfIntro(res.selfIntro);
+                        setUserInfo(res.previewUserInfoDTO);
+                        setRecruitField( res.previewUserInfoDTO.userInterestFieldDTOS.map(item => item.interestField) )
+                        setRecruitLan(res.previewUserInfoDTO.userLanguageDTOS.map(item => item.language) )
+                        setRecruitPers(res.previewUserInfoDTO.userPersonalityDTOS.map(item => item.personality) );
                 });
                 setModalOpen(true);
 
@@ -72,7 +78,14 @@ const Selection = ({ name, rank, id, value}) => {
 
     return (
         <> 
-        {modalOpen && <ApplyModal setModalOpen={setModalOpen} content={content} selfIntro={selfIntro} userInfo={userInfo}/>}
+        {modalOpen && <ApplyModal setModalOpen={setModalOpen} 
+                                    content={content} 
+                                    selfIntro={selfIntro} 
+                                    userInfo={userInfo}
+                                    language={recuritLan} 
+                                    interest={recuritField} 
+                                    personal={recuritPers} 
+                                    />}
 
             <div>팀원 : {name} {rank}
             <label>

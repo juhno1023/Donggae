@@ -7,9 +7,6 @@ import TeamCard from '../../components/_UserTeam/TeamCard';
 export default function UserTeam() {
     const [teambyL, setTeamL] = useState([]);
     const [teambyM, setTeamM] = useState([]);
-    const user = {
-        token: localStorage.getItem('token')
-    };
     let token = localStorage.getItem('token') || '';
     localStorage.setItem('checkPost', JSON.stringify(''))
     
