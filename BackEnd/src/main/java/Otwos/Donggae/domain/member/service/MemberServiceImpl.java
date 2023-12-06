@@ -72,7 +72,7 @@ public class MemberServiceImpl implements MemberService{
     private void validateGIt(ValidGithubIdRequest request) throws Exception {
         User userByGithubName = memberRepository.findUserByGithubName(request.getGithubName());
         if (userByGithubName != null) {
-            throw new Exception("GitHub 이름이 중복됩니다: " + request.getGithubName());
+            throw new Exception("GitHub name already exists: " + request.getGithubName());
         }
     }
 
@@ -81,10 +81,10 @@ public class MemberServiceImpl implements MemberService{
         User userByGithubName = memberRepository.findUserByGithubName(signUpDTO.getGithubName());
         User userByDguEmail = memberRepository.findUserByDguEmail(signUpDTO.getDguEmail());
         if (userByGithubName != null) {
-            throw new Exception("GitHub 이름이 중복됩니다: " + signUpDTO.getGithubName());
+            throw new Exception("GitHub name already exists:  " + signUpDTO.getGithubName());
         }
         if (userByDguEmail != null) {
-            throw new Exception("DGU 이메일이 중복됩니다: " + signUpDTO.getDguEmail());
+            throw new Exception("DGU email already exists: " + signUpDTO.getDguEmail());
         }
     }
 
