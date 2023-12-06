@@ -22,7 +22,7 @@ export default function Mypage() {
     useEffect(() => {
         const handleClick = async() => {
             try {
-                fetch('http://localhost:8080/members/rank', {
+                fetch('/members/rank', {
                     method: "GET",
                     headers: {
                         'Content-Type': 'application/json',
@@ -63,8 +63,8 @@ export default function Mypage() {
                             <td>동개등급</td>
                             <td>백준 티어</td>
                         </tr>
-                    {number.map(data => <Rank  rankNo={data.ranking} rank={data.rankName} id={data.githubName} 
-                    score={data.score} tier={data.bojRank}/>)}
+                        {number.map(data => <Rank  rankNo={data.ranking} rank={data.rankName} id={data.githubName} 
+                        score={data.score} tier={data.bojRank}/>)}
                     </table>
                 </div>
                 </div>
