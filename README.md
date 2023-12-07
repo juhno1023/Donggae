@@ -79,6 +79,12 @@
 > 필터를 설정하고 검색하면 "해당 키워드 + a"를 가진 프로젝트들만 검색된다.
 > ![image](https://github.com/juhno1023/Donggae/assets/127164905/c6d59806-53f7-415d-9185-c061e2912d4f)
 
+#### 프로젝트 조회
+> ![image](https://github.com/juhno1023/Donggae/assets/127164905/2ca1ac0d-8b5b-47ce-b948-6d34177ed0eb)
+
+#### 지원하기
+> ![image](https://github.com/juhno1023/Donggae/assets/127164905/cda30c21-e9e7-404c-8f64-9f325d1595f2)
+
 #### 순위 (동개 랭크)
 > 사용자들의 커밋 수, 이슈 수, pr 수, 리더횟수 등등을 계산해 랭크를 매긴다.
 > ![image](https://github.com/juhno1023/Donggae/assets/127164905/78e98ec4-a41f-48f8-bde5-8ec6337a0f33)
